@@ -9,7 +9,7 @@
     "preview": "nuxt preview"
   },
   "dependencies": {
-    "nuxt": "file:local-packages/nuxt",
-    "@nuxt/ui": "file:local-packages/nuxt-ui"
+    "nuxt": "^3.13.0",
+    "@nuxt/ui": "^2.17.0"
   }
 }

@@ -1,0 +1,10 @@
+{
+  "name": "nuxt",
+  "version": "3.13.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "nuxt": "bin/nuxt.js"
+  },
+  "main": "index.js"
+}

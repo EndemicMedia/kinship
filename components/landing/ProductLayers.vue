@@ -19,13 +19,18 @@ const layers = [
     image: sectionPrompts.biological
   },
   {
-    title: 'Legal agreements layer',
-    description: 'Track legal counsel, contracts, and consent checkpoints in one place.',
+    title: 'Legal & logistical layer',
+    description: 'Track legal counsel, contracts, and consent checkpoints. Contracts activate at life formation.',
     image: sectionPrompts.legal
   },
   {
-    title: 'Support layer',
-    description: 'Plan co-parenting communication, postpartum support, and long-term check-ins.',
+    title: 'Family accountability layer',
+    description: 'Log behaviors, coordinate interventions, prevent state involvement—family responds first.',
+    image: sectionPrompts.accountability
+  },
+  {
+    title: 'Ongoing support layer',
+    description: 'Regular check-ins, milestone reviews, conflict mediation, and role renegotiation over time.',
     image: sectionPrompts.support
   }
 ]
@@ -36,10 +41,10 @@ const layers = [
     <UContainer>
       <div class="flex flex-col gap-8">
         <div class="max-w-2xl">
-          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">Product layers built for intentional teams.</h2>
+          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">The Seven Layers: Your crew's complete toolkit</h2>
           <p class="mt-3 text-slate-600 dark:text-slate-300">
-            Each layer keeps your parenting project aligned—from identity and values to biological planning, legal support, and
-            ongoing care.
+            Each layer keeps your parenting project aligned—from identity and values to biological planning, legal support,
+            family accountability, and ongoing care.
           </p>
         </div>
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -49,12 +54,10 @@ const layers = [
                 :prompt="layer.image.prompt"
                 aspectRatio="square"
                 :alt="layer.title"
-
                 shadow="none"
                 class="h-48 w-full -mx-6 -mt-6 mb-4"
                 :rounded="false"
-              
-            />
+              />
               <div class="space-y-2">
                 <p class="text-xs font-semibold uppercase tracking-[0.18em] text-teal-600 dark:text-teal-300">Layer</p>
                 <h3 class="text-lg font-semibold text-slate-900 dark:text-white">{{ layer.title }}</h3>

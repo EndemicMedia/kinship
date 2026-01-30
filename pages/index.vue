@@ -48,8 +48,10 @@ useHead({
   <main>
     <LandingHero />
     <LandingProblemSolution />
+    <LandingTheCompass />
     <LandingProductLayers />
     <LandingHowItWorks />
+    <LandingFamilyAccountability />
     <LandingGovernanceLegalSupport />
     <LandingTestimonials />
     <LandingCallToAction />

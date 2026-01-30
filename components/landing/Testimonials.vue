@@ -7,21 +7,21 @@ const testimonials = [
     quote:
       'Kinship gave us a shared language for expectations. We felt supported before we even started the legal process.',
     name: 'Jules & Avery',
-    role: 'Co-parenting team',
+    role: 'Co-parenting crew of 2',
     image: sectionPrompts.testimonial1
   },
   {
     quote:
       'The layers framework helped us honor identity and values while still handling the practical details with care.',
-    name: 'Rina S.',
-    role: 'Future parent',
+    name: 'Rina, Sam & Jordan',
+    role: 'Parenting crew of 3',
     image: sectionPrompts.testimonial2
   },
   {
     quote:
-      'The governance checkpoints kept everyone aligned and reduced anxiety during the planning phase.',
-    name: 'Marcus & Lee',
-    role: 'Parenting partners',
+      'Having my mom as part of the crew from day one changed everything. The governance checkpoints kept us aligned.',
+    name: 'Marcus, Lee, Jordan & Grandma Rita',
+    role: 'Multigenerational crew',
     image: sectionPrompts.testimonial3
   }
 ]
@@ -34,7 +34,7 @@ const testimonials = [
         <div class="max-w-2xl">
           <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">Families trust Kinship to lead with care.</h2>
           <p class="mt-3 text-slate-600 dark:text-slate-300">
-            Real stories from intentional parents using Kinship to build aligned, supportive teams.
+            Real stories from intentional parents using Kinship to build aligned, supportive crews.
           </p>
         </div>
         <div class="grid gap-6 md:grid-cols-3">
@@ -46,12 +46,10 @@ const testimonials = [
                     :prompt="testimonial.image.prompt"
                     aspectRatio="square"
                     :alt="testimonial.name"
-
                     shadow="none"
                     :rounded="false"
                     class="h-full w-full"
-                  
-            />
+                  />
                 </div>
               </div>
               <p class="text-sm text-slate-600 dark:text-slate-300 text-center">{{ testimonial.quote }}</p>

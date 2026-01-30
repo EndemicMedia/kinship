@@ -22,99 +22,134 @@ export const styleVersions = {
     friendly: 'approachable candid photography, natural smiles, relaxed postures, warm welcoming energy',
     elegant: 'refined lifestyle photography, sophisticated compositions, premium editorial quality, tasteful color grading',
     nurturing: 'tender family moments, protective gestures, caring interactions, warm supportive atmosphere, gentle natural lighting',
+  },
+
+  v3: {
+    // Diverse crews model: Multi-generational, platonic crews raising children together
+    base: 'Professional lifestyle photography, diverse multi-generational crews, platonic collaborative energy, authentic crew dynamics like bands or startups, warm natural lighting, documentary-style candid moments, ages ranging from 20s to 70s, mixed genders and ethnicities, genuine connections not romantic, side-by-side working positions, contemporary settings, warm beige and navy blue color palette, editorial photography quality, real moments not staged perfection, thriving children in supportive environments',
+    warm: 'golden hour natural lighting, warm ambient glow, soft window light, collaborative atmosphere',
+    professional: 'editorial lifestyle photography, sophisticated natural lighting, contemporary aesthetic, diverse representation',
+    friendly: 'approachable candid photography, genuine smiles, relaxed crew dynamics, welcoming collaborative energy',
+    elegant: 'refined lifestyle photography, sophisticated compositions, premium editorial quality, tasteful color grading',
+    nurturing: 'multi-generational care moments, platonic supportive interactions, crew collaboration, warm inclusive atmosphere',
+    illustration: 'Modern abstract editorial illustration, clean minimalist flat vector design, teal and navy color palette with warm gold accents, conceptual visualization, sophisticated infographic style, soft paper grain texture, professional editorial quality, geometric shapes, subtle gradients',
   }
 }
 
-// ACTIVE VERSION - Switch between v1 and v2 here
-const ACTIVE_STYLE_VERSION = 'v2' as const
+// ACTIVE VERSION - Switch between v1, v2, and v3 here
+const ACTIVE_STYLE_VERSION = 'v3' as const
 
 export const stylePrefixes = styleVersions[ACTIVE_STYLE_VERSION]
 
 // Section-specific prompts for the landing page
 export const sectionPrompts = {
-  // Hero section - main family photo
+  // Hero section - main crew photo (full-screen background)
   hero: {
-    prompt: 'Family sitting together on comfortable couch, warm natural home lighting, genuine smiles and laughter, casual modern living room, parents and children interacting naturally, professional lifestyle photography, warm beige walls, cozy intimate atmosphere, authentic family bonding moment, natural candid poses, European home setting',
-    aspectRatio: 'landscape' as const,
-    width: 1024,
-    height: 768,
+    prompt: 'Wide cinematic shot of diverse crew of 4 adults, one person in 20s, two in 30s, one in 60s, mixed genders and ethnicities, sitting around large wooden table with 2 children ages 4 and 7 drawing and playing nearby, collaborative crew meeting with planning documents and laptops, warm sunlight through large windows, multigenerational family planning scene, authentic engaged expressions, side-by-side working positions, documentary lifestyle photography, children engaged happily in background showing thriving family model, warm beige walls with navy accents, plants and toys visible, ultra-wide composition for full-screen hero background, professional editorial quality',
+    aspectRatio: 'wide' as const,
+    width: 1920,
+    height: 800,
   },
   
-  // Problem/Solution section - stress vs clarity
+  // Problem/Solution section - abstract concepts (illustrations)
   problem: {
-    prompt: 'Stressed parent looking at scattered paperwork on kitchen table, concerned expression, cluttered disorganized environment, natural indoor lighting, authentic lifestyle photography, documentary style capturing real parenting challenges, muted colors, candid moment',
+    prompt: 'Modern abstract editorial illustration showing three tangled chains or ropes representing romantic desire, lifelong partnership, and legal enforcement, twisted together and breaking apart, chaotic fragmented composition, stressed color palette with muted reds, grays, and dark blues, minimalist flat vector design style, conceptual metaphor for incompatible logics forced together, clean geometric shapes, soft paper grain texture, editorial illustration quality, sophisticated adult aesthetic, crisis visualization',
     aspectRatio: 'square' as const,
     width: 768,
     height: 768,
   },
 
   solution: {
-    prompt: 'Co-parents collaborating peacefully at clean organized table with laptop, warm smiles, calm focused expressions, modern home office, natural window lighting, professional lifestyle photography, warm beige tones with navy accents, harmonious teamwork moment',
+    prompt: 'Modern abstract editorial illustration showing three separate clear pathways or streams flowing harmoniously side by side, organized flowing composition with gentle curves, calming color palette with teals, warm beiges, and navy blues, minimalist flat vector design, conceptual metaphor for unbundled systems working in harmony, clean geometric shapes, soft gradients, optimistic uplifting mood, editorial illustration quality, clarity and structure visualization, professional sophisticated style',
     aspectRatio: 'square' as const,
     width: 768,
     height: 768,
   },
   
-  // Product Layers - each layer concept with photorealistic approach
+  // The Compass section - crew matching system (NEW)
+  compass: {
+    prompt: 'Over-shoulder shot of person in 30s using tablet showing Kinship interface with crew profile cards and compatibility visualization on screen, sitting in comfortable modern home office, warm natural lighting, professional lifestyle photography showing user experience moment, screen clearly visible with interface elements showing values cards and compatibility maps, contemporary digital product usage, editorial tech photography style, warm inviting atmosphere, focus on intentional discovery process',
+    aspectRatio: 'landscape' as const,
+    width: 1024,
+    height: 600,
+  },
+  
+  // Product Layers - each layer concept with mix of photos and graphics
   identity: {
-    prompt: 'Person looking at family photos on wall, reflecting on personal identity and heritage, European cultural elements in home decor, natural indoor lighting, thoughtful contemplative moment, lifestyle photography capturing authentic self-discovery',
+    prompt: 'Professional portrait style shot of three diverse individuals, different ages ranging 30s to 50s, different genders and ethnicities, each holding a document or photo representing their personal background, standing and sitting in triangular composition in warm modern home, natural window lighting, genuine thoughtful expressions, celebrating individual identity before crew formation, documentary-style lifestyle photography, each person separate but together showing distinct identities, authentic self-presentation not performative, editorial portrait quality',
     aspectRatio: 'square' as const,
     width: 768,
     height: 768,
   },
 
   values: {
-    prompt: 'Two people having meaningful conversation over coffee, warm engaged expressions, hands gesturing in discussion, cozy home setting, natural window lighting, professional lifestyle photography capturing shared values and connection',
+    prompt: 'Abstract illustration showing overlapping Venn diagram circles with icons representing core values, compass, heart, handshake, home, scales of justice, areas of overlap highlighted in warm gold, clean minimalist flat vector design, teal and navy color palette, conceptual representation of shared values discovery, modern infographic style, professional sophisticated aesthetic, alignment visualization, soft paper grain texture',
     aspectRatio: 'square' as const,
     width: 768,
     height: 768,
   },
 
   biological: {
-    prompt: 'Expectant parents at medical appointment with healthcare provider, warm professional consultation, modern medical office, gentle natural lighting, caring supportive atmosphere, professional medical photography style',
+    prompt: 'Multigenerational consultation, pregnant person in 30s, young partner in 20s, and grandmother in 60s in warm meeting with medical professional at modern clinic, all engaged around table reviewing fertility and prenatal care documents, natural window lighting, inclusive three-generation healthcare moment, professional medical photography, platonic crew including extended family in biological planning, warm supportive atmosphere, contemporary clinic with warm wood and white surfaces',
     aspectRatio: 'square' as const,
     width: 768,
     height: 768,
   },
 
   legal: {
-    prompt: 'Professional advisor reviewing documents with co-parents at conference table, warm collaborative atmosphere, modern European office setting, natural lighting, working together on parenting agreement, editorial business photography style',
+    prompt: 'Four people, family lawyer plus 3 diverse crew members, mixed ages ranging 30s to 50s and different genders, around professional conference table reviewing and signing co-parenting agreement documents, collaborative signing ceremony atmosphere, modern law office with natural light, confident smiles and professional handshakes celebrating legal protection, editorial business photography style, diverse team formalizing non-romantic partnership, warm navy and beige office decor, documents visible on table',
     aspectRatio: 'square' as const,
     width: 768,
     height: 768,
   },
 
   support: {
-    prompt: 'Support group of parents sitting in circle, warm welcoming atmosphere, community center or home setting, natural lighting, genuine connections and empathy, documentary style capturing authentic support network, European context',
+    prompt: 'Diverse group of 4 adults, ages ranging from 20s to 60s, mixed genders and ethnicities, and 3 children ages 3 to 9, in comfortable circle in bright living room for family check-in meeting, kids playing with toys nearby while adults talk with coffee cups, warm engaged expressions showing ongoing multi-generational connection, natural daylight, documentary photography capturing authentic long-term crew with thriving happy children present, casual comfortable clothing, genuine care and continuity visible',
     aspectRatio: 'square' as const,
     width: 768,
     height: 768,
   },
+
+  // NEW: Layer 6 - Family Accountability
+  accountability: {
+    prompt: 'Abstract infographic illustration showing concentric circles or shield layers radiating outward from center representing escalating levels of family intervention, visual flow from warm protected center representing family care to outer rings representing professional and legal support, color gradient from warm teal and gold at center to cooler navy at edges, clean modern infographic design with icons at each layer showing family, therapist, school, legal symbols, minimalist flat vector style, professional serious tone, protective barrier concept, conceptual visualization of proactive family accountability preventing state intervention, sophisticated editorial illustration quality',
+    aspectRatio: 'square' as const,
+    width: 768,
+    height: 768,
+  },
+
+  // Supporting image for Family Accountability section
+  accountabilitySupport: {
+    prompt: 'Diverse crew of 3 adults, ages 30s, 40s, and 60s, sitting together in serious but supportive conversation, one adult holding hand of teenager age 15, warm living room setting, concerned but caring expressions, natural lighting, documentary photography capturing family intervention moment with multi-generational support, grandmother figure present with younger parents, genuine care and accountability visible, contemporary home setting, difficult conversation handled with dignity and teamwork',
+    aspectRatio: 'landscape' as const,
+    width: 1024,
+    height: 600,
+  },
   
-  // How It Works - step photos
+  // How It Works - step photos with diverse crews
   discover: {
-    prompt: 'Two people meeting for first time at coffee shop, warm friendly handshake, genuine smiles, modern cafe setting, natural lighting through windows, professional lifestyle photography capturing new connection and discovery',
+    prompt: 'Three people, diverse genders, ages, and ethnicities ranging 30s to 40s, meeting for first time at modern bright coffee shop, friendly introduction moment with handshakes and warm smiles, sitting around small café table with laptops and notebooks open, comfortable casual dress, natural window lighting, professional lifestyle photography capturing initial crew discovery meeting like band audition or business partnership interview, genuine curiosity and openness, platonic friendly energy not romantic, contemporary coffee shop interior, portrait orientation composition',
     aspectRatio: 'portrait' as const,
     width: 600,
     height: 800,
   },
 
   plan: {
-    prompt: 'Co-parents planning together at table with laptop and notebooks, collaborative working session, warm focused expressions, modern home office, natural daylight, editorial photography style capturing planning journey',
+    prompt: 'Four diverse individuals, mixed ages ranging 30s to 50s, genders, and ethnicities, working collaboratively around large table covered with planning materials, laptops, colorful sticky notes, and charts, active brainstorming session energy like creative team or startup planning meeting, modern home office or co-working space, natural daylight, engaged focused expressions with some gesturing and discussion, editorial photography capturing organized crew collaboration, platonic team building together, portrait vertical composition, warm contemporary setting',
     aspectRatio: 'portrait' as const,
     width: 600,
     height: 800,
   },
 
   secure: {
-    prompt: 'Professional meeting with legal advisor, signing documents with confident expressions, modern office setting, warm professional atmosphere, handshake agreement, editorial business photography style',
+    prompt: 'Three crew members with professional advisor celebrating signed co-parenting agreement with confident handshakes and relieved smiles, modern professional office setting with large windows, confident expressions showing milestone achievement, documents visible on table, natural lighting, editorial business photography showing formalized commitment for platonic parenting team, diverse group with different ages ranging 30s to 50s, genders, and ethnicities, warm professional atmosphere, portrait orientation, contemporary office with navy and beige tones',
     aspectRatio: 'portrait' as const,
     width: 600,
     height: 800,
   },
 
   sustain: {
-    prompt: 'Extended co-parenting family gathering over meal, multiple generations together, warm joyful atmosphere, comfortable home dining room, natural lighting, authentic family moment, lifestyle photography capturing ongoing support',
+    prompt: 'Intergenerational crew gathering, 5 adults with one person in 20s, two in 40s, and two in 60s to 70s, mixed genders and ethnicities, with 3 children ages 5 to 10, around outdoor dinner table at sunset, children laughing and playing between adult conversation, warm joyful multigenerational atmosphere, golden hour lighting, lifestyle photography capturing thriving chosen family with happy engaged children, platonic crew across generations raising kids together, authentic connections, portrait vertical composition, everyone participating in shared family moment',
     aspectRatio: 'portrait' as const,
     width: 600,
     height: 800,
@@ -122,40 +157,40 @@ export const sectionPrompts = {
   
   // Governance/Legal Support section
   governance: {
-    prompt: 'Professional legal team in modern conference room, warm collaborative meeting atmosphere, documents and laptops, natural window lighting, approachable yet professional, corporate lifestyle photography, warm beige and navy color palette, European office environment',
+    prompt: 'Professional diverse governance and legal team, 4 to 5 people including lawyers and mediators, mixed ages ranging 35 to 60, genders, and ethnicities, in modern bright conference room, collaborative advisory meeting atmosphere around large table with documents and laptops, warm approachable yet professional expressions, natural window lighting, corporate lifestyle photography showing inclusive family law practice, contemporary office with warm wood, white walls, navy blue and beige accents, landscape composition, editorial business photography quality, expertise with warmth and accessibility',
     aspectRatio: 'landscape' as const,
     width: 1024,
     height: 600,
   },
 
-  // Testimonials - authentic family portraits
+  // Testimonials - diverse crew portraits with children in some
   testimonial1: {
-    prompt: 'Genuine portrait of couple smiling warmly at camera, natural home setting, soft window lighting, warm beige background, professional lifestyle portrait photography, authentic happy expressions, editorial quality, European home',
+    prompt: 'Professional portrait of two friends, different genders, ages, and ethnicities in mid-30s, standing side-by-side with friendly warm smiles, comfortable casual poses with arms crossed or hands in pockets, neutral warm home background slightly blurred, soft natural lighting, editorial lifestyle portrait photography, platonic co-parent team, authentic happiness and confidence, business partner or bandmate energy not romantic, both looking at camera, square composition for circular crop, contemporary portrait style, genuine connection',
     aspectRatio: 'square' as const,
     width: 600,
     height: 600,
   },
 
   testimonial2: {
-    prompt: 'Candid portrait of three co-parents together, warm genuine smiles, modern home interior, natural lighting, showing unity and joy, professional lifestyle photography, authentic connections, European setting',
+    prompt: 'Group portrait of three diverse individuals, mixed ages in 30s to 40s, genders, and ethnicities, in casual triangular formation, friendly crew dynamic like band promotional photo, warm modern home interior background softly blurred, natural window lighting, genuine warm smiles showing unity and friendship, professional lifestyle photography, platonic parenting crew together, relaxed comfortable poses standing or leaning naturally, square composition for circular crop, authentic joy and camaraderie, editorial portrait quality, no romantic couples visible',
     aspectRatio: 'square' as const,
     width: 600,
     height: 600,
   },
 
   testimonial3: {
-    prompt: 'Heartwarming family portrait, two parents embracing child, warm affectionate moment, golden hour natural lighting, home environment, professional lifestyle photography capturing genuine love and connection',
+    prompt: 'Casual group portrait of four diverse adults, ages 25, 35, 45, and 68, young parent, two mid-career, one grandparent figure, mixed genders and ethnicities, with three children ages 4, 7, and 10, all sitting together on outdoor wooden steps, children clearly happy and engaged with multiple adults showing secure attachments, playful relaxed grouping, warm golden hour lighting, genuine smiles and laughter, lifestyle photography showing thriving children in multigenerational chosen family crew, platonic adult friendships across ages raising kids together, authentic joyful moment, square composition for circular crop',
     aspectRatio: 'square' as const,
     width: 600,
     height: 600,
   },
 
-  // Call to Action section
+  // Call to Action section - full screen background with thriving family
   cta: {
-    prompt: 'Hopeful family walking toward bright future, warm backlit silhouette, open doorway with natural light streaming through, warm golden and beige tones, cinematic lifestyle photography, inspiring forward movement, new beginnings',
+    prompt: 'Cinematic wide shot of diverse group of 5 adults, ages 25, 35, 40, 55, and 70, and 2 children ages 6 and 9, walking together on beach or open field toward sunset horizon, children running ahead playfully while adults walk in loose formation, warm golden backlight, silhouettes with rim lighting, multi-generational crew on journey together showing children thriving, epic landscape with open sky, warm golden and teal tones, professional cinematic lifestyle photography, inspiring forward movement, ultra-wide aspect for full-screen background, hopeful joyful family voyage, children clearly happy and free',
     aspectRatio: 'wide' as const,
-    width: 1200,
-    height: 500,
+    width: 1920,
+    height: 800,
   },
 
   // Brand Assets - Logo and Favicon

@@ -12,30 +12,28 @@ import { sectionPrompts } from '../../composables/prompts'
           <AiImageContainer
             :prompt="sectionPrompts.cta.prompt"
             aspectRatio="wide"
-            alt="Open door with bright future ahead"
-
+            alt="Multigenerational crew with children walking toward bright future"
             shadow="none"
             :rounded="false"
             class="h-full w-full"
-          
-            />
+          />
           <!-- Gradient overlay for text readability -->
-          <div class="absolute inset-0 bg-gradient-to-r from-teal-900/90 via-slate-900/80 to-indigo-900/90" 
-            />
+          <div class="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/85 to-slate-900/75" />
         </div>
         
         <!-- Content -->
         <UCard class="relative z-10 border-0 bg-transparent">
-          <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <div class="flex flex-col gap-6 py-8 lg:flex-row lg:items-center lg:justify-between">
             <div class="max-w-xl">
-              <h2 class="text-3xl font-semibold text-white">Ready to build your parenting team?</h2>
-              <p class="mt-3 text-sm text-white/80">
-                Start with a guided plan, align on values, and move forward together with clarity and support.
+              <h2 class="text-3xl font-semibold text-white">Ready to find your crew?</h2>
+              <p class="mt-3 text-base text-white/90">
+                Form a parenting team with shared values, clear roles, and the support every child deserves. 
+                Contracts activate at life, not at love.
               </p>
             </div>
             <div class="flex flex-wrap gap-3">
-              <UButton color="white" variant="solid" size="lg" aria-label="Request a Kinship demo">
-                Request a demo
+              <UButton color="white" variant="solid" size="lg" aria-label="Start your journey on Kinship">
+                Start your journey
               </UButton>
               <UButton color="white" variant="ghost" size="lg" aria-label="Join the Kinship waitlist">
                 Join the waitlist

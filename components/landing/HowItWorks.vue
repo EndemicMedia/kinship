@@ -4,25 +4,25 @@ import { sectionPrompts } from '../../composables/prompts'
 
 const steps = [
   {
-    label: 'Discover alignment',
+    label: 'Chart your course',
     content:
-      'Invite prospective parents, set shared intentions, and map values, boundaries, and the roles each person wants to play.',
+      'Invite prospective crew members, set shared intentions, and map values, boundaries, and the roles each person wants to play.',
     image: sectionPrompts.discover
   },
   {
-    label: 'Plan the journey',
+    label: 'Assemble your crew',
     content:
       'Organize biological pathways, timelines, and medical coordination alongside emotional readiness check-ins.',
     image: sectionPrompts.plan
   },
   {
-    label: 'Secure agreements',
+    label: 'Set sail prepared',
     content:
       'Keep legal counsel, consent checkpoints, and documentation in a shared, permissioned workspace.',
     image: sectionPrompts.secure
   },
   {
-    label: 'Sustain the team',
+    label: 'Navigate together',
     content:
       'Create ongoing communication cadences, support plans, and decision-making protocols for the life of your family.',
     image: sectionPrompts.sustain
@@ -35,7 +35,7 @@ const steps = [
     <UContainer>
       <div class="space-y-8">
         <div class="max-w-2xl">
-          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">How Kinship works</h2>
+          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">Your voyage: From discovery to family</h2>
           <p class="mt-3 text-slate-600 dark:text-slate-300">
             A guided flow turns complex conversations into a calm, collaborative roadmap for parenthood.
           </p>
@@ -49,11 +49,9 @@ const steps = [
                 :prompt="step.image.prompt"
                 aspectRatio="portrait"
                 :alt="step.label"
-
                 shadow="md"
                 class="h-48 w-full"
-              
-            />
+              />
               <div class="absolute -bottom-3 -right-3 flex h-8 w-8 items-center justify-center rounded-full bg-teal-500 text-xs font-bold text-white">
                 {{ index + 1 }}
               </div>

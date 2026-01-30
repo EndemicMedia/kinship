@@ -4,16 +4,16 @@ import { sectionPrompts } from '../../composables/prompts'
 
 const features = [
   {
-    title: 'Values cards, not selfies',
-    description: 'Philosophy and parenting approach come first. Photos are secondary to what matters most.'
+    title: 'Values come first',
+    description: 'Browse crew profiles that lead with parenting philosophy, not photos. Compatibility shows before attraction.'
   },
   {
-    title: 'Crew compatibility maps',
-    description: 'See alignment across 6 dimensions, not a single score. Low areas become discussion topics.'
+    title: 'Six dimensions of alignment',
+    description: 'See where you match and where early conversations matter. No single score hiding incompatibilities.'
   },
   {
-    title: 'Guided conversations',
-    description: 'Structured topics surface disagreements early—before free chat opens.'
+    title: 'Structure before chemistry',
+    description: 'Complete guided discussions on hard topics before chat unlocks. Surface disagreements early.'
   }
 ]
 </script>
@@ -23,13 +23,10 @@ const features = [
     <UContainer>
       <div class="space-y-8">
         <div class="max-w-2xl">
-          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">The Compass: Find your crew</h2>
+          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">The Compass: Discover your crew</h2>
           <p class="mt-3 text-slate-600 dark:text-slate-300">
-            Dating app usability. Crew formation purpose.
-          </p>
-          <p class="mt-3 text-slate-600 dark:text-slate-300">
-            Discover potential crewmates through values-first profiles, not photos. The Compass shows you people 
-            seeking the same voyage—with compatibility maps that highlight alignment and flag early discussion topics.
+            Kinship combines the ease of modern matching apps with the rigor intentional families need. The Compass puts 
+            values and vision first, then surfaces people seeking the same journey.
           </p>
         </div>
         

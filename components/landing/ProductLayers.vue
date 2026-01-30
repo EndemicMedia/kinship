@@ -4,33 +4,33 @@ import { sectionPrompts } from '../../composables/prompts'
 
 const layers = [
   {
-    title: 'Identity layer',
-    description: 'Document names, pronouns, cultural context, and the story you want to tell together.',
+    title: 'Identity',
+    description: 'Document who you are: names, pronouns, cultural context, and the story you want to tell together.',
     image: sectionPrompts.identity
   },
   {
-    title: 'Project & values layer',
-    description: 'Capture shared parenting goals, relationship expectations, and family rituals.',
+    title: 'Values alignment',
+    description: 'Surface shared goals, relationship boundaries, and family rituals through guided conversations.',
     image: sectionPrompts.values
   },
   {
-    title: 'Biological planning layer',
-    description: 'Coordinate health history, fertility pathways, and care teams with transparency.',
+    title: 'Biological planning',
+    description: 'Coordinate fertility pathways, health history, and medical decisions with full transparency.',
     image: sectionPrompts.biological
   },
   {
-    title: 'Legal & logistical layer',
-    description: 'Track legal counsel, contracts, and consent checkpoints. Contracts activate at life formation.',
+    title: 'Legal preparation',
+    description: 'Generate co-parenting agreements that activate at conception. Track consent and legal checkpoints.',
     image: sectionPrompts.legal
   },
   {
-    title: 'Family accountability layer',
-    description: 'Log behaviors, coordinate interventions, prevent state involvement—family responds first.',
+    title: 'Family accountability',
+    description: 'Establish intervention protocols for behavioral issues. Respond as a crew before courts get involved.',
     image: sectionPrompts.accountability
   },
   {
-    title: 'Ongoing support layer',
-    description: 'Regular check-ins, milestone reviews, conflict mediation, and role renegotiation over time.',
+    title: 'Ongoing support',
+    description: 'Maintain alignment through regular check-ins, milestone reviews, and structured conflict resolution.',
     image: sectionPrompts.support
   }
 ]
@@ -41,10 +41,10 @@ const layers = [
     <UContainer>
       <div class="flex flex-col gap-8">
         <div class="max-w-2xl">
-          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">The Seven Layers: Your crew's complete toolkit</h2>
+          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">Six layers. One complete system.</h2>
           <p class="mt-3 text-slate-600 dark:text-slate-300">
-            Each layer keeps your parenting project aligned—from identity and values to biological planning, legal support,
-            family accountability, and ongoing care.
+            Traditional family formation leaves gaps between legal preparation, medical coordination, and emotional alignment. 
+            Kinship provides structure for every conversation and decision your crew needs to make together.
           </p>
         </div>
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -59,7 +59,6 @@ const layers = [
                 :rounded="false"
               />
               <div class="space-y-2">
-                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-teal-600 dark:text-teal-300">Layer</p>
                 <h3 class="text-lg font-semibold text-slate-900 dark:text-white">{{ layer.title }}</h3>
                 <p class="text-sm text-slate-600 dark:text-slate-300">{{ layer.description }}</p>
               </div>

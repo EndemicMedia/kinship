@@ -25,18 +25,17 @@ import { sectionPrompts } from '../../composables/prompts'
         <UCard class="relative z-10 border-0 bg-transparent">
           <div class="flex flex-col gap-6 py-8 lg:flex-row lg:items-center lg:justify-between">
             <div class="max-w-xl">
-              <h2 class="text-3xl font-semibold text-white">Ready to find your crew?</h2>
+              <h2 class="text-3xl font-semibold text-white">Ready to form your crew?</h2>
               <p class="mt-3 text-base text-white/90">
-                Form a parenting team with shared values, clear roles, and the support every child deserves. 
-                Contracts activate at life, not at love.
+                Start with values alignment. Build legal protection from day one. Maintain support through every transition.
               </p>
             </div>
             <div class="flex flex-wrap gap-3">
-              <UButton color="white" variant="solid" size="lg" aria-label="Start your journey on Kinship">
-                Start your journey
+              <UButton color="white" variant="solid" size="lg" aria-label="Start building your crew on Kinship">
+                Get started
               </UButton>
               <UButton color="white" variant="ghost" size="lg" aria-label="Join the Kinship waitlist">
-                Join the waitlist
+                Join waitlist
               </UButton>
             </div>
           </div>

@@ -3,12 +3,12 @@ import AiImageContainer from '../image/AiImageContainer.vue'
 import { sectionPrompts } from '../../composables/prompts'
 
 const highlights = [
-  'Align on parenting values and vision early',
-  'Coordinate legal, medical, and emotional planning',
-  'Build trusted crews with clarity and care',
-  'Form crews like bands—intention over accident',
-  'Contracts activate at life, not at love',
-  'Family accountability before state intervention'
+  'Align on parenting values before you start',
+  'Coordinate legal, medical, and care planning together',
+  'Build crews like bands: intention, not accident',
+  'Contracts activate at conception, not at weddings',
+  'Family accountability prevents state intervention',
+  'Exit with dignity when circumstances change'
 ]
 </script>
 
@@ -35,20 +35,20 @@ const highlights = [
           Intentional parenthood coordination platform
         </UBadge>
         <h1 class="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-          Your kin. Your ship. Your voyage.
+          Form parenting crews with intention, clarity, and lasting support.
         </h1>
         <p class="text-xl text-white/90">
-          Build a crew to raise children together—with shared values, clear roles, and the stability every child deserves.
+          Assemble a crew to raise children together. Align on values. Define clear roles. Create stability every child deserves.
         </p>
         <p class="text-lg font-medium text-teal-300">
-          Contracts activate at life, not at love.
+          Responsibility begins at conception, not at romantic commitment.
         </p>
         <div class="flex flex-wrap gap-3">
-          <UButton color="white" variant="solid" size="lg" aria-label="Chart your course on Kinship">
-            Chart your course
+          <UButton color="white" variant="solid" size="lg" aria-label="Get started with Kinship">
+            Get started
           </UButton>
-          <UButton color="white" variant="ghost" size="lg" aria-label="Explore the Compass">
-            Explore the Compass
+          <UButton color="white" variant="ghost" size="lg" aria-label="See how Kinship works">
+            How it works
           </UButton>
         </div>
         <ul class="grid gap-3 text-sm text-white/90 sm:grid-cols-2">

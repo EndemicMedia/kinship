@@ -4,27 +4,27 @@ import { sectionPrompts } from '../../composables/prompts'
 
 const steps = [
   {
-    label: 'Chart your course',
+    label: 'Discover',
     content:
-      'Invite prospective crew members, set shared intentions, and map values, boundaries, and the roles each person wants to play.',
+      'Meet potential crew members through values-first profiles. Complete compatibility assessments before making contact.',
     image: sectionPrompts.discover
   },
   {
-    label: 'Assemble your crew',
+    label: 'Align',
     content:
-      'Organize biological pathways, timelines, and medical coordination alongside emotional readiness check-ins.',
+      'Work through guided conversations on parenting philosophy, finances, boundaries, and long-term expectations.',
     image: sectionPrompts.plan
   },
   {
-    label: 'Set sail prepared',
+    label: 'Formalize',
     content:
-      'Keep legal counsel, consent checkpoints, and documentation in a shared, permissioned workspace.',
+      'Generate legal agreements with your crew. Establish consent checkpoints and documentation for court recognition.',
     image: sectionPrompts.secure
   },
   {
-    label: 'Navigate together',
+    label: 'Sustain',
     content:
-      'Create ongoing communication cadences, support plans, and decision-making protocols for the life of your family.',
+      'Maintain crew alignment with regular check-ins, milestone reviews, and mediation support when conflicts arise.',
     image: sectionPrompts.sustain
   }
 ]
@@ -35,9 +35,10 @@ const steps = [
     <UContainer>
       <div class="space-y-8">
         <div class="max-w-2xl">
-          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">Your voyage: From discovery to family</h2>
+          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">From first conversation to first birthday</h2>
           <p class="mt-3 text-slate-600 dark:text-slate-300">
-            A guided flow turns complex conversations into a calm, collaborative roadmap for parenthood.
+            Kinship guides you through each stage of crew formation. Slow, deliberate decisions replace rushed commitments 
+            made under romantic pressure.
           </p>
         </div>
         

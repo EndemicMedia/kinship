@@ -5,22 +5,22 @@ import { sectionPrompts } from '../../composables/prompts'
 const testimonials = [
   {
     quote:
-      'Kinship gave us a shared language for expectations. We felt supported before we even started the legal process.',
+      'Kinship gave us language for expectations we did not know how to express. Legal prep felt supportive instead of adversarial.',
     name: 'Jules & Avery',
-    role: 'Co-parenting crew of 2',
+    role: 'Two parent crew',
     image: sectionPrompts.testimonial1
   },
   {
     quote:
-      'The layers framework helped us honor identity and values while still handling the practical details with care.',
+      'The values framework helped us honor our identities while handling practical details. We aligned before conception.',
     name: 'Rina, Sam & Jordan',
-    role: 'Parenting crew of 3',
+    role: 'Three parent crew',
     image: sectionPrompts.testimonial2
   },
   {
     quote:
-      'Having my mom as part of the crew from day one changed everything. The governance checkpoints kept us aligned.',
-    name: 'Marcus, Lee, Jordan & Grandma Rita',
+      'Having my mother formally in the crew changed everything. The governance structure gave her voice without overstepping.',
+    name: 'Marcus, Lee, Jordan & Rita',
     role: 'Multigenerational crew',
     image: sectionPrompts.testimonial3
   }
@@ -32,9 +32,9 @@ const testimonials = [
     <UContainer>
       <div class="space-y-8">
         <div class="max-w-2xl">
-          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">Families trust Kinship to lead with care.</h2>
+          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">Real crews. Real outcomes.</h2>
           <p class="mt-3 text-slate-600 dark:text-slate-300">
-            Real stories from intentional parents using Kinship to build aligned, supportive crews.
+            Families using Kinship to form intentional crews and raise children outside traditional marriage structures.
           </p>
         </div>
         <div class="grid gap-6 md:grid-cols-3">

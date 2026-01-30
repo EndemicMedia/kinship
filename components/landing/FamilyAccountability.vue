@@ -4,25 +4,25 @@ import { sectionPrompts } from '../../composables/prompts'
 
 const features = [
   {
-    title: 'Behavior incident logging',
-    description: 'Track patterns, assess severity, and coordinate crew response at every level.'
+    title: 'Incident logging',
+    description: 'Document behavioral patterns with severity assessment. Track what interventions work over time.'
   },
   {
-    title: 'Required intervention protocols',
-    description: 'Clear escalation pathways—from primary parent care to full crew mobilization.'
+    title: 'Escalation protocols',
+    description: 'Required actions at each severity level. Primary parent responds first, full crew mobilizes for serious issues.'
   },
   {
-    title: 'Pre-legal documentation',
-    description: 'Court-ready reports demonstrating proactive family care and intervention attempts.'
+    title: 'Court documentation',
+    description: 'Generate reports showing proactive family care if legal intervention becomes necessary.'
   }
 ]
 
 const severityLevels = [
-  { level: 1, title: 'Minor Issues', description: 'Primary parent addresses' },
-  { level: 2, title: 'Concerning Patterns', description: 'Full crew discussion required' },
-  { level: 3, title: 'Serious Behaviors', description: 'Crew + professional help' },
-  { level: 4, title: 'Critical Incidents', description: 'Immediate crew mobilization' },
-  { level: 5, title: 'Legal Involvement', description: 'Full coordination + representation' }
+  { level: 1, title: 'Minor', description: 'Primary parent addresses' },
+  { level: 2, title: 'Patterns', description: 'Full crew discussion' },
+  { level: 3, title: 'Serious', description: 'Crew plus professional help' },
+  { level: 4, title: 'Critical', description: 'Immediate mobilization' },
+  { level: 5, title: 'Legal', description: 'Court coordination' }
 ]
 </script>
 
@@ -31,14 +31,10 @@ const severityLevels = [
     <UContainer>
       <div class="space-y-8">
         <div class="max-w-2xl">
-          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">The Accountability Circle: Family responds first</h2>
+          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">Family accountability before state intervention</h2>
           <p class="mt-3 text-lg text-slate-600 dark:text-slate-300">
-            Those who signed on at birth are tasked with guiding, correcting, and intervening—before the state steps in.
-          </p>
-          <p class="mt-3 text-slate-600 dark:text-slate-300">
-            When challenges arise, your crew mobilizes. The Family Accountability System provides protocols for every 
-            severity level—from minor issues to critical incidents—ensuring children receive proactive family care, 
-            not reactive punishment.
+            Those who commit at birth stay responsible for guiding, correcting, and intervening when challenges arise. 
+            Kinship provides the structure to respond as a crew before courts step in with punishment.
           </p>
         </div>
 
@@ -56,7 +52,7 @@ const severityLevels = [
 
           <!-- Severity levels -->
           <div class="space-y-4">
-            <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Five Severity Levels</h3>
+            <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Five response levels</h3>
             <div class="space-y-3">
               <UCard 
                 v-for="item in severityLevels" 

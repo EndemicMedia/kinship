@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Kinship Favicon</title>
+</head>
+<body>
+    <h2>Kinship Favicon Generator</h2>
+    <p>Click the buttons below to download each icon:</p>
+    <canvas id="favicon32" width="32" height="32" style="border:1px solid #ccc; margin:10px;"></canvas>
+    <button onclick="download32()">Download 32x32 Favicon</button>
+    <br>
+    <canvas id="favicon16" width="16" height="16" style="border:1px solid #ccc; margin:10px;"></canvas>
+    <button onclick="download16()">Download 16x16 Favicon</button>
+    <br>
+    <canvas id="apple180" width="180" height="180" style="border:1px solid #ccc; margin:10px;"></canvas>
+    <button onclick="downloadApple()">Download 180x180 Apple Icon</button>
+    <br>
+    <canvas id="og1200" width="1200" height="630" style="border:1px solid #ccc; margin:10px; max-width:600px;"></canvas>
+    <button onclick="downloadOG()">Download 1200x630 OG Image</button>
+    
+    <script>
+        function drawIcon(canvas, size) {
+            const ctx = canvas.getContext('2d');
+            
+            // Background
+            ctx.fillStyle = '#0d9488'; // Teal-600
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Calculate proportions
+            const scale = size / 32;
+            const lineWidth = Math.max(1, Math.round(2 * scale));
+            
+            ctx.strokeStyle = '#ffffff';
+            ctx.fillStyle = '#ffffff';
+            ctx.lineWidth = lineWidth;
+            
+            // Center point
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            
+            // Top triangle (sail/deck)
+            ctx.beginPath();
+            ctx.moveTo(cx, cy - 10 * scale);
+            ctx.lineTo(cx - 8 * scale, cy - 4 * scale);
+            ctx.lineTo(cx + 8 * scale, cy - 4 * scale);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Middle line (deck)
+            ctx.beginPath();
+            ctx.moveTo(cx - 8 * scale, cy + 1 * scale);
+            ctx.lineTo(cx + 8 * scale, cy + 1 * scale);
+            ctx.stroke();
+            
+            // Bottom line (hull)
+            ctx.beginPath();
+            ctx.moveTo(cx - 8 * scale, cy + 7 * scale);
+            ctx.lineTo(cx + 8 * scale, cy + 7 * scale);
+            ctx.stroke();
+        }
+        
+        function drawOGImage(canvas) {
+            const ctx = canvas.getContext('2d');
+            
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, 1200, 630);
+            gradient.addColorStop(0, '#0d9488');
+            gradient.addColorStop(1, '#0f766e');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 1200, 630);
+            
+            // Draw icon large
+            ctx.strokeStyle = '#ffffff';
+            ctx.fillStyle = '#ffffff';
+            ctx.lineWidth = 12;
+            
+            const cx = 300;
+            const cy = 315;
+            const scale = 6;
+            
+            // Top triangle
+            ctx.beginPath();
+            ctx.moveTo(cx, cy - 60);
+            ctx.lineTo(cx - 48, cy - 24);
+            ctx.lineTo(cx + 48, cy - 24);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Middle line
+            ctx.beginPath();
+            ctx.moveTo(cx - 48, cy + 6);
+            ctx.lineTo(cx + 48, cy + 6);
+            ctx.stroke();
+            
+            // Bottom line
+            ctx.beginPath();
+            ctx.moveTo(cx - 48, cy + 42);
+            ctx.lineTo(cx + 48, cy + 42);
+            ctx.stroke();
+            
+            // Text
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 72px system-ui, -apple-system, sans-serif';
+            ctx.fillText('Kinship', 450, 280);
+            
+            ctx.font = '32px system-ui, -apple-system, sans-serif';
+            ctx.fillStyle = 'rgba(255,255,255,0.9)';
+            ctx.fillText('Form parenting crews with intention', 450, 340);
+            ctx.fillText('and lasting support', 450, 385);
+        }
+        
+        // Draw all canvases
+        drawIcon(document.getElementById('favicon32'), 32);
+        drawIcon(document.getElementById('favicon16'), 16);
+        drawIcon(document.getElementById('apple180'), 180);
+        drawOGImage(document.getElementById('og1200'));
+        
+        function download32() {
+            const link = document.createElement('a');
+            link.download = 'favicon-32x32.png';
+            link.href = document.getElementById('favicon32').toDataURL();
+            link.click();
+        }
+        
+        function download16() {
+            const link = document.createElement('a');
+            link.download = 'favicon-16x16.png';
+            link.href = document.getElementById('favicon16').toDataURL();
+            link.click();
+        }
+        
+        function downloadApple() {
+            const link = document.createElement('a');
+            link.download = 'apple-touch-icon.png';
+            link.href = document.getElementById('apple180').toDataURL();
+            link.click();
+        }
+        
+        function downloadOG() {
+            const link = document.createElement('a');
+            link.download = 'og-image.jpg';
+            link.href = document.getElementById('og1200').toDataURL('image/jpeg', 0.9);
+            link.click();
+        }
+    </script>
+</body>
+</html>

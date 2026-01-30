@@ -45,7 +45,7 @@ export const stylePrefixes = styleVersions[ACTIVE_STYLE_VERSION]
 export const sectionPrompts = {
   // Hero section - main crew photo (full-screen background)
   hero: {
-    prompt: 'Wide cinematic shot of diverse crew of 4 adults, one person in 20s, two in 30s, one in 60s, mixed genders and ethnicities, sitting around large wooden table with 2 children ages 4 and 7 drawing and playing nearby, collaborative crew meeting with planning documents and laptops, warm sunlight through large windows, multigenerational family planning scene, authentic engaged expressions, side-by-side working positions, documentary lifestyle photography, children engaged happily in background showing thriving family model, warm beige walls with navy accents, plants and toys visible, ultra-wide composition for full-screen hero background, professional editorial quality',
+    prompt: 'Close-up intimate shot of diverse crew of 4 adults, one person in 20s, two in 30s, one in 60s, mixed genders and ethnicities, gathered around large wooden table with 2 children ages 4 and 7 drawing and playing, all adults fully focused on children and their drawings, warm sunlight through large windows, multigenerational family engaged moment, authentic loving expressions, hands pointing at children\'s artwork, documentary lifestyle photography, children at center of attention showing thriving family model, warm beige walls with navy accents, plants and toys visible, medium shot composition showing faces and connection, professional editorial quality',
     aspectRatio: 'wide' as const,
     width: 1920,
     height: 800,
@@ -76,7 +76,7 @@ export const sectionPrompts = {
   
   // Product Layers - each layer concept with mix of photos and graphics
   identity: {
-    prompt: 'Professional portrait style shot of three diverse individuals, different ages ranging 30s to 50s, different genders and ethnicities, each holding a document or photo representing their personal background, standing and sitting in triangular composition in warm modern home, natural window lighting, genuine thoughtful expressions, celebrating individual identity before crew formation, documentary-style lifestyle photography, each person separate but together showing distinct identities, authentic self-presentation not performative, editorial portrait quality',
+    prompt: 'Artistic close-up portrait of single person in 40s, holding photo representing their personal story, warm window light from side creating dramatic but gentle shadows on face, genuine thoughtful expression, celebrating individual identity before crew formation, documentary-style lifestyle photography, intimate personal moment, authentic self-presentation not performative, shallow depth of field with soft bokeh background, editorial portrait quality, emotional depth and character visible',
     aspectRatio: 'square' as const,
     width: 768,
     height: 768,
@@ -97,14 +97,14 @@ export const sectionPrompts = {
   },
 
   legal: {
-    prompt: 'Four people, family lawyer plus 3 diverse crew members, mixed ages ranging 30s to 50s and different genders, around professional conference table reviewing and signing co-parenting agreement documents, collaborative signing ceremony atmosphere, modern law office with natural light, confident smiles and professional handshakes celebrating legal protection, editorial business photography style, diverse team formalizing non-romantic partnership, warm navy and beige office decor, documents visible on table',
+    prompt: 'Close-up shot of three diverse hands coming together in center frame for supportive hand stack gesture over signed co-parenting agreement document on wooden table, warm natural lighting, confident moment celebrating legal protection, editorial lifestyle photography style, focus on unity and commitment, diverse crew members with mixed ages and genders visible in soft focus background, warm navy and beige office decor, intimate collaborative moment, professional yet warm atmosphere',
     aspectRatio: 'square' as const,
     width: 768,
     height: 768,
   },
 
   support: {
-    prompt: 'Diverse group of 4 adults, ages ranging from 20s to 60s, mixed genders and ethnicities, and 3 children ages 3 to 9, in comfortable circle in bright living room for family check-in meeting, kids playing with toys nearby while adults talk with coffee cups, warm engaged expressions showing ongoing multi-generational connection, natural daylight, documentary photography capturing authentic long-term crew with thriving happy children present, casual comfortable clothing, genuine care and continuity visible',
+    prompt: 'Medium close-up of 4 diverse adults, ages ranging from 20s to 60s, mixed genders and ethnicities, and 3 children ages 3 to 9, in comfortable circle in bright living room, all adults fully focused on children playing with blocks in center of group, no devices, warm engaged expressions showing ongoing multi-generational connection, natural daylight, documentary photography capturing authentic long-term crew with thriving happy children as focal point, adults leaning in toward children, genuine care and attention visible',
     aspectRatio: 'square' as const,
     width: 768,
     height: 768,
@@ -128,14 +128,14 @@ export const sectionPrompts = {
   
   // How It Works - step photos with diverse crews
   discover: {
-    prompt: 'Three people, diverse genders, ages, and ethnicities ranging 30s to 40s, meeting for first time at modern bright coffee shop, friendly introduction moment with handshakes and warm smiles, sitting around small café table with laptops and notebooks open, comfortable casual dress, natural window lighting, professional lifestyle photography capturing initial crew discovery meeting like band audition or business partnership interview, genuine curiosity and openness, platonic friendly energy not romantic, contemporary coffee shop interior, portrait orientation composition',
+    prompt: 'Close-up portrait of two people, diverse genders, ages, and ethnicities in 30s, meeting for first time at modern bright coffee shop, friendly introduction moment with warm genuine smiles and eye contact, sitting across from each other, comfortable casual dress, natural window lighting, professional lifestyle photography capturing initial crew discovery conversation, genuine curiosity and openness visible in expressions, platonic friendly energy not romantic, shallow depth of field focusing on faces, portrait orientation composition, intimate conversational moment',
     aspectRatio: 'portrait' as const,
     width: 600,
     height: 800,
   },
 
   plan: {
-    prompt: 'Four diverse individuals, mixed ages ranging 30s to 50s, genders, and ethnicities, working collaboratively around large table covered with planning materials, laptops, colorful sticky notes, and charts, active brainstorming session energy like creative team or startup planning meeting, modern home office or co-working space, natural daylight, engaged focused expressions with some gesturing and discussion, editorial photography capturing organized crew collaboration, platonic team building together, portrait vertical composition, warm contemporary setting',
+    prompt: 'Artistic overhead shot of large table covered with planning materials, colorful sticky notes, charts, and handwritten notes, four diverse hands from different people pointing and writing, mixed skin tones and ages visible through hands, active collaborative brainstorming moment, modern home with natural daylight, editorial photography capturing organized crew collaboration, platonic team building together, portrait vertical composition, warm contemporary setting, focus on creative process and teamwork without faces, intimate planning session',
     aspectRatio: 'portrait' as const,
     width: 600,
     height: 800,
@@ -157,7 +157,7 @@ export const sectionPrompts = {
   
   // Governance/Legal Support section
   governance: {
-    prompt: 'Professional diverse governance and legal team, 4 to 5 people including lawyers and mediators, mixed ages ranging 35 to 60, genders, and ethnicities, in modern bright conference room, collaborative advisory meeting atmosphere around large table with documents and laptops, warm approachable yet professional expressions, natural window lighting, corporate lifestyle photography showing inclusive family law practice, contemporary office with warm wood, white walls, navy blue and beige accents, landscape composition, editorial business photography quality, expertise with warmth and accessibility',
+    prompt: 'Close-up intimate shot of professional mediator in 50s sitting across from diverse couple in 30s in modern bright office, warm approachable expressions during supportive consultation, natural window lighting, shallow depth of field with soft bokeh, corporate lifestyle photography showing inclusive family law practice, contemporary office with warm wood and white walls, documents on table between them, landscape composition focusing on human connection, editorial business photography quality, expertise with warmth and accessibility, genuine caring interaction',
     aspectRatio: 'landscape' as const,
     width: 1024,
     height: 600,
@@ -165,7 +165,7 @@ export const sectionPrompts = {
 
   // Testimonials - diverse crew portraits with children in some
   testimonial1: {
-    prompt: 'Professional portrait of two friends, different genders, ages, and ethnicities in mid-30s, standing side-by-side with friendly warm smiles, comfortable casual poses with arms crossed or hands in pockets, neutral warm home background slightly blurred, soft natural lighting, editorial lifestyle portrait photography, platonic co-parent team, authentic happiness and confidence, business partner or bandmate energy not romantic, both looking at camera, square composition for circular crop, contemporary portrait style, genuine connection',
+    prompt: 'Artistic close-up portrait of single person in mid-30s with genuine warm confident smile, sitting near window with soft natural side lighting creating beautiful shadows, neutral warm home background with deep bokeh blur, editorial lifestyle portrait photography, platonic co-parent, authentic happiness and confidence in expression, looking directly at camera with engaging eyes, square composition for circular crop, contemporary portrait style, shallow depth of field emphasizing face and emotion, intimate personal moment',
     aspectRatio: 'square' as const,
     width: 600,
     height: 600,
@@ -179,7 +179,7 @@ export const sectionPrompts = {
   },
 
   testimonial3: {
-    prompt: 'Casual group portrait of four diverse adults, ages 25, 35, 45, and 68, young parent, two mid-career, one grandparent figure, mixed genders and ethnicities, with three children ages 4, 7, and 10, all sitting together on outdoor wooden steps, children clearly happy and engaged with multiple adults showing secure attachments, playful relaxed grouping, warm golden hour lighting, genuine smiles and laughter, lifestyle photography showing thriving children in multigenerational chosen family crew, platonic adult friendships across ages raising kids together, authentic joyful moment, square composition for circular crop',
+    prompt: 'Close-up intimate shot of grandmother in 68 with two children ages 4 and 7 on outdoor wooden steps, children cuddled close showing secure attachment, all three faces visible with genuine smiles and laughter, warm golden hour lighting, grandmother fully focused on children with loving expression, lifestyle photography showing thriving children in multigenerational chosen family crew, other adults softly visible in blurred background, playful relaxed moment, square composition for circular crop, shallow depth of field emphasizing faces and connection',
     aspectRatio: 'square' as const,
     width: 600,
     height: 600,

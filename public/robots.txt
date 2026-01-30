@@ -1,0 +1,6 @@
+# robots.txt for Kinship
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://endemicmedia.github.io/kinship/sitemap.xml

@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import AiImageContainer from '../image/AiImageContainer.vue'
+import { sectionPrompts } from '../../composables/prompts'
+
 const highlights = [
   'Align on parenting values and vision early',
   'Coordinate legal, medical, and emotional planning',
@@ -8,7 +11,8 @@ const highlights = [
 
 <template>
   <section class="relative overflow-hidden pb-16 pt-12 sm:pt-16">
-    <div class="absolute inset-0 bg-gradient-to-br from-teal-100 via-transparent to-indigo-100 opacity-80 dark:from-teal-950 dark:to-indigo-950" />
+    <div class="absolute inset-0 bg-gradient-to-br from-teal-100 via-transparent to-indigo-100 opacity-80 dark:from-teal-950 dark:to-indigo-950" 
+            />
     <UContainer class="relative">
       <div class="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
         <div class="space-y-6">
@@ -32,7 +36,8 @@ const highlights = [
           </div>
           <ul class="grid gap-3 text-sm text-slate-600 dark:text-slate-300 sm:grid-cols-2">
             <li v-for="item in highlights" :key="item" class="flex items-start gap-2">
-              <span class="mt-0.5 h-2 w-2 rounded-full bg-teal-500" aria-hidden="true" />
+              <span class="mt-0.5 h-2 w-2 rounded-full bg-teal-500" aria-hidden="true" 
+            />
               <span>{{ item }}</span>
             </li>
           </ul>
@@ -43,11 +48,12 @@ const highlights = [
               <p class="text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Planning workspace</p>
               <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">Your family blueprint, beautifully organized.</h2>
             </div>
-            <img
-              src="/illustrations/hero-illustration.svg"
-              alt="Illustration of connected parents collaborating on a family planning board"
-              class="w-full rounded-xl border border-slate-200 bg-white/80 p-4 dark:border-slate-800 dark:bg-slate-950"
-              loading="lazy"
+            <AiImageContainer
+              :prompt="sectionPrompts.hero.prompt"
+              aspectRatio="landscape"
+              alt="Diverse parenting team collaborating on family planning"
+              loading="eager"
+              shadow="xl"
             />
             <div class="grid gap-3 sm:grid-cols-2">
               <UCard class="bg-slate-50/80 dark:bg-slate-900/80">

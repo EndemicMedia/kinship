@@ -1,14 +1,33 @@
+<script setup lang="ts">
+import AiImageContainer from '../image/AiImageContainer.vue'
+import { sectionPrompts } from '../../composables/prompts'
+</script>
+
 <template>
   <section class="py-16">
     <UContainer>
-      <div class="grid gap-8 lg:grid-cols-2">
-        <div>
-          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">Governance and legal support built in.</h2>
-          <p class="mt-3 text-slate-600 dark:text-slate-300">
-            Kinship helps families stay protected with guided governance, documented consent, and access to vetted legal resources.
-          </p>
+      <div class="space-y-8">
+        <!-- Header with image -->
+        <div class="grid gap-8 lg:grid-cols-2">
+          <div>
+            <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">Governance and legal support built in.</h2>
+            <p class="mt-3 text-slate-600 dark:text-slate-300">
+              Kinship helps families stay protected with guided governance, documented consent, and access to vetted legal resources.
+            </p>
+          </div>
+          <AiImageContainer
+            :prompt="sectionPrompts.governance.prompt"
+            aspectRatio="landscape"
+            alt="Professional legal support and governance team"
+
+            shadow="lg"
+            class="h-64 w-full"
+          
+            />
         </div>
-        <div class="grid gap-4">
+        
+        <!-- Feature cards -->
+        <div class="grid gap-4 lg:grid-cols-3">
           <UCard class="bg-slate-50 dark:bg-slate-900">
             <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Consent-first governance</h3>
             <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">

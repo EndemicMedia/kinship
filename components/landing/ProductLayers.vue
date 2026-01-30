@@ -1,24 +1,32 @@
 <script setup lang="ts">
+import AiImageContainer from '../image/AiImageContainer.vue'
+import { sectionPrompts } from '../../composables/prompts'
+
 const layers = [
   {
     title: 'Identity layer',
-    description: 'Document names, pronouns, cultural context, and the story you want to tell together.'
+    description: 'Document names, pronouns, cultural context, and the story you want to tell together.',
+    image: sectionPrompts.identity
   },
   {
     title: 'Project & values layer',
-    description: 'Capture shared parenting goals, relationship expectations, and family rituals.'
+    description: 'Capture shared parenting goals, relationship expectations, and family rituals.',
+    image: sectionPrompts.values
   },
   {
     title: 'Biological planning layer',
-    description: 'Coordinate health history, fertility pathways, and care teams with transparency.'
+    description: 'Coordinate health history, fertility pathways, and care teams with transparency.',
+    image: sectionPrompts.biological
   },
   {
     title: 'Legal agreements layer',
-    description: 'Track legal counsel, contracts, and consent checkpoints in one place.'
+    description: 'Track legal counsel, contracts, and consent checkpoints in one place.',
+    image: sectionPrompts.legal
   },
   {
     title: 'Support layer',
-    description: 'Plan co-parenting communication, postpartum support, and long-term check-ins.'
+    description: 'Plan co-parenting communication, postpartum support, and long-term check-ins.',
+    image: sectionPrompts.support
   }
 ]
 </script>
@@ -35,11 +43,23 @@ const layers = [
           </p>
         </div>
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <UCard v-for="layer in layers" :key="layer.title" class="bg-white dark:bg-slate-900">
-            <div class="space-y-2">
-              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-teal-600 dark:text-teal-300">Layer</p>
-              <h3 class="text-lg font-semibold text-slate-900 dark:text-white">{{ layer.title }}</h3>
-              <p class="text-sm text-slate-600 dark:text-slate-300">{{ layer.description }}</p>
+          <UCard v-for="layer in layers" :key="layer.title" class="overflow-hidden bg-white dark:bg-slate-900">
+            <div class="space-y-4">
+              <AiImageContainer
+                :prompt="layer.image.prompt"
+                aspectRatio="square"
+                :alt="layer.title"
+
+                shadow="none"
+                class="h-48 w-full -mx-6 -mt-6 mb-4"
+                :rounded="false"
+              
+            />
+              <div class="space-y-2">
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-teal-600 dark:text-teal-300">Layer</p>
+                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">{{ layer.title }}</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-300">{{ layer.description }}</p>
+              </div>
             </div>
           </UCard>
         </div>

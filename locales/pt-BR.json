@@ -125,6 +125,24 @@
       }
     }
   },
+  "whoItsFor": {
+    "eyebrow": "Para quem é",
+    "title": "A Kinship é para pessoas que querem filhos e uma equipe, não um romance.",
+    "description": "A Kinship ajuda pessoas a formar famílias com intenção, clareza e responsabilidade compartilhada.",
+    "quotes": {
+      "primary": "A Kinship ajuda pessoas a formar famílias com intenção, clareza e responsabilidade compartilhada.",
+      "secondary": "Você não precisa de um parceiro romântico para criar bem uma criança. Você precisa de adultos alinhados dispostos a se comprometer com o mesmo projeto de longo prazo."
+    },
+    "notFor": "A Kinship não é para pessoas que se separaram de seus parceiros. É para pessoas que querem filhos, mas não encontraram o parceiro certo e querem uma equipe parental comprometida.",
+    "audience": {
+      "intentional": "Pessoas que querem filhos, mas não um acoplamento tradicional",
+      "queer": "Famílias queer",
+      "singleParents": "Pais solo por escolha",
+      "friends": "Amigos que querem coparentalidade",
+      "contributors": "Pessoas que querem contribuir sem romance",
+      "clarity": "Pessoas que querem clareza antes do compromisso"
+    }
+  },
   "familyAccountability": {
     "title": "Responsabilidade familiar antes da intervenção do Estado",
     "description": "Quem se compromete no nascimento permanece responsável por orientar, corrigir e intervir quando surgirem desafios. A Kinship oferece a estrutura para responder como equipe antes que os tribunais intervenham com punição.",

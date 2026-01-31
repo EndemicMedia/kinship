@@ -79,6 +79,7 @@ useHead(() => ({
     <LandingTheCompass />
     <LandingProductLayers />
     <LandingHowItWorks />
+    <LandingWhoItsFor />
     <LandingFamilyAccountability />
     <LandingGovernanceLegalSupport />
     <LandingTestimonials />

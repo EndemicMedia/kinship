@@ -125,6 +125,24 @@
       }
     }
   },
+  "whoItsFor": {
+    "eyebrow": "Who it is for",
+    "title": "Kinship is for people who want children and a team, not a romance.",
+    "description": "Kinship helps people form families with intention, clarity, and shared responsibility.",
+    "quotes": {
+      "primary": "Kinship helps people form families with intention, clarity, and shared responsibility.",
+      "secondary": "You don’t need a romantic partner to raise a child well. You need aligned adults who are willing to commit to the same long-term project."
+    },
+    "notFor": "Kinship is not for people who broke up with their partners. It is for people who want children but could not find the right partner and want a committed parenting crew instead.",
+    "audience": {
+      "intentional": "People who want children but not traditional coupling",
+      "queer": "Queer families",
+      "singleParents": "Single parents by choice",
+      "friends": "Friends who want to co-parent",
+      "contributors": "People who want to contribute without romance",
+      "clarity": "People who want clarity before commitment"
+    }
+  },
   "familyAccountability": {
     "title": "Family accountability before state intervention",
     "description": "Those who commit at birth stay responsible for guiding, correcting, and intervening when challenges arise. Kinship provides the structure to respond as a crew before courts step in with punishment.",

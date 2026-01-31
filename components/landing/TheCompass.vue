@@ -1,21 +1,24 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import AiImageContainer from '../image/AiImageContainer.vue'
 import { sectionPrompts } from '../../composables/prompts'
 
-const features = [
+const { t } = useI18n()
+
+const features = computed(() => [
   {
-    title: 'Values come first',
-    description: 'Browse crew profiles that lead with parenting philosophy, not photos. Compatibility shows before attraction.'
+    title: t('compass.features.values.title'),
+    description: t('compass.features.values.description')
   },
   {
-    title: 'Six dimensions of alignment',
-    description: 'See where you match and where early conversations matter. No single score hiding incompatibilities.'
+    title: t('compass.features.dimensions.title'),
+    description: t('compass.features.dimensions.description')
   },
   {
-    title: 'Structure before chemistry',
-    description: 'Complete guided discussions on hard topics before chat unlocks. Surface disagreements early.'
+    title: t('compass.features.structure.title'),
+    description: t('compass.features.structure.description')
   }
-]
+])
 </script>
 
 <template>
@@ -23,17 +26,16 @@ const features = [
     <UContainer>
       <div class="space-y-8">
         <div class="max-w-2xl">
-          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">The Compass: Discover your crew</h2>
+          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">{{ t('compass.title') }}</h2>
           <p class="mt-3 text-slate-600 dark:text-slate-300">
-            Kinship combines the ease of modern matching apps with the rigor intentional families need. The Compass puts 
-            values and vision first, then surfaces people seeking the same journey.
+            {{ t('compass.description') }}
           </p>
         </div>
         
         <AiImageContainer
           :prompt="sectionPrompts.compass.prompt"
           aspectRatio="landscape"
-          alt="The Compass crew matching interface"
+          :alt="t('compass.imageAlt')"
           shadow="lg"
           class="h-80 w-full"
         />

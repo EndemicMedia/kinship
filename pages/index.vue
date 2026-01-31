@@ -1,31 +1,32 @@
 <script setup lang="ts">
-const title = 'Kinship | Form Parenting Crews with Intention and Clarity'
-const description =
-  'Build parenting crews outside traditional marriage. Align on values, coordinate legal and medical planning, activate agreements at conception. Family accountability before state intervention.'
+const { t } = useI18n()
+
 const url = 'https://endemicmedia.github.io/kinship/'
 const ogImage = 'https://endemicmedia.github.io/kinship/og-image.jpg'
 
-useSeoMeta({
-  title,
-  description,
-  ogTitle: title,
-  ogDescription: description,
-  ogType: 'website',
-  ogUrl: url,
-  ogImage,
-  ogImageWidth: '1200',
-  ogImageHeight: '630',
-  twitterTitle: title,
-  twitterDescription: description,
-  twitterCard: 'summary_large_image',
-  twitterImage: ogImage,
-  twitterSite: '@kinship',
+useSeoMeta(() => {
+  const title = t('seo.title')
+  const description = t('seo.description')
+
+  return {
+    title,
+    description,
+    ogTitle: title,
+    ogDescription: description,
+    ogType: 'website',
+    ogUrl: url,
+    ogImage,
+    ogImageWidth: '1200',
+    ogImageHeight: '630',
+    twitterTitle: title,
+    twitterDescription: description,
+    twitterCard: 'summary_large_image',
+    twitterImage: ogImage,
+    twitterSite: '@kinship',
+  }
 })
 
-useHead({
-  htmlAttrs: {
-    lang: 'en'
-  },
+useHead(() => ({
   link: [
     { rel: 'canonical', href: url },
     { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -44,9 +45,9 @@ useHead({
       children: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'SoftwareApplication',
-        name: 'Kinship',
+        name: t('brand.name'),
         applicationCategory: 'LifestyleApplication',
-        description,
+        description: t('seo.description'),
         url,
         offers: {
           '@type': 'Offer',
@@ -56,7 +57,7 @@ useHead({
         },
         audience: {
           '@type': 'Audience',
-          audienceType: 'Intentional parents forming parenting crews'
+          audienceType: t('seo.audienceType')
         },
         aggregateRating: {
           '@type': 'AggregateRating',
@@ -68,7 +69,7 @@ useHead({
       })
     }
   ]
-})
+}))
 </script>
 
 <template>

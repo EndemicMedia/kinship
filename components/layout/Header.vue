@@ -1,24 +1,26 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+
+const { t } = useI18n()
 
 const mobileMenuOpen = ref(false)
 
-const navigation = [
-  { name: 'How it works', href: '#how-it-works' },
-  { name: 'Features', href: '#features' },
-  { name: 'About', href: '#about' }
-]
+const navigation = computed(() => [
+  { name: t('header.nav.howItWorks'), href: '#how-it-works' },
+  { name: t('header.nav.features'), href: '#features' },
+  { name: t('header.nav.about'), href: '#about' }
+])
 </script>
 
 <template>
   <header class="fixed top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-lg dark:border-slate-800 dark:bg-slate-900/80">
     <UContainer>
-      <nav class="flex items-center justify-between py-4" aria-label="Global navigation">
+      <nav class="flex items-center justify-between py-4" :aria-label="t('header.ariaLabel')">
         <!-- Logo -->
         <div class="flex items-center gap-2">
           <a href="/" class="flex items-center gap-3">
-            <img src="/logo.png" alt="Kinship" class="h-10 w-10" />
-            <span class="text-xl font-semibold text-slate-900 dark:text-white">Kinship</span>
+            <img src="/logo.png" :alt="t('brand.name')" class="h-10 w-10" />
+            <span class="text-xl font-semibold text-slate-900 dark:text-white">{{ t('brand.name') }}</span>
           </a>
         </div>
 
@@ -33,7 +35,7 @@ const navigation = [
             {{ item.name }}
           </a>
           <UButton color="primary" size="sm">
-            Get started
+            {{ t('header.cta') }}
           </UButton>
         </div>
 
@@ -42,7 +44,7 @@ const navigation = [
           type="button"
           class="md:hidden"
           @click="mobileMenuOpen = !mobileMenuOpen"
-          aria-label="Toggle mobile menu"
+          :aria-label="t('header.mobileToggle')"
         >
           <UIcon
             :name="mobileMenuOpen ? 'i-heroicons-x-mark' : 'i-heroicons-bars-3'"
@@ -67,7 +69,7 @@ const navigation = [
             {{ item.name }}
           </a>
           <UButton color="primary" size="sm" class="w-full">
-            Get started
+            {{ t('header.cta') }}
           </UButton>
         </div>
       </div>

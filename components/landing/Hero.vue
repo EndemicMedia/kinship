@@ -1,30 +1,33 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import AiImageContainer from '../image/AiImageContainer.vue'
 import { sectionPrompts } from '../../composables/prompts'
 
-const highlights = [
-  'Align on parenting values before you start',
-  'Coordinate legal, medical, and care planning together',
-  'Build crews like bands: intention, not accident',
-  'Contracts activate at conception, not at weddings',
-  'Family accountability prevents state intervention',
-  'Exit with dignity when circumstances change'
-]
+const { t } = useI18n()
+
+const highlights = computed(() => [
+  t('hero.highlights.values'),
+  t('hero.highlights.planning'),
+  t('hero.highlights.intention'),
+  t('hero.highlights.contracts'),
+  t('hero.highlights.accountability'),
+  t('hero.highlights.exit')
+])
 </script>
 
 <template>
   <section class="relative overflow-hidden pb-16 pt-12 sm:pt-16">
     <!-- Full-screen background image -->
     <div class="absolute inset-0 z-0">
-      <AiImageContainer
-        :prompt="sectionPrompts.hero.prompt"
-        aspectRatio="wide"
-        alt="Diverse multigenerational crew planning together with children present"
-        loading="eager"
-        shadow="none"
-        :rounded="false"
-        class="h-full w-full"
-      />
+        <AiImageContainer
+          :prompt="sectionPrompts.hero.prompt"
+          aspectRatio="wide"
+          :alt="t('hero.imageAlt')"
+          loading="eager"
+          shadow="none"
+          :rounded="false"
+          class="h-full w-full"
+        />
       <!-- Gradient overlay for text readability -->
       <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/80 to-slate-900/70" />
     </div>
@@ -32,23 +35,23 @@ const highlights = [
     <UContainer class="relative z-10">
       <div class="max-w-3xl space-y-6 py-8">
         <UBadge color="white" variant="soft" class="w-fit">
-          Intentional parenthood coordination platform
+          {{ t('hero.badge') }}
         </UBadge>
         <h1 class="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-          Form parenting crews with intention, clarity, and lasting support.
+          {{ t('hero.title') }}
         </h1>
         <p class="text-xl text-white/90">
-          Assemble a crew to raise children together. Align on values. Define clear roles. Create stability every child deserves.
+          {{ t('hero.description') }}
         </p>
         <p class="text-lg font-medium text-teal-300">
-          Responsibility begins at conception, not at romantic commitment.
+          {{ t('hero.subtext') }}
         </p>
         <div class="flex flex-wrap gap-3">
-          <UButton color="white" variant="solid" size="lg" aria-label="Get started with Kinship">
-            Get started
+          <UButton color="white" variant="solid" size="lg" :aria-label="t('hero.cta.primaryAria')">
+            {{ t('hero.cta.primary') }}
           </UButton>
-          <UButton color="white" variant="ghost" size="lg" aria-label="See how Kinship works">
-            How it works
+          <UButton color="white" variant="ghost" size="lg" :aria-label="t('hero.cta.secondaryAria')">
+            {{ t('hero.cta.secondary') }}
           </UButton>
         </div>
         <ul class="grid gap-3 text-sm text-white/90 sm:grid-cols-2">

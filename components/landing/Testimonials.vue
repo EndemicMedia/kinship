@@ -1,30 +1,30 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import AiImageContainer from '../image/AiImageContainer.vue'
 import { sectionPrompts } from '../../composables/prompts'
 
-const testimonials = [
+const { t } = useI18n()
+
+const testimonials = computed(() => [
   {
-    quote:
-      'Kinship gave us language for expectations we did not know how to express. Legal prep felt supportive instead of adversarial.',
-    name: 'Jules & Avery',
-    role: 'Two parent crew',
+    quote: t('testimonials.items.first.quote'),
+    name: t('testimonials.items.first.name'),
+    role: t('testimonials.items.first.role'),
     image: sectionPrompts.testimonial1
   },
   {
-    quote:
-      'The values framework helped us honor our identities while handling practical details. We aligned before conception.',
-    name: 'Rina, Sam & Jordan',
-    role: 'Three parent crew',
+    quote: t('testimonials.items.second.quote'),
+    name: t('testimonials.items.second.name'),
+    role: t('testimonials.items.second.role'),
     image: sectionPrompts.testimonial2
   },
   {
-    quote:
-      'Having my mother formally in the crew changed everything. The governance structure gave her voice without overstepping.',
-    name: 'Marcus, Lee, Jordan & Rita',
-    role: 'Multigenerational crew',
+    quote: t('testimonials.items.third.quote'),
+    name: t('testimonials.items.third.name'),
+    role: t('testimonials.items.third.role'),
     image: sectionPrompts.testimonial3
   }
-]
+])
 </script>
 
 <template>
@@ -32,9 +32,9 @@ const testimonials = [
     <UContainer>
       <div class="space-y-8">
         <div class="max-w-2xl">
-          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">Real crews. Real outcomes.</h2>
+          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">{{ t('testimonials.title') }}</h2>
           <p class="mt-3 text-slate-600 dark:text-slate-300">
-            Families using Kinship to form intentional crews and raise children outside traditional marriage structures.
+            {{ t('testimonials.description') }}
           </p>
         </div>
         <div class="grid gap-6 md:grid-cols-3">

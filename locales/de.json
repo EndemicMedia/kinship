@@ -1,0 +1,249 @@
+{
+  "brand": {
+    "name": "Kinship"
+  },
+  "seo": {
+    "title": "Kinship | Eltern-Crews mit Absicht und Klarheit bilden",
+    "description": "Baue Eltern-Crews außerhalb traditioneller Ehe. Werte abstimmen, rechtliche und medizinische Planung koordinieren, Vereinbarungen bei der Empfängnis aktivieren. Familienverantwortung vor staatlicher Intervention.",
+    "audienceType": "Intentionale Eltern, die Eltern-Crews bilden"
+  },
+  "header": {
+    "nav": {
+      "howItWorks": "So funktioniert es",
+      "features": "Funktionen",
+      "about": "Über uns"
+    },
+    "cta": "Jetzt starten",
+    "mobileToggle": "Mobiles Menü umschalten",
+    "ariaLabel": "Globale Navigation"
+  },
+  "hero": {
+    "badge": "Koordinationsplattform für intentionale Elternschaft",
+    "title": "Eltern-Crews mit Absicht, Klarheit und dauerhaftem Rückhalt bilden.",
+    "description": "Stelle eine Crew zusammen, um Kinder gemeinsam großzuziehen. Werte abstimmen. Klare Rollen definieren. Die Stabilität schaffen, die jedes Kind verdient.",
+    "subtext": "Verantwortung beginnt bei der Empfängnis, nicht bei romantischer Bindung.",
+    "cta": {
+      "primary": "Jetzt starten",
+      "secondary": "So funktioniert es",
+      "primaryAria": "Mit Kinship starten",
+      "secondaryAria": "So funktioniert Kinship"
+    },
+    "highlights": {
+      "values": "Auf Erziehungswerte ausrichten, bevor ihr startet",
+      "planning": "Rechtliche, medizinische und Betreuungsplanung gemeinsam koordinieren",
+      "intention": "Crews wie Bands bilden: mit Absicht, nicht zufällig",
+      "contracts": "Verträge werden bei der Empfängnis aktiv, nicht bei Hochzeiten",
+      "accountability": "Familienverantwortung verhindert staatliche Intervention",
+      "exit": "Mit Würde aussteigen, wenn sich Umstände ändern"
+    },
+    "imageAlt": "Vielfältige Mehrgenerationen-Crew plant gemeinsam mit Kindern"
+  },
+  "problemSolution": {
+    "title": "Romantik verwehrt Elternschaft. Kinder zahlen den Preis.",
+    "description": "Die Gesellschaft bündelt drei unvereinbare Bedürfnisse in der Ehe: romantische Leidenschaft, lebenslange Bindung und rechtliche Durchsetzung. Wenn die Romantik scheitert, bricht die ganze Struktur zusammen. Kinship entflechtet diese Bedürfnisse, damit Familien durch Absicht statt Zufall entstehen.",
+    "problem": {
+      "eyebrow": "Das Problem",
+      "title": "Leidenschaft ist volatil. Partnerschaft braucht Stabilität. Das Recht verlangt Klarheit.",
+      "description": "Die Ehe zwingt diese unvereinbaren Kräfte zusammen. Wenn das Begehren nachlässt oder Konflikte entstehen, bricht die rechtliche und elterliche Struktur mit zusammen. Kinder verlieren Stabilität, weil Erwachsene die Romantik nicht aufrechterhalten konnten.",
+      "imageAlt": "Abstrakte Visualisierung inkompatibler Systeme, die zusammengezwungen werden"
+    },
+    "solution": {
+      "eyebrow": "Die Kinship-Lösung",
+      "title": "Romantik von Verantwortung trennen. Vereinbarungen bei der Empfängnis aktivieren.",
+      "description": "Crews um gemeinsame Erziehungsziele bilden, nicht um romantische Chemie. Rechtliche Vereinbarungen werden aktiv, wenn die Schwangerschaft beginnt, nicht wenn Gelübde gesprochen werden. Verantwortung wandelt sich, wenn das Leben sich ändert, verschwindet aber nie.",
+      "imageAlt": "Abstrakte Visualisierung harmonischer entkoppelter Systeme"
+    }
+  },
+  "compass": {
+    "title": "Der Kompass: Deine Crew entdecken",
+    "description": "Kinship verbindet die Leichtigkeit moderner Matching-Apps mit der Strenge, die intentionale Familien brauchen. Der Kompass stellt Werte und Vision an erste Stelle und zeigt dann Menschen, die dieselbe Reise suchen.",
+    "imageAlt": "Die Kompass-Oberfläche für Crew-Matching",
+    "features": {
+      "values": {
+        "title": "Werte zuerst",
+        "description": "Durchsuche Crew-Profile, die mit Erziehungsphilosophie beginnen, nicht mit Fotos. Kompatibilität zeigt sich vor Anziehung."
+      },
+      "dimensions": {
+        "title": "Sechs Dimensionen der Ausrichtung",
+        "description": "Sieh, wo ihr übereinstimmt und wo frühe Gespräche wichtig sind. Keine einzelne Punktzahl, die Inkompatibilitäten verdeckt."
+      },
+      "structure": {
+        "title": "Struktur vor Chemie",
+        "description": "Geführte Gespräche zu schwierigen Themen abschließen, bevor der Chat freigeschaltet wird. Meinungsverschiedenheiten früh sichtbar machen."
+      }
+    }
+  },
+  "productLayers": {
+    "title": "Sechs Ebenen. Ein vollständiges System.",
+    "description": "Traditionelle Familiengründung lässt Lücken zwischen rechtlicher Vorbereitung, medizinischer Koordination und emotionaler Abstimmung. Kinship schafft Struktur für jedes Gespräch und jede Entscheidung, die eure Crew gemeinsam treffen muss.",
+    "layers": {
+      "identity": {
+        "title": "Identität",
+        "description": "Dokumentiere, wer ihr seid: Namen, Pronomen, kultureller Kontext und die Geschichte, die ihr gemeinsam erzählen wollt."
+      },
+      "values": {
+        "title": "Werteabgleich",
+        "description": "Gemeinsame Ziele, Beziehungsgrenzen und Familienrituale durch geführte Gespräche sichtbar machen."
+      },
+      "biological": {
+        "title": "Biologische Planung",
+        "description": "Fertilitätswege, Gesundheitsgeschichte und medizinische Entscheidungen mit voller Transparenz koordinieren."
+      },
+      "legal": {
+        "title": "Rechtliche Vorbereitung",
+        "description": "Co-Parenting-Vereinbarungen erstellen, die bei der Empfängnis aktiv werden. Zustimmung und rechtliche Meilensteine verfolgen."
+      },
+      "accountability": {
+        "title": "Familienverantwortung",
+        "description": "Interventionsprotokolle für Verhaltensprobleme festlegen. Als Crew reagieren, bevor Gerichte eingreifen."
+      },
+      "support": {
+        "title": "Laufende Unterstützung",
+        "description": "Ausrichtung durch regelmäßige Check-ins, Meilenstein-Reviews und strukturierte Konfliktlösung erhalten."
+      }
+    }
+  },
+  "howItWorks": {
+    "title": "Vom ersten Gespräch bis zum ersten Geburtstag",
+    "description": "Kinship begleitet euch durch jede Phase der Crew-Bildung. Langsame, überlegte Entscheidungen ersetzen überstürzte Verpflichtungen unter romantischem Druck.",
+    "steps": {
+      "discover": {
+        "label": "Entdecken",
+        "content": "Potenzielle Crew-Mitglieder über werteorientierte Profile kennenlernen. Kompatibilitätsbewertungen abschließen, bevor Kontakt entsteht."
+      },
+      "align": {
+        "label": "Abstimmen",
+        "content": "Geführte Gespräche zu Erziehungsphilosophie, Finanzen, Grenzen und langfristigen Erwartungen führen."
+      },
+      "formalize": {
+        "label": "Formalisieren",
+        "content": "Rechtliche Vereinbarungen mit eurer Crew erstellen. Zustimmungspunkte und Dokumentation für gerichtliche Anerkennung festlegen."
+      },
+      "sustain": {
+        "label": "Stabilisieren",
+        "content": "Crew-Ausrichtung mit regelmäßigen Check-ins, Meilenstein-Reviews und Mediation bei Konflikten erhalten."
+      }
+    }
+  },
+  "familyAccountability": {
+    "title": "Familienverantwortung vor staatlicher Intervention",
+    "description": "Wer sich bei der Geburt verpflichtet, bleibt verantwortlich für Anleitung, Korrektur und Eingreifen, wenn Herausforderungen entstehen. Kinship bietet die Struktur, als Crew zu reagieren, bevor Gerichte mit Strafen eingreifen.",
+    "imageAlt": "Visualisierung des Familienverantwortungskreises",
+    "supportImageAlt": "Mehrgenerationen-Crew unterstützt einen Teenager",
+    "severity": {
+      "title": "Fünf Reaktionsstufen",
+      "minor": {
+        "title": "Gering",
+        "description": "Primäre Bezugsperson handelt"
+      },
+      "patterns": {
+        "title": "Muster",
+        "description": "Gesamte Crew diskutiert"
+      },
+      "serious": {
+        "title": "Ernst",
+        "description": "Crew plus professionelle Hilfe"
+      },
+      "critical": {
+        "title": "Kritisch",
+        "description": "Sofortige Mobilisierung"
+      },
+      "legal": {
+        "title": "Rechtlich",
+        "description": "Gerichtskoordination"
+      }
+    },
+    "features": {
+      "logging": {
+        "title": "Vorfallprotokollierung",
+        "description": "Verhaltensmuster mit Schweregrad erfassen. Nachverfolgen, welche Interventionen langfristig wirken."
+      },
+      "protocols": {
+        "title": "Eskalationsprotokolle",
+        "description": "Erforderliche Maßnahmen je Schweregrad. Primäre Bezugsperson reagiert zuerst, die ganze Crew mobilisiert bei ernsten Fällen."
+      },
+      "documentation": {
+        "title": "Gerichtsdokumentation",
+        "description": "Berichte erstellen, die proaktive Familienfürsorge zeigen, falls rechtliche Intervention nötig wird."
+      }
+    }
+  },
+  "governance": {
+    "title": "Rechtlicher Schutz in jedem Schritt",
+    "description": "Kinship erstellt von Beginn an rechtssichere Dokumentation. Vereinbarungen werden aktiv, sobald eine Schwangerschaft beginnt, und sichern Verantwortung vor der Geburt, statt nach einer Trennung hektisch Schutz zu suchen.",
+    "imageAlt": "Professionelles, vielfältiges Team für Governance und rechtliche Unterstützung",
+    "cards": {
+      "consent": {
+        "title": "Zustimmung an jedem Schwellenpunkt",
+        "description": "Explizite Zustimmung bei Gründung, Empfängnis, Geburt und großen Lebensänderungen dokumentieren. Keine Annahmen über fortgesetzte Beteiligung."
+      },
+      "responsibility": {
+        "title": "Verantwortungsanteile",
+        "description": "Entscheidungskompetenz und finanzielle Verpflichtung prozentual zuweisen. Erweiterte Familie kann definierte Unterstützungsrollen übernehmen."
+      },
+      "exit": {
+        "title": "Ausstieg mit Transformation",
+        "description": "Verantwortlichkeiten passen sich an, verschwinden aber nie. Mediation vor dem Ausstieg, Pläne für die Kontinuität des Kindes erforderlich."
+      }
+    }
+  },
+  "testimonials": {
+    "title": "Echte Crews. Echte Ergebnisse.",
+    "description": "Familien, die Kinship nutzen, um intentionale Crews zu bilden und Kinder außerhalb traditioneller Ehemodelle großzuziehen.",
+    "items": {
+      "first": {
+        "quote": "Kinship gab uns Worte für Erwartungen, die wir nicht ausdrücken konnten. Die rechtliche Vorbereitung fühlte sich unterstützend statt konfrontativ an.",
+        "name": "Jules & Avery",
+        "role": "Zwei-Eltern-Crew"
+      },
+      "second": {
+        "quote": "Der Werterahmen half uns, unsere Identitäten zu respektieren und zugleich praktische Details zu klären. Wir richteten uns vor der Empfängnis aus.",
+        "name": "Rina, Sam & Jordan",
+        "role": "Drei-Eltern-Crew"
+      },
+      "third": {
+        "quote": "Dass meine Mutter offiziell in der Crew ist, hat alles verändert. Die Governance-Struktur gab ihr eine Stimme, ohne zu übergreifen.",
+        "name": "Marcus, Lee, Jordan & Rita",
+        "role": "Mehrgenerationen-Crew"
+      }
+    }
+  },
+  "cta": {
+    "imageAlt": "Mehrgenerationen-Crew mit Kindern auf dem Weg in eine helle Zukunft",
+    "title": "Bereit, deine Crew zu bilden?",
+    "description": "Beginne mit Werteabgleich. Baue rechtlichen Schutz von Tag eins an. Halte Unterstützung durch jeden Übergang aufrecht.",
+    "primary": "Jetzt starten",
+    "secondary": "Warteliste beitreten",
+    "primaryAria": "Beginne, deine Crew auf Kinship aufzubauen",
+    "secondaryAria": "Der Kinship-Warteliste beitreten"
+  },
+  "footer": {
+    "tagline": "Eltern-Crews mit Absicht, Klarheit und dauerhaftem Rückhalt bilden.",
+    "product": {
+      "title": "Produkt",
+      "features": "Funktionen",
+      "howItWorks": "So funktioniert es",
+      "pricing": "Preise"
+    },
+    "company": {
+      "title": "Unternehmen",
+      "about": "Über uns",
+      "blog": "Blog",
+      "contact": "Kontakt"
+    },
+    "legal": {
+      "title": "Rechtliches",
+      "privacy": "Datenschutz",
+      "terms": "Nutzungsbedingungen"
+    },
+    "language": "Sprache",
+    "rights": "Alle Rechte vorbehalten."
+  },
+  "image": {
+    "loading": "Bild wird generiert ...",
+    "defaults": {
+      "alt": "KI-generiertes Bild",
+      "fallback": "Bild konnte nicht geladen werden"
+    }
+  }
+}

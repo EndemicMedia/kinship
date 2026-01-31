@@ -1,0 +1,249 @@
+{
+  "brand": {
+    "name": "Kinship"
+  },
+  "seo": {
+    "title": "Kinship | Form Parenting Crews with Intention and Clarity",
+    "description": "Build parenting crews outside traditional marriage. Align on values, coordinate legal and medical planning, activate agreements at conception. Family accountability before state intervention.",
+    "audienceType": "Intentional parents forming parenting crews"
+  },
+  "header": {
+    "nav": {
+      "howItWorks": "How it works",
+      "features": "Features",
+      "about": "About"
+    },
+    "cta": "Get started",
+    "mobileToggle": "Toggle mobile menu",
+    "ariaLabel": "Global navigation"
+  },
+  "hero": {
+    "badge": "Intentional parenthood coordination platform",
+    "title": "Form parenting crews with intention, clarity, and lasting support.",
+    "description": "Assemble a crew to raise children together. Align on values. Define clear roles. Create stability every child deserves.",
+    "subtext": "Responsibility begins at conception, not at romantic commitment.",
+    "cta": {
+      "primary": "Get started",
+      "secondary": "How it works",
+      "primaryAria": "Get started with Kinship",
+      "secondaryAria": "See how Kinship works"
+    },
+    "highlights": {
+      "values": "Align on parenting values before you start",
+      "planning": "Coordinate legal, medical, and care planning together",
+      "intention": "Build crews like bands: intention, not accident",
+      "contracts": "Contracts activate at conception, not at weddings",
+      "accountability": "Family accountability prevents state intervention",
+      "exit": "Exit with dignity when circumstances change"
+    },
+    "imageAlt": "Diverse multigenerational crew planning together with children present"
+  },
+  "problemSolution": {
+    "title": "Romance gates parenthood. Children pay the price.",
+    "description": "Society bundles three incompatible needs into marriage: romantic passion, lifelong commitment, and legal enforcement. When romance fails, the entire structure collapses. Kinship unbundles these needs so families form through intention instead of accident.",
+    "problem": {
+      "eyebrow": "The problem",
+      "title": "Passion is volatile. Partnership needs stability. Law demands clarity.",
+      "description": "Marriage forces these incompatible forces together. When desire fades or conflict arises, the legal and parenting structure collapses with it. Children lose stability because adults could not sustain romance.",
+      "imageAlt": "Abstract visualization of incompatible systems forced together"
+    },
+    "solution": {
+      "eyebrow": "The Kinship solution",
+      "title": "Separate romance from responsibility. Activate agreements at conception.",
+      "description": "Form crews around shared parenting goals, not romantic chemistry. Legal agreements activate when pregnancy begins, not when vows are spoken. Responsibility transforms when life changes, but never disappears.",
+      "imageAlt": "Abstract visualization of harmonious unbundled systems"
+    }
+  },
+  "compass": {
+    "title": "The Compass: Discover your crew",
+    "description": "Kinship combines the ease of modern matching apps with the rigor intentional families need. The Compass puts values and vision first, then surfaces people seeking the same journey.",
+    "imageAlt": "The Compass crew matching interface",
+    "features": {
+      "values": {
+        "title": "Values come first",
+        "description": "Browse crew profiles that lead with parenting philosophy, not photos. Compatibility shows before attraction."
+      },
+      "dimensions": {
+        "title": "Six dimensions of alignment",
+        "description": "See where you match and where early conversations matter. No single score hiding incompatibilities."
+      },
+      "structure": {
+        "title": "Structure before chemistry",
+        "description": "Complete guided discussions on hard topics before chat unlocks. Surface disagreements early."
+      }
+    }
+  },
+  "productLayers": {
+    "title": "Six layers. One complete system.",
+    "description": "Traditional family formation leaves gaps between legal preparation, medical coordination, and emotional alignment. Kinship provides structure for every conversation and decision your crew needs to make together.",
+    "layers": {
+      "identity": {
+        "title": "Identity",
+        "description": "Document who you are: names, pronouns, cultural context, and the story you want to tell together."
+      },
+      "values": {
+        "title": "Values alignment",
+        "description": "Surface shared goals, relationship boundaries, and family rituals through guided conversations."
+      },
+      "biological": {
+        "title": "Biological planning",
+        "description": "Coordinate fertility pathways, health history, and medical decisions with full transparency."
+      },
+      "legal": {
+        "title": "Legal preparation",
+        "description": "Generate co-parenting agreements that activate at conception. Track consent and legal checkpoints."
+      },
+      "accountability": {
+        "title": "Family accountability",
+        "description": "Establish intervention protocols for behavioral issues. Respond as a crew before courts get involved."
+      },
+      "support": {
+        "title": "Ongoing support",
+        "description": "Maintain alignment through regular check-ins, milestone reviews, and structured conflict resolution."
+      }
+    }
+  },
+  "howItWorks": {
+    "title": "From first conversation to first birthday",
+    "description": "Kinship guides you through each stage of crew formation. Slow, deliberate decisions replace rushed commitments made under romantic pressure.",
+    "steps": {
+      "discover": {
+        "label": "Discover",
+        "content": "Meet potential crew members through values-first profiles. Complete compatibility assessments before making contact."
+      },
+      "align": {
+        "label": "Align",
+        "content": "Work through guided conversations on parenting philosophy, finances, boundaries, and long-term expectations."
+      },
+      "formalize": {
+        "label": "Formalize",
+        "content": "Generate legal agreements with your crew. Establish consent checkpoints and documentation for court recognition."
+      },
+      "sustain": {
+        "label": "Sustain",
+        "content": "Maintain crew alignment with regular check-ins, milestone reviews, and mediation support when conflicts arise."
+      }
+    }
+  },
+  "familyAccountability": {
+    "title": "Family accountability before state intervention",
+    "description": "Those who commit at birth stay responsible for guiding, correcting, and intervening when challenges arise. Kinship provides the structure to respond as a crew before courts step in with punishment.",
+    "imageAlt": "Family accountability circle visualization",
+    "supportImageAlt": "Multigenerational crew supporting teenager",
+    "severity": {
+      "title": "Five response levels",
+      "minor": {
+        "title": "Minor",
+        "description": "Primary parent addresses"
+      },
+      "patterns": {
+        "title": "Patterns",
+        "description": "Full crew discussion"
+      },
+      "serious": {
+        "title": "Serious",
+        "description": "Crew plus professional help"
+      },
+      "critical": {
+        "title": "Critical",
+        "description": "Immediate mobilization"
+      },
+      "legal": {
+        "title": "Legal",
+        "description": "Court coordination"
+      }
+    },
+    "features": {
+      "logging": {
+        "title": "Incident logging",
+        "description": "Document behavioral patterns with severity assessment. Track what interventions work over time."
+      },
+      "protocols": {
+        "title": "Escalation protocols",
+        "description": "Required actions at each severity level. Primary parent responds first, full crew mobilizes for serious issues."
+      },
+      "documentation": {
+        "title": "Court documentation",
+        "description": "Generate reports showing proactive family care if legal intervention becomes necessary."
+      }
+    }
+  },
+  "governance": {
+    "title": "Legal protection built into every step",
+    "description": "Kinship generates legally sound documentation from the start. Agreements activate when pregnancy begins, establishing responsibility before birth instead of scrambling for protection after separation.",
+    "imageAlt": "Professional diverse governance and legal support team",
+    "cards": {
+      "consent": {
+        "title": "Consent at every threshold",
+        "description": "Document explicit agreement at formation, conception, birth, and major life changes. No assumptions about continued participation."
+      },
+      "responsibility": {
+        "title": "Responsibility percentages",
+        "description": "Assign decision authority and financial obligation by percentage. Extended family can hold defined support roles."
+      },
+      "exit": {
+        "title": "Exit with transformation",
+        "description": "Responsibilities adjust when life changes, never vanish. Mediation before exit, child continuity plans required."
+      }
+    }
+  },
+  "testimonials": {
+    "title": "Real crews. Real outcomes.",
+    "description": "Families using Kinship to form intentional crews and raise children outside traditional marriage structures.",
+    "items": {
+      "first": {
+        "quote": "Kinship gave us language for expectations we did not know how to express. Legal prep felt supportive instead of adversarial.",
+        "name": "Jules & Avery",
+        "role": "Two parent crew"
+      },
+      "second": {
+        "quote": "The values framework helped us honor our identities while handling practical details. We aligned before conception.",
+        "name": "Rina, Sam & Jordan",
+        "role": "Three parent crew"
+      },
+      "third": {
+        "quote": "Having my mother formally in the crew changed everything. The governance structure gave her voice without overstepping.",
+        "name": "Marcus, Lee, Jordan & Rita",
+        "role": "Multigenerational crew"
+      }
+    }
+  },
+  "cta": {
+    "imageAlt": "Multigenerational crew with children walking toward bright future",
+    "title": "Ready to form your crew?",
+    "description": "Start with values alignment. Build legal protection from day one. Maintain support through every transition.",
+    "primary": "Get started",
+    "secondary": "Join waitlist",
+    "primaryAria": "Start building your crew on Kinship",
+    "secondaryAria": "Join the Kinship waitlist"
+  },
+  "footer": {
+    "tagline": "Form parenting crews with intention, clarity, and lasting support.",
+    "product": {
+      "title": "Product",
+      "features": "Features",
+      "howItWorks": "How it works",
+      "pricing": "Pricing"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About",
+      "blog": "Blog",
+      "contact": "Contact"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy",
+      "terms": "Terms"
+    },
+    "language": "Language",
+    "rights": "All rights reserved."
+  },
+  "image": {
+    "loading": "Generating image...",
+    "defaults": {
+      "alt": "AI generated image",
+      "fallback": "Failed to load image"
+    }
+  }
+}

@@ -1,33 +1,32 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import AiImageContainer from '../image/AiImageContainer.vue'
 import { sectionPrompts } from '../../composables/prompts'
 
-const steps = [
+const { t } = useI18n()
+
+const steps = computed(() => [
   {
-    label: 'Discover',
-    content:
-      'Meet potential crew members through values-first profiles. Complete compatibility assessments before making contact.',
+    label: t('howItWorks.steps.discover.label'),
+    content: t('howItWorks.steps.discover.content'),
     image: sectionPrompts.discover
   },
   {
-    label: 'Align',
-    content:
-      'Work through guided conversations on parenting philosophy, finances, boundaries, and long-term expectations.',
+    label: t('howItWorks.steps.align.label'),
+    content: t('howItWorks.steps.align.content'),
     image: sectionPrompts.plan
   },
   {
-    label: 'Formalize',
-    content:
-      'Generate legal agreements with your crew. Establish consent checkpoints and documentation for court recognition.',
+    label: t('howItWorks.steps.formalize.label'),
+    content: t('howItWorks.steps.formalize.content'),
     image: sectionPrompts.secure
   },
   {
-    label: 'Sustain',
-    content:
-      'Maintain crew alignment with regular check-ins, milestone reviews, and mediation support when conflicts arise.',
+    label: t('howItWorks.steps.sustain.label'),
+    content: t('howItWorks.steps.sustain.content'),
     image: sectionPrompts.sustain
   }
-]
+])
 </script>
 
 <template>
@@ -35,10 +34,9 @@ const steps = [
     <UContainer>
       <div class="space-y-8">
         <div class="max-w-2xl">
-          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">From first conversation to first birthday</h2>
+          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">{{ t('howItWorks.title') }}</h2>
           <p class="mt-3 text-slate-600 dark:text-slate-300">
-            Kinship guides you through each stage of crew formation. Slow, deliberate decisions replace rushed commitments 
-            made under romantic pressure.
+            {{ t('howItWorks.description') }}
           </p>
         </div>
         

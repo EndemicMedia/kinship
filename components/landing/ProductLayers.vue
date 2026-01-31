@@ -1,39 +1,42 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import AiImageContainer from '../image/AiImageContainer.vue'
 import { sectionPrompts } from '../../composables/prompts'
 
-const layers = [
+const { t } = useI18n()
+
+const layers = computed(() => [
   {
-    title: 'Identity',
-    description: 'Document who you are: names, pronouns, cultural context, and the story you want to tell together.',
+    title: t('productLayers.layers.identity.title'),
+    description: t('productLayers.layers.identity.description'),
     image: sectionPrompts.identity
   },
   {
-    title: 'Values alignment',
-    description: 'Surface shared goals, relationship boundaries, and family rituals through guided conversations.',
+    title: t('productLayers.layers.values.title'),
+    description: t('productLayers.layers.values.description'),
     image: sectionPrompts.values
   },
   {
-    title: 'Biological planning',
-    description: 'Coordinate fertility pathways, health history, and medical decisions with full transparency.',
+    title: t('productLayers.layers.biological.title'),
+    description: t('productLayers.layers.biological.description'),
     image: sectionPrompts.biological
   },
   {
-    title: 'Legal preparation',
-    description: 'Generate co-parenting agreements that activate at conception. Track consent and legal checkpoints.',
+    title: t('productLayers.layers.legal.title'),
+    description: t('productLayers.layers.legal.description'),
     image: sectionPrompts.legal
   },
   {
-    title: 'Family accountability',
-    description: 'Establish intervention protocols for behavioral issues. Respond as a crew before courts get involved.',
+    title: t('productLayers.layers.accountability.title'),
+    description: t('productLayers.layers.accountability.description'),
     image: sectionPrompts.accountability
   },
   {
-    title: 'Ongoing support',
-    description: 'Maintain alignment through regular check-ins, milestone reviews, and structured conflict resolution.',
+    title: t('productLayers.layers.support.title'),
+    description: t('productLayers.layers.support.description'),
     image: sectionPrompts.support
   }
-]
+])
 </script>
 
 <template>
@@ -41,10 +44,9 @@ const layers = [
     <UContainer>
       <div class="flex flex-col gap-8">
         <div class="max-w-2xl">
-          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">Six layers. One complete system.</h2>
+          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">{{ t('productLayers.title') }}</h2>
           <p class="mt-3 text-slate-600 dark:text-slate-300">
-            Traditional family formation leaves gaps between legal preparation, medical coordination, and emotional alignment. 
-            Kinship provides structure for every conversation and decision your crew needs to make together.
+            {{ t('productLayers.description') }}
           </p>
         </div>
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

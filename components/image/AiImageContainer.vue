@@ -20,14 +20,16 @@ interface Props {
   debug?: boolean
 }
 
+const { t } = useI18n()
+
 const props = withDefaults(defineProps<Props>(), {
   width: 1024,
   height: 1024,
   model: 'nanobanana', // Default to nanobanana - cheapest and most reliable
   aspectRatio: 'auto',
-  alt: 'AI generated image',
+  alt: '',
   loading: 'lazy',
-  fallbackText: 'Failed to load image',
+  fallbackText: '',
   objectFit: 'cover',
   rounded: true,
   shadow: 'md',
@@ -77,6 +79,10 @@ const shadowClass = computed(() => {
   }
   return shadows[props.shadow]
 })
+
+const resolvedAlt = computed(() => props.alt || t('image.defaults.alt'))
+const resolvedFallbackText = computed(() => props.fallbackText || t('image.defaults.fallback'))
+const loadingText = computed(() => t('image.loading'))
 
 const roundedClass = computed(() => props.rounded ? 'rounded-xl' : '')
 
@@ -166,7 +172,7 @@ watch(isLoaded, (loaded) => {
           name="i-heroicons-photo"
           class="h-8 w-8 animate-pulse text-slate-400"
         />
-        <span class="text-xs text-slate-500">Generating image...</span>
+        <span class="text-xs text-slate-500">{{ loadingText }}</span>
       </div>
     </div>
 
@@ -180,7 +186,7 @@ watch(isLoaded, (loaded) => {
           name="i-heroicons-exclamation-triangle"
           class="h-8 w-8 text-rose-500"
         />
-        <span class="text-xs text-rose-600 dark:text-rose-400">{{ fallbackText }}</span>
+        <span class="text-xs text-rose-600 dark:text-rose-400">{{ resolvedFallbackText }}</span>
       </div>
     </div>
 
@@ -188,7 +194,7 @@ watch(isLoaded, (loaded) => {
     <img
       v-else-if="imageUrl"
       :src="imageUrl"
-      :alt="alt"
+      :alt="resolvedAlt"
       :loading="loading"
       :class="[objectFitClass, roundedClass, props.class, 'h-full w-full transition-opacity duration-300', { 'opacity-0': !isLoaded, 'opacity-100': isLoaded }]"
       @load="() => { isLoaded = true; log('📸 Image element loaded successfully (native load event)') }"

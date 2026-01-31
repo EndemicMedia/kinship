@@ -1,0 +1,249 @@
+{
+  "brand": {
+    "name": "Kinship"
+  },
+  "seo": {
+    "title": "Kinship | Forme equipes parentais com intenção e clareza",
+    "description": "Crie equipes parentais fora do casamento tradicional. Alinhe valores, coordene planejamento jurídico e médico, ative acordos na concepção. Responsabilidade familiar antes da intervenção do Estado.",
+    "audienceType": "Pais intencionais formando equipes parentais"
+  },
+  "header": {
+    "nav": {
+      "howItWorks": "Como funciona",
+      "features": "Recursos",
+      "about": "Sobre"
+    },
+    "cta": "Começar",
+    "mobileToggle": "Alternar menu móvel",
+    "ariaLabel": "Navegação global"
+  },
+  "hero": {
+    "badge": "Plataforma de coordenação de parentalidade intencional",
+    "title": "Forme equipes parentais com intenção, clareza e apoio duradouro.",
+    "description": "Monte uma equipe para criar crianças em conjunto. Alinhe valores. Defina papéis claros. Crie a estabilidade que toda criança merece.",
+    "subtext": "A responsabilidade começa na concepção, não no compromisso romântico.",
+    "cta": {
+      "primary": "Começar",
+      "secondary": "Como funciona",
+      "primaryAria": "Comece com a Kinship",
+      "secondaryAria": "Veja como a Kinship funciona"
+    },
+    "highlights": {
+      "values": "Alinhe valores parentais antes de começar",
+      "planning": "Coordene juntos o planejamento jurídico, médico e de cuidados",
+      "intention": "Forme equipes como bandas: com intenção, não por acaso",
+      "contracts": "Contratos são ativados na concepção, não em casamentos",
+      "accountability": "Responsabilidade familiar evita intervenção do Estado",
+      "exit": "Saia com dignidade quando as circunstâncias mudarem"
+    },
+    "imageAlt": "Equipe multigeracional diversa planejando junto com crianças"
+  },
+  "problemSolution": {
+    "title": "O romance barra a parentalidade. As crianças pagam o preço.",
+    "description": "A sociedade reúne três necessidades incompatíveis no casamento: paixão romântica, compromisso vitalício e aplicação legal. Quando o romance falha, toda a estrutura desmorona. A Kinship separa essas necessidades para que as famílias se formem por intenção, não por acaso.",
+    "problem": {
+      "eyebrow": "O problema",
+      "title": "Paixão é volátil. Parceria precisa de estabilidade. A lei exige clareza.",
+      "description": "O casamento força essas forças incompatíveis a ficarem juntas. Quando o desejo diminui ou surge conflito, a estrutura legal e parental desmorona junto. As crianças perdem estabilidade porque os adultos não conseguiram sustentar o romance.",
+      "imageAlt": "Visualização abstrata de sistemas incompatíveis forçados juntos"
+    },
+    "solution": {
+      "eyebrow": "A solução da Kinship",
+      "title": "Separe romance de responsabilidade. Ative acordos na concepção.",
+      "description": "Forme equipes em torno de metas parentais compartilhadas, não de química romântica. Acordos legais são ativados quando a gravidez começa, não quando votos são feitos. A responsabilidade se transforma quando a vida muda, mas nunca desaparece.",
+      "imageAlt": "Visualização abstrata de sistemas harmoniosos desvinculados"
+    }
+  },
+  "compass": {
+    "title": "O Compass: descubra sua equipe",
+    "description": "A Kinship combina a facilidade dos apps modernos de matching com o rigor que famílias intencionais precisam. O Compass coloca valores e visão em primeiro lugar e, então, mostra pessoas buscando a mesma jornada.",
+    "imageAlt": "Interface do Compass para matching de equipes",
+    "features": {
+      "values": {
+        "title": "Valores em primeiro lugar",
+        "description": "Explore perfis de equipe que começam pela filosofia de criação, não por fotos. A compatibilidade aparece antes da atração."
+      },
+      "dimensions": {
+        "title": "Seis dimensões de alinhamento",
+        "description": "Veja onde vocês combinam e onde conversas iniciais importam. Nenhuma pontuação única escondendo incompatibilidades."
+      },
+      "structure": {
+        "title": "Estrutura antes da química",
+        "description": "Conclua conversas guiadas sobre temas difíceis antes de liberar o chat. Traga discordâncias à tona cedo."
+      }
+    }
+  },
+  "productLayers": {
+    "title": "Seis camadas. Um sistema completo.",
+    "description": "A formação familiar tradicional deixa lacunas entre preparação jurídica, coordenação médica e alinhamento emocional. A Kinship oferece estrutura para cada conversa e decisão que sua equipe precisa tomar em conjunto.",
+    "layers": {
+      "identity": {
+        "title": "Identidade",
+        "description": "Documente quem vocês são: nomes, pronomes, contexto cultural e a história que querem contar juntos."
+      },
+      "values": {
+        "title": "Alinhamento de valores",
+        "description": "Traga à tona metas compartilhadas, limites de relacionamento e rituais familiares por meio de conversas guiadas."
+      },
+      "biological": {
+        "title": "Planejamento biológico",
+        "description": "Coordene caminhos de fertilidade, histórico de saúde e decisões médicas com total transparência."
+      },
+      "legal": {
+        "title": "Preparação jurídica",
+        "description": "Gere acordos de coparentalidade que são ativados na concepção. Acompanhe consentimento e marcos jurídicos."
+      },
+      "accountability": {
+        "title": "Responsabilidade familiar",
+        "description": "Estabeleça protocolos de intervenção para questões comportamentais. Responda como equipe antes que os tribunais se envolvam."
+      },
+      "support": {
+        "title": "Apoio contínuo",
+        "description": "Mantenha o alinhamento com check-ins regulares, revisões de marcos e resolução estruturada de conflitos."
+      }
+    }
+  },
+  "howItWorks": {
+    "title": "Da primeira conversa ao primeiro aniversário",
+    "description": "A Kinship guia você por cada etapa da formação da equipe. Decisões lentas e deliberadas substituem compromissos apressados feitos sob pressão romântica.",
+    "steps": {
+      "discover": {
+        "label": "Descobrir",
+        "content": "Conheça potenciais membros da equipe por perfis focados em valores. Complete avaliações de compatibilidade antes de fazer contato."
+      },
+      "align": {
+        "label": "Alinhar",
+        "content": "Trabalhe em conversas guiadas sobre filosofia parental, finanças, limites e expectativas de longo prazo."
+      },
+      "formalize": {
+        "label": "Formalizar",
+        "content": "Gere acordos legais com sua equipe. Estabeleça pontos de consentimento e documentação para reconhecimento judicial."
+      },
+      "sustain": {
+        "label": "Sustentar",
+        "content": "Mantenha o alinhamento da equipe com check-ins regulares, revisões de marcos e apoio de mediação quando surgirem conflitos."
+      }
+    }
+  },
+  "familyAccountability": {
+    "title": "Responsabilidade familiar antes da intervenção do Estado",
+    "description": "Quem se compromete no nascimento permanece responsável por orientar, corrigir e intervir quando surgirem desafios. A Kinship oferece a estrutura para responder como equipe antes que os tribunais intervenham com punição.",
+    "imageAlt": "Visualização do círculo de responsabilidade familiar",
+    "supportImageAlt": "Equipe multigeracional apoiando adolescente",
+    "severity": {
+      "title": "Cinco níveis de resposta",
+      "minor": {
+        "title": "Leve",
+        "description": "Responsável principal atua"
+      },
+      "patterns": {
+        "title": "Padrões",
+        "description": "Discussão com toda a equipe"
+      },
+      "serious": {
+        "title": "Sério",
+        "description": "Equipe mais ajuda profissional"
+      },
+      "critical": {
+        "title": "Crítico",
+        "description": "Mobilização imediata"
+      },
+      "legal": {
+        "title": "Legal",
+        "description": "Coordenação judicial"
+      }
+    },
+    "features": {
+      "logging": {
+        "title": "Registro de incidentes",
+        "description": "Documente padrões de comportamento com avaliação de gravidade. Acompanhe o que funciona ao longo do tempo."
+      },
+      "protocols": {
+        "title": "Protocolos de escalonamento",
+        "description": "Ações exigidas em cada nível de gravidade. O responsável principal responde primeiro, a equipe completa se mobiliza em casos graves."
+      },
+      "documentation": {
+        "title": "Documentação judicial",
+        "description": "Gere relatórios mostrando cuidado familiar proativo caso a intervenção legal se torne necessária."
+      }
+    }
+  },
+  "governance": {
+    "title": "Proteção jurídica integrada a cada etapa",
+    "description": "A Kinship gera documentação juridicamente sólida desde o início. Os acordos são ativados quando a gravidez começa, estabelecendo responsabilidade antes do nascimento em vez de correr atrás de proteção após a separação.",
+    "imageAlt": "Equipe profissional diversa de governança e suporte jurídico",
+    "cards": {
+      "consent": {
+        "title": "Consentimento em cada etapa",
+        "description": "Documente acordo explícito na formação, concepção, nascimento e grandes mudanças de vida. Sem suposições sobre participação contínua."
+      },
+      "responsibility": {
+        "title": "Percentuais de responsabilidade",
+        "description": "Atribua autoridade de decisão e obrigação financeira por porcentagem. A família estendida pode ter papéis de apoio definidos."
+      },
+      "exit": {
+        "title": "Saída com transformação",
+        "description": "As responsabilidades se ajustam quando a vida muda, nunca desaparecem. Mediação antes da saída, planos de continuidade da criança obrigatórios."
+      }
+    }
+  },
+  "testimonials": {
+    "title": "Equipes reais. Resultados reais.",
+    "description": "Famílias usando a Kinship para formar equipes intencionais e criar filhos fora das estruturas tradicionais de casamento.",
+    "items": {
+      "first": {
+        "quote": "A Kinship nos deu linguagem para expectativas que não sabíamos expressar. A preparação jurídica pareceu acolhedora em vez de adversarial.",
+        "name": "Jules & Avery",
+        "role": "Equipe de dois pais"
+      },
+      "second": {
+        "quote": "A estrutura de valores nos ajudou a honrar nossas identidades enquanto lidávamos com detalhes práticos. Nos alinhamos antes da concepção.",
+        "name": "Rina, Sam & Jordan",
+        "role": "Equipe de três pais"
+      },
+      "third": {
+        "quote": "Ter minha mãe formalmente na equipe mudou tudo. A estrutura de governança deu voz a ela sem ultrapassar limites.",
+        "name": "Marcus, Lee, Jordan & Rita",
+        "role": "Equipe multigeracional"
+      }
+    }
+  },
+  "cta": {
+    "imageAlt": "Equipe multigeracional com crianças caminhando rumo a um futuro promissor",
+    "title": "Pronto para formar sua equipe?",
+    "description": "Comece com alinhamento de valores. Construa proteção jurídica desde o primeiro dia. Mantenha apoio em cada transição.",
+    "primary": "Começar",
+    "secondary": "Entrar na lista de espera",
+    "primaryAria": "Comece a construir sua equipe na Kinship",
+    "secondaryAria": "Entrar na lista de espera da Kinship"
+  },
+  "footer": {
+    "tagline": "Forme equipes parentais com intenção, clareza e apoio duradouro.",
+    "product": {
+      "title": "Produto",
+      "features": "Recursos",
+      "howItWorks": "Como funciona",
+      "pricing": "Preços"
+    },
+    "company": {
+      "title": "Empresa",
+      "about": "Sobre",
+      "blog": "Blog",
+      "contact": "Contato"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacidade",
+      "terms": "Termos"
+    },
+    "language": "Idioma",
+    "rights": "Todos os direitos reservados."
+  },
+  "image": {
+    "loading": "Gerando imagem...",
+    "defaults": {
+      "alt": "Imagem gerada por IA",
+      "fallback": "Falha ao carregar a imagem"
+    }
+  }
+}

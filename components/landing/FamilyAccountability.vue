@@ -1,29 +1,32 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import AiImageContainer from '../image/AiImageContainer.vue'
 import { sectionPrompts } from '../../composables/prompts'
 
-const features = [
-  {
-    title: 'Incident logging',
-    description: 'Document behavioral patterns with severity assessment. Track what interventions work over time.'
-  },
-  {
-    title: 'Escalation protocols',
-    description: 'Required actions at each severity level. Primary parent responds first, full crew mobilizes for serious issues.'
-  },
-  {
-    title: 'Court documentation',
-    description: 'Generate reports showing proactive family care if legal intervention becomes necessary.'
-  }
-]
+const { t } = useI18n()
 
-const severityLevels = [
-  { level: 1, title: 'Minor', description: 'Primary parent addresses' },
-  { level: 2, title: 'Patterns', description: 'Full crew discussion' },
-  { level: 3, title: 'Serious', description: 'Crew plus professional help' },
-  { level: 4, title: 'Critical', description: 'Immediate mobilization' },
-  { level: 5, title: 'Legal', description: 'Court coordination' }
-]
+const features = computed(() => [
+  {
+    title: t('familyAccountability.features.logging.title'),
+    description: t('familyAccountability.features.logging.description')
+  },
+  {
+    title: t('familyAccountability.features.protocols.title'),
+    description: t('familyAccountability.features.protocols.description')
+  },
+  {
+    title: t('familyAccountability.features.documentation.title'),
+    description: t('familyAccountability.features.documentation.description')
+  }
+])
+
+const severityLevels = computed(() => [
+  { level: 1, title: t('familyAccountability.severity.minor.title'), description: t('familyAccountability.severity.minor.description') },
+  { level: 2, title: t('familyAccountability.severity.patterns.title'), description: t('familyAccountability.severity.patterns.description') },
+  { level: 3, title: t('familyAccountability.severity.serious.title'), description: t('familyAccountability.severity.serious.description') },
+  { level: 4, title: t('familyAccountability.severity.critical.title'), description: t('familyAccountability.severity.critical.description') },
+  { level: 5, title: t('familyAccountability.severity.legal.title'), description: t('familyAccountability.severity.legal.description') }
+])
 </script>
 
 <template>
@@ -31,10 +34,9 @@ const severityLevels = [
     <UContainer>
       <div class="space-y-8">
         <div class="max-w-2xl">
-          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">Family accountability before state intervention</h2>
+          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">{{ t('familyAccountability.title') }}</h2>
           <p class="mt-3 text-lg text-slate-600 dark:text-slate-300">
-            Those who commit at birth stay responsible for guiding, correcting, and intervening when challenges arise. 
-            Kinship provides the structure to respond as a crew before courts step in with punishment.
+            {{ t('familyAccountability.description') }}
           </p>
         </div>
 
@@ -44,7 +46,7 @@ const severityLevels = [
             <AiImageContainer
               :prompt="sectionPrompts.accountability.prompt"
               aspectRatio="square"
-              alt="Family accountability circle visualization"
+              :alt="t('familyAccountability.imageAlt')"
               shadow="lg"
               class="h-80 w-full"
             />
@@ -52,7 +54,7 @@ const severityLevels = [
 
           <!-- Severity levels -->
           <div class="space-y-4">
-            <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Five response levels</h3>
+            <h3 class="text-xl font-semibold text-slate-900 dark:text-white">{{ t('familyAccountability.severity.title') }}</h3>
             <div class="space-y-3">
               <UCard 
                 v-for="item in severityLevels" 
@@ -77,7 +79,7 @@ const severityLevels = [
         <AiImageContainer
           :prompt="sectionPrompts.accountabilitySupport.prompt"
           aspectRatio="landscape"
-          alt="Multigenerational crew supporting teenager"
+          :alt="t('familyAccountability.supportImageAlt')"
           shadow="lg"
           class="h-64 w-full"
         />

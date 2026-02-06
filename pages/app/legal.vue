@@ -26,11 +26,35 @@ const allDocuments = computed(() => {
   return docs
 })
 
-const activeTab = ref('my-documents')
+const activeTab = ref(0)
 const tabs = [
-  { key: 'my-documents', label: 'My Documents', icon: 'i-heroicons-document-text' },
-  { key: 'templates', label: 'Templates', icon: 'i-heroicons-document-duplicate' }
+  { slot: 'my-documents', label: 'My Documents', icon: 'i-heroicons-document-text' },
+  { slot: 'templates', label: 'Templates', icon: 'i-heroicons-document-duplicate' }
 ]
+
+const route = useRoute()
+const router = useRouter()
+
+const selectedTemplateId = computed(() => route.query.templateId as string | undefined)
+const selectedTemplate = computed(() => {
+  if (!selectedTemplateId.value) return null
+  return mockDocuments.find(t => t.id === selectedTemplateId.value)
+})
+
+const showPreview = ref(false)
+
+watch(selectedTemplateId, (newId) => {
+  showPreview.value = !!newId
+})
+
+const openPreview = (templateId: string) => {
+  router.push({ query: { ...route.query, templateId } })
+}
+
+const closePreview = () => {
+  const { templateId, ...queryWithoutTemplate } = route.query
+  router.push({ query: queryWithoutTemplate })
+}
 </script>
 
 <template>
@@ -88,13 +112,41 @@ const tabs = [
                   <p class="text-sm text-slate-500">{{ template.description }}</p>
                 </div>
               </div>
-              <UButton variant="soft" icon="i-heroicons-plus" disabled title="Coming soon">
-                Use Template
-              </UButton>
+              <div class="flex items-center gap-2">
+                <UButton variant="ghost" icon="i-heroicons-eye" @click="openPreview(template.id)">
+                  Preview
+                </UButton>
+                <UButton variant="soft" icon="i-heroicons-plus" disabled title="Coming soon">
+                  Use Template
+                </UButton>
+              </div>
             </div>
           </div>
         </UCard>
       </template>
     </UTabs>
+
+    <!-- Template Preview Modal -->
+    <UModal v-model="showPreview" :ui="{ width: 'w-full sm:max-w-4xl' }">
+      <UCard v-if="selectedTemplate">
+        <template #header>
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold">{{ selectedTemplate.title }}</h3>
+            <UButton icon="i-heroicons-x-mark" variant="ghost" color="gray" @click="closePreview" />
+          </div>
+        </template>
+        
+        <div class="prose prose-slate dark:prose-invert max-w-none" v-html="selectedTemplate.content"></div>
+        
+        <template #footer>
+          <div class="flex justify-end gap-3">
+            <UButton variant="ghost" @click="closePreview">Close</UButton>
+            <UButton color="primary" icon="i-heroicons-plus" disabled title="Coming soon">
+              Use This Template
+            </UButton>
+          </div>
+        </template>
+      </UCard>
+    </UModal>
   </div>
 </template>

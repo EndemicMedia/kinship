@@ -220,10 +220,42 @@ const formatDate = (date: Date) => {
 
       <template #values>
         <UCard class="mt-4">
-          <div class="text-center py-12">
+          <div v-if="!crew.values || crew.values.length === 0" class="text-center py-12">
             <UIcon name="i-heroicons-heart" class="w-16 h-16 mx-auto text-slate-300 mb-4" />
-            <h3 class="text-lg font-medium mb-2">Values</h3>
-            <p class="text-slate-600 mb-4">Values alignment</p>
+            <h3 class="text-lg font-medium mb-2">No values defined</h3>
+            <p class="text-slate-600 mb-4">Define your crew's core values to ensure alignment</p>
+            <UButton color="primary" icon="i-heroicons-plus" disabled title="Add values (coming soon)">Add Values</UButton>
+          </div>
+          
+          <div v-else class="space-y-6">
+            <div class="flex items-center justify-between">
+              <h3 class="font-semibold text-lg">Crew Values Alignment</h3>
+              <UBadge color="primary" variant="subtle" size="lg">90% Match</UBadge>
+            </div>
+            
+            <div class="grid gap-4 md:grid-cols-2">
+              <div v-for="value in crew.values" :key="value.id" class="p-4 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-100 dark:border-slate-700">
+                <div class="flex items-start justify-between mb-2">
+                  <div class="flex items-center gap-2">
+                    <div class="p-2 rounded-full" 
+                         :class="value.category === 'communication' ? 'bg-blue-100 text-blue-600' : 
+                                 value.category === 'financial' ? 'bg-green-100 text-green-600' :
+                                 value.category === 'parenting' ? 'bg-purple-100 text-purple-600' : 'bg-orange-100 text-orange-600'">
+                      <UIcon :name="value.category === 'communication' ? 'i-heroicons-chat-bubble-bottom-center-text' : 
+                                   value.category === 'financial' ? 'i-heroicons-currency-dollar' :
+                                   value.category === 'parenting' ? 'i-heroicons-user-group' : 'i-heroicons-sparkles'" 
+                             class="w-5 h-5" />
+                    </div>
+                    <span class="font-medium">{{ value.title }}</span>
+                  </div>
+                  <span class="text-sm font-semibold" :class="value.matchPercentage >= 90 ? 'text-emerald-600' : 'text-slate-600'">
+                    {{ value.matchPercentage }}%
+                  </span>
+                </div>
+                <p class="text-sm text-slate-600 mb-3">{{ value.description }}</p>
+                <UProgress :value="value.matchPercentage" :color="value.matchPercentage >= 90 ? 'emerald' : 'primary'" size="sm" />
+              </div>
+            </div>
           </div>
         </UCard>
       </template>

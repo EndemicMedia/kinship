@@ -30,6 +30,12 @@ export const mockCrews = [
         joinedAt: new Date('2024-02-01')
       }
     ],
+    values: [
+      { id: 'v1', title: 'Open Communication', description: 'Transparency in all decisions', category: 'communication', matchPercentage: 95 },
+      { id: 'v2', title: 'Shared Finances', description: 'Joint contribution to child expenses', category: 'financial', matchPercentage: 88 },
+      { id: 'v3', title: 'Gentle Parenting', description: 'Approach to discipline and guidance', category: 'parenting', matchPercentage: 92 },
+      { id: 'v4', title: 'Cultural Heritage', description: 'Maintaining strong cultural roots', category: 'culture', matchPercentage: 85 }
+    ],
     formationProgress: 85,
     documents: [
       {
@@ -135,6 +141,6 @@ export const mockCrews = [
 ]
 
 export const getCrewById = (id: string) => mockCrews.find(c => c.id === id)
-export const getUserCrews = (userId: string) => mockCrews.filter(c => 
+export const getUserCrews = (userId: string) => mockCrews.filter(c =>
   c.members.some(m => m.userId === userId)
 )

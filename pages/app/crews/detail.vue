@@ -12,8 +12,20 @@ const route = useRoute()
 const crewsStore = useCrewsStore()
 const authStore = useAuthStore()
 
-const crewId = computed(() => route.query.id as string)
-const crew = computed(() => crewsStore.getCrewById(crewId.value))
+const crewId = computed(() => {
+  const id = route.query.id
+  return Array.isArray(id) ? id[0] : id
+})
+
+const crew = computed(() => {
+  if (!crewId.value) return null
+  const found = crewsStore.getCrewById(crewId.value as string)
+  return found || null
+})
+
+const crewName = computed(() => crew.value?.name || 'Crew Details')
+const crewMembers = computed(() => crew.value?.members || [])
+const crewDocuments = computed(() => crew.value?.documents || [])
 
 const activeTab = ref('overview')
 const tabs = [
@@ -70,11 +82,26 @@ const formatDate = (date: Date) => {
         Back
       </UButton>
       <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
-        {{ crew?.name }}
+        {{ crewName }}
       </h1>
     </div>
 
-    <UTabs v-model="activeTab" :items="tabs">
+    <!-- Loading State -->
+    <div v-if="!crewId" class="text-center py-12">
+      <UIcon name="i-heroicons-arrow-path" class="w-12 h-12 mx-auto text-slate-400 animate-spin mb-4" />
+      <p class="text-slate-600">Loading crew...</p>
+    </div>
+
+    <!-- Crew Not Found -->
+    <UCard v-else-if="!crew" class="text-center py-12">
+      <UIcon name="i-heroicons-exclamation-triangle" class="w-16 h-16 mx-auto text-amber-500 mb-4" />
+      <h2 class="text-xl font-bold mb-2">Crew Not Found</h2>
+      <p class="text-slate-600 mb-2">Crew ID: {{ crewId }}</p>
+      <p class="text-slate-600 mb-6">The crew you're looking for doesn't exist or you don't have access to it.</p>
+      <UButton to="/app/crews" color="primary">Back to My Crews</UButton>
+    </UCard>
+
+    <UTabs v-else v-model="activeTab" :items="tabs" :key="crew.id">
       <template #overview>
         <UCard class="mt-4">
           <div class="space-y-6">
@@ -90,9 +117,9 @@ const formatDate = (date: Date) => {
             </div>
 
             <div>
-              <h3 class="text-lg font-semibold mb-3">Members ({{ crew?.members.length }})</h3>
+              <h3 class="text-lg font-semibold mb-3">Members ({{ crewMembers.length }})</h3>
               <div class="space-y-3">
-                <div v-for="member in crew?.members" :key="member.userId" 
+                <div v-for="member in crewMembers" :key="member.userId"
                      class="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
                   <div class="flex items-center gap-3">
                     <UAvatar 
@@ -163,7 +190,7 @@ const formatDate = (date: Date) => {
 
       <template #documents>
         <UCard class="mt-4">
-          <div v-if="crew?.documents.length === 0" class="text-center py-12">
+          <div v-if="crewDocuments.length === 0" class="text-center py-12">
             <UIcon name="i-heroicons-document-text" class="w-16 h-16 mx-auto text-slate-300 mb-4" />
             <h3 class="text-lg font-medium mb-2">No documents yet</h3>
             <p class="text-slate-600 mb-4">Create your first legal agreement</p>
@@ -171,7 +198,7 @@ const formatDate = (date: Date) => {
           </div>
           
           <div v-else class="space-y-3">
-            <div v-for="doc in crew?.documents" :key="doc.id" 
+            <div v-for="doc in crewDocuments" :key="doc.id" 
                  class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
               <div class="flex items-center gap-3">
                 <UIcon name="i-heroicons-document-text" class="w-8 h-8 text-slate-400" />

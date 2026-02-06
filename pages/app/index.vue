@@ -135,7 +135,7 @@ const showEmptyState = computed(() => !isLoading.value && userCrews.value.length
 
       <!-- Stats Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard
+        <DashboardStatCard
           v-for="stat in stats"
           :key="stat.label"
           :label="stat.label"
@@ -272,7 +272,7 @@ const showEmptyState = computed(() => !isLoading.value && userCrews.value.length
 
         <!-- Activity Timeline (1/3 width) -->
         <div>
-          <ActivityTimeline />
+          <DashboardActivityTimeline />
         </div>
       </div>
     </template>

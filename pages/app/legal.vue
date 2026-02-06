@@ -1,0 +1,100 @@
+<script setup lang="ts">
+import { mockDocuments } from '~/data/mock-documents'
+import { useCrewsStore } from '~/stores/crews'
+import { useAuthStore } from '~/stores/auth'
+
+definePageMeta({
+  layout: 'app',
+  middleware: ['auth']
+})
+
+const crewsStore = useCrewsStore()
+const authStore = useAuthStore()
+
+const userCrews = computed(() => {
+  if (!authStore.currentUser) return []
+  return crewsStore.userCrews(authStore.currentUser.id)
+})
+
+const allDocuments = computed(() => {
+  const docs: any[] = []
+  userCrews.value.forEach(crew => {
+    crew.documents.forEach(doc => {
+      docs.push({ ...doc, crewName: crew.name })
+    })
+  })
+  return docs
+})
+
+const activeTab = ref('my-documents')
+const tabs = [
+  { key: 'my-documents', label: 'My Documents', icon: 'i-heroicons-document-text' },
+  { key: 'templates', label: 'Templates', icon: 'i-heroicons-document-duplicate' }
+]
+</script>
+
+<template>
+  <div class="space-y-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl font-bold text-slate-900 dark:text-white">Legal</h1>
+        <p class="text-slate-600 dark:text-slate-400 mt-1">Manage your legal agreements and documents</p>
+      </div>
+      <UButton color="primary" icon="i-heroicons-plus" disabled title="Coming soon">
+        New Document
+      </UButton>
+    </div>
+
+    <UTabs v-model="activeTab" :items="tabs">
+      <template #my-documents>
+        <UCard class="mt-4">
+          <div v-if="allDocuments.length === 0" class="text-center py-12">
+            <UIcon name="i-heroicons-document-text" class="w-16 h-16 mx-auto text-slate-300 mb-4" />
+            <h3 class="text-lg font-medium mb-2">No documents yet</h3>
+            <p class="text-slate-600 mb-4">Create your first legal agreement with your crew</p>
+            <UButton color="primary" icon="i-heroicons-plus" disabled title="Coming soon">Create Document</UButton>
+          </div>
+          
+          <div v-else class="space-y-3">
+            <div v-for="doc in allDocuments" :key="doc.id" 
+                 class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
+              <div class="flex items-center gap-3">
+                <UIcon name="i-heroicons-document-text" class="w-8 h-8 text-slate-400" />
+                <div>
+                  <p class="font-medium">{{ doc.title }}</p>
+                  <p class="text-sm text-slate-500">{{ doc.crewName }} • {{ doc.type }}</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <UBadge :color="doc.status === 'signed' ? 'success' : doc.status === 'pending' ? 'warning' : 'gray'" variant="soft">
+                  {{ doc.status }}
+                </UBadge>
+                <UButton variant="ghost" icon="i-heroicons-eye" disabled title="View document (coming soon)" />
+              </div>
+            </div>
+          </div>
+        </UCard>
+      </template>
+
+      <template #templates>
+        <UCard class="mt-4">
+          <div class="space-y-3">
+            <div v-for="template in mockDocuments" :key="template.id" 
+                 class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
+              <div class="flex items-center gap-3">
+                <UIcon name="i-heroicons-document-duplicate" class="w-8 h-8 text-slate-400" />
+                <div>
+                  <p class="font-medium">{{ template.title }}</p>
+                  <p class="text-sm text-slate-500">{{ template.description }}</p>
+                </div>
+              </div>
+              <UButton variant="soft" icon="i-heroicons-plus" disabled title="Coming soon">
+                Use Template
+              </UButton>
+            </div>
+          </div>
+        </UCard>
+      </template>
+    </UTabs>
+  </div>
+</template>

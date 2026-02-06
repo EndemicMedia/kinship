@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url'
 const unheadCompatPath = fileURLToPath(new URL('./utils/unhead-compat.ts', import.meta.url))
 
 export default defineNuxtConfig({
-  modules: ['@nuxt/ui', '@nuxtjs/i18n'],
+  modules: ['@nuxt/ui', '@nuxtjs/i18n', '@pinia/nuxt'],
   vite: {
     resolve: {
       alias: [{ find: /^unhead$/, replacement: unheadCompatPath }]

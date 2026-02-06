@@ -9,9 +9,14 @@
   },
   "header": {
     "nav": {
+      "mission": "Mission",
       "howItWorks": "How it works",
       "features": "Features",
       "about": "About"
+    },
+    "download": {
+      "appStore": "App Store",
+      "playStore": "Play Store"
     },
     "cta": "Get started",
     "mobileToggle": "Toggle mobile menu",
@@ -234,7 +239,8 @@
     "legal": {
       "title": "Legal",
       "privacy": "Privacy",
-      "terms": "Terms"
+      "terms": "Terms",
+      "cookies": "Cookies"
     },
     "language": "Language",
     "rights": "All rights reserved."

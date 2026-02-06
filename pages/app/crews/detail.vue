@@ -22,6 +22,8 @@ const crew = computed(() => {
   const found = crewsStore.getCrewById(crewId.value as string)
   return found || null
 })
+const router = useRouter()
+const toast = useToast()
 
 const crewName = computed(() => crew.value?.name || 'Crew Details')
 const crewMembers = computed(() => crew.value?.members || [])
@@ -72,6 +74,52 @@ const submitIncident = () => {
 
 const formatDate = (date: Date) => {
   return new Date(date).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })
+}
+
+// File upload
+const fileInput = ref<HTMLInputElement | null>(null)
+const triggerFileUpload = () => {
+  fileInput.value?.click()
+}
+
+const handleFileSelect = (event: Event) => {
+  const target = event.target as HTMLInputElement
+  const file = target.files?.[0]
+  if (file) {
+    toast.add({
+      title: 'File Attached',
+      description: `${file.name} will be sent with your next message.`,
+      color: 'success',
+      icon: 'i-heroicons-paper-clip'
+    })
+  }
+}
+
+// Document viewing
+const showDocViewModal = ref(false)
+const selectedDoc = ref<any>(null)
+const viewDocument = (doc: any) => {
+  selectedDoc.value = doc
+  showDocViewModal.value = true
+}
+
+// Values modal
+const showAddValuesModal = ref(false)
+const newValueTitle = ref('')
+const newValueCategory = ref('parenting')
+
+const addValue = () => {
+  if (!newValueTitle.value.trim()) return
+  
+  toast.add({
+    title: 'Value Added',
+    description: `${newValueTitle.value} has been added to your crew values.`,
+    color: 'success',
+    icon: 'i-heroicons-heart'
+  })
+  
+  showAddValuesModal.value = false
+  newValueTitle.value = ''
 }
 </script>
 
@@ -180,7 +228,8 @@ const formatDate = (date: Date) => {
               </div>
             </div>
             <div class="border-t pt-4 flex gap-2">
-              <UButton icon="i-heroicons-paper-clip" variant="ghost" color="gray" disabled title="Attach file (coming soon)" />
+              <UButton icon="i-heroicons-paper-clip" variant="ghost" color="gray" @click="triggerFileUpload" title="Attach file" />
+              <input ref="fileInput" type="file" class="hidden" @change="handleFileSelect" />
               <UInput v-model="newMessage" placeholder="Type a message..." class="flex-1" @keyup.enter="sendMessage" />
               <UButton icon="i-heroicons-paper-airplane" color="primary" :disabled="!newMessage.trim()" @click="sendMessage" />
             </div>
@@ -194,7 +243,7 @@ const formatDate = (date: Date) => {
             <UIcon name="i-heroicons-document-text" class="w-16 h-16 mx-auto text-slate-300 mb-4" />
             <h3 class="text-lg font-medium mb-2">No documents yet</h3>
             <p class="text-slate-600 mb-4">Create your first legal agreement</p>
-            <UButton color="primary" icon="i-heroicons-plus" disabled title="Create document (coming soon)">Create Document</UButton>
+            <UButton color="primary" icon="i-heroicons-plus" @click="router.push('/app/legal')">Create Document</UButton>
           </div>
           
           <div v-else class="space-y-3">
@@ -211,7 +260,7 @@ const formatDate = (date: Date) => {
                 <UBadge :color="doc.status === 'signed' ? 'success' : doc.status === 'pending' ? 'warning' : 'gray'" variant="soft">
                   {{ doc.status }}
                 </UBadge>
-                <UButton variant="ghost" icon="i-heroicons-eye" disabled title="View document (coming soon)" />
+                <UButton variant="ghost" icon="i-heroicons-eye" @click="viewDocument(doc)" />
               </div>
             </div>
           </div>
@@ -224,7 +273,7 @@ const formatDate = (date: Date) => {
             <UIcon name="i-heroicons-heart" class="w-16 h-16 mx-auto text-slate-300 mb-4" />
             <h3 class="text-lg font-medium mb-2">No values defined</h3>
             <p class="text-slate-600 mb-4">Define your crew's core values to ensure alignment</p>
-            <UButton color="primary" icon="i-heroicons-plus" disabled title="Add values (coming soon)">Add Values</UButton>
+            <UButton color="primary" icon="i-heroicons-plus" @click="showAddValuesModal = true">Add Values</UButton>
           </div>
           
           <div v-else class="space-y-6">

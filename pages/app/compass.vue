@@ -90,6 +90,68 @@ const getUserStatus = (userId: string) => {
   if (maybeUsers.value.includes(userId)) return 'maybe'
   return null
 }
+
+// Modals and interactions
+const toast = useToast()
+const showProfileModal = ref(false)
+const showMessageModal = ref(false)
+const showConnectModal = ref(false)
+const selectedUser = ref<any>(null)
+const messageContent = ref('')
+const connectionMessage = ref('')
+
+const openProfile = (user: any) => {
+  selectedUser.value = user
+  showProfileModal.value = true
+}
+
+const openMessage = (user: any) => {
+  selectedUser.value = user
+  messageContent.value = ''
+  showMessageModal.value = true
+}
+
+const sendMessage = () => {
+  if (!messageContent.value.trim() || !selectedUser.value) return
+  
+  // In a real app, this would call an API
+  toast.add({
+    title: 'Message Sent',
+    description: `Your message to ${selectedUser.value.name} has been sent.`,
+    color: 'success',
+    icon: 'i-heroicons-check-circle'
+  })
+  
+  showMessageModal.value = false
+  messageContent.value = ''
+}
+
+const openConnect = (user: any) => {
+  selectedUser.value = user
+  connectionMessage.value = ''
+  showConnectModal.value = true
+}
+
+const sendConnectionRequest = () => {
+  if (!selectedUser.value) return
+  
+  // In a real app, this would call an API
+  toast.add({
+    title: 'Connection Request Sent',
+    description: `Your connection request to ${selectedUser.value.name} has been sent${connectionMessage.value ? ' with your message' : ''}.`,
+    color: 'success',
+    icon: 'i-heroicons-user-plus'
+  })
+  
+  showConnectModal.value = false
+  connectionMessage.value = ''
+}
+
+const getMatchScoreBreakdown = (user: any) => {
+  const currentUser = authStore.currentUser
+  if (!currentUser) return null
+  return calculateMatchScore(currentUser, user)
+}
 </script>
 
 <template>
@@ -237,8 +299,7 @@ const getUserStatus = (userId: string) => {
               variant="ghost" 
               size="sm" 
               icon="i-heroicons-user" 
-              disabled
-              title="View full profile (coming soon)"
+              @click="openProfile(match)"
             >
               Profile
             </UButton>
@@ -246,8 +307,7 @@ const getUserStatus = (userId: string) => {
               variant="ghost" 
               size="sm" 
               icon="i-heroicons-chat-bubble-left" 
-              disabled
-              title="Send message (coming soon)"
+              @click="openMessage(match)"
             >
               Message
             </UButton>
@@ -255,8 +315,7 @@ const getUserStatus = (userId: string) => {
               color="primary" 
               size="sm" 
               icon="i-heroicons-user-plus" 
-              disabled
-              title="Send connection request (coming soon)"
+              @click="openConnect(match)"
             >
               Connect
             </UButton>
@@ -309,5 +368,190 @@ const getUserStatus = (userId: string) => {
         Reset All Votes
       </UButton>
     </div>
+
+    <!-- Profile View Modal -->
+    <UModal v-model="showProfileModal" :ui="{ width: 'w-full sm:max-w-3xl' }">
+      <UCard v-if="selectedUser">
+        <template #header>
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-4">
+              <UAvatar :src="selectedUser.avatar" :alt="selectedUser.name" size="2xl" />
+              <div>
+                <h2 class="text-2xl font-bold">{{ selectedUser.name }}</h2>
+                <p class="text-slate-600 dark:text-slate-400">{{ selectedUser.location }}</p>
+                <div class="flex gap-2 mt-2">
+                  <UBadge color="primary" variant="soft">{{ selectedUser.role.replace(/-/g, ' ') }}</UBadge>
+                  <UBadge 
+                    :color="selectedUser.matchScore >= 80 ? 'emerald' : selectedUser.matchScore >= 60 ? 'teal' : 'amber'"
+                    variant="solid"
+                  >
+                    {{ selectedUser.matchScore }}% Match
+                  </UBadge>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+
+        <div class="space-y-6">
+          <!-- Bio -->
+          <div>
+            <h3 class="font-semibold text-lg mb-2">About</h3>
+            <p class="text-slate-600 dark:text-slate-400">{{ selectedUser.bio }}</p>
+          </div>
+
+          <!-- Details -->
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <h4 class="font-medium text-sm text-slate-500 mb-1">Pronouns</h4>
+              <p>{{ selectedUser.pronouns }}</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-sm text-slate-500 mb-1">Availability</h4>
+              <p>{{ selectedUser.availability }}</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-sm text-slate-500 mb-1">Languages</h4>
+              <p>{{ selectedUser.languages.join(', ') }}</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-sm text-slate-500 mb-1">Children</h4>
+              <p>{{ selectedUser.children }}</p>
+            </div>
+          </div>
+
+          <!-- Seeking -->
+          <div v-if="selectedUser.seeking && selectedUser.seeking.length > 0">
+            <h3 class="font-semibold text-lg mb-2">Seeking</h3>
+            <div class="flex flex-wrap gap-2">
+              <UBadge v-for="seek in selectedUser.seeking" :key="seek" variant="soft">
+                {{ seek.replace(/-/g, ' ') }}
+              </UBadge>
+            </div>
+          </div>
+
+          <!-- Match Breakdown -->
+          <div v-if="getMatchScoreBreakdown(selectedUser)">
+            <h3 class="font-semibold text-lg mb-3">Compatibility Breakdown</h3>
+            <div class="space-y-2">
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Values Alignment</span>
+                  <span class="font-medium">{{ getMatchScoreBreakdown(selectedUser).breakdown.values }}%</span>
+                </div>
+                <UProgress :value="getMatchScoreBreakdown(selectedUser).breakdown.values" color="teal" size="sm" />
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Location Proximity</span>
+                  <span class="font-medium">{{ getMatchScoreBreakdown(selectedUser).breakdown.location }}%</span>
+                </div>
+                <UProgress :value="getMatchScoreBreakdown(selectedUser).breakdown.location" color="teal" size="sm" />
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Role Compatibility</span>
+                  <span class="font-medium">{{ getMatchScoreBreakdown(selectedUser).breakdown.role }}%</span>
+                </div>
+                <UProgress :value="getMatchScoreBreakdown(selectedUser).breakdown.role" color="teal" size="sm" />
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Language Overlap</span>
+                  <span class="font-medium">{{ getMatchScoreBreakdown(selectedUser).breakdown.language }}%</span>
+                </div>
+                <UProgress :value="getMatchScoreBreakdown(selectedUser).breakdown.language" color="teal" size="sm" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <template #footer>
+          <div class="flex justify-end gap-3">
+            <UButton variant="ghost" @click="showProfileModal = false">Close</UButton>
+            <UButton variant="ghost" icon="i-heroicons-chat-bubble-left" @click="showProfileModal = false; openMessage(selectedUser)">Message</UButton>
+            <UButton color="primary" icon="i-heroicons-user-plus" @click="showProfileModal = false; openConnect(selectedUser)">Connect</UButton>
+          </div>
+        </template>
+      </UCard>
+    </UModal>
+
+    <!-- Message Modal -->
+    <UModal v-model="showMessageModal" :ui="{ width: 'w-full sm:max-w-lg' }">
+      <UCard v-if="selectedUser">
+        <template #header>
+          <div class="flex items-center gap-3">
+            <UAvatar :src="selectedUser.avatar" :alt="selectedUser.name" size="md" />
+            <div>
+              <h3 class="font-semibold">Send Message to {{ selectedUser.name }}</h3>
+              <p class="text-sm text-slate-500">{{ selectedUser.location }}</p>
+            </div>
+          </div>
+        </template>
+
+        <div class="space-y-4">
+          <UTextarea 
+            v-model="messageContent" 
+            placeholder="Type your message here..."
+            :rows="6"
+            autofocus
+          />
+          <p class="text-sm text-slate-500">Introduce yourself and share why you're interested in connecting.</p>
+        </div>
+
+        <template #footer>
+          <div class="flex justify-end gap-3">
+            <UButton variant="ghost" @click="showMessageModal = false">Cancel</UButton>
+            <UButton 
+              color="primary" 
+              icon="i-heroicons-paper-airplane" 
+              :disabled="!messageContent.trim()"
+              @click="sendMessage"
+            >
+              Send Message
+            </UButton>
+          </div>
+        </template>
+      </UCard>
+    </UModal>
+
+    <!-- Connection Request Modal -->
+    <UModal v-model="showConnectModal" :ui="{ width: 'w-full sm:max-w-lg' }">
+      <UCard v-if="selectedUser">
+        <template #header>
+          <div class="flex items-center gap-3">
+            <UAvatar :src="selectedUser.avatar" :alt="selectedUser.name" size="md" />
+            <div>
+              <h3 class="font-semibold">Send Connection Request to {{ selectedUser.name }}</h3>
+              <p class="text-sm text-slate-500">{{ selectedUser.matchScore }}% Match</p>
+            </div>
+          </div>
+        </template>
+
+        <div class="space-y-4">
+          <p class="text-sm text-slate-600 dark:text-slate-400">
+            Sending a connection request will notify {{ selectedUser.name }} and allow you to start building a parenting crew together.
+          </p>
+          <UTextarea 
+            v-model="connectionMessage" 
+            placeholder="Add a personal note (optional)"
+            :rows="4"
+          />
+        </div>
+
+        <template #footer>
+          <div class="flex justify-end gap-3">
+            <UButton variant="ghost" @click="showConnectModal = false">Cancel</UButton>
+            <UButton 
+              color="primary" 
+              icon="i-heroicons-user-plus" 
+              @click="sendConnectionRequest"
+            >
+              Send Request
+            </UButton>
+          </div>
+        </template>
+      </UCard>
+    </UModal>
   </div>
 </template>

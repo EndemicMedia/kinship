@@ -7,6 +7,26 @@ definePageMeta({
 })
 
 const authStore = useAuthStore()
+const toast = useToast()
+const router = useRouter()
+const showEditModal = ref(false)
+
+const openSettings = () => {
+  router.push('/app/settings')
+}
+
+const editName = ref(authStore.currentUser?.name || '')
+const editBio = ref(authStore.currentUser?.bio || '')
+
+const saveProfile = () => {
+  toast.add({
+    title: 'Profile Updated',
+    description: 'Your profile has been updated successfully.',
+    color: 'success',
+    icon: 'i-heroicons-user'
+  })
+  showEditModal.value = false
+}
 
 const switchPersona = (index: number) => {
   authStore.switchPersona(index)
@@ -94,10 +114,10 @@ const showComingSoon = () => {
     <!-- Actions -->
     <UCard>
       <div class="space-y-3">
-        <UButton block variant="soft" icon="i-heroicons-pencil-square" disabled title="Coming soon">
+        <UButton block variant="soft" icon="i-heroicons-pencil-square" @click="showEditModal = true">
           Edit Profile
         </UButton>
-        <UButton block variant="soft" icon="i-heroicons-cog-6-tooth" disabled title="Coming soon">
+        <UButton block variant="soft" icon="i-heroicons-cog-6-tooth" @click="openSettings">
           Settings
         </UButton>
         <UButton block color="rose" variant="soft" icon="i-heroicons-arrow-right-on-rectangle" @click="logout">

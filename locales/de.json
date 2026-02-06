@@ -125,6 +125,24 @@
       }
     }
   },
+  "whoItsFor": {
+    "eyebrow": "Für wen es ist",
+    "title": "Kinship ist für Menschen, die Kinder und ein Team wollen, nicht eine Romanze.",
+    "description": "Kinship hilft Menschen, Familien mit Absicht, Klarheit und geteilter Verantwortung zu bilden.",
+    "quotes": {
+      "primary": "Kinship hilft Menschen, Familien mit Absicht, Klarheit und geteilter Verantwortung zu bilden.",
+      "secondary": "Du brauchst keinen romantischen Partner, um ein Kind gut großzuziehen. Du brauchst abgestimmte Erwachsene, die bereit sind, sich auf dasselbe langfristige Projekt einzulassen."
+    },
+    "notFor": "Kinship ist nicht für Menschen, die sich von ihren Partnern getrennt haben. Es ist für Menschen, die Kinder wollen, aber nicht den richtigen Partner finden konnten und stattdessen eine engagierte Parenting-Crew wollen.",
+    "audience": {
+      "intentional": "Menschen, die Kinder wollen, aber keine traditionelle Paarbeziehung",
+      "queer": "Queere Familien",
+      "singleParents": "Single-Eltern aus eigener Entscheidung",
+      "friends": "Freunde, die gemeinsam co-parenten wollen",
+      "contributors": "Menschen, die ohne Romantik beitragen wollen",
+      "clarity": "Menschen, die Klarheit vor der Verpflichtung wollen"
+    }
+  },
   "familyAccountability": {
     "title": "Familienverantwortung vor staatlicher Intervention",
     "description": "Wer sich bei der Geburt verpflichtet, bleibt verantwortlich für Anleitung, Korrektur und Eingreifen, wenn Herausforderungen entstehen. Kinship bietet die Struktur, als Crew zu reagieren, bevor Gerichte mit Strafen eingreifen.",

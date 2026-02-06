@@ -111,7 +111,44 @@ export const mockMessages = {
       readBy: ['user-2', 'user-3']
     }
   ],
-  'crew-3': []
+  'crew-3': [
+    {
+      id: 'msg-12',
+      crewId: 'crew-3',
+      senderId: 'user-1',
+      content: 'Hi everyone! Excited to connect with you all as we start building our parenting crew.',
+      type: 'text',
+      timestamp: new Date('2024-02-01T10:00:00'),
+      readBy: ['user-1']
+    },
+    {
+      id: 'msg-13',
+      crewId: 'crew-3',
+      senderId: 'user-5',
+      content: 'Thank you for reaching out! We really appreciate your interest in co-parenting. What is your vision for involvement?',
+      type: 'text',
+      timestamp: new Date('2024-02-01T14:20:00'),
+      readBy: ['user-1', 'user-5']
+    },
+    {
+      id: 'msg-14',
+      crewId: 'crew-3',
+      senderId: 'user-1',
+      content: 'I am looking for a true partnership - shared decision making, regular presence, and commitment to the child long-term.',
+      type: 'text',
+      timestamp: new Date('2024-02-01T16:45:00'),
+      readBy: ['user-1', 'user-5']
+    },
+    {
+      id: 'msg-15',
+      crewId: 'crew-3',
+      senderId: 'user-5',
+      content: 'That aligns with what we are seeking too. Should we schedule a video call next week to discuss values and logistics?',
+      type: 'text',
+      timestamp: new Date('2024-02-02T09:00:00'),
+      readBy: ['user-1', 'user-5']
+    }
+  ]
 }
 
 export const getMessagesForCrew = (crewId: string) => mockMessages[crewId] || []

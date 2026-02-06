@@ -34,5 +34,18 @@ export default defineNuxtConfig({
       cookieKey: 'i18n_redirected',
       fallbackLocale: 'en'
     }
+  },
+  nitro: {
+    prerender: {
+      failOnError: false,
+      ignore: [
+        '/app',
+        '/app/**',
+        '/de/app',
+        '/de/app/**',
+        '/pt-BR/app',
+        '/pt-BR/app/**'
+      ]
+    }
   }
 })

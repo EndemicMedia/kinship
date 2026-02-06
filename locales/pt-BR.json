@@ -77,13 +77,24 @@
       "eyebrow": "O problema",
       "title": "Paixão é volátil. Parceria precisa de estabilidade. A lei exige clareza.",
       "description": "O casamento força essas forças incompatíveis a ficarem juntas. Quando o desejo diminui ou surge conflito, a estrutura legal e parental desmorona junto. As crianças perdem estabilidade porque os adultos não conseguiram sustentar o romance.",
-      "imageAlt": "Visualização abstrata de sistemas incompatíveis forçados juntos"
+      "imageAlt": "Visualização abstrata de sistemas incompatíveis forçados juntos",
+      "points": {
+        "noFramework": "Nenhum framework claro para planejamento familiar",
+        "legalAmbiguity": "Ambiguidade e confusão legal",
+        "noAccountability": "Falta de mecanismos de responsabilização"
+      }
     },
     "solution": {
       "eyebrow": "A solução da Kinship",
       "title": "Separe romance de responsabilidade. Ative acordos na concepção.",
       "description": "Forme equipes em torno de metas parentais compartilhadas, não de química romântica. Acordos legais são ativados quando a gravidez começa, não quando votos são feitos. A responsabilidade se transforma quando a vida muda, mas nunca desaparece.",
-      "imageAlt": "Visualização abstrata de sistemas harmoniosos desvinculados"
+      "imageAlt": "Visualização abstrata de sistemas harmoniosos desvinculados",
+      "points": {
+        "clearFramework": "Framework claro e estruturado para todas as partes",
+        "legalGuidance": "Orientação e suporte jurídico integrados",
+        "accountabilityTools": "Ferramentas de responsabilização e rastreamento",
+        "exitStrategies": "Estratégias de saída planejadas desde o início"
+      }
     }
   },
   "compass": {
@@ -294,6 +305,342 @@
     "defaults": {
       "alt": "Imagem gerada por IA",
       "fallback": "Falha ao carregar a imagem"
+    }
+  },
+  "commandPalette": {
+    "searchPlaceholder": "Buscar equipes, pessoas ou ações...",
+    "searchButton": "Buscar...",
+    "quickActions": "Ações Rápidas",
+    "createNewCrew": "Criar Nova Equipe",
+    "browseCompass": "Explorar Bússola",
+    "viewProfile": "Ver Perfil",
+    "legalDocuments": "Documentos Legais",
+    "myCrews": "Minhas Equipes",
+    "pages": "Páginas",
+    "dashboard": "Painel",
+    "theCompass": "A Bússola",
+    "profile": "Perfil",
+    "legal": "Legal",
+    "crews": "Equipes",
+    "members": "membros"
+  },
+  "activity": {
+    "recentActivity": "Atividade Recente",
+    "viewAll": "Ver Tudo",
+    "noRecentActivity": "Sem atividade recente",
+    "type": {
+      "crew": "Equipe",
+      "document": "Documento",
+      "member": "Membro",
+      "message": "Mensagem",
+      "milestone": "Marco"
+    }
+  },
+  "crewsPage": {
+    "myCrews": "Minhas Equipes",
+    "findCrews": "Encontrar Equipes",
+    "noCrewsYet": "Nenhuma equipe ainda",
+    "browseCompassSubtitle": "Explore a Bússola para encontrar sua equipe parental ideal",
+    "browseTheCompass": "Explorar a Bússola",
+    "formationProgress": "Progresso da Formação",
+    "crewDetails": "Detalhes da Equipe",
+    "status": {
+      "active": "ativo",
+      "pending": "pendente"
+    }
+  },
+  "dashboard": {
+    "welcomeBack": "Bem-vindo de volta, {name}! 👋",
+    "welcomeSubtitle": "Veja o que está acontecendo com suas equipes hoje.",
+    "createCrew": "Criar Equipe",
+    "quickActions": "Ações Rápidas",
+    "yourCrews": "Suas Equipes",
+    "viewAll": "Ver Tudo",
+    "noCrewsJoined": "Você ainda não participou de nenhuma equipe. Explore a Bússola para encontrar famílias que combinam com seus valores.",
+    "stats": {
+      "activeCrews": "Equipes Ativas",
+      "totalMembers": "Total de Membros",
+      "documents": "Documentos",
+      "formationProgress": "Progresso da Formação"
+    },
+    "quickActionsList": {
+      "browseCompass": "Explorar Bússola",
+      "findCrews": "Encontrar novas equipes",
+      "viewCrews": "Ver Equipes",
+      "manageCrews": "Gerenciar suas equipes",
+      "messages": "Mensagens",
+      "checkMessages": "Ver mensagens",
+      "documents": "Documentos",
+      "viewLegalDocs": "Ver documentos legais"
+    },
+    "welcomeToast": {
+      "title": "Bem-vindo de volta, {name}!",
+      "description": "Você não tem novas notificações"
+    }
+  },
+  "profile": {
+    "title": "Perfil",
+    "editProfile": "Editar Perfil",
+    "settings": "Configurações",
+    "logOut": "Sair",
+    "switchPersona": "Trocar Persona (Modo Demo)",
+    "profileUpdated": "Perfil Atualizado",
+    "profileUpdatedDesc": "Seu perfil foi atualizado com sucesso.",
+    "labels": {
+      "location": "Localização",
+      "pronouns": "Pronomes",
+      "children": "Filhos",
+      "languages": "Idiomas",
+      "name": "Nome",
+      "bio": "Bio"
+    },
+    "editModal": {
+      "title": "Editar Perfil",
+      "namePlaceholder": "Seu nome",
+      "bioPlaceholder": "Fale sobre você",
+      "cancel": "Cancelar",
+      "saveChanges": "Salvar Alterações"
+    }
+  },
+  "compass": {
+    "title": "A Bússola",
+    "subtitle": "Encontre sua equipe parental perfeita",
+    "matches": "{count} correspondências",
+    "filters": "Filtros",
+    "filterRole": "Função",
+    "filterLocation": "Localização",
+    "filterMinMatch": "Correspondência Mín: {percent}%",
+    "allRoles": "Todas as Funções",
+    "allLocations": "Todas as Localizações",
+    "stats": {
+      "potential": "Potencial",
+      "liked": "Curtidas",
+      "maybe": "Talvez",
+      "passed": "Passou"
+    },
+    "status": {
+      "liked": "Curtida",
+      "passed": "Passou",
+      "maybe": "Talvez"
+    },
+    "matchPercent": "{percent}% Correspondência",
+    "about": "Sobre",
+    "seeking": "Buscando",
+    "compatibilityBreakdown": "Divisão de Compatibilidade",
+    "compatibility": {
+      "valuesAlignment": "Alinhamento de Valores",
+      "locationProximity": "Proximidade de Localização",
+      "roleCompatibility": "Compatibilidade de Função",
+      "languageOverlap": "Sobreposição de Idioma"
+    },
+    "buttons": {
+      "profile": "Perfil",
+      "message": "Mensagem",
+      "connect": "Conectar",
+      "close": "Fechar",
+      "cancel": "Cancelar",
+      "sendMessage": "Enviar Mensagem",
+      "sendRequest": "Enviar Solicitação",
+      "resetVotes": "Redefinir Todos os Votos"
+    },
+    "modals": {
+      "sendMessageTitle": "Enviar Mensagem para {name}",
+      "messagePlaceholder": "Digite sua mensagem aqui...",
+      "messageHint": "Apresente-se e compartilhe por que você tem interesse em se conectar.",
+      "connectionTitle": "Enviar Solicitação de Conexão para {name}",
+      "connectionHint": "Enviar uma solicitação de conexão notificará {name} e permitirá que você comece a construir uma equipe parental juntos.",
+      "noteOptional": "Adicionar uma nota pessoal (opcional)"
+    },
+    "noMatches": {
+      "title": "Nenhuma correspondência encontrada",
+      "description": "Volte mais tarde para novos membros potenciais de equipe."
+    }
+  },
+  "legal": {
+    "title": "Legal",
+    "subtitle": "Gerencie seus acordos e documentos legais",
+    "tabs": {
+      "myDocuments": "Meus Documentos",
+      "templates": "Modelos"
+    },
+    "newDocument": "Novo Documento",
+    "noDocuments": {
+      "title": "Nenhum documento ainda",
+      "description": "Crie seu primeiro acordo legal com sua equipe",
+      "button": "Criar Documento"
+    },
+    "documentTypes": {
+      "agreement": "Acordo",
+      "contract": "Contrato",
+      "policy": "Política",
+      "statement": "Declaração"
+    },
+    "status": {
+      "signed": "assinado",
+      "pending": "pendente",
+      "draft": "rascunho"
+    },
+    "buttons": {
+      "preview": "Visualizar",
+      "useTemplate": "Usar Modelo",
+      "close": "Fechar",
+      "edit": "Editar",
+      "createDocument": "Criar Documento"
+    },
+    "modals": {
+      "createTitle": "Criar Novo Documento",
+      "documentTitle": "Título do Documento",
+      "documentType": "Tipo de Documento",
+      "useThisTemplate": "Usar Este Modelo"
+    },
+    "toasts": {
+      "documentCreated": "Documento Criado",
+      "documentCreatedDesc": "{title} foi criado. Você pode editá-lo e compartilhá-lo com sua equipe.",
+      "templateAdded": "Modelo Adicionado",
+      "templateAddedDesc": "{title} foi adicionado aos seus documentos.",
+      "editMode": "Modo de Edição",
+      "editModeDesc": "Edição de documentos em breve."
+    }
+  },
+  "loginPage": {
+    "welcomeTitle": "Bem-vindo ao Kinship",
+    "welcomeSubtitle": "Entre para acessar suas equipes",
+    "email": "E-mail",
+    "password": "Senha",
+    "emailPlaceholder": "Digite seu e-mail",
+    "passwordPlaceholder": "Digite sua senha",
+    "signIn": "Entrar",
+    "ou": "ou",
+    "demoUser": "Continuar como Usuário Demo",
+    "demoCredentials": "Credenciais demo: qualquer e-mail com senha password",
+    "error": "E-mail ou senha inválidos"
+  },
+  "settings": {
+    "title": "Configurações",
+    "backToProfile": "Voltar ao Perfil",
+    "notifications": "Notificações",
+    "emailNotifications": {
+      "label": "Notificações por E-mail",
+      "description": "Receba atualizações por e-mail"
+    },
+    "pushNotifications": {
+      "label": "Notificações Push",
+      "description": "Receba notificações push no seu dispositivo"
+    },
+    "weeklyDigest": {
+      "label": "Resumo Semanal",
+      "description": "Resumo semanal de atividade"
+    },
+    "saveSettings": "Salvar Configurações",
+    "account": "Conta",
+    "changePassword": "Alterar Senha",
+    "privacySettings": "Configurações de Privacidade",
+    "deleteAccount": "Excluir Conta",
+    "toasts": {
+      "settingsSaved": "Configurações Salvas",
+      "settingsSavedDesc": "Suas preferências foram atualizadas com sucesso.",
+      "passwordReset": "Link de Redefinição Enviado",
+      "passwordResetDesc": "Verifique seu e-mail para instruções de redefinição de senha.",
+      "privacy": "Configurações de Privacidade",
+      "privacyDesc": "Controles avançados de privacidade em breve.",
+       "accountDeletion": "Exclusão de Conta",
+       "accountDeletionDesc": "Esta ação requer confirmação por e-mail. Recurso em breve."
+     }
+   },
+   "landing": {
+     "hero": {
+       "openApp": "Abrir App",
+       "tryDemo": "Experimentar Demo"
+     }
+   },
+  "statCard": {
+    "vsLastMonth": "vs último mês"
+  },
+  "crewDetail": {
+    "tabs": {
+      "overview": "Visão Geral",
+      "chat": "Chat",
+      "documents": "Documentos",
+      "values": "Valores",
+      "accountability": "Responsabilidade"
+    },
+    "loading": "Carregando equipe...",
+    "notFound": {
+      "title": "Equipe Não Encontrada",
+      "crewId": "ID da Equipe: {id}",
+      "description": "A equipe que você procura não existe ou você não tem acesso a ela.",
+      "backToCrews": "Voltar às Minhas Equipes"
+    },
+    "back": "Voltar",
+    "overview": {
+      "about": "Sobre",
+      "formationProgress": "Progresso da Formação",
+      "percentComplete": "{percent}% completo",
+      "membersCount": "Membros ({count})",
+      "role": {
+        "primaryParent": "pai/mãe principal",
+        "secondaryParent": "pai/mãe secundário",
+        "contributor": "contribuidor",
+        "supporter": "apoio"
+      }
+    },
+    "chat": {
+      "noMessages": "Nenhuma mensagem ainda. Inicie a conversa!",
+      "typeMessage": "Digite uma mensagem...",
+      "attachFile": "Anexar arquivo"
+    },
+    "documents": {
+      "noDocuments": "Nenhum documento ainda",
+      "createFirst": "Crie seu primeiro acordo legal",
+      "createDocument": "Criar Documento"
+    },
+    "values": {
+      "noValues": "Nenhum valor definido",
+      "defineValues": "Defina os valores centrais da sua equipe para garantir alinhamento",
+      "addValues": "Adicionar Valores",
+      "crewValues": "Alinhamento de Valores da Equipe",
+      "matchPercent": "{percent}% Correspondência"
+    },
+    "accountability": {
+      "title": "Registros de Responsabilidade",
+      "logIncident": "Registrar Incidente",
+      "logNew": "Registrar Novo Incidente",
+      "severity": "Nível de Gravidade",
+      "description": "Descrição",
+      "describeIncident": "Descreva o incidente...",
+      "submit": "Enviar",
+      "cancel": "Cancelar",
+      "noIncidents": "Nenhum incidente registrado",
+      "healthy": "Esta equipe está mantendo responsabilidade saudável",
+      "actionsTaken": "Ações Tomadas",
+      "severityLevels": {
+        "minor": "Leve (Pai/Mãe Principal)",
+        "pattern": "Padrão (Equipe Completa)",
+        "serious": "Sério (+ Profissional)",
+        "critical": "Crítico (Imediato)",
+        "legal": "Legal (Tribunal)"
+      },
+      "status": {
+        "resolved": "resolvido",
+        "addressed": "tratado",
+        "pending": "pendente"
+      }
+    },
+    "toasts": {
+      "fileAttached": "Arquivo Anexado",
+      "fileAttachedDesc": "{name} será enviado com sua próxima mensagem.",
+      "valueAdded": "Valor Adicionado",
+      "valueAddedDesc": "{name} foi adicionado aos valores da sua equipe.",
+      "editMode": "Modo de Edição",
+      "editModeDesc": "Edição de documentos em breve."
+    },
+    "modals": {
+      "addValue": "Adicionar Valor da Equipe",
+      "valueTitle": "Título do Valor",
+      "valuePlaceholder": "ex., Comunicação Aberta",
+      "category": "Categoria",
+      "close": "Fechar",
+      "edit": "Editar"
     }
   }
 }

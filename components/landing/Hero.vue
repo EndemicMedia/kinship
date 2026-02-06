@@ -15,8 +15,8 @@ const highlights = computed(() => [
 ])
 
 const downloadButtons = [
-  { label: 'Open App', icon: 'i-heroicons-arrow-top-right-on-square', href: '/app/login' },
-  { label: 'Try Demo', icon: 'i-heroicons-play', href: '/app/login' }
+  { label: t('landing.hero.openApp'), icon: 'i-heroicons-arrow-top-right-on-square', href: '/app/login' },
+  { label: t('landing.hero.tryDemo'), icon: 'i-heroicons-play', href: '/app/login' }
 ]
 </script>
 

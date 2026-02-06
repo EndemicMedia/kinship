@@ -82,13 +82,24 @@
       "eyebrow": "The problem",
       "title": "Passion is volatile. Partnership needs stability. Law demands clarity.",
       "description": "Marriage forces these incompatible forces together. When desire fades or conflict arises, the legal and parenting structure collapses with it. Children lose stability because adults could not sustain romance.",
-      "imageAlt": "Abstract visualization of incompatible systems forced together"
+      "imageAlt": "Abstract visualization of incompatible systems forced together",
+      "points": {
+        "noFramework": "No clear framework for family planning",
+        "legalAmbiguity": "Legal ambiguity and confusion",
+        "noAccountability": "Lack of accountability mechanisms"
+      }
     },
     "solution": {
       "eyebrow": "The Kinship solution",
       "title": "Separate romance from responsibility. Activate agreements at conception.",
       "description": "Form crews around shared parenting goals, not romantic chemistry. Legal agreements activate when pregnancy begins, not when vows are spoken. Responsibility transforms when life changes, but never disappears.",
-      "imageAlt": "Abstract visualization of harmonious unbundled systems"
+      "imageAlt": "Abstract visualization of harmonious unbundled systems",
+      "points": {
+        "clearFramework": "Clear, structured framework for all parties",
+        "legalGuidance": "Built-in legal guidance and support",
+        "accountabilityTools": "Accountability tools and tracking",
+        "exitStrategies": "Exit strategies built from the start"
+      }
     }
   },
   "compass": {
@@ -300,6 +311,344 @@
     "defaults": {
       "alt": "AI generated image",
       "fallback": "Failed to load image"
+    }
+  },
+  "commandPalette": {
+    "searchPlaceholder": "Search crews, people, or actions...",
+    "searchButton": "Search...",
+    "quickActions": "Quick Actions",
+    "createNewCrew": "Create New Crew",
+    "browseCompass": "Browse Compass",
+    "viewProfile": "View Profile",
+    "legalDocuments": "Legal Documents",
+    "myCrews": "My Crews",
+    "pages": "Pages",
+    "dashboard": "Dashboard",
+    "theCompass": "The Compass",
+    "profile": "Profile",
+    "legal": "Legal",
+    "crews": "Crews",
+    "members": "members"
+  },
+  "activity": {
+    "recentActivity": "Recent Activity",
+    "viewAll": "View All",
+    "noRecentActivity": "No recent activity",
+    "type": {
+      "crew": "Crew",
+      "document": "Document",
+      "member": "Member",
+      "message": "Message",
+      "milestone": "Milestone"
+    }
+  },
+  "crewsPage": {
+    "myCrews": "My Crews",
+    "findCrews": "Find Crews",
+    "noCrewsYet": "No crews yet",
+    "browseCompassSubtitle": "Browse The Compass to find your perfect parenting crew",
+    "browseTheCompass": "Browse The Compass",
+    "formationProgress": "Formation Progress",
+    "crewDetails": "Crew Details",
+    "status": {
+      "active": "active",
+      "pending": "pending"
+    }
+  },
+  "dashboard": {
+    "welcomeBack": "Welcome back, {name}! 👋",
+    "welcomeSubtitle": "Here's what's happening with your crews today.",
+    "createCrew": "Create Crew",
+    "quickActions": "Quick Actions",
+    "yourCrews": "Your Crews",
+    "viewAll": "View All",
+    "noCrewsJoined": "You haven't joined any crews yet. Browse The Compass to find families that match your values.",
+    "stats": {
+      "activeCrews": "Active Crews",
+      "totalMembers": "Total Members",
+      "documents": "Documents",
+      "formationProgress": "Formation Progress"
+    },
+    "quickActionsList": {
+      "browseCompass": "Browse Compass",
+      "findCrews": "Find new crews",
+      "viewCrews": "View Crews",
+      "manageCrews": "Manage your crews",
+      "messages": "Messages",
+      "checkMessages": "Check messages",
+      "documents": "Documents",
+      "viewLegalDocs": "View legal docs"
+    },
+    "welcomeToast": {
+      "title": "Welcome back, {name}!",
+      "description": "You have no new notifications"
+    }
+  },
+  "profile": {
+    "title": "Profile",
+    "editProfile": "Edit Profile",
+    "settings": "Settings",
+    "logOut": "Log Out",
+    "switchPersona": "Switch Persona (Demo Mode)",
+    "profileUpdated": "Profile Updated",
+    "profileUpdatedDesc": "Your profile has been updated successfully.",
+    "labels": {
+      "location": "Location",
+      "pronouns": "Pronouns",
+      "children": "Children",
+      "languages": "Languages",
+      "name": "Name",
+      "bio": "Bio"
+    },
+    "editModal": {
+      "title": "Edit Profile",
+      "namePlaceholder": "Your name",
+      "bioPlaceholder": "Tell us about yourself",
+      "cancel": "Cancel",
+      "saveChanges": "Save Changes"
+    }
+  },
+  "compass": {
+    "title": "The Compass",
+    "subtitle": "Find your perfect parenting crew",
+    "matches": "{count} matches",
+    "filters": "Filters",
+    "filterRole": "Role",
+    "filterLocation": "Location",
+    "filterMinMatch": "Min Match: {percent}%",
+    "allRoles": "All Roles",
+    "allLocations": "All Locations",
+    "stats": {
+      "potential": "Potential",
+      "liked": "Liked",
+      "maybe": "Maybe",
+      "passed": "Passed"
+    },
+    "status": {
+      "liked": "Liked",
+      "passed": "Passed",
+      "maybe": "Maybe"
+    },
+    "matchPercent": "{percent}% Match",
+    "about": "About",
+    "seeking": "Seeking",
+    "compatibilityBreakdown": "Compatibility Breakdown",
+    "compatibility": {
+      "valuesAlignment": "Values Alignment",
+      "locationProximity": "Location Proximity",
+      "roleCompatibility": "Role Compatibility",
+      "languageOverlap": "Language Overlap"
+    },
+    "buttons": {
+      "profile": "Profile",
+      "message": "Message",
+      "connect": "Connect",
+      "close": "Close",
+      "cancel": "Cancel",
+      "sendMessage": "Send Message",
+      "sendRequest": "Send Request",
+      "resetVotes": "Reset All Votes"
+    },
+    "modals": {
+      "sendMessageTitle": "Send Message to {name}",
+      "messagePlaceholder": "Type your message here...",
+      "messageHint": "Introduce yourself and share why you're interested in connecting.",
+      "connectionTitle": "Send Connection Request to {name}",
+      "connectionHint": "Sending a connection request will notify {name} and allow you to start building a parenting crew together.",
+      "noteOptional": "Add a personal note (optional)"
+    },
+    "noMatches": {
+      "title": "No matches found",
+      "description": "Check back later for new potential crew members."
+    }
+  },
+  "legal": {
+    "title": "Legal",
+    "subtitle": "Manage your legal agreements and documents",
+    "tabs": {
+      "myDocuments": "My Documents",
+      "templates": "Templates"
+    },
+    "newDocument": "New Document",
+    "noDocuments": {
+      "title": "No documents yet",
+      "description": "Create your first legal agreement with your crew",
+      "button": "Create Document"
+    },
+    "documentTypes": {
+      "agreement": "Agreement",
+      "contract": "Contract",
+      "policy": "Policy",
+      "statement": "Statement"
+    },
+    "status": {
+      "signed": "signed",
+      "pending": "pending",
+      "draft": "draft"
+    },
+    "buttons": {
+      "preview": "Preview",
+      "useTemplate": "Use Template",
+      "close": "Close",
+      "edit": "Edit",
+      "createDocument": "Create Document"
+    },
+    "modals": {
+      "createTitle": "Create New Document",
+      "documentTitle": "Document Title",
+      "documentType": "Document Type",
+      "useThisTemplate": "Use This Template"
+    },
+    "toasts": {
+      "documentCreated": "Document Created",
+      "documentCreatedDesc": "{title} has been created. You can now edit and share it with your crew.",
+      "templateAdded": "Template Added",
+      "templateAddedDesc": "{title} has been added to your documents.",
+      "editMode": "Edit Mode",
+      "editModeDesc": "Document editing coming soon."
+    }
+  },
+  "loginPage": {
+    "welcomeTitle": "Welcome to Kinship",
+    "welcomeSubtitle": "Sign in to access your crews",
+    "email": "Email",
+    "password": "Password",
+    "emailPlaceholder": "Enter your email",
+    "passwordPlaceholder": "Enter your password",
+    "signIn": "Sign In",
+    "or": "or",
+    "demoUser": "Continue as Demo User",
+    "demoCredentials": "Demo credentials: any email with password password",
+    "error": "Invalid email or password"
+  },
+  "settings": {
+    "title": "Settings",
+    "backToProfile": "Back to Profile",
+    "notifications": "Notifications",
+    "emailNotifications": {
+      "label": "Email Notifications",
+      "description": "Receive updates via email"
+    },
+    "pushNotifications": {
+      "label": "Push Notifications",
+      "description": "Get push notifications on your device"
+    },
+    "weeklyDigest": {
+      "label": "Weekly Digest",
+      "description": "Weekly summary of activity"
+    },
+    "saveSettings": "Save Settings",
+    "account": "Account",
+    "changePassword": "Change Password",
+    "privacySettings": "Privacy Settings",
+    "deleteAccount": "Delete Account",
+    "toasts": {
+      "settingsSaved": "Settings Saved",
+      "settingsSavedDesc": "Your preferences have been updated successfully.",
+      "passwordReset": "Password Reset Link Sent",
+      "passwordResetDesc": "Check your email for instructions to reset your password.",
+      "privacy": "Privacy Settings",
+      "privacyDesc": "Advanced privacy controls coming soon.",
+      "accountDeletion": "Account Deletion",
+      "accountDeletionDesc": "This action requires email confirmation. Feature coming soon."
+    }
+  },
+  "landing": {
+    "hero": {
+      "openApp": "Open App",
+      "tryDemo": "Try Demo"
+    }
+  },
+  "statCard": {
+    "vsLastMonth": "vs last month"
+  },
+  "crewDetail": {
+    "tabs": {
+      "overview": "Overview",
+      "chat": "Chat",
+      "documents": "Documents",
+      "values": "Values",
+      "accountability": "Accountability"
+    },
+    "loading": "Loading crew...",
+    "notFound": {
+      "title": "Crew Not Found",
+      "crewId": "Crew ID: {id}",
+      "description": "The crew you're looking for doesn't exist or you don't have access to it.",
+      "backToCrews": "Back to My Crews"
+    },
+    "back": "Back",
+    "overview": {
+      "about": "About",
+      "formationProgress": "Formation Progress",
+      "percentComplete": "{percent}% complete",
+      "membersCount": "Members ({count})",
+      "role": {
+        "primaryParent": "primary-parent",
+        "secondaryParent": "secondary-parent",
+        "contributor": "contributor",
+        "supporter": "supporter"
+      }
+    },
+    "chat": {
+      "noMessages": "No messages yet. Start the conversation!",
+      "typeMessage": "Type a message...",
+      "attachFile": "Attach file"
+    },
+    "documents": {
+      "noDocuments": "No documents yet",
+      "createFirst": "Create your first legal agreement",
+      "createDocument": "Create Document"
+    },
+    "values": {
+      "noValues": "No values defined",
+      "defineValues": "Define your crew's core values to ensure alignment",
+      "addValues": "Add Values",
+      "crewValues": "Crew Values Alignment",
+      "matchPercent": "{percent}% Match"
+    },
+    "accountability": {
+      "title": "Accountability Logs",
+      "logIncident": "Log Incident",
+      "logNew": "Log New Incident",
+      "severity": "Severity Level",
+      "description": "Description",
+      "describeIncident": "Describe the incident...",
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "noIncidents": "No incidents logged",
+      "healthy": "This crew is maintaining healthy accountability",
+      "actionsTaken": "Actions Taken",
+      "reportedBy": "Reported by",
+      "severityLevels": {
+        "minor": "Minor (Primary Parent)",
+        "pattern": "Pattern (Full Crew)",
+        "serious": "Serious (+ Professional)",
+        "critical": "Critical (Immediate)",
+        "legal": "Legal (Court)"
+      },
+      "status": {
+        "resolved": "resolved",
+        "addressed": "addressed",
+        "pending": "pending"
+      }
+    },
+    "toasts": {
+      "fileAttached": "File Attached",
+      "fileAttachedDesc": "{name} will be sent with your next message.",
+      "valueAdded": "Value Added",
+      "valueAddedDesc": "{name} has been added to your crew values.",
+      "editMode": "Edit Mode",
+      "editModeDesc": "Document editing coming soon."
+    },
+    "modals": {
+      "addValue": "Add Crew Value",
+      "valueTitle": "Value Title",
+      "valuePlaceholder": "e.g., Open Communication",
+      "category": "Category",
+      "close": "Close",
+      "edit": "Edit",
+      "noContent": "No content available"
     }
   }
 }

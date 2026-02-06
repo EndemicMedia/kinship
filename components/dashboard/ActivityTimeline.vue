@@ -1,33 +1,33 @@
 <script setup lang="ts">
 import { formatDistanceToNow } from 'date-fns'
-
+const { t } = useI18n()
 const uiStore = useUIStore()
 
 const activityTypeConfig = {
   crew: {
     icon: 'i-heroicons-user-group',
     color: 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400',
-    label: 'Crew'
+    label: t('activity.type.crew')
   },
   document: {
     icon: 'i-heroicons-document-text',
     color: 'bg-purple-50 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400',
-    label: 'Document'
+    label: t('activity.type.document')
   },
   member: {
     icon: 'i-heroicons-user-plus',
     color: 'bg-green-50 text-green-600 dark:bg-green-900/20 dark:text-green-400',
-    label: 'Member'
+    label: t('activity.type.member')
   },
   message: {
     icon: 'i-heroicons-chat-bubble-left',
     color: 'bg-yellow-50 text-yellow-600 dark:bg-yellow-900/20 dark:text-yellow-400',
-    label: 'Message'
+    label: t('activity.type.message')
   },
   milestone: {
     icon: 'i-heroicons-trophy',
     color: 'bg-orange-50 text-orange-600 dark:bg-orange-900/20 dark:text-orange-400',
-    label: 'Milestone'
+    label: t('activity.type.milestone')
   }
 }
 
@@ -40,7 +40,7 @@ function formatTime(date: Date): string {
   <UCard>
     <template #header>
       <div class="flex items-center justify-between">
-        <h3 class="font-semibold text-lg">Recent Activity</h3>
+        <h3 class="font-semibold text-lg">{{ t('activity.recentActivity') }}</h3>
         <UButton 
           to="/app/activity" 
           variant="link" 
@@ -48,7 +48,7 @@ function formatTime(date: Date): string {
           size="sm"
           trailing-icon="i-heroicons-arrow-right"
         >
-          View All
+          {{ t('activity.viewAll') }}
         </UButton>
       </div>
     </template>
@@ -86,7 +86,7 @@ function formatTime(date: Date): string {
       <!-- Empty State -->
       <div v-if="uiStore.recentActivities.length === 0" class="text-center py-8">
         <UIcon name="i-heroicons-clock" class="w-12 h-12 mx-auto text-slate-300 mb-3" />
-        <p class="text-slate-500 text-sm">No recent activity</p>
+        <p class="text-slate-500 text-sm">{{ t('activity.noRecentActivity') }}</p>
       </div>
     </div>
   </UCard>

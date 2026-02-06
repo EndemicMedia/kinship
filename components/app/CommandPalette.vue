@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { t } = useI18n()
 const uiStore = useUIStore()
 const authStore = useAuthStore()
 const crewsStore = useCrewsStore()
@@ -10,32 +11,32 @@ const searchQuery = ref('')
 const commandGroups = computed(() => [
   {
     id: 'actions',
-    label: 'Quick Actions',
+    label: t('commandPalette.quickActions'),
     items: [
       { 
         id: 'new-crew', 
-        label: 'Create New Crew', 
+        label: t('commandPalette.createNewCrew'), 
         icon: 'i-heroicons-plus-circle',
         shortcut: ['N'],
         click: () => navigateTo('/app/crews')
       },
       { 
         id: 'browse-compass', 
-        label: 'Browse Compass', 
+        label: t('commandPalette.browseCompass'), 
         icon: 'i-heroicons-magnifying-glass',
         shortcut: ['B'],
         click: () => navigateTo('/app/compass')
       },
       { 
         id: 'view-profile', 
-        label: 'View Profile', 
+        label: t('commandPalette.viewProfile'), 
         icon: 'i-heroicons-user',
         shortcut: ['P'],
         click: () => navigateTo('/app/profile')
       },
       { 
         id: 'legal-docs', 
-        label: 'Legal Documents', 
+        label: t('commandPalette.legalDocuments'), 
         icon: 'i-heroicons-folder',
         shortcut: ['L'],
         click: () => navigateTo('/app/legal')
@@ -44,24 +45,24 @@ const commandGroups = computed(() => [
   },
   {
     id: 'crews',
-    label: 'My Crews',
+    label: t('commandPalette.myCrews'),
     items: crewsStore.crews.slice(0, 5).map(crew => ({
       id: `crew-${crew.id}`,
       label: crew.name,
       icon: 'i-heroicons-user-group',
-      description: `${crew.members.length} members`,
+      description: `${crew.members.length} ${t('commandPalette.members')}`,
       click: () => navigateTo(`/app/crews/detail?id=${crew.id}`)
     }))
   },
   {
     id: 'pages',
-    label: 'Pages',
+    label: t('commandPalette.pages'),
     items: [
-      { id: 'dashboard', label: 'Dashboard', icon: 'i-heroicons-home', shortcut: ['D'], click: () => navigateTo('/app') },
-      { id: 'crews', label: 'My Crews', icon: 'i-heroicons-users', shortcut: ['C'], click: () => navigateTo('/app/crews') },
-      { id: 'compass', label: 'The Compass', icon: 'i-heroicons-magnifying-glass', shortcut: ['T'], click: () => navigateTo('/app/compass') },
-      { id: 'profile', label: 'Profile', icon: 'i-heroicons-user-circle', shortcut: ['P'], click: () => navigateTo('/app/profile') },
-      { id: 'legal', label: 'Legal', icon: 'i-heroicons-document-text', shortcut: ['L'], click: () => navigateTo('/app/legal') }
+      { id: 'dashboard', label: t('commandPalette.dashboard'), icon: 'i-heroicons-home', shortcut: ['D'], click: () => navigateTo('/app') },
+      { id: 'crews', label: t('commandPalette.myCrews'), icon: 'i-heroicons-users', shortcut: ['C'], click: () => navigateTo('/app/crews') },
+      { id: 'compass', label: t('commandPalette.theCompass'), icon: 'i-heroicons-magnifying-glass', shortcut: ['T'], click: () => navigateTo('/app/compass') },
+      { id: 'profile', label: t('commandPalette.profile'), icon: 'i-heroicons-user-circle', shortcut: ['P'], click: () => navigateTo('/app/profile') },
+      { id: 'legal', label: t('commandPalette.legal'), icon: 'i-heroicons-document-text', shortcut: ['L'], click: () => navigateTo('/app/legal') }
     ]
   }
 ])
@@ -114,33 +115,33 @@ function onSelect(option: any) {
   <div>
     <!-- Trigger Button -->
     <UButton
-      icon="i-heroicons-magnifying-glass"
-      variant="outline"
-      color="neutral"
-      class="w-full justify-between text-slate-500 hidden md:flex"
-      @click="isOpen = true"
-    >
-      <span class="flex-1 text-left">Search...</span>
-      <UKbd>⌘K</UKbd>
-    </UButton>
-    
-    <!-- Mobile Trigger -->
-    <UButton
-      icon="i-heroicons-magnifying-glass"
-      variant="ghost"
-      color="neutral"
-      class="md:hidden"
-      @click="isOpen = true"
-    />
+       icon="i-heroicons-magnifying-glass"
+       variant="outline"
+       color="neutral"
+       class="w-full justify-between text-slate-500 hidden md:flex"
+       @click="isOpen = true"
+     >
+       <span class="flex-1 text-left">{{ t('commandPalette.searchButton') }}</span>
+       <UKbd>⌘K</UKbd>
+     </UButton>
+     
+     <!-- Mobile Trigger -->
+     <UButton
+       icon="i-heroicons-magnifying-glass"
+       variant="ghost"
+       color="neutral"
+       class="md:hidden"
+       @click="isOpen = true"
+     />
 
-    <!-- Command Palette Modal -->
-    <UModal v-model="isOpen" :ui="{ width: 'sm:max-w-2xl' }">
-      <UCommandPalette
-        v-model="searchQuery"
-        :groups="filteredGroups"
-        placeholder="Search crews, people, or actions..."
-        @update:model-value="onSelect"
-      />
-    </UModal>
+     <!-- Command Palette Modal -->
+     <UModal v-model="isOpen" :ui="{ width: 'sm:max-w-2xl' }">
+       <UCommandPalette
+         v-model="searchQuery"
+         :groups="filteredGroups"
+         :placeholder="t('commandPalette.searchPlaceholder')"
+         @update:model-value="onSelect"
+       />
+     </UModal>
   </div>
 </template>

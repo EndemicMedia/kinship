@@ -77,13 +77,24 @@
       "eyebrow": "Das Problem",
       "title": "Leidenschaft ist volatil. Partnerschaft braucht Stabilität. Das Recht verlangt Klarheit.",
       "description": "Die Ehe zwingt diese unvereinbaren Kräfte zusammen. Wenn das Begehren nachlässt oder Konflikte entstehen, bricht die rechtliche und elterliche Struktur mit zusammen. Kinder verlieren Stabilität, weil Erwachsene die Romantik nicht aufrechterhalten konnten.",
-      "imageAlt": "Abstrakte Visualisierung inkompatibler Systeme, die zusammengezwungen werden"
+      "imageAlt": "Abstrakte Visualisierung inkompatibler Systeme, die zusammengezwungen werden",
+      "points": {
+        "noFramework": "Kein klares Rahmenwerk für Familienplanung",
+        "legalAmbiguity": "Rechtliche Mehrdeutigkeit und Verwirrung",
+        "noAccountability": "Fehlende Rechenschaftsmechanismen"
+      }
     },
     "solution": {
       "eyebrow": "Die Kinship-Lösung",
       "title": "Romantik von Verantwortung trennen. Vereinbarungen bei der Empfängnis aktivieren.",
       "description": "Crews um gemeinsame Erziehungsziele bilden, nicht um romantische Chemie. Rechtliche Vereinbarungen werden aktiv, wenn die Schwangerschaft beginnt, nicht wenn Gelübde gesprochen werden. Verantwortung wandelt sich, wenn das Leben sich ändert, verschwindet aber nie.",
-      "imageAlt": "Abstrakte Visualisierung harmonischer entkoppelter Systeme"
+      "imageAlt": "Abstrakte Visualisierung harmonischer entkoppelter Systeme",
+      "points": {
+        "clearFramework": "Klares, strukturiertes Rahmenwerk für alle Parteien",
+        "legalGuidance": "Integrierte rechtliche Beratung und Unterstützung",
+        "accountabilityTools": "Rechenschaftstools und -verfolgung",
+        "exitStrategies": "Austrittsstrategien von Anfang an eingebaut"
+      }
     }
   },
   "compass": {
@@ -294,6 +305,342 @@
     "defaults": {
       "alt": "KI-generiertes Bild",
       "fallback": "Bild konnte nicht geladen werden"
+    }
+  },
+  "commandPalette": {
+    "searchPlaceholder": "Crews, Personen oder Aktionen suchen...",
+    "searchButton": "Suchen...",
+    "quickActions": "Schnellaktionen",
+    "createNewCrew": "Neue Crew erstellen",
+    "browseCompass": "Kompass durchsuchen",
+    "viewProfile": "Profil anzeigen",
+    "legalDocuments": "Rechtliche Dokumente",
+    "myCrews": "Meine Crews",
+    "pages": "Seiten",
+    "dashboard": "Dashboard",
+    "theCompass": "Der Kompass",
+    "profile": "Profil",
+    "legal": "Rechtliches",
+    "crews": "Crews",
+    "members": "Mitglieder"
+  },
+  "activity": {
+    "recentActivity": "Letzte Aktivität",
+    "viewAll": "Alle anzeigen",
+    "noRecentActivity": "Keine kürzliche Aktivität",
+    "type": {
+      "crew": "Crew",
+      "document": "Dokument",
+      "member": "Mitglied",
+      "message": "Nachricht",
+      "milestone": "Meilenstein"
+    }
+  },
+  "crewsPage": {
+    "myCrews": "Meine Crews",
+    "findCrews": "Crews finden",
+    "noCrewsYet": "Noch keine Crews",
+    "browseCompassSubtitle": "Durchsuche den Kompass, um deine perfekte Eltern-Crew zu finden",
+    "browseTheCompass": "Den Kompass durchsuchen",
+    "formationProgress": "Formierungsfortschritt",
+    "crewDetails": "Crew-Details",
+    "status": {
+      "active": "aktiv",
+      "pending": "ausstehend"
+    }
+  },
+  "dashboard": {
+    "welcomeBack": "Willkommen zurück, {name}! 👋",
+    "welcomeSubtitle": "Hier ist, was heute mit deinen Crews passiert.",
+    "createCrew": "Crew erstellen",
+    "quickActions": "Schnellaktionen",
+    "yourCrews": "Deine Crews",
+    "viewAll": "Alle anzeigen",
+    "noCrewsJoined": "Du hast noch keiner Crew beigetreten. Durchsuche den Kompass, um Familien zu finden, die zu deinen Werten passen.",
+    "stats": {
+      "activeCrews": "Aktive Crews",
+      "totalMembers": "Gesamtmitglieder",
+      "documents": "Dokumente",
+      "formationProgress": "Formierungsfortschritt"
+    },
+    "quickActionsList": {
+      "browseCompass": "Kompass durchsuchen",
+      "findCrews": "Neue Crews finden",
+      "viewCrews": "Crews anzeigen",
+      "manageCrews": "Deine Crews verwalten",
+      "messages": "Nachrichten",
+      "checkMessages": "Nachrichten prüfen",
+      "documents": "Dokumente",
+      "viewLegalDocs": "Rechtliche Dokumente anzeigen"
+    },
+    "welcomeToast": {
+      "title": "Willkommen zurück, {name}!",
+      "description": "Du hast keine neuen Benachrichtigungen"
+    }
+  },
+  "profile": {
+    "title": "Profil",
+    "editProfile": "Profil bearbeiten",
+    "settings": "Einstellungen",
+    "logOut": "Abmelden",
+    "switchPersona": "Persona wechseln (Demo-Modus)",
+    "profileUpdated": "Profil aktualisiert",
+    "profileUpdatedDesc": "Dein Profil wurde erfolgreich aktualisiert.",
+    "labels": {
+      "location": "Standort",
+      "pronouns": "Pronomen",
+      "children": "Kinder",
+      "languages": "Sprachen",
+      "name": "Name",
+      "bio": "Bio"
+    },
+    "editModal": {
+      "title": "Profil bearbeiten",
+      "namePlaceholder": "Dein Name",
+      "bioPlaceholder": "Erzähl uns von dir",
+      "cancel": "Abbrechen",
+      "saveChanges": "Änderungen speichern"
+    }
+  },
+  "compass": {
+    "title": "Der Kompass",
+    "subtitle": "Finde deine perfekte Eltern-Crew",
+    "matches": "{count} Übereinstimmungen",
+    "filters": "Filter",
+    "filterRole": "Rolle",
+    "filterLocation": "Standort",
+    "filterMinMatch": "Min. Übereinstimmung: {percent}%",
+    "allRoles": "Alle Rollen",
+    "allLocations": "Alle Standorte",
+    "stats": {
+      "potential": "Potenziell",
+      "liked": "Gefällt mir",
+      "maybe": "Vielleicht",
+      "passed": "Übersprungen"
+    },
+    "status": {
+      "liked": "Gefällt mir",
+      "passed": "Übersprungen",
+      "maybe": "Vielleicht"
+    },
+    "matchPercent": "{percent}% Übereinstimmung",
+    "about": "Über",
+    "seeking": "Sucht",
+    "compatibilityBreakdown": "Kompatibilitätsaufschlüsselung",
+    "compatibility": {
+      "valuesAlignment": "Werteübereinstimmung",
+      "locationProximity": "Nähe zum Standort",
+      "roleCompatibility": "Rollenkompatibilität",
+      "languageOverlap": "Sprachüberschneidung"
+    },
+    "buttons": {
+      "profile": "Profil",
+      "message": "Nachricht",
+      "connect": "Verbinden",
+      "close": "Schließen",
+      "cancel": "Abbrechen",
+      "sendMessage": "Nachricht senden",
+      "sendRequest": "Anfrage senden",
+      "resetVotes": "Alle Stimmen zurücksetzen"
+    },
+    "modals": {
+      "sendMessageTitle": "Nachricht an {name} senden",
+      "messagePlaceholder": "Tippe hier deine Nachricht...",
+      "messageHint": "Stelle dich vor und teile mit, warum du an einer Verbindung interessiert bist.",
+      "connectionTitle": "Verbindungsanfrage an {name} senden",
+      "connectionHint": "Das Senden einer Verbindungsanfrage benachrichtigt {name} und ermöglicht euch, gemeinsam eine Eltern-Crew aufzubauen.",
+      "noteOptional": "Persönliche Notiz hinzufügen (optional)"
+    },
+    "noMatches": {
+      "title": "Keine Übereinstimmungen gefunden",
+      "description": "Schau später nochmal nach neuen potenziellen Crew-Mitgliedern."
+    }
+  },
+  "legal": {
+    "title": "Rechtliches",
+    "subtitle": "Verwalte deine rechtlichen Vereinbarungen und Dokumente",
+    "tabs": {
+      "myDocuments": "Meine Dokumente",
+      "templates": "Vorlagen"
+    },
+    "newDocument": "Neues Dokument",
+    "noDocuments": {
+      "title": "Noch keine Dokumente",
+      "description": "Erstelle deine erste rechtliche Vereinbarung mit deiner Crew",
+      "button": "Dokument erstellen"
+    },
+    "documentTypes": {
+      "agreement": "Vereinbarung",
+      "contract": "Vertrag",
+      "policy": "Richtlinie",
+      "statement": "Erklärung"
+    },
+    "status": {
+      "signed": "unterzeichnet",
+      "pending": "ausstehend",
+      "draft": "Entwurf"
+    },
+    "buttons": {
+      "preview": "Vorschau",
+      "useTemplate": "Vorlage verwenden",
+      "close": "Schließen",
+      "edit": "Bearbeiten",
+      "createDocument": "Dokument erstellen"
+    },
+    "modals": {
+      "createTitle": "Neues Dokument erstellen",
+      "documentTitle": "Dokumenttitel",
+      "documentType": "Dokumenttyp",
+      "useThisTemplate": "Diese Vorlage verwenden"
+    },
+    "toasts": {
+      "documentCreated": "Dokument erstellt",
+      "documentCreatedDesc": "{title} wurde erstellt. Du kannst es jetzt bearbeiten und mit deiner Crew teilen.",
+      "templateAdded": "Vorlage hinzugefügt",
+      "templateAddedDesc": "{title} wurde zu deinen Dokumenten hinzugefügt.",
+      "editMode": "Bearbeitungsmodus",
+      "editModeDesc": "Dokumentbearbeitung kommt bald."
+    }
+  },
+  "loginPage": {
+    "welcomeTitle": "Willkommen bei Kinship",
+    "welcomeSubtitle": "Melde dich an, um auf deine Crews zuzugreifen",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "emailPlaceholder": "E-Mail eingeben",
+    "passwordPlaceholder": "Passwort eingeben",
+    "signIn": "Anmelden",
+    "oder": "oder",
+    "demoUser": "Als Demo-Benutzer fortfahren",
+    "demoCredentials": "Demo-Zugangsdaten: beliebige E-Mail mit Passwort password",
+    "error": "Ungültige E-Mail oder Passwort"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "backToProfile": "Zurück zum Profil",
+    "notifications": "Benachrichtigungen",
+    "emailNotifications": {
+      "label": "E-Mail-Benachrichtigungen",
+      "description": "Updates per E-Mail erhalten"
+    },
+    "pushNotifications": {
+      "label": "Push-Benachrichtigungen",
+      "description": "Push-Benachrichtigungen auf deinem Gerät erhalten"
+    },
+    "weeklyDigest": {
+      "label": "Wöchentliche Zusammenfassung",
+      "description": "Wöchentliche Aktivitätszusammenfassung"
+    },
+    "saveSettings": "Einstellungen speichern",
+    "account": "Konto",
+    "changePassword": "Passwort ändern",
+    "privacySettings": "Datenschutzeinstellungen",
+    "deleteAccount": "Konto löschen",
+    "toasts": {
+      "settingsSaved": "Einstellungen gespeichert",
+      "settingsSavedDesc": "Deine Einstellungen wurden erfolgreich aktualisiert.",
+      "passwordReset": "Link zum Zurücksetzen des Passworts gesendet",
+      "passwordResetDesc": "Überprüfe deine E-Mail für Anleitungen zum Zurücksetzen deines Passworts.",
+      "privacy": "Datenschutzeinstellungen",
+      "privacyDesc": "Erweiterte Datenschutzkontrollen kommen bald.",
+       "accountDeletion": "Kontolöschung",
+       "accountDeletionDesc": "Diese Aktion erfordert eine E-Mail-Bestätigung. Funktion kommt bald."
+     }
+   },
+   "landing": {
+     "hero": {
+       "openApp": "App öffnen",
+       "tryDemo": "Demo ausprobieren"
+     }
+   },
+  "statCard": {
+    "vsLastMonth": "vs letzter Monat"
+  },
+  "crewDetail": {
+    "tabs": {
+      "overview": "Übersicht",
+      "chat": "Chat",
+      "documents": "Dokumente",
+      "values": "Werte",
+      "accountability": "Verantwortlichkeit"
+    },
+    "loading": "Crew wird geladen...",
+    "notFound": {
+      "title": "Crew Nicht Gefunden",
+      "crewId": "Crew-ID: {id}",
+      "description": "Die Crew, die du suchst, existiert nicht oder du hast keinen Zugriff darauf.",
+      "backToCrews": "Zurück zu Meine Crews"
+    },
+    "back": "Zurück",
+    "overview": {
+      "about": "Über",
+      "formationProgress": "Formierungsfortschritt",
+      "percentComplete": "{percent}% abgeschlossen",
+      "membersCount": "Mitglieder ({count})",
+      "role": {
+        "primaryParent": "haupt-erziehungsberechtigt",
+        "secondaryParent": "sekundär-erziehungsberechtigt",
+        "contributor": "Mitwirkender",
+        "supporter": "Unterstützer"
+      }
+    },
+    "chat": {
+      "noMessages": "Noch keine Nachrichten. Starte das Gespräch!",
+      "typeMessage": "Nachricht eingeben...",
+      "attachFile": "Datei anhängen"
+    },
+    "documents": {
+      "noDocuments": "Noch keine Dokumente",
+      "createFirst": "Erstelle deine erste rechtliche Vereinbarung",
+      "createDocument": "Dokument erstellen"
+    },
+    "values": {
+      "noValues": "Keine Werte definiert",
+      "defineValues": "Definiert die Kernwerte eurer Crew, um Ausrichtung sicherzustellen",
+      "addValues": "Werte hinzufügen",
+      "crewValues": "Werte-Ausrichtung der Crew",
+      "matchPercent": "{percent}% Übereinstimmung"
+    },
+    "accountability": {
+      "title": "Verantwortlichkeits-Protokolle",
+      "logIncident": "Vorfall protokollieren",
+      "logNew": "Neuen Vorfall protokollieren",
+      "severity": "Schweregrad",
+      "description": "Beschreibung",
+      "describeIncident": "Beschreibe den Vorfall...",
+      "submit": "Absenden",
+      "cancel": "Abbrechen",
+      "noIncidents": "Keine Vorfälle protokolliert",
+      "healthy": "Diese Crew pflegt gesunde Verantwortlichkeit",
+      "actionsTaken": "Ergriffene Maßnahmen",
+      "severityLevels": {
+        "minor": "Gering (Hauptbezugsperson)",
+        "pattern": "Muster (Gesamte Crew)",
+        "serious": "Ernst (+ Professionelle Hilfe)",
+        "critical": "Kritisch (Sofort)",
+        "legal": "Rechtlich (Gericht)"
+      },
+      "status": {
+        "resolved": "gelöst",
+        "addressed": "bearbeitet",
+        "pending": "ausstehend"
+      }
+    },
+    "toasts": {
+      "fileAttached": "Datei Angehängt",
+      "fileAttachedDesc": "{name} wird mit deiner nächsten Nachricht gesendet.",
+      "valueAdded": "Wert Hinzugefügt",
+      "valueAddedDesc": "{name} wurde zu den Crew-Werten hinzugefügt.",
+      "editMode": "Bearbeitungsmodus",
+      "editModeDesc": "Dokumentbearbeitung kommt bald."
+    },
+    "modals": {
+      "addValue": "Crew-Wert Hinzufügen",
+      "valueTitle": "Wert-Titel",
+      "valuePlaceholder": "z.B., Offene Kommunikation",
+      "category": "Kategorie",
+      "close": "Schließen",
+      "edit": "Bearbeiten"
     }
   }
 }

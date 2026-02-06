@@ -50,11 +50,11 @@ const crewDocuments = computed(() => crew.value?.documents || [])
 
 const activeTab = ref(0)
 const tabs = [
-  { slot: 'overview', label: 'Overview', icon: 'i-heroicons-home' },
-  { slot: 'chat', label: 'Chat', icon: 'i-heroicons-chat-bubble-left-right' },
-  { slot: 'documents', label: 'Documents', icon: 'i-heroicons-document-text' },
-  { slot: 'values', label: 'Values', icon: 'i-heroicons-heart' },
-  { slot: 'accountability', label: 'Accountability', icon: 'i-heroicons-scale' }
+  { slot: 'overview', label: t('crewDetail.tabs.overview'), icon: 'i-heroicons-home' },
+  { slot: 'chat', label: t('crewDetail.tabs.chat'), icon: 'i-heroicons-chat-bubble-left-right' },
+  { slot: 'documents', label: t('crewDetail.tabs.documents'), icon: 'i-heroicons-document-text' },
+  { slot: 'values', label: t('crewDetail.tabs.values'), icon: 'i-heroicons-heart' },
+  { slot: 'accountability', label: t('crewDetail.tabs.accountability'), icon: 'i-heroicons-scale' }
 ]
 
 const getMemberInfo = (userId: string) => {
@@ -106,8 +106,8 @@ const handleFileSelect = (event: Event) => {
   const file = target.files?.[0]
   if (file) {
     toast.add({
-      title: 'File Attached',
-      description: `${file.name} will be sent with your next message.`,
+      title: t('crewDetail.toasts.fileAttached'),
+      description: t('crewDetail.toasts.fileAttachedDesc', { name: file.name }),
       color: 'success',
       icon: 'i-heroicons-paper-clip'
     })
@@ -131,8 +131,8 @@ const addValue = () => {
   if (!newValueTitle.value.trim()) return
   
   toast.add({
-    title: 'Value Added',
-    description: `${newValueTitle.value} has been added to your crew values.`,
+    title: t('crewDetail.toasts.valueAdded'),
+    description: t('crewDetail.toasts.valueAddedDesc', { name: newValueTitle.value }),
     color: 'success',
     icon: 'i-heroicons-heart'
   })
@@ -146,7 +146,7 @@ const addValue = () => {
   <div class="space-y-6">
     <div class="flex items-center gap-4">
       <UButton to="/app/crews" variant="ghost" icon="i-heroicons-arrow-left">
-        Back
+        {{ t('crewDetail.back') }}
       </UButton>
       <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
         {{ crewName }}
@@ -156,256 +156,256 @@ const addValue = () => {
     <!-- Loading State -->
     <div v-if="!crewId" class="text-center py-12">
       <UIcon name="i-heroicons-arrow-path" class="w-12 h-12 mx-auto text-slate-400 animate-spin mb-4" />
-      <p class="text-slate-600">Loading crew...</p>
+      <p class="text-slate-600">{{ t('crewDetail.loading') }}</p>
     </div>
 
     <!-- Crew Not Found -->
     <UCard v-else-if="!crew" class="text-center py-12">
       <UIcon name="i-heroicons-exclamation-triangle" class="w-16 h-16 mx-auto text-amber-500 mb-4" />
-      <h2 class="text-xl font-bold mb-2">Crew Not Found</h2>
-      <p class="text-slate-600 mb-2">Crew ID: {{ crewId }}</p>
-      <p class="text-slate-600 mb-6">The crew you're looking for doesn't exist or you don't have access to it.</p>
-      <UButton to="/app/crews" color="primary">Back to My Crews</UButton>
+      <h2 class="text-xl font-bold mb-2">{{ t('crewDetail.notFound.title') }}</h2>
+      <p class="text-slate-600 mb-2">{{ t('crewDetail.notFound.crewId', { id: crewId }) }}</p>
+      <p class="text-slate-600 mb-6">{{ t('crewDetail.notFound.description') }}</p>
+      <UButton to="/app/crews" color="primary">{{ t('crewDetail.notFound.backToCrews') }}</UButton>
     </UCard>
 
     <UTabs v-else v-model="activeTab" :items="tabs" :key="crew.id">
-      <template #overview>
-        <UCard class="mt-4">
-          <div class="space-y-6">
-            <div v-if="crew?.description">
-              <h3 class="text-lg font-semibold mb-2">About</h3>
-              <p class="text-slate-600 dark:text-slate-400">{{ crew.description }}</p>
-            </div>
+        <template #overview>
+          <UCard class="mt-4">
+            <div class="space-y-6">
+              <div v-if="crew?.description">
+                <h3 class="text-lg font-semibold mb-2">{{ t('crewDetail.overview.about') }}</h3>
+                <p class="text-slate-600 dark:text-slate-400">{{ crew.description }}</p>
+              </div>
 
-            <div v-if="crew?.formationProgress !== undefined">
-              <h3 class="text-lg font-semibold mb-3">Formation Progress</h3>
-              <UProgress :value="crew.formationProgress" color="primary" size="lg" />
-              <p class="text-sm text-slate-600 mt-2">{{ crew.formationProgress }}% complete</p>
-            </div>
+              <div v-if="crew?.formationProgress !== undefined">
+                <h3 class="text-lg font-semibold mb-3">{{ t('crewDetail.overview.formationProgress') }}</h3>
+                <UProgress :value="crew.formationProgress" color="primary" size="lg" />
+                <p class="text-sm text-slate-600 mt-2">{{ t('crewDetail.overview.percentComplete', { percent: crew.formationProgress }) }}</p>
+              </div>
 
-            <div>
-              <h3 class="text-lg font-semibold mb-3">Members ({{ crewMembers.length }})</h3>
-              <div class="space-y-3">
-                <div v-for="member in crewMembers" :key="member.userId"
-                     class="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
-                  <div class="flex items-center gap-3">
-                    <UAvatar 
-                      :src="getMemberInfo(member.userId)?.avatar" 
-                      :alt="getMemberInfo(member.userId)?.name"
-                      size="md" 
-                    />
-                    <div>
-                      <p class="font-medium">{{ getMemberInfo(member.userId)?.name || 'Unknown' }}</p>
-                      <p class="text-sm text-slate-500">{{ member.role.replace('-', ' ') }}</p>
+              <div>
+                <h3 class="text-lg font-semibold mb-3">{{ t('crewDetail.overview.membersCount', { count: crewMembers.length }) }}</h3>
+                <div class="space-y-3">
+                  <div v-for="member in crewMembers" :key="member.userId"
+                       class="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
+                    <div class="flex items-center gap-3">
+                      <UAvatar 
+                        :src="getMemberInfo(member.userId)?.avatar" 
+                        :alt="getMemberInfo(member.userId)?.name"
+                        size="md" 
+                      />
+                      <div>
+                        <p class="font-medium">{{ getMemberInfo(member.userId)?.name || 'Unknown' }}</p>
+                        <p class="text-sm text-slate-500">{{ member.role.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) }}</p>
+                      </div>
                     </div>
+                    <UBadge :color="member.status === 'active' ? 'success' : 'warning'" variant="soft">
+                      {{ member.status }}
+                    </UBadge>
                   </div>
-                  <UBadge :color="member.status === 'active' ? 'success' : 'warning'" variant="soft">
-                    {{ member.status }}
-                  </UBadge>
                 </div>
               </div>
             </div>
-          </div>
-        </UCard>
-      </template>
+          </UCard>
+        </template>
 
-      <template #chat>
-        <UCard class="mt-4">
-          <div class="h-[400px] flex flex-col">
-            <div class="flex-1 overflow-y-auto space-y-4 p-4">
-              <div v-if="messages.length === 0" class="text-center text-slate-500 py-8">
-                <UIcon name="i-heroicons-chat-bubble-left-right" class="w-12 h-12 mx-auto mb-2 opacity-50" />
-                <p>No messages yet. Start the conversation!</p>
-              </div>
-              
-              <div v-for="message in messages" :key="message.id" 
-                   :class="['flex gap-3', message.senderId === authStore.currentUser?.id ? 'flex-row-reverse' : '']">
-                <UAvatar v-if="message.senderId !== 'system'" 
-                        :src="getMemberInfo(message.senderId)?.avatar" 
-                        :alt="getMemberInfo(message.senderId)?.name" 
-                        size="sm" />
+        <template #chat>
+          <UCard class="mt-4">
+            <div class="h-[400px] flex flex-col">
+              <div class="flex-1 overflow-y-auto space-y-4 p-4">
+                <div v-if="messages.length === 0" class="text-center text-slate-500 py-8">
+                  <UIcon name="i-heroicons-chat-bubble-left-right" class="w-12 h-12 mx-auto mb-2 opacity-50" />
+                  <p>{{ t('crewDetail.chat.noMessages') }}</p>
+                </div>
                 
-                <div :class="['max-w-[70%]', message.senderId === 'system' ? 'w-full text-center' : '']">
-                  <div v-if="message.senderId !== 'system'" class="flex items-center gap-2 mb-1 text-xs text-slate-500">
-                    <span>{{ getMemberInfo(message.senderId)?.name }}</span>
-                    <span>{{ formatTime(message.timestamp) }}</span>
-                  </div>
+                <div v-for="message in messages" :key="message.id" 
+                     :class="['flex gap-3', message.senderId === authStore.currentUser?.id ? 'flex-row-reverse' : '']">
+                  <UAvatar v-if="message.senderId !== 'system'" 
+                          :src="getMemberInfo(message.senderId)?.avatar" 
+                          :alt="getMemberInfo(message.senderId)?.name" 
+                          size="sm" />
                   
-                  <div :class="['p-3 rounded-lg', 
-                               message.senderId === 'system' ? 'bg-slate-100 dark:bg-slate-800 text-sm text-slate-600' :
-                               message.senderId === authStore.currentUser?.id ? 'bg-teal-500 text-white' : 'bg-slate-100 dark:bg-slate-800']">
-                    <p>{{ message.content }}</p>
-                    <div v-if="message.attachments?.length" class="mt-2">
-                      <div v-for="att in message.attachments" :key="att.id" 
-                           class="flex items-center gap-2 p-2 bg-white/20 rounded text-sm">
-                        <UIcon name="i-heroicons-paper-clip" class="w-4 h-4" />
-                        <span>{{ att.name }}</span>
+                  <div :class="['max-w-[70%]', message.senderId === 'system' ? 'w-full text-center' : '']">
+                    <div v-if="message.senderId !== 'system'" class="flex items-center gap-2 mb-1 text-xs text-slate-500">
+                      <span>{{ getMemberInfo(message.senderId)?.name }}</span>
+                      <span>{{ formatTime(message.timestamp) }}</span>
+                    </div>
+                    
+                    <div :class="['p-3 rounded-lg', 
+                                 message.senderId === 'system' ? 'bg-slate-100 dark:bg-slate-800 text-sm text-slate-600' :
+                                 message.senderId === authStore.currentUser?.id ? 'bg-teal-500 text-white' : 'bg-slate-100 dark:bg-slate-800']">
+                      <p>{{ message.content }}</p>
+                      <div v-if="message.attachments?.length" class="mt-2">
+                        <div v-for="att in message.attachments" :key="att.id" 
+                             class="flex items-center gap-2 p-2 bg-white/20 rounded text-sm">
+                          <UIcon name="i-heroicons-paper-clip" class="w-4 h-4" />
+                          <span>{{ att.name }}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="border-t pt-4 flex gap-2">
-              <UButton icon="i-heroicons-paper-clip" variant="ghost" color="gray" @click="triggerFileUpload" title="Attach file" />
-              <input ref="fileInput" type="file" class="hidden" @change="handleFileSelect" />
-              <UInput v-model="newMessage" placeholder="Type a message..." class="flex-1" @keyup.enter="sendMessage" />
-              <UButton icon="i-heroicons-paper-airplane" color="primary" :disabled="!newMessage.trim()" @click="sendMessage" />
-            </div>
-          </div>
-        </UCard>
-      </template>
-
-      <template #documents>
-        <UCard class="mt-4">
-          <div v-if="crewDocuments.length === 0" class="text-center py-12">
-            <UIcon name="i-heroicons-document-text" class="w-16 h-16 mx-auto text-slate-300 mb-4" />
-            <h3 class="text-lg font-medium mb-2">No documents yet</h3>
-            <p class="text-slate-600 mb-4">Create your first legal agreement</p>
-            <UButton color="primary" icon="i-heroicons-plus" @click="router.push('/app/legal')">Create Document</UButton>
-          </div>
-          
-          <div v-else class="space-y-3">
-            <div v-for="doc in crewDocuments" :key="doc.id" 
-                 class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
-              <div class="flex items-center gap-3">
-                <UIcon name="i-heroicons-document-text" class="w-8 h-8 text-slate-400" />
-                <div>
-                  <p class="font-medium">{{ doc.title }}</p>
-                  <p class="text-sm text-slate-500">{{ doc.type }}</p>
-                </div>
-              </div>
-              <div class="flex items-center gap-3">
-                <UBadge :color="doc.status === 'signed' ? 'success' : doc.status === 'pending' ? 'warning' : 'gray'" variant="soft">
-                  {{ doc.status }}
-                </UBadge>
-                <UButton variant="ghost" icon="i-heroicons-eye" @click="viewDocument(doc)" />
+              <div class="border-t pt-4 flex gap-2">
+                <UButton icon="i-heroicons-paper-clip" variant="ghost" color="gray" @click="triggerFileUpload" :title="t('crewDetail.chat.attachFile')" />
+                <input ref="fileInput" type="file" class="hidden" @change="handleFileSelect" />
+                <UInput v-model="newMessage" :placeholder="t('crewDetail.chat.typeMessage')" class="flex-1" @keyup.enter="sendMessage" />
+                <UButton icon="i-heroicons-paper-airplane" color="primary" :disabled="!newMessage.trim()" @click="sendMessage" />
               </div>
             </div>
-          </div>
-        </UCard>
-      </template>
+          </UCard>
+        </template>
 
-      <template #values>
-        <UCard class="mt-4">
-          <div v-if="!crew.values || crew.values.length === 0" class="text-center py-12">
-            <UIcon name="i-heroicons-heart" class="w-16 h-16 mx-auto text-slate-300 mb-4" />
-            <h3 class="text-lg font-medium mb-2">No values defined</h3>
-            <p class="text-slate-600 mb-4">Define your crew's core values to ensure alignment</p>
-            <UButton color="primary" icon="i-heroicons-plus" @click="showAddValuesModal = true">Add Values</UButton>
-          </div>
-          
-          <div v-else class="space-y-6">
-            <div class="flex items-center justify-between">
-              <h3 class="font-semibold text-lg">Crew Values Alignment</h3>
-              <UBadge color="primary" variant="subtle" size="lg">90% Match</UBadge>
+        <template #documents>
+          <UCard class="mt-4">
+            <div v-if="crewDocuments.length === 0" class="text-center py-12">
+              <UIcon name="i-heroicons-document-text" class="w-16 h-16 mx-auto text-slate-300 mb-4" />
+              <h3 class="text-lg font-medium mb-2">{{ t('crewDetail.documents.noDocuments') }}</h3>
+              <p class="text-slate-600 mb-4">{{ t('crewDetail.documents.createFirst') }}</p>
+              <UButton color="primary" icon="i-heroicons-plus" @click="router.push('/app/legal')">{{ t('crewDetail.documents.createDocument') }}</UButton>
             </div>
             
-            <div class="grid gap-4 md:grid-cols-2">
-              <div v-for="value in crew.values" :key="value.id" class="p-4 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-100 dark:border-slate-700">
+            <div v-else class="space-y-3">
+              <div v-for="doc in crewDocuments" :key="doc.id" 
+                   class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
+                <div class="flex items-center gap-3">
+                  <UIcon name="i-heroicons-document-text" class="w-8 h-8 text-slate-400" />
+                  <div>
+                    <p class="font-medium">{{ doc.title }}</p>
+                    <p class="text-sm text-slate-500">{{ doc.type }}</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <UBadge :color="doc.status === 'signed' ? 'success' : doc.status === 'pending' ? 'warning' : 'gray'" variant="soft">
+                    {{ doc.status.charAt(0).toUpperCase() + doc.status.slice(1) }}
+                  </UBadge>
+                  <UButton variant="ghost" icon="i-heroicons-eye" @click="viewDocument(doc)" />
+                </div>
+              </div>
+            </div>
+          </UCard>
+        </template>
+
+        <template #values>
+          <UCard class="mt-4">
+            <div v-if="!crew.values || crew.values.length === 0" class="text-center py-12">
+              <UIcon name="i-heroicons-heart" class="w-16 h-16 mx-auto text-slate-300 mb-4" />
+              <h3 class="text-lg font-medium mb-2">{{ t('crewDetail.values.noValues') }}</h3>
+              <p class="text-slate-600 mb-4">{{ t('crewDetail.values.defineValues') }}</p>
+              <UButton color="primary" icon="i-heroicons-plus" @click="showAddValuesModal = true">{{ t('crewDetail.values.addValues') }}</UButton>
+            </div>
+            
+            <div v-else class="space-y-6">
+              <div class="flex items-center justify-between">
+                <h3 class="font-semibold text-lg">{{ t('crewDetail.values.crewValues') }}</h3>
+                <UBadge color="primary" variant="subtle" size="lg">{{ t('crewDetail.values.matchPercent', { percent: 90 }) }}</UBadge>
+              </div>
+              
+              <div class="grid gap-4 md:grid-cols-2">
+                <div v-for="value in crew.values" :key="value.id" class="p-4 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-100 dark:border-slate-700">
+                  <div class="flex items-start justify-between mb-2">
+                    <div class="flex items-center gap-2">
+                      <div class="p-2 rounded-full" 
+                           :class="value.category === 'communication' ? 'bg-blue-100 text-blue-600' : 
+                                   value.category === 'financial' ? 'bg-green-100 text-green-600' :
+                                   value.category === 'parenting' ? 'bg-purple-100 text-purple-600' : 'bg-orange-100 text-orange-600'">
+                        <UIcon :name="value.category === 'communication' ? 'i-heroicons-chat-bubble-bottom-center-text' : 
+                                     value.category === 'financial' ? 'i-heroicons-currency-dollar' :
+                                     value.category === 'parenting' ? 'i-heroicons-user-group' : 'i-heroicons-sparkles'" 
+                               class="w-5 h-5" />
+                      </div>
+                      <span class="font-medium">{{ value.title }}</span>
+                    </div>
+                    <span class="text-sm font-semibold" :class="value.matchPercentage >= 90 ? 'text-emerald-600' : 'text-slate-600'">
+                      {{ value.matchPercentage }}%
+                    </span>
+                  </div>
+                  <p class="text-sm text-slate-600 mb-3">{{ value.description }}</p>
+                  <UProgress :value="value.matchPercentage" :color="value.matchPercentage >= 90 ? 'emerald' : 'primary'" size="sm" />
+                </div>
+              </div>
+            </div>
+          </UCard>
+        </template>
+
+        <template #accountability>
+          <UCard class="mt-4">
+            <template #header>
+              <div class="flex items-center justify-between">
+                <h3 class="font-semibold">{{ t('crewDetail.accountability.title') }}</h3>
+                <UButton size="sm" icon="i-heroicons-plus" @click="showIncidentForm = true">
+                  {{ t('crewDetail.accountability.logIncident') }}
+                </UButton>
+              </div>
+            </template>
+            
+            <!-- Incident Form -->
+            <div v-if="showIncidentForm" class="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
+              <h4 class="font-medium mb-3">{{ t('crewDetail.accountability.logNew') }}</h4>
+              <div class="space-y-3">
+                <UFormGroup :label="t('crewDetail.accountability.severity')">
+                  <USelect v-model="newIncident.severity" :options="[
+                    { label: t('crewDetail.accountability.severityLevels.minor'), value: 1 },
+                    { label: t('crewDetail.accountability.severityLevels.pattern'), value: 2 },
+                    { label: t('crewDetail.accountability.severityLevels.serious'), value: 3 },
+                    { label: t('crewDetail.accountability.severityLevels.critical'), value: 4 },
+                    { label: t('crewDetail.accountability.severityLevels.legal'), value: 5 }
+                  ]" />
+                </UFormGroup>
+                <UFormGroup :label="t('crewDetail.accountability.description')">
+                  <UTextarea v-model="newIncident.description" :placeholder="t('crewDetail.accountability.describeIncident')" />
+                </UFormGroup>
+                <div class="flex gap-2">
+                  <UButton color="primary" @click="submitIncident">{{ t('crewDetail.accountability.submit') }}</UButton>
+                  <UButton variant="ghost" @click="showIncidentForm = false">{{ t('crewDetail.accountability.cancel') }}</UButton>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Incidents List -->
+            <div v-if="incidents.length === 0" class="text-center py-12">
+              <UIcon name="i-heroicons-scale" class="w-16 h-16 mx-auto text-slate-300 mb-4" />
+              <h3 class="text-lg font-medium mb-2">{{ t('crewDetail.accountability.noIncidents') }}</h3>
+              <p class="text-slate-600 mb-4">{{ t('crewDetail.accountability.healthy') }}</p>
+            </div>
+            
+            <div v-else class="space-y-4">
+              <div v-for="incident in incidents" :key="incident.id" 
+                   class="p-4 border rounded-lg"
+                   :class="incident.status === 'resolved' ? 'border-emerald-200 bg-emerald-50/50' : 
+                           incident.status === 'addressed' ? 'border-teal-200 bg-teal-50/50' : 'border-amber-200 bg-amber-50/50'">
                 <div class="flex items-start justify-between mb-2">
                   <div class="flex items-center gap-2">
-                    <div class="p-2 rounded-full" 
-                         :class="value.category === 'communication' ? 'bg-blue-100 text-blue-600' : 
-                                 value.category === 'financial' ? 'bg-green-100 text-green-600' :
-                                 value.category === 'parenting' ? 'bg-purple-100 text-purple-600' : 'bg-orange-100 text-orange-600'">
-                      <UIcon :name="value.category === 'communication' ? 'i-heroicons-chat-bubble-bottom-center-text' : 
-                                   value.category === 'financial' ? 'i-heroicons-currency-dollar' :
-                                   value.category === 'parenting' ? 'i-heroicons-user-group' : 'i-heroicons-sparkles'" 
-                             class="w-5 h-5" />
-                    </div>
-                    <span class="font-medium">{{ value.title }}</span>
+                    <UBadge :color="incident.severity <= 2 ? 'emerald' : incident.severity === 3 ? 'amber' : 'rose'" variant="soft">
+                      Level {{ incident.severity }}
+                    </UBadge>
+                    <span class="text-sm text-slate-500">{{ formatDate(incident.date) }}</span>
                   </div>
-                  <span class="text-sm font-semibold" :class="value.matchPercentage >= 90 ? 'text-emerald-600' : 'text-slate-600'">
-                    {{ value.matchPercentage }}%
-                  </span>
-                </div>
-                <p class="text-sm text-slate-600 mb-3">{{ value.description }}</p>
-                <UProgress :value="value.matchPercentage" :color="value.matchPercentage >= 90 ? 'emerald' : 'primary'" size="sm" />
-              </div>
-            </div>
-          </div>
-        </UCard>
-      </template>
-
-      <template #accountability>
-        <UCard class="mt-4">
-          <template #header>
-            <div class="flex items-center justify-between">
-              <h3 class="font-semibold">Accountability Logs</h3>
-              <UButton size="sm" icon="i-heroicons-plus" @click="showIncidentForm = true">
-                Log Incident
-              </UButton>
-            </div>
-          </template>
-          
-          <!-- Incident Form -->
-          <div v-if="showIncidentForm" class="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
-            <h4 class="font-medium mb-3">Log New Incident</h4>
-            <div class="space-y-3">
-              <UFormGroup label="Severity Level">
-                <USelect v-model="newIncident.severity" :options="[
-                  { label: '1 - Minor (Primary Parent)', value: 1 },
-                  { label: '2 - Pattern (Full Crew)', value: 2 },
-                  { label: '3 - Serious (+ Professional)', value: 3 },
-                  { label: '4 - Critical (Immediate)', value: 4 },
-                  { label: '5 - Legal (Court)', value: 5 }
-                ]" />
-              </UFormGroup>
-              <UFormGroup label="Description">
-                <UTextarea v-model="newIncident.description" placeholder="Describe the incident..." />
-              </UFormGroup>
-              <div class="flex gap-2">
-                <UButton color="primary" @click="submitIncident">Submit</UButton>
-                <UButton variant="ghost" @click="showIncidentForm = false">Cancel</UButton>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Incidents List -->
-          <div v-if="incidents.length === 0" class="text-center py-12">
-            <UIcon name="i-heroicons-scale" class="w-16 h-16 mx-auto text-slate-300 mb-4" />
-            <h3 class="text-lg font-medium mb-2">No incidents logged</h3>
-            <p class="text-slate-600 mb-4">This crew is maintaining healthy accountability</p>
-          </div>
-          
-          <div v-else class="space-y-4">
-            <div v-for="incident in incidents" :key="incident.id" 
-                 class="p-4 border rounded-lg"
-                 :class="incident.status === 'resolved' ? 'border-emerald-200 bg-emerald-50/50' : 
-                         incident.status === 'addressed' ? 'border-teal-200 bg-teal-50/50' : 'border-amber-200 bg-amber-50/50'">
-              <div class="flex items-start justify-between mb-2">
-                <div class="flex items-center gap-2">
-                  <UBadge :color="incident.severity <= 2 ? 'emerald' : incident.severity === 3 ? 'amber' : 'rose'" variant="soft">
-                    Level {{ incident.severity }}
+                  <UBadge :color="incident.status === 'resolved' ? 'emerald' : incident.status === 'addressed' ? 'teal' : 'amber'" variant="soft">
+                    {{ incident.status.charAt(0).toUpperCase() + incident.status.slice(1) }}
                   </UBadge>
-                  <span class="text-sm text-slate-500">{{ formatDate(incident.date) }}</span>
                 </div>
-                <UBadge :color="incident.status === 'resolved' ? 'emerald' : incident.status === 'addressed' ? 'teal' : 'amber'" variant="soft">
-                  {{ incident.status }}
-                </UBadge>
-              </div>
-              
-              <p class="text-slate-700 mb-3">{{ incident.description }}</p>
-              
-              <div class="flex items-center gap-2 text-sm text-slate-500">
-                <UIcon name="i-heroicons-user" class="w-4 h-4" />
-                <span>Reported by {{ getMemberInfo(incident.reportedBy)?.name }}</span>
-              </div>
-              
-              <div v-if="incident.actions.length > 0" class="mt-3 pt-3 border-t">
-                <p class="text-sm font-medium text-slate-600 mb-2">Actions Taken:</p>
-                <ul class="text-sm text-slate-600 space-y-1">
-                  <li v-for="(action, idx) in incident.actions" :key="idx" class="flex items-start gap-2">
-                    <UIcon name="i-heroicons-check" class="w-4 h-4 text-emerald-500 mt-0.5" />
-                    <span>{{ action }}</span>
-                  </li>
-                </ul>
+                
+                <p class="text-slate-700 mb-3">{{ incident.description }}</p>
+                
+                <div class="flex items-center gap-2 text-sm text-slate-500">
+                  <UIcon name="i-heroicons-user" class="w-4 h-4" />
+                  <span>{{ t('crewDetail.accountability.reportedBy') }} {{ getMemberInfo(incident.reportedBy)?.name }}</span>
+                </div>
+                
+                <div v-if="incident.actions.length > 0" class="mt-3 pt-3 border-t">
+                  <p class="text-sm font-medium text-slate-600 mb-2">{{ t('crewDetail.accountability.actionsTaken') }}</p>
+                  <ul class="text-sm text-slate-600 space-y-1">
+                    <li v-for="(action, idx) in incident.actions" :key="idx" class="flex items-start gap-2">
+                      <UIcon name="i-heroicons-check" class="w-4 h-4 text-emerald-500 mt-0.5" />
+                      <span>{{ action }}</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-        </UCard>
-      </template>
+          </UCard>
+        </template>
     </UTabs>
 
     <!-- Document View Modal -->
@@ -418,22 +418,22 @@ const addValue = () => {
           </div>
         </template>
 
-        <div class="prose prose-slate dark:prose-invert max-w-none" v-html="selectedDoc.content || 'No content available'"></div>
+        <div class="prose prose-slate dark:prose-invert max-w-none" v-html="selectedDoc.content || $t('crewDetail.modals.noContent')"></div>
 
         <template #footer>
           <div class="flex justify-between items-center">
             <UBadge :color="selectedDoc.status === 'signed' ? 'success' : selectedDoc.status === 'pending' ? 'warning' : 'gray'" variant="soft">
-              {{ selectedDoc.status }}
+              {{ selectedDoc.status.charAt(0).toUpperCase() + selectedDoc.status.slice(1) }}
             </UBadge>
             <div class="flex gap-3">
-              <UButton variant="ghost" @click="showDocViewModal = false">Close</UButton>
+              <UButton variant="ghost" @click="showDocViewModal = false">{{ t('crewDetail.modals.close') }}</UButton>
               <UButton 
                 v-if="selectedDoc.status !== 'signed'" 
                 color="primary" 
                 icon="i-heroicons-pencil-square"
-                @click="toast.add({ title: 'Edit Mode', description: 'Document editing coming soon.', icon: 'i-heroicons-pencil-square' })"
+                @click="toast.add({ title: t('crewDetail.toasts.editMode'), description: t('crewDetail.toasts.editModeDesc'), icon: 'i-heroicons-pencil-square' })"
               >
-                Edit
+                {{ t('crewDetail.modals.edit') }}
               </UButton>
             </div>
           </div>
@@ -445,16 +445,16 @@ const addValue = () => {
     <UModal v-model="showAddValuesModal" :ui="{ width: 'w-full sm:max-w-lg' }">
       <UCard>
         <template #header>
-          <h3 class="font-semibold text-lg">Add Crew Value</h3>
+          <h3 class="font-semibold text-lg">{{ t('crewDetail.modals.addValue') }}</h3>
         </template>
 
         <div class="space-y-4">
           <div>
-            <label class="block text-sm font-medium mb-2">Value Title</label>
-            <UInput v-model="newValueTitle" placeholder="e.g., Open Communication" autofocus />
+            <label class="block text-sm font-medium mb-2">{{ t('crewDetail.modals.valueTitle') }}</label>
+            <UInput v-model="newValueTitle" :placeholder="t('crewDetail.modals.valuePlaceholder')" autofocus />
           </div>
-          <div>
-            <label class="block text-sm font-medium mb-2">Category</label>
+            <div>
+            <label class="block text-sm font-medium mb-2">{{ t('crewDetail.modals.category') }}</label>
             <select v-model="newValueCategory" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800">
               <option value="parenting">Parenting</option>
               <option value="communication">Communication</option>
@@ -466,14 +466,14 @@ const addValue = () => {
 
         <template #footer>
           <div class="flex justify-end gap-3">
-            <UButton variant="ghost" @click="showAddValuesModal = false">Cancel</UButton>
+            <UButton variant="ghost" @click="showAddValuesModal = false">{{ t('crewDetail.accountability.cancel') }}</UButton>
             <UButton 
               color="primary" 
               icon="i-heroicons-heart"
               :disabled="!newValueTitle.trim()"
               @click="addValue"
             >
-              Add Value
+              {{ t('crewDetail.values.addValues') }}
             </UButton>
           </div>
         </template>

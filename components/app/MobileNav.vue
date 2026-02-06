@@ -1,12 +1,13 @@
 <script setup lang="ts">
 const route = useRoute()
+const { t } = useI18n()
 
 const navItems = [
-  { icon: 'i-heroicons-home', label: 'Home', to: '/app' },
-  { icon: 'i-heroicons-magnifying-glass', label: 'Compass', to: '/app/compass' },
-  { icon: 'i-heroicons-users', label: 'Crews', to: '/app/crews' },
-  { icon: 'i-heroicons-folder', label: 'Legal', to: '/app/legal' },
-  { icon: 'i-heroicons-user', label: 'Profile', to: '/app/profile' }
+  { icon: 'i-heroicons-home', label: t('commandPalette.dashboard'), to: '/app' },
+  { icon: 'i-heroicons-magnifying-glass', label: t('commandPalette.theCompass'), to: '/app/compass' },
+  { icon: 'i-heroicons-users', label: t('commandPalette.crews'), to: '/app/crews' },
+  { icon: 'i-heroicons-folder', label: t('commandPalette.legal'), to: '/app/legal' },
+  { icon: 'i-heroicons-user', label: t('commandPalette.profile'), to: '/app/profile' }
 ]
 </script>
 

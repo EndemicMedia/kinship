@@ -45,7 +45,7 @@ const userCrews = computed(() => {
 // Stats data
 const stats = computed(() => [
   {
-    label: 'Active Crews',
+    label: t('dashboard.stats.activeCrews'),
     value: userCrews.value.length,
     icon: 'i-heroicons-user-group',
     trend: 25,
@@ -53,7 +53,7 @@ const stats = computed(() => [
     iconBgColor: 'bg-blue-50 dark:bg-blue-900/20'
   },
   {
-    label: 'Total Members',
+    label: t('dashboard.stats.totalMembers'),
     value: userCrews.value.reduce((acc, crew) => acc + crew.members.length, 0),
     icon: 'i-heroicons-users',
     trend: 12,
@@ -61,7 +61,7 @@ const stats = computed(() => [
     iconBgColor: 'bg-green-50 dark:bg-green-900/20'
   },
   {
-    label: 'Documents',
+    label: t('dashboard.stats.documents'),
     value: 8,
     icon: 'i-heroicons-document-text',
     trend: -5,
@@ -69,7 +69,7 @@ const stats = computed(() => [
     iconBgColor: 'bg-purple-50 dark:bg-purple-900/20'
   },
   {
-    label: 'Formation Progress',
+    label: t('dashboard.stats.formationProgress'),
     value: `${Math.round(userCrews.value.reduce((acc, crew) => acc + crew.formationProgress, 0) / (userCrews.value.length || 1))}%`,
     icon: 'i-heroicons-chart-bar',
     trend: 8,
@@ -82,31 +82,31 @@ const stats = computed(() => [
 const quickActions = [
   { 
     icon: 'i-heroicons-magnifying-glass', 
-    label: 'Browse Compass', 
+    label: t('landing.hero.browseCompass'), 
     to: '/app/compass', 
     color: 'primary',
-    description: 'Find new crews'
+    description: t('dashboard.quickActionsList.findCrews')
   },
   { 
     icon: 'i-heroicons-users', 
-    label: 'View Crews', 
+    label: t('dashboard.quickActionsList.viewCrews'), 
     to: '/app/crews', 
     color: 'neutral',
-    description: 'Manage your crews'
+    description: t('dashboard.quickActionsList.manageCrews')
   },
   { 
     icon: 'i-heroicons-chat-bubble-left', 
-    label: 'Messages', 
+    label: t('dashboard.quickActionsList.messages'), 
     to: '/app/crews', 
     color: 'neutral',
-    description: 'Check messages'
+    description: t('dashboard.quickActionsList.checkMessages')
   },
   { 
     icon: 'i-heroicons-document-text', 
-    label: 'Documents', 
+    label: t('dashboard.quickActionsList.documents'), 
     to: '/app/legal', 
     color: 'neutral',
-    description: 'View legal docs'
+    description: t('dashboard.quickActionsList.viewLegalDocs')
   }
 ]
 
@@ -117,8 +117,8 @@ onMounted(() => {
     
     // Show welcome toast
     uiStore.showToast({
-      title: `Welcome back, ${authStore.currentUser?.name.split(' ')[0]}!`,
-      description: 'You have no new notifications',
+      title: t('dashboard.welcomeToast.title', { name: authStore.currentUser?.name.split(' ')[0] }),
+      description: t('dashboard.welcomeToast.description'),
       color: 'info'
     })
   }, 1000)
@@ -138,10 +138,10 @@ const showEmptyState = computed(() => !isLoading.value && userCrews.value.length
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 class="text-3xl font-bold text-slate-900 dark:text-white">
-            Welcome back, {{ authStore.currentUser?.name.split(' ')[0] }}! 👋
+            {{ t('dashboard.welcomeBack', { name: authStore.currentUser?.name.split(' ')[0] }) }} 👋
           </h1>
           <p class="text-slate-600 dark:text-slate-400 mt-2">
-            Here's what's happening with your crews today.
+            {{ t('dashboard.welcomeSubtitle') }}
           </p>
         </div>
         <div class="flex items-center gap-3">
@@ -150,7 +150,7 @@ const showEmptyState = computed(() => !isLoading.value && userCrews.value.length
             color="primary"
             icon="i-heroicons-plus"
           >
-            Create Crew
+            {{ t('dashboard.createCrew') }}
           </UButton>
         </div>
       </div>
@@ -171,7 +171,7 @@ const showEmptyState = computed(() => !isLoading.value && userCrews.value.length
 
       <!-- Quick Actions -->
       <section>
-        <h2 class="text-lg font-semibold text-slate-900 dark:text-white mb-4">Quick Actions</h2>
+        <h2 class="text-lg font-semibold text-slate-900 dark:text-white mb-4">{{ t('dashboard.quickActions') }}</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <NuxtLink
             v-for="action in quickActions"
@@ -205,14 +205,14 @@ const showEmptyState = computed(() => !isLoading.value && userCrews.value.length
         <!-- Active Crews (2/3 width) -->
         <div class="lg:col-span-2 space-y-4">
           <div class="flex items-center justify-between">
-            <h2 class="text-lg font-semibold text-slate-900 dark:text-white">Your Crews</h2>
+            <h2 class="text-lg font-semibold text-slate-900 dark:text-white">{{ t('dashboard.yourCrews') }}</h2>
             <UButton 
               to="/app/crews" 
               variant="link" 
               color="primary"
               trailing-icon="i-heroicons-arrow-right"
             >
-              View All
+              {{ t('dashboard.viewAll') }}
             </UButton>
           </div>
 
@@ -220,9 +220,9 @@ const showEmptyState = computed(() => !isLoading.value && userCrews.value.length
           <AppEmptyState
             v-if="showEmptyState"
             icon="i-heroicons-users"
-            title="No crews yet"
-            description="You haven't joined any crews yet. Browse The Compass to find families that match your values."
-            :action="{ label: 'Browse The Compass', to: '/app/compass', icon: 'i-heroicons-magnifying-glass' }"
+            :title="t('crewsPage.noCrewsYet')"
+            :description="t('dashboard.noCrewsJoined')"
+            :action="{ label: t('crewsPage.browseTheCompass'), to: '/app/compass', icon: 'i-heroicons-magnifying-glass' }"
           />
 
           <!-- Crew Cards -->
@@ -244,7 +244,7 @@ const showEmptyState = computed(() => !isLoading.value && userCrews.value.length
                       variant="soft"
                       size="sm"
                     >
-                      {{ crew.status }}
+                      {{ t(`crewsPage.status.${crew.status}`) }}
                     </UBadge>
                   </div>
                   
@@ -263,7 +263,7 @@ const showEmptyState = computed(() => !isLoading.value && userCrews.value.length
                       />
                     </UAvatarGroup>
                     <span class="text-sm text-slate-500">
-                      {{ crew.members.length }} members
+                      {{ crew.members.length }} {{ t('commandPalette.members') }}
                     </span>
                   </div>
                 </div>
@@ -279,7 +279,7 @@ const showEmptyState = computed(() => !isLoading.value && userCrews.value.length
               <!-- Progress Bar -->
               <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <div class="flex items-center justify-between text-sm mb-2">
-                  <span class="text-slate-600 dark:text-slate-400">Formation Progress</span>
+                  <span class="text-slate-600 dark:text-slate-400">{{ t('crewsPage.formationProgress') }}</span>
                   <span class="font-medium text-slate-900 dark:text-white">{{ crew.formationProgress }}%</span>
                 </div>
                 <UProgress 

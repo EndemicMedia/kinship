@@ -49,15 +49,15 @@ const { t } = useI18n()
               <ul class="space-y-3 pt-2">
                 <li class="flex items-start gap-3 text-slate-600 dark:text-slate-300">
                   <UIcon name="i-heroicons-x-circle" class="mt-0.5 h-5 w-5 shrink-0 text-rose-500" />
-                  <span>No clear framework for family planning</span>
+                  <span>{{ t('problemSolution.problem.points.noFramework') }}</span>
                 </li>
                 <li class="flex items-start gap-3 text-slate-600 dark:text-slate-300">
                   <UIcon name="i-heroicons-x-circle" class="mt-0.5 h-5 w-5 shrink-0 text-rose-500" />
-                  <span>Legal ambiguity and confusion</span>
+                  <span>{{ t('problemSolution.problem.points.legalAmbiguity') }}</span>
                 </li>
                 <li class="flex items-start gap-3 text-slate-600 dark:text-slate-300">
                   <UIcon name="i-heroicons-x-circle" class="mt-0.5 h-5 w-5 shrink-0 text-rose-500" />
-                  <span>Lack of accountability mechanisms</span>
+                  <span>{{ t('problemSolution.problem.points.noAccountability') }}</span>
                 </li>
               </ul>
             </div>
@@ -77,22 +77,22 @@ const { t } = useI18n()
             <p class="text-base leading-relaxed text-slate-600 sm:text-lg dark:text-slate-300">
               {{ t('problemSolution.solution.description') }}
             </p>
-            <ul class="space-y-3 pt-2">
+             <ul class="space-y-3 pt-2">
               <li class="flex items-start gap-3 text-slate-600 dark:text-slate-300">
                 <UIcon name="i-heroicons-check-circle" class="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" />
-                <span>Clear, structured framework for all parties</span>
+                <span>{{ t('problemSolution.solution.points.clearFramework') }}</span>
               </li>
               <li class="flex items-start gap-3 text-slate-600 dark:text-slate-300">
                 <UIcon name="i-heroicons-check-circle" class="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" />
-                <span>Built-in legal guidance and support</span>
+                <span>{{ t('problemSolution.solution.points.legalGuidance') }}</span>
               </li>
               <li class="flex items-start gap-3 text-slate-600 dark:text-slate-300">
                 <UIcon name="i-heroicons-check-circle" class="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" />
-                <span>Accountability tools and tracking</span>
+                <span>{{ t('problemSolution.solution.points.accountabilityTools') }}</span>
               </li>
               <li class="flex items-start gap-3 text-slate-600 dark:text-slate-300">
                 <UIcon name="i-heroicons-check-circle" class="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" />
-                <span>Exit strategies built from the start</span>
+                <span>{{ t('problemSolution.solution.points.exitStrategies') }}</span>
               </li>
             </ul>
           </div>

@@ -48,8 +48,8 @@ const saveProfile = () => {
     })
     
     toast.add({
-      title: 'Profile Updated',
-      description: 'Your profile has been updated successfully.',
+      title: t('profile.profileUpdated'),
+      description: t('profile.profileUpdatedDesc'),
       color: 'success',
       icon: 'i-heroicons-user'
     })
@@ -74,7 +74,7 @@ const showComingSoon = () => {
 
 <template>
   <div class="space-y-6">
-    <h1 class="text-2xl font-bold text-slate-900 dark:text-white">Profile</h1>
+    <h1 class="text-2xl font-bold text-slate-900 dark:text-white">{{ t('profile.title') }}</h1>
     
     <!-- Current User Profile -->
     <UCard v-if="authStore.currentUser">
@@ -91,19 +91,19 @@ const showComingSoon = () => {
           
           <div class="grid grid-cols-2 gap-4 text-sm">
             <div>
-              <span class="text-slate-500">Location:</span>
+              <span class="text-slate-500">{{ t('profile.labels.location') }}:</span>
               <span class="ml-2">{{ authStore.currentUser.location }}</span>
             </div>
             <div>
-              <span class="text-slate-500">Pronouns:</span>
+              <span class="text-slate-500">{{ t('profile.labels.pronouns') }}:</span>
               <span class="ml-2">{{ authStore.currentUser.pronouns }}</span>
             </div>
             <div>
-              <span class="text-slate-500">Children:</span>
+              <span class="text-slate-500">{{ t('profile.labels.children') }}:</span>
               <span class="ml-2">{{ authStore.currentUser.children }}</span>
             </div>
             <div>
-              <span class="text-slate-500">Languages:</span>
+              <span class="text-slate-500">{{ t('profile.labels.languages') }}:</span>
               <span class="ml-2">{{ authStore.currentUser.languages.join(', ') }}</span>
             </div>
           </div>
@@ -114,7 +114,7 @@ const showComingSoon = () => {
     <!-- Demo Personas -->
     <UCard>
       <template #header>
-        <h3 class="font-semibold">Switch Persona (Demo Mode)</h3>
+        <h3 class="font-semibold">{{ t('profile.switchPersona') }}</h3>
       </template>
       <div class="space-y-3">
         <div
@@ -144,13 +144,13 @@ const showComingSoon = () => {
     <UCard>
       <div class="space-y-3">
         <UButton block variant="soft" icon="i-heroicons-pencil-square" @click="showEditModal = true">
-          Edit Profile
+          {{ t('profile.editProfile') }}
         </UButton>
         <UButton block variant="soft" icon="i-heroicons-cog-6-tooth" @click="openSettings">
-          Settings
+          {{ t('profile.settings') }}
         </UButton>
         <UButton block color="rose" variant="soft" icon="i-heroicons-arrow-right-on-rectangle" @click="logout">
-          Log Out
+          {{ t('profile.logOut') }}
         </UButton>
       </div>
     </UCard>
@@ -160,29 +160,29 @@ const showComingSoon = () => {
   <UModal v-model="showEditModal" :ui="{ width: 'w-full sm:max-w-lg' }">
     <UCard>
       <template #header>
-        <h3 class="font-semibold text-lg">Edit Profile</h3>
+        <h3 class="font-semibold text-lg">{{ t('profile.editModal.title') }}</h3>
       </template>
 
       <div class="space-y-4">
         <div>
-          <label class="block text-sm font-medium mb-2">Name</label>
-          <UInput v-model="editName" placeholder="Your name" autofocus />
+          <label class="block text-sm font-medium mb-2">{{ t('profile.labels.name') }}</label>
+          <UInput v-model="editName" :placeholder="t('profile.editModal.namePlaceholder')" autofocus />
         </div>
         <div>
-          <label class="block text-sm font-medium mb-2">Bio</label>
-          <UTextarea v-model="editBio" placeholder="Tell us about yourself" :rows="4" />
+          <label class="block text-sm font-medium mb-2">{{ t('profile.labels.bio') }}</label>
+          <UTextarea v-model="editBio" :placeholder="t('profile.editModal.bioPlaceholder')" :rows="4" />
         </div>
       </div>
 
       <template #footer>
         <div class="flex justify-end gap-3">
-          <UButton variant="ghost" @click="showEditModal = false">Cancel</UButton>
+          <UButton variant="ghost" @click="showEditModal = false">{{ t('profile.editModal.cancel') }}</UButton>
           <UButton 
             color="primary" 
             icon="i-heroicons-user"
             @click="saveProfile"
           >
-            Save Changes
+            {{ t('profile.editModal.saveChanges') }}
           </UButton>
         </div>
       </template>

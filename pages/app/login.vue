@@ -44,7 +44,7 @@ async function handleLogin() {
   if (success) {
     router.push('/app')
   } else {
-    error.value = 'Invalid email or password'
+    error.value = t('loginPage.error')
   }
   
   loading.value = false
@@ -64,27 +64,27 @@ async function demoLogin() {
       <template #header>
         <div class="text-center">
           <img src="/logo.png" alt="Kinship" class="h-12 w-12 mx-auto mb-4" />
-          <h1 class="text-2xl font-bold text-slate-900 dark:text-white">Welcome to Kinship</h1>
-          <p class="text-slate-600 dark:text-slate-400 mt-2">Sign in to access your crews</p>
+          <h1 class="text-2xl font-bold text-slate-900 dark:text-white">{{ t('loginPage.welcomeTitle') }}</h1>
+          <p class="text-slate-600 dark:text-slate-400 mt-2">{{ t('loginPage.welcomeSubtitle') }}</p>
         </div>
       </template>
 
       <UForm :state="state" @submit="handleLogin" class="space-y-4">
-        <UFormGroup label="Email" name="email">
+        <UFormGroup :label="t('loginPage.email')" name="email">
           <UInput
             v-model="state.email"
             type="email"
-            placeholder="you@example.com"
+            :placeholder="t('loginPage.emailPlaceholder')"
             icon="i-heroicons-envelope"
             required
           />
         </UFormGroup>
 
-        <UFormGroup label="Password" name="password">
+        <UFormGroup :label="t('loginPage.password')" name="password">
           <UInput
             v-model="state.password"
             type="password"
-            placeholder="••••••••"
+            :placeholder="t('loginPage.passwordPlaceholder')"
             icon="i-heroicons-lock-closed"
             required
           />
@@ -105,11 +105,11 @@ async function demoLogin() {
           block
           :loading="loading"
         >
-          Sign In
+          {{ t('loginPage.signIn') }}
         </UButton>
       </UForm>
 
-      <UDivider label="or" class="my-6" />
+      <UDivider :label="t('loginPage.or')" class="my-6" />
 
       <UButton
         color="gray"
@@ -119,11 +119,11 @@ async function demoLogin() {
         @click="demoLogin"
         :loading="loading"
       >
-        Continue as Demo User
+        {{ t('loginPage.demoUser') }}
       </UButton>
 
       <p class="text-center text-sm text-slate-500 dark:text-slate-400 mt-6">
-        Demo credentials: any email with password "password"
+        {{ t('loginPage.demoCredentials') }}
       </p>
     </UCard>
   </div>

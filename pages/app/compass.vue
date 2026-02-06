@@ -150,8 +150,8 @@ const sendMessage = () => {
   
   // In a real app, this would call an API
   toast.add({
-    title: 'Message Sent',
-    description: `Your message to ${selectedUser.value.name} has been sent.`,
+    title: t('compass.toasts.messageSent'),
+    description: t('compass.toasts.messageSentDesc', { name: selectedUser.value.name }),
     color: 'success',
     icon: 'i-heroicons-check-circle'
   })
@@ -171,8 +171,8 @@ const sendConnectionRequest = () => {
   
   // In a real app, this would call an API
   toast.add({
-    title: 'Connection Request Sent',
-    description: `Your connection request to ${selectedUser.value.name} has been sent${connectionMessage.value ? ' with your message' : ''}.`,
+    title: t('compass.toasts.requestSent'),
+    description: t('compass.toasts.requestSentDesc', { name: selectedUser.value.name, hasMessage: connectionMessage.value }),
     color: 'success',
     icon: 'i-heroicons-user-plus'
   })
@@ -192,19 +192,19 @@ const getMatchScoreBreakdown = (user: any) => {
   <div class="space-y-6">
     <div class="flex items-center justify-between">
       <div>
-        <h1 class="text-2xl font-bold text-slate-900 dark:text-white">The Compass</h1>
-        <p class="text-slate-600 dark:text-slate-400 mt-1">Find your perfect parenting crew</p>
+        <h1 class="text-2xl font-bold text-slate-900 dark:text-white">{{ t('compass.title') }}</h1>
+        <p class="text-slate-600 dark:text-slate-400 mt-1">{{ t('compass.subtitle') }}</p>
       </div>
       <div class="flex items-center gap-3">
         <UBadge color="primary" variant="soft" size="lg">
-          {{ potentialMatches.length }} matches
+          {{ t('compass.matches', { count: potentialMatches.length }) }}
         </UBadge>
         <UButton 
           variant="ghost" 
           icon="i-heroicons-adjustments-horizontal" 
           @click="showFilters = !showFilters"
         >
-          Filters {{ showFilters ? '▼' : '▶' }}
+          {{ t('compass.filters') }} {{ showFilters ? '▼' : '▶' }}
         </UButton>
       </div>
     </div>
@@ -213,25 +213,25 @@ const getMatchScoreBreakdown = (user: any) => {
     <UCard v-if="showFilters" class="mb-6">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
-          <label class="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300">Role</label>
+          <label class="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300">{{ t('compass.filterRole') }}</label>
           <select v-model="selectedRole" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
-            <option value="">All Roles</option>
+            <option value="">{{ t('compass.allRoles') }}</option>
             <option v-for="role in uniqueRoles" :key="role" :value="role">
               {{ role.replace(/-/g, ' ') }}
             </option>
           </select>
         </div>
         <div>
-          <label class="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300">Location</label>
+          <label class="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300">{{ t('compass.filterLocation') }}</label>
           <select v-model="selectedLocation" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
-            <option value="">All Locations</option>
+            <option value="">{{ t('compass.allLocations') }}</option>
             <option v-for="loc in uniqueLocations" :key="loc" :value="loc">
               {{ loc }}
             </option>
           </select>
         </div>
         <div>
-          <label class="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300">Min Match: {{ minMatchScore }}%</label>
+          <label class="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300">{{ t('compass.filterMinMatch', { percent: minMatchScore }) }}</label>
           <input 
             v-model.number="minMatchScore" 
             type="range" 
@@ -248,19 +248,19 @@ const getMatchScoreBreakdown = (user: any) => {
     <div class="grid grid-cols-4 gap-4">
       <UCard class="text-center">
         <div class="text-2xl font-bold text-slate-900">{{ potentialMatches.length }}</div>
-        <div class="text-sm text-slate-500">Potential</div>
+        <div class="text-sm text-slate-500">{{ t('compass.stats.potential') }}</div>
       </UCard>
       <UCard class="text-center">
         <div class="text-2xl font-bold text-teal-600">{{ likedUsers.length }}</div>
-        <div class="text-sm text-slate-500">Liked</div>
+        <div class="text-sm text-slate-500">{{ t('compass.stats.liked') }}</div>
       </UCard>
       <UCard class="text-center">
         <div class="text-2xl font-bold text-amber-600">{{ maybeUsers.length }}</div>
-        <div class="text-sm text-slate-500">Maybe</div>
+        <div class="text-sm text-slate-500">{{ t('compass.stats.maybe') }}</div>
       </UCard>
       <UCard class="text-center">
         <div class="text-2xl font-bold text-rose-600">{{ passedUsers.length }}</div>
-        <div class="text-sm text-slate-500">Passed</div>
+        <div class="text-sm text-slate-500">{{ t('compass.stats.passed') }}</div>
       </UCard>
     </div>
 
@@ -274,14 +274,14 @@ const getMatchScoreBreakdown = (user: any) => {
             :color="getUserStatus(match.id) === 'liked' ? 'teal' : getUserStatus(match.id) === 'passed' ? 'rose' : 'amber'"
             variant="solid"
           >
-            {{ getUserStatus(match.id) === 'liked' ? 'Liked' : getUserStatus(match.id) === 'passed' ? 'Passed' : 'Maybe' }}
+            {{ t(`compass.status.${getUserStatus(match.id)}`) }}
           </UBadge>
           <UBadge 
             :color="match.matchScore >= 80 ? 'emerald' : match.matchScore >= 60 ? 'teal' : match.matchScore >= 40 ? 'amber' : 'gray'"
             variant="solid"
             size="lg"
           >
-            {{ match.matchScore }}% Match
+            {{ t('compass.matchPercent', { percent: match.matchScore }) }}
           </UBadge>
         </div>
 
@@ -306,7 +306,7 @@ const getMatchScoreBreakdown = (user: any) => {
           
           <div class="flex flex-wrap gap-2">
             <UBadge v-for="seeking in match.seeking" :key="seeking" variant="soft" size="sm">
-              Seeking: {{ seeking.replace('-', ' ') }}
+              {{ t('compass.seeking') }}: {{ seeking.replace('-', ' ') }}
             </UBadge>
           </div>
           
@@ -317,7 +317,7 @@ const getMatchScoreBreakdown = (user: any) => {
             </div>
             <div class="flex items-center gap-2 text-sm">
               <UIcon name="i-heroicons-users" class="w-4 h-4 text-slate-400" />
-              <span class="text-slate-600">{{ match.children }} children</span>
+              <span class="text-slate-600">{{ match.children }} {{ t('commandPalette.members') }}</span>
             </div>
             <div class="flex items-center gap-2 text-sm">
               <UIcon name="i-heroicons-clock" class="w-4 h-4 text-slate-400" />
@@ -335,7 +335,7 @@ const getMatchScoreBreakdown = (user: any) => {
               icon="i-heroicons-user" 
               @click="openProfile(match)"
             >
-              Profile
+              {{ t('compass.buttons.profile') }}
             </UButton>
             <UButton 
               variant="ghost" 
@@ -343,7 +343,7 @@ const getMatchScoreBreakdown = (user: any) => {
               icon="i-heroicons-chat-bubble-left" 
               @click="openMessage(match)"
             >
-              Message
+              {{ t('compass.buttons.message') }}
             </UButton>
             <UButton 
               color="primary" 
@@ -351,7 +351,7 @@ const getMatchScoreBreakdown = (user: any) => {
               icon="i-heroicons-user-plus" 
               @click="openConnect(match)"
             >
-              Connect
+              {{ t('compass.buttons.connect') }}
             </UButton>
           </div>
           <div class="flex justify-center gap-3">
@@ -391,15 +391,15 @@ const getMatchScoreBreakdown = (user: any) => {
     <!-- No Matches -->
     <UCard v-if="potentialMatches.length === 0" class="text-center p-12">
       <UIcon name="i-heroicons-users" class="w-16 h-16 mx-auto text-slate-400 mb-4" />
-      <h2 class="text-xl font-bold mb-2">No matches found</h2>
-      <p class="text-slate-600">Check back later for new potential crew members.</p>
+      <h2 class="text-xl font-bold mb-2">{{ t('compass.noMatches.title') }}</h2>
+      <p class="text-slate-600">{{ t('compass.noMatches.description') }}</p>
     </UCard>
 
     <!-- Reset Button -->
     <div v-if="likedUsers.length > 0 || maybeUsers.length > 0 || passedUsers.length > 0" class="flex justify-center">
       <UButton variant="ghost" @click="reset">
         <UIcon name="i-heroicons-arrow-path" class="mr-2" />
-        Reset All Votes
+        {{ t('compass.buttons.resetVotes') }}
       </UButton>
     </div>
 
@@ -419,7 +419,7 @@ const getMatchScoreBreakdown = (user: any) => {
                     :color="selectedUser.matchScore >= 80 ? 'emerald' : selectedUser.matchScore >= 60 ? 'teal' : 'amber'"
                     variant="solid"
                   >
-                    {{ selectedUser.matchScore }}% Match
+                    {{ t('compass.matchPercent', { percent: selectedUser.matchScore }) }}
                   </UBadge>
                 </div>
               </div>
@@ -430,33 +430,33 @@ const getMatchScoreBreakdown = (user: any) => {
         <div class="space-y-6">
           <!-- Bio -->
           <div>
-            <h3 class="font-semibold text-lg mb-2">About</h3>
+            <h3 class="font-semibold text-lg mb-2">{{ t('compass.about') }}</h3>
             <p class="text-slate-600 dark:text-slate-400">{{ selectedUser.bio }}</p>
           </div>
 
           <!-- Details -->
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <h4 class="font-medium text-sm text-slate-500 mb-1">Pronouns</h4>
+              <h4 class="font-medium text-sm text-slate-500 mb-1">{{ t('profile.labels.pronouns') }}</h4>
               <p>{{ selectedUser.pronouns }}</p>
             </div>
             <div>
-              <h4 class="font-medium text-sm text-slate-500 mb-1">Availability</h4>
+              <h4 class="font-medium text-sm text-slate-500 mb-1">{{ t('compass.seeking') }}</h4>
               <p>{{ selectedUser.availability }}</p>
             </div>
             <div>
-              <h4 class="font-medium text-sm text-slate-500 mb-1">Languages</h4>
+              <h4 class="font-medium text-sm text-slate-500 mb-1">{{ t('profile.labels.languages') }}</h4>
               <p>{{ selectedUser.languages.join(', ') }}</p>
             </div>
             <div>
-              <h4 class="font-medium text-sm text-slate-500 mb-1">Children</h4>
+              <h4 class="font-medium text-sm text-slate-500 mb-1">{{ t('profile.labels.children') }}</h4>
               <p>{{ selectedUser.children }}</p>
             </div>
           </div>
 
           <!-- Seeking -->
           <div v-if="selectedUser.seeking && selectedUser.seeking.length > 0">
-            <h3 class="font-semibold text-lg mb-2">Seeking</h3>
+            <h3 class="font-semibold text-lg mb-2">{{ t('compass.seeking') }}</h3>
             <div class="flex flex-wrap gap-2">
               <UBadge v-for="seek in selectedUser.seeking" :key="seek" variant="soft">
                 {{ seek.replace(/-/g, ' ') }}
@@ -466,32 +466,32 @@ const getMatchScoreBreakdown = (user: any) => {
 
           <!-- Match Breakdown -->
           <div v-if="getMatchScoreBreakdown(selectedUser)">
-            <h3 class="font-semibold text-lg mb-3">Compatibility Breakdown</h3>
+            <h3 class="font-semibold text-lg mb-3">{{ t('compass.compatibilityBreakdown') }}</h3>
             <div class="space-y-2">
               <div>
                 <div class="flex justify-between text-sm mb-1">
-                  <span>Values Alignment</span>
+                  <span>{{ t('compass.compatibility.valuesAlignment') }}</span>
                   <span class="font-medium">{{ getMatchScoreBreakdown(selectedUser).breakdown.values }}%</span>
                 </div>
                 <UProgress :value="getMatchScoreBreakdown(selectedUser).breakdown.values" color="teal" size="sm" />
               </div>
               <div>
                 <div class="flex justify-between text-sm mb-1">
-                  <span>Location Proximity</span>
+                  <span>{{ t('compass.compatibility.locationProximity') }}</span>
                   <span class="font-medium">{{ getMatchScoreBreakdown(selectedUser).breakdown.location }}%</span>
                 </div>
                 <UProgress :value="getMatchScoreBreakdown(selectedUser).breakdown.location" color="teal" size="sm" />
               </div>
               <div>
                 <div class="flex justify-between text-sm mb-1">
-                  <span>Role Compatibility</span>
+                  <span>{{ t('compass.compatibility.roleCompatibility') }}</span>
                   <span class="font-medium">{{ getMatchScoreBreakdown(selectedUser).breakdown.role }}%</span>
                 </div>
                 <UProgress :value="getMatchScoreBreakdown(selectedUser).breakdown.role" color="teal" size="sm" />
               </div>
               <div>
                 <div class="flex justify-between text-sm mb-1">
-                  <span>Language Overlap</span>
+                  <span>{{ t('compass.compatibility.languageOverlap') }}</span>
                   <span class="font-medium">{{ getMatchScoreBreakdown(selectedUser).breakdown.language }}%</span>
                 </div>
                 <UProgress :value="getMatchScoreBreakdown(selectedUser).breakdown.language" color="teal" size="sm" />
@@ -502,9 +502,9 @@ const getMatchScoreBreakdown = (user: any) => {
 
         <template #footer>
           <div class="flex justify-end gap-3">
-            <UButton variant="ghost" @click="showProfileModal = false">Close</UButton>
-            <UButton variant="ghost" icon="i-heroicons-chat-bubble-left" @click="showProfileModal = false; openMessage(selectedUser)">Message</UButton>
-            <UButton color="primary" icon="i-heroicons-user-plus" @click="showProfileModal = false; openConnect(selectedUser)">Connect</UButton>
+            <UButton variant="ghost" @click="showProfileModal = false">{{ t('compass.buttons.close') }}</UButton>
+            <UButton variant="ghost" icon="i-heroicons-chat-bubble-left" @click="showProfileModal = false; openMessage(selectedUser)">{{ t('compass.buttons.message') }}</UButton>
+            <UButton color="primary" icon="i-heroicons-user-plus" @click="showProfileModal = false; openConnect(selectedUser)">{{ t('compass.buttons.connect') }}</UButton>
           </div>
         </template>
       </UCard>
@@ -517,7 +517,7 @@ const getMatchScoreBreakdown = (user: any) => {
           <div class="flex items-center gap-3">
             <UAvatar :src="selectedUser.avatar" :alt="selectedUser.name" size="md" />
             <div>
-              <h3 class="font-semibold">Send Message to {{ selectedUser.name }}</h3>
+              <h3 class="font-semibold">{{ t('compass.modals.sendMessageTitle', { name: selectedUser.name }) }}</h3>
               <p class="text-sm text-slate-500">{{ selectedUser.location }}</p>
             </div>
           </div>
@@ -526,23 +526,23 @@ const getMatchScoreBreakdown = (user: any) => {
         <div class="space-y-4">
           <UTextarea 
             v-model="messageContent" 
-            placeholder="Type your message here..."
+            :placeholder="t('compass.modals.messagePlaceholder')"
             :rows="6"
             autofocus
           />
-          <p class="text-sm text-slate-500">Introduce yourself and share why you're interested in connecting.</p>
+          <p class="text-sm text-slate-500">{{ t('compass.modals.messageHint') }}</p>
         </div>
 
         <template #footer>
           <div class="flex justify-end gap-3">
-            <UButton variant="ghost" @click="showMessageModal = false">Cancel</UButton>
+            <UButton variant="ghost" @click="showMessageModal = false">{{ t('compass.buttons.cancel') }}</UButton>
             <UButton 
               color="primary" 
               icon="i-heroicons-paper-airplane" 
               :disabled="!messageContent.trim()"
               @click="sendMessage"
             >
-              Send Message
+              {{ t('compass.buttons.sendMessage') }}
             </UButton>
           </div>
         </template>
@@ -556,32 +556,32 @@ const getMatchScoreBreakdown = (user: any) => {
           <div class="flex items-center gap-3">
             <UAvatar :src="selectedUser.avatar" :alt="selectedUser.name" size="md" />
             <div>
-              <h3 class="font-semibold">Send Connection Request to {{ selectedUser.name }}</h3>
-              <p class="text-sm text-slate-500">{{ selectedUser.matchScore }}% Match</p>
+              <h3 class="font-semibold">{{ t('compass.modals.connectionTitle', { name: selectedUser.name }) }}</h3>
+              <p class="text-sm text-slate-500">{{ t('compass.matchPercent', { percent: selectedUser.matchScore }) }}</p>
             </div>
           </div>
         </template>
 
         <div class="space-y-4">
           <p class="text-sm text-slate-600 dark:text-slate-400">
-            Sending a connection request will notify {{ selectedUser.name }} and allow you to start building a parenting crew together.
+            {{ t('compass.modals.connectionHint', { name: selectedUser.name }) }}
           </p>
           <UTextarea 
             v-model="connectionMessage" 
-            placeholder="Add a personal note (optional)"
+            :placeholder="t('compass.modals.noteOptional')"
             :rows="4"
           />
         </div>
 
         <template #footer>
           <div class="flex justify-end gap-3">
-            <UButton variant="ghost" @click="showConnectModal = false">Cancel</UButton>
+            <UButton variant="ghost" @click="showConnectModal = false">{{ t('compass.buttons.cancel') }}</UButton>
             <UButton 
               color="primary" 
               icon="i-heroicons-user-plus" 
               @click="sendConnectionRequest"
             >
-              Send Request
+              {{ t('compass.buttons.sendRequest') }}
             </UButton>
           </div>
         </template>

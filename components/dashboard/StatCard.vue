@@ -9,6 +9,8 @@ interface Props {
   iconBgColor?: string
 }
 
+const { t } = useI18n()
+
 withDefaults(defineProps<Props>(), {
   trend: 0,
   trendLabel: 'vs last month',

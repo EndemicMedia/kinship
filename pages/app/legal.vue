@@ -50,8 +50,8 @@ const allDocuments = computed(() => {
 
 const activeTab = ref(0)
 const tabs = [
-  { slot: 'my-documents', label: 'My Documents', icon: 'i-heroicons-document-text' },
-  { slot: 'templates', label: 'Templates', icon: 'i-heroicons-document-duplicate' }
+  { slot: 'my-documents', label: t('legal.tabs.myDocuments'), icon: 'i-heroicons-document-text' },
+  { slot: 'templates', label: t('legal.tabs.templates'), icon: 'i-heroicons-document-duplicate' }
 ]
 
 const route = useRoute()
@@ -96,8 +96,8 @@ const createDocument = () => {
   if (!newDocTitle.value.trim()) return
   
   toast.add({
-    title: 'Document Created',
-    description: `${newDocTitle.value} has been created. You can now edit and share it with your crew.`,
+    title: t('legal.toasts.documentCreated'),
+    description: t('legal.toasts.documentCreatedDesc', { title: newDocTitle.value }),
     color: 'success',
     icon: 'i-heroicons-document-text'
   })
@@ -107,8 +107,8 @@ const createDocument = () => {
 
 const useTemplate = (template: any) => {
   toast.add({
-    title: 'Template Added',
-    description: `${template.title} has been added to your documents.`,
+    title: t('legal.toasts.templateAdded'),
+    description: t('legal.toasts.templateAddedDesc', { title: template.title }),
     color: 'success',
     icon: 'i-heroicons-document-duplicate'
   })
@@ -126,11 +126,11 @@ const viewDocument = (doc: any) => {
   <div class="space-y-6">
     <div class="flex items-center justify-between">
       <div>
-        <h1 class="text-2xl font-bold text-slate-900 dark:text-white">Legal</h1>
-        <p class="text-slate-600 dark:text-slate-400 mt-1">Manage your legal agreements and documents</p>
+        <h1 class="text-2xl font-bold text-slate-900 dark:text-white">{{ t('legal.title') }}</h1>
+        <p class="text-slate-600 dark:text-slate-400 mt-1">{{ t('legal.subtitle') }}</p>
       </div>
       <UButton color="primary" icon="i-heroicons-plus" @click="openNewDoc">
-        New Document
+        {{ t('legal.newDocument') }}
       </UButton>
     </div>
 
@@ -139,9 +139,9 @@ const viewDocument = (doc: any) => {
         <UCard class="mt-4">
           <div v-if="allDocuments.length === 0" class="text-center py-12">
             <UIcon name="i-heroicons-document-text" class="w-16 h-16 mx-auto text-slate-300 mb-4" />
-            <h3 class="text-lg font-medium mb-2">No documents yet</h3>
-            <p class="text-slate-600 mb-4">Create your first legal agreement with your crew</p>
-            <UButton color="primary" icon="i-heroicons-plus" @click="openNewDoc">Create Document</UButton>
+            <h3 class="text-lg font-medium mb-2">{{ t('legal.noDocuments.title') }}</h3>
+            <p class="text-slate-600 mb-4">{{ t('legal.noDocuments.description') }}</p>
+            <UButton color="primary" icon="i-heroicons-plus" @click="openNewDoc">{{ t('legal.noDocuments.button') }}</UButton>
           </div>
           
           <div v-else class="space-y-3">
@@ -156,7 +156,7 @@ const viewDocument = (doc: any) => {
               </div>
               <div class="flex items-center gap-3">
                 <UBadge :color="doc.status === 'signed' ? 'success' : doc.status === 'pending' ? 'warning' : 'gray'" variant="soft">
-                  {{ doc.status }}
+                  {{ t(`legal.status.${doc.status}`) }}
                 </UBadge>
                 <UButton variant="ghost" icon="i-heroicons-eye" @click="viewDocument(doc)" />
               </div>
@@ -179,10 +179,10 @@ const viewDocument = (doc: any) => {
               </div>
               <div class="flex items-center gap-2">
                 <UButton variant="ghost" icon="i-heroicons-eye" @click="openPreview(template.id)">
-                  Preview
+                  {{ t('legal.buttons.preview') }}
                 </UButton>
                 <UButton variant="soft" icon="i-heroicons-plus" @click="openNewDoc">
-                  Use Template
+                  {{ t('legal.buttons.useTemplate') }}
                 </UButton>
               </div>
             </div>
@@ -205,9 +205,9 @@ const viewDocument = (doc: any) => {
         
         <template #footer>
           <div class="flex justify-end gap-3">
-            <UButton variant="ghost" @click="closePreview">Close</UButton>
+            <UButton variant="ghost" @click="closePreview">{{ t('legal.buttons.close') }}</UButton>
             <UButton color="primary" icon="i-heroicons-plus" @click="useTemplate(selectedTemplate)">
-              Use This Template
+              {{ t('legal.modals.useThisTemplate') }}
             </UButton>
           </div>
         </template>
@@ -218,35 +218,35 @@ const viewDocument = (doc: any) => {
     <UModal v-model="showNewDocModal" :ui="{ width: 'w-full sm:max-w-lg' }">
       <UCard>
         <template #header>
-          <h3 class="font-semibold text-lg">Create New Document</h3>
+          <h3 class="font-semibold text-lg">{{ t('legal.modals.createTitle') }}</h3>
         </template>
 
         <div class="space-y-4">
           <div>
-            <label class="block text-sm font-medium mb-2">Document Title</label>
-            <UInput v-model="newDocTitle" placeholder="e.g., Co-Parenting Agreement" autofocus />
+            <label class="block text-sm font-medium mb-2">{{ t('legal.modals.documentTitle') }}</label>
+            <UInput v-model="newDocTitle" :placeholder="t('legal.documentTypes.agreement')" autofocus />
           </div>
           <div>
-            <label class="block text-sm font-medium mb-2">Document Type</label>
+            <label class="block text-sm font-medium mb-2">{{ t('legal.modals.documentType') }}</label>
             <select v-model="newDocType" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800">
-              <option value="agreement">Agreement</option>
-              <option value="contract">Contract</option>
-              <option value="policy">Policy</option>
-              <option value="statement">Statement</option>
+              <option value="agreement">{{ t('legal.documentTypes.agreement') }}</option>
+              <option value="contract">{{ t('legal.documentTypes.contract') }}</option>
+              <option value="policy">{{ t('legal.documentTypes.policy') }}</option>
+              <option value="statement">{{ t('legal.documentTypes.statement') }}</option>
             </select>
           </div>
         </div>
 
         <template #footer>
           <div class="flex justify-end gap-3">
-            <UButton variant="ghost" @click="showNewDocModal = false">Cancel</UButton>
+            <UButton variant="ghost" @click="showNewDocModal = false">{{ t('legal.buttons.cancel') }}</UButton>
             <UButton 
               color="primary" 
               icon="i-heroicons-document-text"
               :disabled="!newDocTitle.trim()"
               @click="createDocument"
             >
-              Create Document
+              {{ t('legal.buttons.createDocument') }}
             </UButton>
           </div>
         </template>
@@ -268,17 +268,17 @@ const viewDocument = (doc: any) => {
         <template #footer>
           <div class="flex justify-between items-center">
             <UBadge :color="selectedDoc.status === 'signed' ? 'success' : selectedDoc.status === 'pending' ? 'warning' : 'gray'" variant="soft">
-              {{ selectedDoc.status }}
+              {{ t(`legal.status.${selectedDoc.status}`) }}
             </UBadge>
             <div class="flex gap-3">
-              <UButton variant="ghost" @click="showDocViewModal = false">Close</UButton>
+              <UButton variant="ghost" @click="showDocViewModal = false">{{ t('legal.buttons.close') }}</UButton>
               <UButton 
                 v-if="selectedDoc.status !== 'signed'" 
                 color="primary" 
                 icon="i-heroicons-pencil-square"
-                @click="toast.add({ title: 'Edit Mode', description: 'Document editing coming soon.', icon: 'i-heroicons-pencil-square' })"
+                @click="toast.add({ title: t('legal.toasts.editMode'), description: t('legal.toasts.editModeDesc'), icon: 'i-heroicons-pencil-square' })"
               >
-                Edit
+                {{ t('legal.buttons.edit') }}
               </UButton>
             </div>
           </div>

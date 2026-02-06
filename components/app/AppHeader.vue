@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const route = useRoute()
+const { t } = useI18n()
 const authStore = useAuthStore()
 const uiStore = useUIStore()
 
@@ -11,19 +12,19 @@ const breadcrumbs = computed(() => {
   const crumbs = []
   
   // Always start with Dashboard
-  crumbs.push({ label: 'Dashboard', to: '/app' })
+  crumbs.push({ label: t('commandPalette.dashboard'), to: '/app' })
   
   if (path.includes('/crews')) {
-    crumbs.push({ label: 'My Crews', to: '/app/crews' })
+    crumbs.push({ label: t('commandPalette.myCrews'), to: '/app/crews' })
     if (path.includes('/detail')) {
-      crumbs.push({ label: 'Crew Details', to: route.path })
+      crumbs.push({ label: t('crewsPage.crewDetails'), to: route.path })
     }
   } else if (path.includes('/compass')) {
-    crumbs.push({ label: 'The Compass', to: '/app/compass' })
+    crumbs.push({ label: t('commandPalette.theCompass'), to: '/app/compass' })
   } else if (path.includes('/legal')) {
-    crumbs.push({ label: 'Legal', to: '/app/legal' })
+    crumbs.push({ label: t('commandPalette.legal'), to: '/app/legal' })
   } else if (path.includes('/profile')) {
-    crumbs.push({ label: 'Profile', to: '/app/profile' })
+    crumbs.push({ label: t('commandPalette.profile'), to: '/app/profile' })
   }
   
   return crumbs
@@ -32,12 +33,12 @@ const breadcrumbs = computed(() => {
 // Page title based on route
 const pageTitle = computed(() => {
   const path = route.path
-  if (path === '/app') return 'Dashboard'
-  if (path.includes('/crews/detail')) return 'Crew Details'
-  if (path.includes('/crews')) return 'My Crews'
-  if (path.includes('/compass')) return 'The Compass'
-  if (path.includes('/legal')) return 'Legal'
-  if (path.includes('/profile')) return 'Profile'
+  if (path === '/app') return t('commandPalette.dashboard')
+  if (path.includes('/crews/detail')) return t('crewsPage.crewDetails')
+  if (path.includes('/crews')) return t('commandPalette.myCrews')
+  if (path.includes('/compass')) return t('commandPalette.theCompass')
+  if (path.includes('/legal')) return t('commandPalette.legal')
+  if (path.includes('/profile')) return t('commandPalette.profile')
   return 'Kinship'
 })
 </script>

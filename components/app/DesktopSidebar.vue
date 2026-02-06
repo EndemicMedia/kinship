@@ -1,14 +1,15 @@
 <script setup lang="ts">
 const route = useRoute()
+const { t } = useI18n()
 const authStore = useAuthStore()
 const uiStore = useUIStore()
 
 const navItems = [
-  { icon: 'i-heroicons-home', label: 'Dashboard', to: '/app', shortcut: 'D' },
-  { icon: 'i-heroicons-magnifying-glass', label: 'The Compass', to: '/app/compass', shortcut: 'C' },
-  { icon: 'i-heroicons-users', label: 'My Crews', to: '/app/crews', shortcut: 'M' },
-  { icon: 'i-heroicons-folder', label: 'Legal', to: '/app/legal', shortcut: 'L' },
-  { icon: 'i-heroicons-user', label: 'Profile', to: '/app/profile', shortcut: 'P' }
+  { icon: 'i-heroicons-home', label: t('commandPalette.dashboard'), to: '/app', shortcut: 'D' },
+  { icon: 'i-heroicons-magnifying-glass', label: t('commandPalette.theCompass'), to: '/app/compass', shortcut: 'C' },
+  { icon: 'i-heroicons-users', label: t('commandPalette.myCrews'), to: '/app/crews', shortcut: 'M' },
+  { icon: 'i-heroicons-folder', label: t('commandPalette.legal'), to: '/app/legal', shortcut: 'L' },
+  { icon: 'i-heroicons-user', label: t('commandPalette.profile'), to: '/app/profile', shortcut: 'P' }
 ]
 
 const isCollapsed = computed({

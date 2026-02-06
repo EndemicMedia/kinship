@@ -27,13 +27,13 @@ const crewName = computed(() => crew.value?.name || 'Crew Details')
 const crewMembers = computed(() => crew.value?.members || [])
 const crewDocuments = computed(() => crew.value?.documents || [])
 
-const activeTab = ref('overview')
+const activeTab = ref(0)
 const tabs = [
-  { key: 'overview', label: 'Overview', icon: 'i-heroicons-home' },
-  { key: 'chat', label: 'Chat', icon: 'i-heroicons-chat-bubble-left-right' },
-  { key: 'documents', label: 'Documents', icon: 'i-heroicons-document-text' },
-  { key: 'values', label: 'Values', icon: 'i-heroicons-heart' },
-  { key: 'accountability', label: 'Accountability', icon: 'i-heroicons-scale' }
+  { slot: 'overview', label: 'Overview', icon: 'i-heroicons-home' },
+  { slot: 'chat', label: 'Chat', icon: 'i-heroicons-chat-bubble-left-right' },
+  { slot: 'documents', label: 'Documents', icon: 'i-heroicons-document-text' },
+  { slot: 'values', label: 'Values', icon: 'i-heroicons-heart' },
+  { slot: 'accountability', label: 'Accountability', icon: 'i-heroicons-scale' }
 ]
 
 const getMemberInfo = (userId: string) => {
@@ -105,15 +105,15 @@ const formatDate = (date: Date) => {
       <template #overview>
         <UCard class="mt-4">
           <div class="space-y-6">
-            <div>
+            <div v-if="crew?.description">
               <h3 class="text-lg font-semibold mb-2">About</h3>
-              <p class="text-slate-600 dark:text-slate-400">{{ crew?.description }}</p>
+              <p class="text-slate-600 dark:text-slate-400">{{ crew.description }}</p>
             </div>
 
-            <div>
+            <div v-if="crew?.formationProgress !== undefined">
               <h3 class="text-lg font-semibold mb-3">Formation Progress</h3>
-              <UProgress :value="crew?.formationProgress" color="primary" size="lg" />
-              <p class="text-sm text-slate-600 mt-2">{{ crew?.formationProgress }}% complete</p>
+              <UProgress :value="crew.formationProgress" color="primary" size="lg" />
+              <p class="text-sm text-slate-600 mt-2">{{ crew.formationProgress }}% complete</p>
             </div>
 
             <div>

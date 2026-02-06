@@ -6,6 +6,28 @@ definePageMeta({
   middleware: ['auth']
 })
 
+const { t } = useI18n()
+
+const url = 'https://endemicmedia.github.io/kinship/app/profile'
+
+useSeoMeta(() => ({
+  title: t('seo.app.profile.title'),
+  description: t('seo.app.profile.description'),
+  ogTitle: t('seo.app.profile.title'),
+  ogDescription: t('seo.app.profile.description'),
+  ogType: 'website',
+  ogUrl: url,
+  twitterTitle: t('seo.app.profile.title'),
+  twitterDescription: t('seo.app.profile.description'),
+  twitterCard: 'summary',
+}))
+
+useHead(() => ({
+  link: [
+    { rel: 'canonical', href: url }
+  ]
+}))
+
 const authStore = useAuthStore()
 const toast = useToast()
 const router = useRouter()
@@ -19,13 +41,20 @@ const editName = ref(authStore.currentUser?.name || '')
 const editBio = ref(authStore.currentUser?.bio || '')
 
 const saveProfile = () => {
-  toast.add({
-    title: 'Profile Updated',
-    description: 'Your profile has been updated successfully.',
-    color: 'success',
-    icon: 'i-heroicons-user'
-  })
-  showEditModal.value = false
+  if (authStore.currentUser) {
+    authStore.updateUser({
+      name: editName.value,
+      bio: editBio.value
+    })
+    
+    toast.add({
+      title: 'Profile Updated',
+      description: 'Your profile has been updated successfully.',
+      color: 'success',
+      icon: 'i-heroicons-user'
+    })
+    showEditModal.value = false
+  }
 }
 
 const switchPersona = (index: number) => {
@@ -126,4 +155,37 @@ const showComingSoon = () => {
       </div>
     </UCard>
   </div>
+
+  <!-- Edit Profile Modal -->
+  <UModal v-model="showEditModal" :ui="{ width: 'w-full sm:max-w-lg' }">
+    <UCard>
+      <template #header>
+        <h3 class="font-semibold text-lg">Edit Profile</h3>
+      </template>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium mb-2">Name</label>
+          <UInput v-model="editName" placeholder="Your name" autofocus />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-2">Bio</label>
+          <UTextarea v-model="editBio" placeholder="Tell us about yourself" :rows="4" />
+        </div>
+      </div>
+
+      <template #footer>
+        <div class="flex justify-end gap-3">
+          <UButton variant="ghost" @click="showEditModal = false">Cancel</UButton>
+          <UButton 
+            color="primary" 
+            icon="i-heroicons-user"
+            @click="saveProfile"
+          >
+            Save Changes
+          </UButton>
+        </div>
+      </template>
+    </UCard>
+  </UModal>
 </template>

@@ -19,10 +19,10 @@ export const useAuthStore = defineStore('auth', {
     async login(email: string, password: string): Promise<boolean> {
       this.loading = true
       await new Promise(resolve => setTimeout(resolve, 800))
-      
+
       const { mockUsers } = await import('~/data/mock-users')
       const user = mockUsers.find((u: User) => u.email === email)
-      
+
       if (user && password === 'password') {
         this.user = user
         this.isAuthenticated = true
@@ -31,7 +31,7 @@ export const useAuthStore = defineStore('auth', {
         this.loading = false
         return true
       }
-      
+
       this.loading = false
       return false
     },
@@ -39,17 +39,17 @@ export const useAuthStore = defineStore('auth', {
     async demoLogin(personaIndex: number = 0): Promise<void> {
       this.loading = true
       await new Promise(resolve => setTimeout(resolve, 500))
-      
+
       const { mockUsers } = await import('~/data/mock-users')
       const user = mockUsers[personaIndex]
-      
+
       if (user) {
         this.user = user
         this.isAuthenticated = true
         this.currentPersonaIndex = personaIndex
         this.saveToStorage()
       }
-      
+
       this.loading = false
     },
 
@@ -94,6 +94,25 @@ export const useAuthStore = defineStore('auth', {
         }
       }
       return false
+    },
+
+    async switchPersona(personaIndex: number): Promise<void> {
+      const { mockUsers } = await import('~/data/mock-users')
+      const user = mockUsers[personaIndex]
+
+      if (user) {
+        this.user = user
+        this.isAuthenticated = true
+        this.currentPersonaIndex = personaIndex
+        this.saveToStorage()
+      }
+    },
+
+    updateUser(updates: Partial<User>): void {
+      if (this.user) {
+        this.user = { ...this.user, ...updates }
+        this.saveToStorage()
+      }
     }
   }
 })

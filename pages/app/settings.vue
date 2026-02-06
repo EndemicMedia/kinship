@@ -4,6 +4,28 @@ definePageMeta({
   middleware: ['auth']
 })
 
+const { t } = useI18n()
+
+const url = 'https://endemicmedia.github.io/kinship/app/settings'
+
+useSeoMeta(() => ({
+  title: t('seo.app.settings.title'),
+  description: t('seo.app.settings.description'),
+  ogTitle: t('seo.app.settings.title'),
+  ogDescription: t('seo.app.settings.description'),
+  ogType: 'website',
+  ogUrl: url,
+  twitterTitle: t('seo.app.settings.title'),
+  twitterDescription: t('seo.app.settings.description'),
+  twitterCard: 'summary',
+}))
+
+useHead(() => ({
+  link: [
+    { rel: 'canonical', href: url }
+  ]
+}))
+
 const toast = useToast()
 const router = useRouter()
 
@@ -18,6 +40,33 @@ const saveSettings = () => {
     description: 'Your preferences have been updated successfully.',
     color: 'success',
     icon: 'i-heroicons-cog-6-tooth'
+  })
+}
+
+const changePassword = () => {
+  toast.add({
+    title: 'Password Reset Link Sent',
+    description: 'Check your email for instructions to reset your password.',
+    color: 'success',
+    icon: 'i-heroicons-lock-closed'
+  })
+}
+
+const openPrivacySettings = () => {
+  toast.add({
+    title: 'Privacy Settings',
+    description: 'Advanced privacy controls coming soon.',
+    color: 'info',
+    icon: 'i-heroicons-shield-check'
+  })
+}
+
+const deleteAccount = () => {
+  toast.add({
+    title: 'Account Deletion',
+    description: 'This action requires email confirmation. Feature coming soon.',
+    color: 'warning',
+    icon: 'i-heroicons-exclamation-triangle'
   })
 }
 </script>
@@ -77,13 +126,13 @@ const saveSettings = () => {
       </template>
 
       <div class="space-y-3">
-        <UButton block variant="soft" icon="i-heroicons-lock-closed">
+        <UButton block variant="soft" icon="i-heroicons-lock-closed" @click="changePassword">
           Change Password
         </UButton>
-        <UButton block variant="soft" icon="i-heroicons-shield-check">
+        <UButton block variant="soft" icon="i-heroicons-shield-check" @click="openPrivacySettings">
           Privacy Settings
         </UButton>
-        <UButton block color="rose" variant="soft" icon="i-heroicons-trash">
+        <UButton block color="rose" variant="soft" icon="i-heroicons-trash" @click="deleteAccount">
           Delete Account
         </UButton>
       </div>

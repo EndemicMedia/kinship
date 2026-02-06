@@ -8,6 +8,28 @@ definePageMeta({
   middleware: ['auth']
 })
 
+const { t } = useI18n()
+
+const url = 'https://endemicmedia.github.io/kinship/app/legal'
+
+useSeoMeta(() => ({
+  title: t('seo.app.legal.title'),
+  description: t('seo.app.legal.description'),
+  ogTitle: t('seo.app.legal.title'),
+  ogDescription: t('seo.app.legal.description'),
+  ogType: 'website',
+  ogUrl: url,
+  twitterTitle: t('seo.app.legal.title'),
+  twitterDescription: t('seo.app.legal.description'),
+  twitterCard: 'summary',
+}))
+
+useHead(() => ({
+  link: [
+    { rel: 'canonical', href: url }
+  ]
+}))
+
 const crewsStore = useCrewsStore()
 const authStore = useAuthStore()
 
@@ -250,7 +272,12 @@ const viewDocument = (doc: any) => {
             </UBadge>
             <div class="flex gap-3">
               <UButton variant="ghost" @click="showDocViewModal = false">Close</UButton>
-              <UButton v-if="selectedDoc.status !== 'signed'" color="primary" icon="i-heroicons-pencil-square">
+              <UButton 
+                v-if="selectedDoc.status !== 'signed'" 
+                color="primary" 
+                icon="i-heroicons-pencil-square"
+                @click="toast.add({ title: 'Edit Mode', description: 'Document editing coming soon.', icon: 'i-heroicons-pencil-square' })"
+              >
                 Edit
               </UButton>
             </div>

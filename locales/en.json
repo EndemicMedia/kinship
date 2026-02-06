@@ -5,7 +5,39 @@
   "seo": {
     "title": "Kinship | Form Parenting Crews with Intention and Clarity",
     "description": "Build parenting crews outside traditional marriage. Align on values, coordinate legal and medical planning, activate agreements at conception. Family accountability before state intervention.",
-    "audienceType": "Intentional parents forming parenting crews"
+    "audienceType": "Intentional parents forming parenting crews",
+    "app": {
+      "title": "Dashboard | Kinship",
+      "description": "Manage your parenting crews, track formation progress, and connect with crew members.",
+      "profile": {
+        "title": "Profile | Kinship",
+        "description": "Manage your Kinship profile and switch between demo personas."
+      },
+      "crews": {
+        "title": "My Crews | Kinship",
+        "description": "View and manage your parenting crews on Kinship."
+      },
+      "crewDetail": {
+        "title": "{name} | Kinship Crew",
+        "description": "View crew details, chat with members, manage documents, and track accountability for {name}."
+      },
+      "compass": {
+        "title": "The Compass | Find Your Crew | Kinship",
+        "description": "Browse and connect with potential parenting crew members. Filter by values, location, and match score."
+      },
+      "settings": {
+        "title": "Settings | Kinship",
+        "description": "Manage your notification preferences and account settings on Kinship."
+      },
+      "legal": {
+        "title": "Legal Documents | Kinship",
+        "description": "Manage your co-parenting agreements, legal templates, and crew documents."
+      },
+      "login": {
+        "title": "Sign In | Kinship",
+        "description": "Sign in to access your Kinship dashboard and manage your parenting crews."
+      }
+    }
   },
   "header": {
     "nav": {

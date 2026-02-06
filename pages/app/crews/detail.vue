@@ -8,6 +8,25 @@ definePageMeta({
   middleware: ['auth']
 })
 
+const { t } = useI18n()
+
+useSeoMeta(() => {
+  const crewName = crewsStore.getCrewById(crewId.value as string)?.name || 'Crew'
+  const title = t('seo.app.crewDetail.title', { name: crewName })
+  const description = t('seo.app.crewDetail.description', { name: crewName })
+  
+  return {
+    title,
+    description,
+    ogTitle: title,
+    ogDescription: description,
+    ogType: 'website',
+    twitterTitle: title,
+    twitterDescription: description,
+    twitterCard: 'summary',
+  }
+})
+
 const route = useRoute()
 const crewsStore = useCrewsStore()
 const authStore = useAuthStore()
@@ -52,7 +71,7 @@ const formatTime = (date: Date) => {
 
 const sendMessage = () => {
   if (!newMessage.value.trim()) return
-  console.log('Sending message:', newMessage.value)
+  // logic to send message would go here
   newMessage.value = ''
 }
 
@@ -66,7 +85,7 @@ const newIncident = ref({
 
 const submitIncident = () => {
   if (!newIncident.value.description.trim()) return
-  console.log('Logging incident:', newIncident.value)
+  // logic to submit incident would go here
   newIncident.value.description = ''
   newIncident.value.severity = 2
   showIncidentForm.value = false
@@ -388,5 +407,77 @@ const addValue = () => {
         </UCard>
       </template>
     </UTabs>
+
+    <!-- Document View Modal -->
+    <UModal v-model="showDocViewModal" :ui="{ width: 'w-full sm:max-w-4xl' }">
+      <UCard v-if="selectedDoc">
+        <template #header>
+          <div>
+            <h2 class="text-xl font-bold">{{ selectedDoc.title }}</h2>
+            <p class="text-sm text-slate-500 mt-1">{{ selectedDoc.type }}</p>
+          </div>
+        </template>
+
+        <div class="prose prose-slate dark:prose-invert max-w-none" v-html="selectedDoc.content || 'No content available'"></div>
+
+        <template #footer>
+          <div class="flex justify-between items-center">
+            <UBadge :color="selectedDoc.status === 'signed' ? 'success' : selectedDoc.status === 'pending' ? 'warning' : 'gray'" variant="soft">
+              {{ selectedDoc.status }}
+            </UBadge>
+            <div class="flex gap-3">
+              <UButton variant="ghost" @click="showDocViewModal = false">Close</UButton>
+              <UButton 
+                v-if="selectedDoc.status !== 'signed'" 
+                color="primary" 
+                icon="i-heroicons-pencil-square"
+                @click="toast.add({ title: 'Edit Mode', description: 'Document editing coming soon.', icon: 'i-heroicons-pencil-square' })"
+              >
+                Edit
+              </UButton>
+            </div>
+          </div>
+        </template>
+      </UCard>
+    </UModal>
+
+    <!-- Add Values Modal -->
+    <UModal v-model="showAddValuesModal" :ui="{ width: 'w-full sm:max-w-lg' }">
+      <UCard>
+        <template #header>
+          <h3 class="font-semibold text-lg">Add Crew Value</h3>
+        </template>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium mb-2">Value Title</label>
+            <UInput v-model="newValueTitle" placeholder="e.g., Open Communication" autofocus />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">Category</label>
+            <select v-model="newValueCategory" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800">
+              <option value="parenting">Parenting</option>
+              <option value="communication">Communication</option>
+              <option value="financial">Financial</option>
+              <option value="lifestyle">Lifestyle</option>
+            </select>
+          </div>
+        </div>
+
+        <template #footer>
+          <div class="flex justify-end gap-3">
+            <UButton variant="ghost" @click="showAddValuesModal = false">Cancel</UButton>
+            <UButton 
+              color="primary" 
+              icon="i-heroicons-heart"
+              :disabled="!newValueTitle.trim()"
+              @click="addValue"
+            >
+              Add Value
+            </UButton>
+          </div>
+        </template>
+      </UCard>
+    </UModal>
   </div>
 </template>

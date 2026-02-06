@@ -3,6 +3,28 @@ definePageMeta({
   layout: false
 })
 
+const { t } = useI18n()
+
+const url = 'https://endemicmedia.github.io/kinship/app/login'
+
+useSeoMeta(() => ({
+  title: t('seo.app.login.title'),
+  description: t('seo.app.login.description'),
+  ogTitle: t('seo.app.login.title'),
+  ogDescription: t('seo.app.login.description'),
+  ogType: 'website',
+  ogUrl: url,
+  twitterTitle: t('seo.app.login.title'),
+  twitterDescription: t('seo.app.login.description'),
+  twitterCard: 'summary',
+}))
+
+useHead(() => ({
+  link: [
+    { rel: 'canonical', href: url }
+  ]
+}))
+
 const authStore = useAuthStore()
 const router = useRouter()
 

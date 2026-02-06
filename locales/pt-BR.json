@@ -5,7 +5,39 @@
   "seo": {
     "title": "Kinship | Forme equipes parentais com intenção e clareza",
     "description": "Crie equipes parentais fora do casamento tradicional. Alinhe valores, coordene planejamento jurídico e médico, ative acordos na concepção. Responsabilidade familiar antes da intervenção do Estado.",
-    "audienceType": "Pais intencionais formando equipes parentais"
+    "audienceType": "Pais intencionais formando equipes parentais",
+    "app": {
+      "title": "Painel | Kinship",
+      "description": "Gerencie suas equipes parentais, acompanhe o progresso de formação e conecte-se com membros da equipe.",
+      "profile": {
+        "title": "Perfil | Kinship",
+        "description": "Gerencie seu perfil Kinship e alterne entre personas de demonstração."
+      },
+      "crews": {
+        "title": "Minhas Equipes | Kinship",
+        "description": "Veja e gerencie suas equipes parentais na Kinship."
+      },
+      "crewDetail": {
+        "title": "{name} | Equipe Kinship",
+        "description": "Veja detalhes da equipe, converse com membros, gerencie documentos e acompanhe a responsabilidade para {name}."
+      },
+      "compass": {
+        "title": "O Compass | Encontre sua Equipe | Kinship",
+        "description": "Navegue e conecte-se com potenciais membros de equipes parentais. Filtre por valores, localização e pontuação de compatibilidade."
+      },
+      "settings": {
+        "title": "Configurações | Kinship",
+        "description": "Gerencie suas preferências de notificação e configurações de conta na Kinship."
+      },
+      "legal": {
+        "title": "Documentos Legais | Kinship",
+        "description": "Gerencie seus acordos de coparentalidade, modelos legais e documentos da equipe."
+      },
+      "login": {
+        "title": "Entrar | Kinship",
+        "description": "Entre para acessar seu painel Kinship e gerenciar suas equipes parentais."
+      }
+    }
   },
   "header": {
     "nav": {

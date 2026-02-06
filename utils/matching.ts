@@ -50,7 +50,7 @@ export function calculateMatchScore(currentUser: any, targetUser: any): MatchSco
     }
 
     // Political alignment (10 points)
-    if (currentValues.politicalViews === targetValues.religiousViews) {
+    if (currentValues.politicalViews === targetValues.politicalViews) {
         valuesScore += 10
     } else if (
         (currentValues.politicalViews?.includes('progressive') && targetValues.politicalViews?.includes('progressive')) ||

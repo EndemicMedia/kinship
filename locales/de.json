@@ -5,7 +5,39 @@
   "seo": {
     "title": "Kinship | Eltern-Crews mit Absicht und Klarheit bilden",
     "description": "Baue Eltern-Crews außerhalb traditioneller Ehe. Werte abstimmen, rechtliche und medizinische Planung koordinieren, Vereinbarungen bei der Empfängnis aktivieren. Familienverantwortung vor staatlicher Intervention.",
-    "audienceType": "Intentionale Eltern, die Eltern-Crews bilden"
+    "audienceType": "Intentionale Eltern, die Eltern-Crews bilden",
+    "app": {
+      "title": "Dashboard | Kinship",
+      "description": "Verwalte deine Eltern-Crews, verfolge den Formierungsfortschritt und verbinde dich mit Crew-Mitgliedern.",
+      "profile": {
+        "title": "Profil | Kinship",
+        "description": "Verwalte dein Kinship-Profil und wechsle zwischen Demo-Personas."
+      },
+      "crews": {
+        "title": "Meine Crews | Kinship",
+        "description": "Zeige und verwalte deine Eltern-Crews auf Kinship."
+      },
+      "crewDetail": {
+        "title": "{name} | Kinship Crew",
+        "description": "Zeige Crew-Details an, chatte mit Mitgliedern, verwalte Dokumente und verfolge die Verantwortlichkeit für {name}."
+      },
+      "compass": {
+        "title": "Der Kompass | Finde deine Crew | Kinship",
+        "description": "Durchsuche und verbinde dich mit potenziellen Eltern-Crew-Mitgliedern. Filtere nach Werten, Standort und Übereinstimmungswert."
+      },
+      "settings": {
+        "title": "Einstellungen | Kinship",
+        "description": "Verwalte deine Benachrichtigungseinstellungen und Konto-Einstellungen auf Kinship."
+      },
+      "legal": {
+        "title": "Rechtliche Dokumente | Kinship",
+        "description": "Verwalte deine Co-Parenting-Vereinbarungen, rechtlichen Vorlagen und Crew-Dokumente."
+      },
+      "login": {
+        "title": "Anmelden | Kinship",
+        "description": "Melde dich an, um auf dein Kinship-Dashboard zuzugreifen und deine Eltern-Crews zu verwalten."
+      }
+    }
   },
   "header": {
     "nav": {

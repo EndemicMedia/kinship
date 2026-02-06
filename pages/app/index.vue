@@ -4,6 +4,28 @@ definePageMeta({
   middleware: ['auth']
 })
 
+const { t } = useI18n()
+
+const url = 'https://endemicmedia.github.io/kinship/app'
+
+useSeoMeta(() => ({
+  title: t('seo.app.title'),
+  description: t('seo.app.description'),
+  ogTitle: t('seo.app.title'),
+  ogDescription: t('seo.app.description'),
+  ogType: 'website',
+  ogUrl: url,
+  twitterTitle: t('seo.app.title'),
+  twitterDescription: t('seo.app.description'),
+  twitterCard: 'summary',
+}))
+
+useHead(() => ({
+  link: [
+    { rel: 'canonical', href: url }
+  ]
+}))
+
 const authStore = useAuthStore()
 const crewsStore = useCrewsStore()
 const uiStore = useUIStore()

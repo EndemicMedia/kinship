@@ -8,6 +8,28 @@ definePageMeta({
   middleware: ['auth']
 })
 
+const { t } = useI18n()
+
+const url = 'https://endemicmedia.github.io/kinship/app/compass'
+
+useSeoMeta(() => ({
+  title: t('seo.app.compass.title'),
+  description: t('seo.app.compass.description'),
+  ogTitle: t('seo.app.compass.title'),
+  ogDescription: t('seo.app.compass.description'),
+  ogType: 'website',
+  ogUrl: url,
+  twitterTitle: t('seo.app.compass.title'),
+  twitterDescription: t('seo.app.compass.description'),
+  twitterCard: 'summary',
+}))
+
+useHead(() => ({
+  link: [
+    { rel: 'canonical', href: url }
+  ]
+}))
+
 const authStore = useAuthStore()
 const router = useRouter()
 
@@ -61,18 +83,30 @@ const passedUsers = ref<string[]>([])
 const maybeUsers = ref<string[]>([])
 
 const like = (userId: string) => {
+  // Remove from others
+  passedUsers.value = passedUsers.value.filter(id => id !== userId)
+  maybeUsers.value = maybeUsers.value.filter(id => id !== userId)
+  
   if (!likedUsers.value.includes(userId)) {
     likedUsers.value.push(userId)
   }
 }
 
 const pass = (userId: string) => {
+  // Remove from others
+  likedUsers.value = likedUsers.value.filter(id => id !== userId)
+  maybeUsers.value = maybeUsers.value.filter(id => id !== userId)
+
   if (!passedUsers.value.includes(userId)) {
     passedUsers.value.push(userId)
   }
 }
 
 const maybe = (userId: string) => {
+  // Remove from others
+  likedUsers.value = likedUsers.value.filter(id => id !== userId)
+  passedUsers.value = passedUsers.value.filter(id => id !== userId)
+
   if (!maybeUsers.value.includes(userId)) {
     maybeUsers.value.push(userId)
   }

@@ -41,9 +41,10 @@ async function performDemoLogin(page) {
   await expect(page.locator('text=Welcome back')).toBeVisible({ timeout: 10000 })
 }
 
-// Helper to get page heading (filter out the logo h1)
+// Helper to get page heading (filter out the logo h1 and header h1)
 function getPageHeading(page, text) {
-  return page.locator('h1').filter({ hasText: new RegExp(text, 'i') })
+  // Use a more specific selector to avoid matching the AppHeader h1
+  return page.locator('h1:not(header h1)').filter({ hasText: new RegExp(text, 'i') })
 }
 
 test.describe('Landing Page', () => {
@@ -104,7 +105,7 @@ test.describe('Dashboard', () => {
 
   test('displays welcome message and crews', async ({ page }) => {
     await expect(page.locator('text=Welcome back')).toBeVisible()
-    await expect(page.locator('text=Your Crews')).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Your Crews', exact: true })).toBeVisible()
     await expect(page.locator('.cursor-pointer').first()).toBeVisible()
   })
 
@@ -160,14 +161,14 @@ test.describe('Crews', () => {
     await page.waitForLoadState('domcontentloaded')
 
     // Verify detail page loaded (check for tabs)
-    await expect(page.locator('text=Overview')).toBeVisible()
-    await expect(page.locator('text=Chat')).toBeVisible()
-    await expect(page.locator('text=Documents')).toBeVisible()
-    await expect(page.locator('text=Accountability')).toBeVisible()
+    await expect(page.getByRole('tab', { name: 'Overview' })).toBeVisible()
+    await expect(page.getByRole('tab', { name: 'Chat' })).toBeVisible()
+    await expect(page.getByRole('tab', { name: 'Documents' })).toBeVisible()
+    await expect(page.getByRole('tab', { name: 'Accountability' })).toBeVisible()
 
     // Verify content visibility (checks that tabs are actually rendering content)
-    await expect(page.locator('text=Members')).toBeVisible()
-    await expect(page.locator('text=About')).toBeVisible()
+    await expect(page.locator('text=/^Members \\(\\d+\\)$/')).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'About', exact: true })).toBeVisible()
   })
 })
 

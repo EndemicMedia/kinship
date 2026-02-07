@@ -8,18 +8,18 @@ const { t } = useI18n()
 const features = computed(() => [
   {
     icon: 'i-heroicons-compass',
-    title: t('compass.features.values.title'),
-    description: t('compass.features.values.description')
+    title: t('landing.compass.features.values.title'),
+    description: t('landing.compass.features.values.description')
   },
   {
     icon: 'i-heroicons-squares-2x2',
-    title: t('compass.features.dimensions.title'),
-    description: t('compass.features.dimensions.description')
+    title: t('landing.compass.features.dimensions.title'),
+    description: t('landing.compass.features.dimensions.description')
   },
   {
     icon: 'i-heroicons-map',
-    title: t('compass.features.structure.title'),
-    description: t('compass.features.structure.description')
+    title: t('landing.compass.features.structure.title'),
+    description: t('landing.compass.features.structure.description')
   }
 ])
 </script>
@@ -32,15 +32,15 @@ const features = computed(() => [
         <div class="space-y-6">
           <div class="inline-flex items-center gap-2 rounded-full bg-teal-100 px-3 py-1 text-sm font-medium text-teal-700 dark:bg-teal-900/30 dark:text-teal-300">
             <UIcon name="i-heroicons-compass" class="h-4 w-4" />
-            {{ t('compass.badge') }}
+            {{ t('landing.compass.badge') }}
           </div>
           
           <h2 class="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
-            {{ t('compass.title') }}
+            {{ t('landing.compass.title') }}
           </h2>
           
           <p class="text-lg text-slate-600 dark:text-slate-300">
-            {{ t('compass.description') }}
+            {{ t('landing.compass.description') }}
           </p>
           
           <div class="space-y-4 pt-4">
@@ -65,7 +65,7 @@ const features = computed(() => [
           <AiImageContainer
             :prompt="sectionPrompts.compass.prompt"
             aspectRatio="square"
-            :alt="t('compass.imageAlt')"
+            :alt="t('landing.compass.imageAlt')"
             shadow="xl"
             class="h-[400px] w-full rounded-2xl lg:h-[500px]"
           />

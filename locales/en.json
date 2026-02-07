@@ -102,25 +102,6 @@
       }
     }
   },
-  "compass": {
-    "title": "The Compass: Discover your crew",
-    "description": "Kinship combines the ease of modern matching apps with the rigor intentional families need. The Compass puts values and vision first, then surfaces people seeking the same journey.",
-    "imageAlt": "The Compass crew matching interface",
-    "features": {
-      "values": {
-        "title": "Values come first",
-        "description": "Browse crew profiles that lead with parenting philosophy, not photos. Compatibility shows before attraction."
-      },
-      "dimensions": {
-        "title": "Six dimensions of alignment",
-        "description": "See where you match and where early conversations matter. No single score hiding incompatibilities."
-      },
-      "structure": {
-        "title": "Structure before chemistry",
-        "description": "Complete guided discussions on hard topics before chat unlocks. Surface disagreements early."
-      }
-    }
-  },
   "productLayers": {
     "title": "Six layers. One complete system.",
     "description": "Traditional family formation leaves gaps between legal preparation, medical coordination, and emotional alignment. Kinship provides structure for every conversation and decision your crew needs to make together.",
@@ -192,6 +173,7 @@
     }
   },
   "familyAccountability": {
+    "badge": "Family Accountability",
     "title": "Family accountability before state intervention",
     "description": "Those who commit at birth stay responsible for guiding, correcting, and intervening when challenges arise. Kinship provides the structure to respond as a crew before courts step in with punishment.",
     "imageAlt": "Family accountability circle visualization",
@@ -235,6 +217,7 @@
     }
   },
   "governance": {
+    "badge": "Legal Protection",
     "title": "Legal protection built into every step",
     "description": "Kinship generates legally sound documentation from the start. Agreements activate when pregnancy begins, establishing responsibility before birth instead of scrambling for protection after separation.",
     "imageAlt": "Professional diverse governance and legal support team",
@@ -275,13 +258,15 @@
     }
   },
   "cta": {
+    "badge": "Start Your Journey",
     "imageAlt": "Multigenerational crew with children walking toward bright future",
     "title": "Ready to form your crew?",
     "description": "Start with values alignment. Build legal protection from day one. Maintain support through every transition.",
     "primary": "Get started",
     "secondary": "Join waitlist",
     "primaryAria": "Start building your crew on Kinship",
-    "secondaryAria": "Join the Kinship waitlist"
+    "secondaryAria": "Join the Kinship waitlist",
+    "note": "Join the community of intentional families."
   },
   "footer": {
     "tagline": "Form parenting crews with intention, clarity, and lasting support.",
@@ -460,6 +445,12 @@
     "noMatches": {
       "title": "No matches found",
       "description": "Check back later for new potential crew members."
+    },
+    "toasts": {
+      "messageSent": "Message Sent",
+      "messageSentDesc": "Your message to {name} has been sent.",
+      "requestSent": "Request Sent",
+      "requestSentDesc": "Connection request sent to {name}."
     }
   },
   "legal": {
@@ -491,7 +482,8 @@
       "useTemplate": "Use Template",
       "close": "Close",
       "edit": "Edit",
-      "createDocument": "Create Document"
+      "createDocument": "Create Document",
+      "cancel": "Cancel"
     },
     "modals": {
       "createTitle": "Create New Document",
@@ -556,7 +548,28 @@
   "landing": {
     "hero": {
       "openApp": "Open App",
-      "tryDemo": "Try Demo"
+      "tryDemo": "Try Demo",
+      "browseCompass": "Browse Compass"
+    },
+    "compass": {
+      "badge": "Compatibility",
+      "title": "The Compass: Discover your crew",
+      "description": "Kinship combines the ease of modern matching apps with the rigor intentional families need. The Compass puts values and vision first, then surfaces people seeking the same journey.",
+      "imageAlt": "The Compass crew matching interface",
+      "features": {
+        "values": {
+          "title": "Values come first",
+          "description": "Browse crew profiles that lead with parenting philosophy, not photos. Compatibility shows before attraction."
+        },
+        "dimensions": {
+          "title": "Six dimensions of alignment",
+          "description": "See where you match and where early conversations matter. No single score hiding incompatibilities."
+        },
+        "structure": {
+          "title": "Structure before chemistry",
+          "description": "Complete guided discussions on hard topics before chat unlocks. Surface disagreements early."
+        }
+      }
     }
   },
   "statCard": {

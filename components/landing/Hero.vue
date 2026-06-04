@@ -69,7 +69,7 @@ const downloadButtons = [
               <div class="rounded-[2.5rem] border-8 border-slate-800 bg-slate-900 p-2 shadow-2xl">
                 <div class="overflow-hidden rounded-[2rem] bg-slate-100 dark:bg-slate-800">
                   <AiImageContainer
-                    :prompt="sectionPrompts.hero.prompt"
+                    :prompt="sectionPrompts.hero.prompt" staticSrc="/kinship/images/hero.jpg"
                     aspectRatio="portrait"
                     :alt="t('hero.imageAlt')"
                     loading="eager"

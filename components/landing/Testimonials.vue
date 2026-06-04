@@ -10,19 +10,22 @@ const testimonials = computed(() => [
     quote: t('testimonials.items.first.quote'),
     name: t('testimonials.items.first.name'),
     role: t('testimonials.items.first.role'),
-    image: sectionPrompts.testimonial1
+    image: sectionPrompts.testimonial1,
+    staticSrc: '/kinship/images/testimonial1.jpg'
   },
   {
     quote: t('testimonials.items.second.quote'),
     name: t('testimonials.items.second.name'),
     role: t('testimonials.items.second.role'),
-    image: sectionPrompts.testimonial2
+    image: sectionPrompts.testimonial2,
+    staticSrc: '/kinship/images/testimonial2.jpg'
   },
   {
     quote: t('testimonials.items.third.quote'),
     name: t('testimonials.items.third.name'),
     role: t('testimonials.items.third.role'),
-    image: sectionPrompts.testimonial3
+    image: sectionPrompts.testimonial3,
+    staticSrc: '/kinship/images/testimonial3.jpg'
   }
 ])
 </script>
@@ -61,6 +64,7 @@ const testimonials = computed(() => [
               <div class="h-12 w-12 overflow-hidden rounded-full ring-2 ring-teal-100 dark:ring-teal-900">
                 <AiImageContainer
                   :prompt="testimonial.image.prompt"
+                  :staticSrc="testimonial.staticSrc"
                   aspectRatio="square"
                   :alt="testimonial.name"
                   shadow="none"

@@ -13,7 +13,7 @@ const { t } = useI18n()
         <!-- Image -->
         <div class="relative order-2 lg:order-1">
           <AiImageContainer
-            :prompt="sectionPrompts.cta.prompt"
+            :prompt="sectionPrompts.cta.prompt" staticSrc="/kinship/images/cta.jpg"
             aspectRatio="square"
             :alt="t('cta.imageAlt')"
             shadow="xl"

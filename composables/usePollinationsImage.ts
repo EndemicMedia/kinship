@@ -10,8 +10,8 @@ interface ImageOptions {
 
 const GEN_BASE_URL = 'https://gen.pollinations.ai/image/'
 const PUBLIC_BASE_URL = 'https://image.pollinations.ai/prompt/'
-const POLLINATIONS_API_KEY = 'pk_9sbL41ofRXSoaOC2'
-const DEFAULT_MODEL = 'gpt-image-2'
+const POLLINATIONS_API_KEY = import.meta.env.VITE_POLLINATIONS_API_KEY || ''
+const DEFAULT_MODEL = 'gptimage-large'
 
 // Module-level singleton: probe gen endpoint once per session
 let endpointProbe: Promise<boolean> | null = null

@@ -109,11 +109,24 @@ async function fetchImage(prompt, width, height, useGen) {
   return null
 }
 
-const PICSUM_SEEDS = { hero: 10, problem: 20, solution: 30, compass: 40, testimonial1: 50, testimonial2: 60, testimonial3: 70, cta: 80, 'how-discover': 91, 'how-align': 92, 'how-formalize': 93, 'how-sustain': 94 }
-
-async function fetchPicsum(name, width, height) {
-  const seed = PICSUM_SEEDS[name] || 99
-  const url = `https://picsum.photos/seed/${seed}/${width}/${height}`
+// Keyword-based fallback using loremflickr (contextually relevant)
+async function fetchLoremFlickr(name, width, height) {
+  const keywords = {
+    hero:           'family,children,diverse,parenting',
+    problem:        'family,conflict,stress',
+    solution:       'family,cooperation,planning',
+    compass:        'people,meeting,diverse',
+    testimonial1:   'woman,portrait,smile',
+    testimonial2:   'friends,group,diverse',
+    testimonial3:   'grandmother,children,family',
+    cta:            'family,outdoors,walking,children',
+    'how-discover': 'people,meeting,coffee',
+    'how-align':    'planning,teamwork,table',
+    'how-formalize':'signing,contract,professional',
+    'how-sustain':  'family,dinner,gathering',
+  }
+  const kw = keywords[name] || 'family'
+  const url = `https://loremflickr.com/${width}/${height}/${kw}?lock=${Object.keys(keywords).indexOf(name) + 1}`
   const res = await fetch(url)
   if (res.ok) return res
   return null
@@ -141,10 +154,10 @@ async function main() {
       if (!useGen && res) await new Promise(r => setTimeout(r, 1500))
     }
 
-    // Fall back to Picsum for preview purposes if Pollinations unreachable
+    // Fall back to loremflickr for preview purposes if Pollinations unreachable
     if (!res) {
-      console.log(`  ↩️  Pollinations unavailable — using Picsum placeholder`)
-      res = await fetchPicsum(name, width, height)
+      console.log(`  ↩️  Pollinations unavailable — using loremflickr placeholder`)
+      res = await fetchLoremFlickr(name, width, height)
     }
 
     if (!res) { console.log(`  ❌ all sources failed for ${name}`); continue }

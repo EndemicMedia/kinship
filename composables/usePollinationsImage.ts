@@ -27,14 +27,13 @@ interface CacheStats {
   hitRate: number
 }
 
-const POLLINATIONS_API_KEY = 'pk_9sbL41ofRXSoaOC2'
-const BASE_IMAGE_URL = 'https://gen.pollinations.ai/image/'
+const BASE_IMAGE_URL = 'https://image.pollinations.ai/prompt/'
 const CACHE_DURATION = 7 * 24 * 60 * 60 * 1000 // 7 days in milliseconds
 const MAX_CACHE_SIZE = 50 // Maximum number of cached images
-const DEFAULT_MODEL = 'nanobanana' // Primary model - cheapest (0.00003 pollen)
+const DEFAULT_MODEL = 'gpt-image-2'
 
-// Fallback models in order of preference (cost, reliability)
-const FALLBACK_MODELS = ['flux', 'turbo', 'zimage']
+// Fallback models in order of preference
+const FALLBACK_MODELS = ['flux-realism', 'flux', 'turbo']
 
 // Global cache statistics for monitoring
 const globalCacheStats: CacheStats = {
@@ -137,13 +136,11 @@ export function usePollinationsImage() {
     console.log(`[usePollinationsImage] Styled prompt length: ${styledPrompt.length} characters`)
 
     const params = new URLSearchParams({
-      key: POLLINATIONS_API_KEY,
       model: options.model || DEFAULT_MODEL,
+      nologo: 'true',
       ...(options.width && { width: options.width.toString() }),
       ...(options.height && { height: options.height.toString() }),
       ...(options.seed !== undefined && { seed: options.seed.toString() }),
-      ...(options.nologo && { nologo: 'true' }),
-      ...(options.private && { private: 'true' }),
       ...(options.safe && { safe: 'true' }),
       ...(options.enhance && { enhance: 'true' }),
     })

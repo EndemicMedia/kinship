@@ -27,13 +27,36 @@ interface CacheStats {
   hitRate: number
 }
 
-const BASE_IMAGE_URL = 'https://image.pollinations.ai/prompt/'
+const GEN_BASE_URL = 'https://gen.pollinations.ai/image/'
+const PUBLIC_BASE_URL = 'https://image.pollinations.ai/prompt/'
+const POLLINATIONS_API_KEY = 'pk_9sbL41ofRXSoaOC2'
 const CACHE_DURATION = 7 * 24 * 60 * 60 * 1000 // 7 days in milliseconds
 const MAX_CACHE_SIZE = 50 // Maximum number of cached images
 const DEFAULT_MODEL = 'gpt-image-2'
 
 // Fallback models in order of preference
 const FALLBACK_MODELS = ['flux-realism', 'flux', 'turbo']
+
+// Module-level singleton: probe gen endpoint once, shared across all instances
+let endpointProbe: Promise<boolean> | null = null
+
+async function probeGenEndpoint(): Promise<boolean> {
+  if (!endpointProbe) {
+    endpointProbe = (async () => {
+      try {
+        const probe = `${GEN_BASE_URL}${encodeURIComponent('test')}?key=${POLLINATIONS_API_KEY}&model=${DEFAULT_MODEL}&width=32&height=32`
+        const res = await fetch(probe, { method: 'HEAD' })
+        const ok = res.ok
+        console.log(`[usePollinationsImage] Endpoint probe: gen.pollinations.ai → ${res.status} — using ${ok ? 'gen (paid)' : 'image.pollinations.ai (free)'}`)
+        return ok
+      } catch {
+        console.log('[usePollinationsImage] Endpoint probe failed — using image.pollinations.ai (free)')
+        return false
+      }
+    })()
+  }
+  return endpointProbe
+}
 
 // Global cache statistics for monitoring
 const globalCacheStats: CacheStats = {
@@ -129,13 +152,11 @@ export function usePollinationsImage() {
   }
 
   // Generate image URL with parameters
-  const buildImageUrl = (prompt: string, options: ImageOptions): string => {
-    // Apply style keywords to the prompt for consistency
+  const buildImageUrl = (prompt: string, options: ImageOptions, useGen: boolean): string => {
     const styledPrompt = applyStyle(prompt, 'base')
     console.log(`[usePollinationsImage] Building image URL for styled prompt: "${styledPrompt.substring(0, 80)}..."`)
-    console.log(`[usePollinationsImage] Styled prompt length: ${styledPrompt.length} characters`)
 
-    const params = new URLSearchParams({
+    const baseParams: Record<string, string> = {
       model: options.model || DEFAULT_MODEL,
       nologo: 'true',
       ...(options.width && { width: options.width.toString() }),
@@ -143,19 +164,21 @@ export function usePollinationsImage() {
       ...(options.seed !== undefined && { seed: options.seed.toString() }),
       ...(options.safe && { safe: 'true' }),
       ...(options.enhance && { enhance: 'true' }),
-    })
+    }
 
-    const url = `${BASE_IMAGE_URL}${encodeURIComponent(styledPrompt)}?${params.toString()}`
-    console.log(`[usePollinationsImage] Full URL length: ${url.length} characters`)
-    console.log(`[usePollinationsImage] Full URL: ${url.substring(0, 150)}...`)
+    if (useGen) baseParams.key = POLLINATIONS_API_KEY
+
+    const base = useGen ? GEN_BASE_URL : PUBLIC_BASE_URL
+    const url = `${base}${encodeURIComponent(styledPrompt)}?${new URLSearchParams(baseParams).toString()}`
+    console.log(`[usePollinationsImage] Endpoint: ${useGen ? 'gen (paid)' : 'public (free)'} | URL: ${url.substring(0, 120)}...`)
     return url
   }
 
   // Try to fetch from a specific model
-  const tryFetchModel = async (prompt: string, options: ImageOptions, modelName: string): Promise<{ blob: Blob; url: string } | null> => {
+  const tryFetchModel = async (prompt: string, options: ImageOptions, modelName: string, useGen: boolean): Promise<{ blob: Blob; url: string } | null> => {
     try {
       console.log(`[usePollinationsImage] 🔄 Trying model: ${modelName}`)
-      const imageUrl = buildImageUrl(prompt, { ...options, model: modelName })
+      const imageUrl = buildImageUrl(prompt, { ...options, model: modelName }, useGen)
 
       const response = await fetch(imageUrl, {
         method: 'GET',
@@ -203,23 +226,14 @@ export function usePollinationsImage() {
     error.value = null
 
     try {
+      // Probe the gen endpoint once; all fetches in this session use the result
+      const useGen = await probeGenEndpoint()
+
       // Determine which models to try
       const modelsToTry: string[] = []
-      
-      // Add requested model first if specified
-      if (options.model && options.model !== DEFAULT_MODEL) {
-        modelsToTry.push(options.model)
-      }
-      
-      // Add default model
+      if (options.model && options.model !== DEFAULT_MODEL) modelsToTry.push(options.model)
       modelsToTry.push(DEFAULT_MODEL)
-      
-      // Add fallback models (excluding ones already tried)
-      FALLBACK_MODELS.forEach(model => {
-        if (!modelsToTry.includes(model)) {
-          modelsToTry.push(model)
-        }
-      })
+      FALLBACK_MODELS.forEach(model => { if (!modelsToTry.includes(model)) modelsToTry.push(model) })
 
       console.log(`[usePollinationsImage] 🎯 Will try models in order: ${modelsToTry.join(' → ')}`)
 
@@ -228,24 +242,11 @@ export function usePollinationsImage() {
       let successfulModel = ''
 
       for (const modelName of modelsToTry) {
-        result = await tryFetchModel(prompt, options, modelName)
+        result = await tryFetchModel(prompt, options, modelName, useGen)
         if (result) {
           successfulModel = modelName
           console.log(`[usePollinationsImage] 🏆 Successfully used model: ${modelName}`)
           break
-        }
-      }
-
-      // If all models failed, try without nologo as last resort
-      if (!result && options.nologo) {
-        console.log(`[usePollinationsImage] 🔄 All models failed with nologo, trying without...`)
-        for (const modelName of modelsToTry) {
-          result = await tryFetchModel(prompt, { ...options, nologo: false }, modelName)
-          if (result) {
-            successfulModel = `${modelName} (no nologo)`
-            console.log(`[usePollinationsImage] 🏆 Success without nologo using: ${modelName}`)
-            break
-          }
         }
       }
 
@@ -343,7 +344,6 @@ export function usePollinationsImage() {
     fetchImage,
     clearCache,
     cacheStats,
-    buildImageUrl,
     getGlobalCacheStats,
     logCacheStats,
   }

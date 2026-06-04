@@ -53,10 +53,10 @@ const testimonials = computed(() => [
               <UIcon name="i-heroicons-quotation-mark" class="h-10 w-10" />
             </div>
             
-            <p class="mb-6 text-slate-600 dark:text-slate-300 leading-relaxed">
+            <p class="mb-6 line-clamp-4 text-slate-600 dark:text-slate-300 leading-relaxed">
               "{{ testimonial.quote }}"
             </p>
-            
+
             <div class="flex items-center gap-4 pt-4 border-t border-slate-100 dark:border-slate-700">
               <div class="h-12 w-12 overflow-hidden rounded-full ring-2 ring-teal-100 dark:ring-teal-900">
                 <AiImageContainer
@@ -70,7 +70,7 @@ const testimonials = computed(() => [
               </div>
               <div>
                 <p class="font-semibold text-slate-900 dark:text-white">{{ testimonial.name }}</p>
-                <p class="text-sm text-slate-500 dark:text-slate-400">{{ testimonial.role }}</p>
+                <UBadge color="teal" variant="soft" size="xs" class="mt-1">{{ testimonial.role }}</UBadge>
               </div>
             </div>
           </div>

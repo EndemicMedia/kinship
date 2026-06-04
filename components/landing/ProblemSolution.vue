@@ -14,9 +14,6 @@ const { t } = useI18n()
           <h2 class="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
             {{ t('problemSolution.title') }}
           </h2>
-          <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">
-            {{ t('problemSolution.description') }}
-          </p>
         </div>
 
         <!-- Problem Section - Image Left, Text Right -->

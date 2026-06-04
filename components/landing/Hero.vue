@@ -1,18 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import AiImageContainer from '../image/AiImageContainer.vue'
 import { sectionPrompts } from '../../composables/prompts'
 
 const { t } = useI18n()
-
-const highlights = computed(() => [
-  t('hero.highlights.values'),
-  t('hero.highlights.planning'),
-  t('hero.highlights.intention'),
-  t('hero.highlights.contracts'),
-  t('hero.highlights.accountability'),
-  t('hero.highlights.exit')
-])
 
 const downloadButtons = [
   { label: t('landing.hero.openApp'), icon: 'i-heroicons-arrow-top-right-on-square', href: '/app/login' },
@@ -44,10 +34,6 @@ const downloadButtons = [
             {{ t('hero.description') }}
           </p>
           
-          <p class="text-base font-medium text-teal-300">
-            {{ t('hero.subtext') }}
-          </p>
-          
           <!-- Download buttons -->
           <div class="flex flex-wrap gap-3 pt-2">
             <UButton
@@ -73,13 +59,6 @@ const downloadButtons = [
             </UButton>
           </div>
           
-          <!-- Highlights -->
-          <div class="grid gap-3 pt-4 text-sm text-white/70 sm:grid-cols-2">
-            <div v-for="item in highlights" :key="item" class="flex items-start gap-2">
-              <span class="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-teal-400" aria-hidden="true" />
-              <span>{{ item }}</span>
-            </div>
-          </div>
         </div>
 
         <!-- App Mockup/Image -->

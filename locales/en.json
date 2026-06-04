@@ -57,7 +57,7 @@
   "hero": {
     "badge": "Intentional parenthood coordination platform",
     "title": "Form parenting crews with intention, clarity, and lasting support.",
-    "description": "Assemble a crew to raise children together. Align on values. Define clear roles. Create stability every child deserves.",
+    "description": "Align on values, coordinate planning, and formalize responsibility — before the baby arrives.",
     "subtext": "Responsibility begins at conception, not at romantic commitment.",
     "cta": {
       "primary": "Get started",
@@ -81,7 +81,7 @@
     "problem": {
       "eyebrow": "The problem",
       "title": "Passion is volatile. Partnership needs stability. Law demands clarity.",
-      "description": "Marriage forces these incompatible forces together. When desire fades or conflict arises, the legal and parenting structure collapses with it. Children lose stability because adults could not sustain romance.",
+      "description": "Marriage forces these incompatible forces together. When romance ends, the parenting structure collapses with it.",
       "imageAlt": "Abstract visualization of incompatible systems forced together",
       "points": {
         "noFramework": "No clear framework for family planning",
@@ -92,7 +92,7 @@
     "solution": {
       "eyebrow": "The Kinship solution",
       "title": "Separate romance from responsibility. Activate agreements at conception.",
-      "description": "Form crews around shared parenting goals, not romantic chemistry. Legal agreements activate when pregnancy begins, not when vows are spoken. Responsibility transforms when life changes, but never disappears.",
+      "description": "Form crews around shared parenting goals, not romantic chemistry. Legal agreements activate at conception — responsibility transforms but never disappears.",
       "imageAlt": "Abstract visualization of harmonious unbundled systems",
       "points": {
         "clearFramework": "Clear, structured framework for all parties",
@@ -235,6 +235,17 @@
         "description": "Responsibilities adjust when life changes, never vanish. Mediation before exit, child continuity plans required."
       }
     }
+  },
+  "features": {
+    "title": "Everything your crew needs.",
+    "description": "Six structured layers, values-first matching, and built-in legal protection — in one platform.",
+    "tabs": {
+      "layers": "The 6 Layers",
+      "compass": "The Compass",
+      "for": "Who It's For"
+    },
+    "compassIntro": "Values and vision come first. The Compass surfaces people seeking the same journey.",
+    "forQuote": "You don't need a romantic partner to raise a child well. You need aligned adults willing to commit to the same long-term project."
   },
   "testimonials": {
     "title": "Real crews. Real outcomes.",

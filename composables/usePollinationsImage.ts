@@ -58,6 +58,16 @@ async function probeGenEndpoint(): Promise<boolean> {
   return endpointProbe
 }
 
+// Module-level serial queue for the free endpoint (max 1 concurrent request per IP)
+let freeQueueTail: Promise<void> = Promise.resolve()
+
+function enqueueFree<T>(fn: () => Promise<T>): Promise<T> {
+  const result = freeQueueTail.then(fn)
+  // Advance the tail; swallow errors so the queue never stalls
+  freeQueueTail = result.then(() => {}, () => {})
+  return result
+}
+
 // Global cache statistics for monitoring
 const globalCacheStats: CacheStats = {
   hits: 0,
@@ -229,25 +239,36 @@ export function usePollinationsImage() {
       // Probe the gen endpoint once; all fetches in this session use the result
       const useGen = await probeGenEndpoint()
 
-      // Determine which models to try
+      // Determine which models to try (skip component-default nanobanana on free endpoint)
       const modelsToTry: string[] = []
-      if (options.model && options.model !== DEFAULT_MODEL) modelsToTry.push(options.model)
+      const requestedModel = options.model
+      if (requestedModel && requestedModel !== DEFAULT_MODEL && (useGen || requestedModel !== 'nanobanana')) {
+        modelsToTry.push(requestedModel)
+      }
       modelsToTry.push(DEFAULT_MODEL)
       FALLBACK_MODELS.forEach(model => { if (!modelsToTry.includes(model)) modelsToTry.push(model) })
 
       console.log(`[usePollinationsImage] 🎯 Will try models in order: ${modelsToTry.join(' → ')}`)
 
-      // Try each model in order
+      // Try each model — serialize requests through the queue when using the free endpoint
       let result: { blob: Blob; url: string } | null = null
       let successfulModel = ''
 
-      for (const modelName of modelsToTry) {
-        result = await tryFetchModel(prompt, options, modelName, useGen)
-        if (result) {
-          successfulModel = modelName
-          console.log(`[usePollinationsImage] 🏆 Successfully used model: ${modelName}`)
-          break
+      const runFetch = async () => {
+        for (const modelName of modelsToTry) {
+          result = await tryFetchModel(prompt, options, modelName, useGen)
+          if (result) {
+            successfulModel = modelName
+            console.log(`[usePollinationsImage] 🏆 Successfully used model: ${modelName}`)
+            break
+          }
         }
+      }
+
+      if (useGen) {
+        await runFetch()
+      } else {
+        await enqueueFree(runFetch)
       }
 
       if (!result) {

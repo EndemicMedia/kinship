@@ -25,7 +25,7 @@ const { t } = useI18n()
 const props = withDefaults(defineProps<Props>(), {
   width: 1024,
   height: 1024,
-  model: 'nanobanana', // Default to nanobanana - cheapest and most reliable
+  model: 'gpt-image-2',
   aspectRatio: 'auto',
   alt: '',
   loading: 'lazy',

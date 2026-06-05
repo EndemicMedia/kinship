@@ -10,25 +10,29 @@ const steps = computed(() => [
     icon: 'i-heroicons-magnifying-glass',
     label: t('howItWorks.steps.discover.label'),
     content: t('howItWorks.steps.discover.content'),
-    image: sectionPrompts.discover
+    image: sectionPrompts.discover,
+    staticSrc: '/kinship/images/how-discover.jpg'
   },
   {
     icon: 'i-heroicons-bullseye',
     label: t('howItWorks.steps.align.label'),
     content: t('howItWorks.steps.align.content'),
-    image: sectionPrompts.plan
+    image: sectionPrompts.plan,
+    staticSrc: '/kinship/images/how-align.jpg'
   },
   {
     icon: 'i-heroicons-document-check',
     label: t('howItWorks.steps.formalize.label'),
     content: t('howItWorks.steps.formalize.content'),
-    image: sectionPrompts.secure
+    image: sectionPrompts.secure,
+    staticSrc: '/kinship/images/how-formalize.jpg'
   },
   {
     icon: 'i-heroicons-arrow-path',
     label: t('howItWorks.steps.sustain.label'),
     content: t('howItWorks.steps.sustain.content'),
-    image: sectionPrompts.sustain
+    image: sectionPrompts.sustain,
+    staticSrc: '/kinship/images/how-sustain.jpg'
   }
 ])
 </script>
@@ -64,6 +68,7 @@ const steps = computed(() => [
               <div class="relative h-48 overflow-hidden">
                 <AiImageContainer
                   :prompt="step.image.prompt"
+                  :staticSrc="step.staticSrc"
                   aspectRatio="landscape"
                   :alt="step.label"
                   shadow="none"

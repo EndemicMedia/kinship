@@ -76,12 +76,8 @@ useHead(() => ({
   <main>
     <LandingHero />
     <LandingProblemSolution />
-    <LandingTheCompass />
-    <LandingProductLayers />
     <LandingHowItWorks />
-    <LandingWhoItsFor />
-    <LandingFamilyAccountability />
-    <LandingGovernanceLegalSupport />
+    <LandingFeatures />
     <LandingTestimonials />
     <LandingCallToAction />
   </main>

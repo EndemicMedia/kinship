@@ -10,19 +10,22 @@ const testimonials = computed(() => [
     quote: t('testimonials.items.first.quote'),
     name: t('testimonials.items.first.name'),
     role: t('testimonials.items.first.role'),
-    image: sectionPrompts.testimonial1
+    image: sectionPrompts.testimonial1,
+    staticSrc: '/kinship/images/testimonial1.jpg'
   },
   {
     quote: t('testimonials.items.second.quote'),
     name: t('testimonials.items.second.name'),
     role: t('testimonials.items.second.role'),
-    image: sectionPrompts.testimonial2
+    image: sectionPrompts.testimonial2,
+    staticSrc: '/kinship/images/testimonial2.jpg'
   },
   {
     quote: t('testimonials.items.third.quote'),
     name: t('testimonials.items.third.name'),
     role: t('testimonials.items.third.role'),
-    image: sectionPrompts.testimonial3
+    image: sectionPrompts.testimonial3,
+    staticSrc: '/kinship/images/testimonial3.jpg'
   }
 ])
 </script>
@@ -53,14 +56,15 @@ const testimonials = computed(() => [
               <UIcon name="i-heroicons-quotation-mark" class="h-10 w-10" />
             </div>
             
-            <p class="mb-6 text-slate-600 dark:text-slate-300 leading-relaxed">
+            <p class="mb-6 line-clamp-4 text-slate-600 dark:text-slate-300 leading-relaxed">
               "{{ testimonial.quote }}"
             </p>
-            
+
             <div class="flex items-center gap-4 pt-4 border-t border-slate-100 dark:border-slate-700">
               <div class="h-12 w-12 overflow-hidden rounded-full ring-2 ring-teal-100 dark:ring-teal-900">
                 <AiImageContainer
                   :prompt="testimonial.image.prompt"
+                  :staticSrc="testimonial.staticSrc"
                   aspectRatio="square"
                   :alt="testimonial.name"
                   shadow="none"
@@ -70,7 +74,7 @@ const testimonials = computed(() => [
               </div>
               <div>
                 <p class="font-semibold text-slate-900 dark:text-white">{{ testimonial.name }}</p>
-                <p class="text-sm text-slate-500 dark:text-slate-400">{{ testimonial.role }}</p>
+                <UBadge color="teal" variant="soft" size="xs" class="mt-1">{{ testimonial.role }}</UBadge>
               </div>
             </div>
           </div>

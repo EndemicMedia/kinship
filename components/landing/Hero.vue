@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import AiImageContainer from '../image/AiImageContainer.vue'
-import { sectionPrompts } from '../../composables/prompts'
 
 const { t } = useI18n()
 
@@ -61,32 +59,18 @@ const downloadButtons = [
           
         </div>
 
-        <!-- App Mockup/Image -->
+        <!-- Hero Image -->
         <div class="relative flex items-center justify-center lg:justify-end">
-          <div class="relative">
-            <!-- Phone frame -->
-            <div class="relative z-10 w-[280px] sm:w-[320px] lg:w-[380px]">
-              <div class="rounded-[2.5rem] border-8 border-slate-800 bg-slate-900 p-2 shadow-2xl">
-                <div class="overflow-hidden rounded-[2rem] bg-slate-100 dark:bg-slate-800">
-                  <AiImageContainer
-                    :prompt="sectionPrompts.hero.prompt" staticSrc="/kinship/images/hero.jpg"
-                    aspectRatio="portrait"
-                    :alt="t('hero.imageAlt')"
-                    loading="eager"
-                    shadow="none"
-                    :rounded="false"
-                    class="h-[480px] w-full sm:h-[520px] lg:h-[580px]"
-                  />
-                </div>
-              </div>
-              <!-- Notch -->
-              <div class="absolute left-1/2 top-2 h-6 w-20 -translate-x-1/2 rounded-full bg-slate-800" />
-            </div>
-            
-            <!-- Decorative elements around phone -->
-            <div class="absolute -right-4 top-1/4 h-12 w-12 rounded-xl bg-teal-500/20 blur-sm" />
-            <div class="absolute -left-8 bottom-1/3 h-8 w-8 rounded-full bg-rose-500/20 blur-sm" />
-            <div class="absolute right-0 bottom-10 h-16 w-16 rounded-full bg-teal-400/10" />
+          <div class="relative w-full max-w-lg lg:max-w-none">
+            <img
+              :src="'/kinship/images/hero.jpg'"
+              :alt="t('hero.imageAlt')"
+              class="w-full rounded-2xl object-cover shadow-2xl ring-1 ring-white/10"
+              style="aspect-ratio: 1024/600"
+              loading="eager"
+            />
+            <!-- Decorative glow -->
+            <div class="absolute -inset-4 -z-10 rounded-3xl bg-teal-500/10 blur-2xl" />
           </div>
         </div>
       </div>

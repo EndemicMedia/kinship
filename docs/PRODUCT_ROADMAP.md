@@ -21,6 +21,57 @@
 
 ---
 
+## Current Delivery Scope: Frontend Showcase
+
+Kinship currently targets a frontend-only mock website that demonstrates the
+displayed features. Real accounts, real data, backend services, and external
+integrations are outside this delivery scope. The production requirements below
+remain a long-term specification, not a checklist of capabilities already shipped.
+
+### Completed showcase milestones
+
+- [x] Seeded-persona login, session restoration, switching, and logout.
+- [x] Persona-specific profile editing and locally saved notification/privacy preferences.
+- [x] Compass filtering, compatibility breakdowns, votes/reset, local message history,
+  and pending connection requests.
+- [x] Crew creation, discovery, joining/requesting membership, chat, and attachment-name previews.
+- [x] Crew values, incident responses/status changes, check-in scheduling, and submission.
+- [x] Crew-linked template drafts, document editing, signing, reopening, and text downloads.
+- [x] Search commands, notification destinations, activity links, theme controls,
+  and keyboard-accessible navigation/sidebar controls.
+- [x] Landing navigation and informational dialogs; English, German, and Portuguese
+  content with locale-preserving app navigation.
+- [x] Mobile/tablet/desktop behavioral tests, WebKit smoke coverage, unit tests,
+  type checking, translation checks, and local image validation.
+- [x] Static export with client-only app deep links and validation-gated Pages deployment.
+
+Mock messages and signatures do not contact other people or execute agreements.
+Password changes and account deletion demonstrate cancellable workflows without
+changing a real account. Attachment previews do not upload files.
+Profile overrides and preferences persist locally; crew and Compass changes
+are session-local and are not durable backend records.
+
+### Next showcase priorities
+
+1. Keep behavioral coverage aligned with every new displayed control and route;
+   include narrow-screen, keyboard, locale, and static-export checks.
+2. Extend accessibility checks for focus order, contrast, and assistive-technology
+   announcements beyond the current interaction tests.
+3. Exercise malformed or unavailable browser storage and interrupted mock actions
+   to strengthen recovery behavior.
+4. Add further product journeys from this specification only when intentionally
+   added to the showcase; implement them with mock state unless scope changes.
+
+These priorities are follow-up work, not unfinished items from the completed
+showcase milestone. Production authentication, identity verification, payments,
+medical/legal integrations, and backend persistence require a separate delivery
+decision before implementation.
+
+See [interaction contracts](../BUTTON_AUDIT.md) for observable behavior and
+[setup and validation](../README.md) for local and static test commands.
+
+---
+
 ## Overview
 
 This document specifies all technical features required to build the Kinship platform. Features are organized by functional area and prioritized as:

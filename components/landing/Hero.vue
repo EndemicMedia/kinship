@@ -1,11 +1,15 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import AiImageContainer from '../image/AiImageContainer.vue'
+import { sectionPrompts } from '../../composables/prompts'
 
 const { t } = useI18n()
+const localePath = useLocalePath()
 
-const downloadButtons = [
-  { label: t('landing.hero.openApp'), icon: 'i-heroicons-arrow-top-right-on-square', href: '/app/login' },
-  { label: t('landing.hero.tryDemo'), icon: 'i-heroicons-play', href: '/app/login' }
-]
+const downloadButtons = computed(() => [
+  { label: t('landing.hero.openApp'), icon: 'i-heroicons-arrow-top-right-on-square', href: localePath('/app/login') },
+  { label: t('landing.hero.tryDemo'), icon: 'i-heroicons-play', href: localePath('/app/login') }
+])
 </script>
 
 <template>
@@ -62,8 +66,11 @@ const downloadButtons = [
         <!-- Hero Image -->
         <div class="relative flex items-center justify-center lg:justify-end">
           <div class="relative w-full max-w-lg lg:max-w-none">
-            <img
-              :src="'/kinship/images/hero.jpg'"
+            <AiImageContainer
+              :prompt="sectionPrompts.hero.prompt"
+              staticSrc="/images/hero.jpg"
+              :width="1024"
+              :height="600"
               :alt="t('hero.imageAlt')"
               class="w-full rounded-2xl object-cover shadow-2xl ring-1 ring-white/10"
               style="aspect-ratio: 1024/600"

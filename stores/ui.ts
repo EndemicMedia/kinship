@@ -7,15 +7,17 @@ interface UIState {
   toasts: Toast[]
   activities: Activity[]
   sidebarCollapsed: boolean
+  toastSequence: number
 }
 
-interface Notification {
+export interface Notification {
   id: string
   type: 'match' | 'message' | 'document' | 'checkin' | 'incident'
   title: string
   message: string
   read: boolean
   timestamp: Date
+  actionUrl?: string
 }
 
 interface Toast {
@@ -27,7 +29,7 @@ interface Toast {
   dismissed: boolean
 }
 
-interface Activity {
+export interface Activity {
   id: string
   type: 'crew' | 'document' | 'member' | 'message' | 'milestone'
   title: string
@@ -35,7 +37,7 @@ interface Activity {
   timestamp: Date
   userId?: string
   crewId?: string
-  metadata?: Record<string, any>
+  metadata?: Record<string, unknown>
 }
 
 export const useUIStore = defineStore('ui', {
@@ -99,7 +101,8 @@ export const useUIStore = defineStore('ui', {
         timestamp: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000) // 10 days ago
       }
     ],
-    sidebarCollapsed: false
+    sidebarCollapsed: false,
+    toastSequence: 0
   }),
 
   getters: {
@@ -124,7 +127,7 @@ export const useUIStore = defineStore('ui', {
     addNotification(notification: Omit<Notification, 'id' | 'timestamp'>): void {
       this.notifications.unshift({
         ...notification,
-        id: Math.random().toString(36).substr(2, 9),
+        id: `notif-${Date.now()}-${this.notifications.length}`,
         timestamp: new Date()
       })
     },
@@ -146,10 +149,10 @@ export const useUIStore = defineStore('ui', {
 
     // Toast notifications
     showToast(toast: Omit<Toast, 'id' | 'dismissed'>): void {
-      const id = Date.now()
+      this.toastSequence = Math.max(Date.now(), this.toastSequence + 1)
       this.toasts.push({
         ...toast,
-        id,
+        id: this.toastSequence,
         dismissed: false
       })
     },
@@ -167,9 +170,10 @@ export const useUIStore = defineStore('ui', {
 
     // Activity tracking
     addActivity(activity: Omit<Activity, 'id' | 'timestamp'>): void {
+      const id = `activity-${Date.now()}-${this.activities.length}`
       this.activities.unshift({
         ...activity,
-        id: Math.random().toString(36).substr(2, 9),
+        id,
         timestamp: new Date()
       })
     },

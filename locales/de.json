@@ -1,4 +1,136 @@
 {
+  "showcase": {
+    "sidebar": { "collapse": "Seitenleiste einklappen", "expand": "Seitenleiste ausklappen" },
+    "auth": {
+      "storageError": "Auf den Browserspeicher konnte nicht zugegriffen werden. Versuche es erneut.",
+      "storageErrorTitle": "Problem mit dem Browserspeicher",
+      "storageErrors": {
+        "clear": "Die lokale Sitzung konnte nicht aus diesem Browser entfernt werden.",
+        "write": "Änderungen sind für diesen Besuch aktiv, konnten aber nicht im Browser gespeichert werden.",
+        "read": "Die gespeicherte Sitzung konnte nicht gelesen werden. Du kannst eine neue Sitzung beginnen.",
+        "profileRead": "Gespeicherte Profiländerungen konnten nicht gelesen werden."
+      },
+      "dismiss": "Schließen"
+    },
+    "header": { "search": "Kinship durchsuchen", "notifications": "Benachrichtigungen, {count} ungelesen", "toggleTheme": "Farbmodus wechseln", "logout": "Abmelden", "account": "Konto von {name}" },
+    "notifications": { "empty": "Keine Benachrichtigungen" },
+    "toasts": { "dismiss": "Benachrichtigung schließen" },
+    "profile": { "personaHint": "Profiländerungen werden für jede Persona separat gespeichert." },
+    "activity": { "subtitle": "Wähle eine Aktivität, um die zugehörige Crew oder das Dokument zu öffnen." },
+    "settings": {
+      "storageFailed": "Einstellungen konnten nicht gespeichert werden",
+      "storageFailedDescription": "Deine Einstellungen bleiben für diesen Besuch aktiv, konnten aber nicht im Browser gespeichert werden.",
+      "storageErrorTitle": "Problem beim Speichern",
+      "storageErrors": { "read": "Gespeicherte Einstellungen konnten nicht gelesen werden.", "write": "Deine Einstellungen sind für diesen Besuch aktiv, konnten aber nicht im Browser gespeichert werden." },
+      "personaHint": "Diese Einstellungen gelten für {name} und werden in diesem Browser gespeichert.",
+      "passwordCompleteTitle": "Passwortablauf abgeschlossen",
+      "passwordCompleteDescription": "Es wurde kein Passwort geändert und kein Dienst kontaktiert.",
+      "privacyCompleteTitle": "Datenschutzeinstellungen gespeichert",
+      "privacyCompleteDescription": "Die Datenschutzeinstellungen wurden lokal für diese Persona gespeichert.",
+      "deleteCompleteTitle": "Löschablauf abgeschlossen",
+      "deleteCompleteDescription": "Es wurden kein Konto und keine Daten gelöscht.",
+      "workflowCompleteTitle": "Ablauf abgeschlossen",
+      "workflowCompleteDescription": "Diese Website kontaktiert keinen Dienst und ändert kein echtes Konto.",
+      "passwordHint": "Gib ein aktuelles Passwort und ein neues Passwort mit mindestens acht Zeichen ein, um die Bestätigung zu sehen.",
+      "currentPassword": "Aktuelles Passwort", "newPassword": "Neues Passwort", "passwordMinimum": "Verwende mindestens acht Zeichen.",
+      "privacyHint": "Diese Einstellungen gelten für die ausgewählte Persona.",
+      "discoverable": "Mein Profil im Kompass anzeigen", "shareMatchBreakdown": "Meinen Kompatibilitätsvergleich teilen",
+      "deleteWarning": "Prüfe die Löschanfrage, bevor du fortfährst.", "simulatedOnly": "Es werden kein echtes Konto und keine Daten geändert.",
+      "deleteConfirmationLabel": "Gib DELETE ein, um die Anfrage zu bestätigen",
+      "done": "Fertig", "cancel": "Abbrechen", "submitPassword": "Weiter", "savePrivacy": "Datenschutzeinstellungen speichern", "confirmDelete": "Anfrage bestätigen"
+    },
+    "compass": {
+      "children": "{count} Kinder",
+      "conversation": "Gespräch",
+      "like": "{name} gefällt mir", "maybeAction": "Vielleicht {name}", "pass": "{name} überspringen",
+      "liked": "gefällt mir", "maybe": "vielleicht", "passed": "übersprungen",
+      "decisionActivity": "Profil als {decision} markiert",
+      "decisionActivityDescription": "Deine Auswahl für {name} wurde für diese Sitzung gespeichert.",
+      "decisionSaved": "{decision} gespeichert", "decisionSavedDescription": "Deine Auswahl für {name} ist in dieser Browsersitzung gespeichert.",
+      "messageActivity": "Nachricht gespeichert", "connectActivity": "Verbindungsanfrage gespeichert",
+      "actionActivityDescription": "Eine Aktion für {name} wurde erfasst.",
+      "resetComplete": "Kompass-Auswahl zurückgesetzt", "resetDescription": "Alle Bewertungen wurden für diese Persona gelöscht.",
+      "resetFilters": "Filter zurücksetzen", "messageSent": "Nachricht gespeichert", "requestSent": "Anfrage ausstehend",
+      "notProvided": "Nicht angegeben", "availability": "Verfügbarkeit",
+      "breakdownHint": "Jeder Prozentsatz zeigt die Übereinstimmung innerhalb der Kategorie; fehlende Daten werden nicht gezählt.",
+      "notAvailable": "Nicht verfügbar", "requestAlreadySent": "Eine Verbindungsanfrage für {name} wurde bereits gespeichert.",
+      "messageSavedTitle": "Nachricht gespeichert", "messageSavedDescription": "Deine Nachricht an {name} ist jetzt in dieser Sitzung sichtbar.",
+      "requestSavedTitle": "Verbindungsanfrage gespeichert", "requestSavedDescription": "Deine Anfrage an {name} ist jetzt in dieser Sitzung sichtbar."
+    },
+    "close": "Schließen",
+    "info": {
+      "about": { "title": "Über Kinship", "body": "Kinship erkundet intentionale Eltern-Crews mit gemeinsamen Werten, klaren Verantwortlichkeiten und dauerhaftem Rückhalt. Entdecke den Abgleich, Crew-Gespräche, Verantwortlichkeit und Dokumentabläufe. Elternvereinbarungen erfordern sorgfältige Gespräche und qualifizierte Beratung." },
+      "pricing": { "title": "Preise und Verfügbarkeit", "body": "Du kannst hier alle Funktionen ohne Zahlung erkunden. Es sind keine Abonnements, Käufe oder Zahlungsdienste verbunden. Ein zukünftiger Dienst würde Funktionen, Kosten, Kündigungsregeln und Verfügbarkeit vor einer Zahlung erklären." },
+      "blog": { "title": "Ressourcen zur Crew-Planung", "body": "Besprecht zuerst Erziehungsziele, Betreuungszeiten, finanzielle Verantwortung, Entscheidungen und Grenzen. Überprüft Vereinbarungen bei Veränderungen. Die Abschnitte Funktionen und So funktioniert es stellen diesen Ansatz intentionaler Elternschaft vor." },
+      "contact": { "title": "Kontakt und Feedback", "body": "Erkunde Crew-, Abgleich- und Dokumentabläufe, um das Konzept zu bewerten. Diese Website ist nicht mit einem Support-Postfach verbunden und sendet keine Kontaktanfragen. Gib hier keine privaten Familiendaten, dringenden Anfragen oder sensiblen Dokumente ein." },
+      "privacy": { "title": "Datenschutz", "body": "Änderungen und Einstellungen werden in deinem Browser statt an einen Kinship-Kontodienst gesendet. Lösche die Website-Daten im Browser, um Informationen zurückzusetzen. Gib keine sensiblen persönlichen, medizinischen, finanziellen oder kindbezogenen Informationen ein." },
+      "terms": { "title": "Nutzungsbedingungen", "body": "Diese Website dient der Erkundung von Produktideen, nicht dem Abschluss rechtlicher, finanzieller, medizinischer oder elterlicher Vereinbarungen. Beispielvereinbarungen und Unterschriften schaffen keine durchsetzbaren Verpflichtungen. Hole qualifizierte Beratung in deiner Rechtsordnung ein." },
+      "cookies": { "title": "Cookies und Browserspeicher", "body": "Die Sprachauswahl speichert ein Cookie für deine bevorzugte Sprache. Interaktionen können auch Zustand im Browser speichern. Werbe- oder Zahlungsnachverfolgung ist nicht implementiert. Gespeicherte Einstellungen lassen sich über die Website-Daten im Browser entfernen." },
+      "community": { "title": "Community-Neuigkeiten", "body": "Kinships Community-Konzept konzentriert sich auf respektvolle Zusammenarbeit, inklusive Elternstrukturen und praktische Crew-Unterstützung. Entdecke die Website und die App. Diese Steuerelemente öffnen keinen offiziellen externen Social-Media-Kanal." },
+      "mobile": { "title": "Mobiler Zugriff", "body": "Kinship ist im Browser auf Mobilgeräten, Tablets und Computern verfügbar. Es ist keine App-Store- oder Play-Store-Veröffentlichung verbunden; diese Steuerelemente installieren nichts. Öffne die App über Jetzt starten oder eine der Hero-Aktionen." }
+    },
+    "crews": {
+      "level": "Stufe {level}",
+      "incidentStatus": { "open": "Offen", "addressed": "Bearbeitet", "resolved": "Gelöst" },
+      "categories": { "parenting": "Erziehung", "communication": "Kommunikation", "financial": "Finanzen", "lifestyle": "Lebensstil" },
+      "create": "Crew erstellen",
+      "name": "Crew-Name",
+      "description": "Crew-Beschreibung",
+      "nameError": "Gib einen Crew-Namen mit 3 bis 80 Zeichen ein.",
+      "descriptionError": "Gib eine Beschreibung mit 1 bis 1.000 Zeichen ein.",
+      "creatorMembership": "Du wirst mit deiner aktuellen Rolle als aktives Crew-Mitglied hinzugefügt.",
+      "discover": "Crews entdecken",
+      "membershipUpdated": "Mitgliedschaft aktualisiert. Deine Crew wird unten angezeigt.",
+      "noAvailable": "Du bist allen verfügbaren Crews beigetreten oder hast eine Anfrage gesendet.",
+      "request": "Beitritt anfragen",
+      "join": "Crew beitreten",
+      "requested": "Anfrage ausstehend",
+      "send": "Nachricht senden",
+      "removeAttachments": "Anhänge entfernen",
+      "response": "Antwortnotizen (optional)",
+      "address": "Als bearbeitet markieren",
+      "resolve": "Vorfall lösen",
+      "reopen": "Vorfall erneut öffnen",
+      "incidentActions": {
+        "open": "Vorfall für weitere Diskussion erneut geöffnet.",
+        "addressed": "Crew-Antwort erfasst; Vorfall bearbeitet.",
+        "resolved": "Crew-Antwort erfasst; Vorfall gelöst."
+      },
+      "checkIn": "Crew-Check-in",
+      "nextCheckIn": "Nächster Check-in",
+      "checkInDate": "Datum und Uhrzeit des Check-ins",
+      "schedule": "Check-in planen",
+      "rating": "Beziehungsqualität (1–5)",
+      "checkInNotes": "Check-in-Notizen",
+      "completeCheckIn": "Check-in absenden",
+      "checkInScheduled": "Check-in geplant.",
+      "checkInSaved": "Check-in-Antwort gespeichert.",
+      "status": { "active": "Aktiv", "forming": "In Gründung", "paused": "Pausiert", "dissolved": "Aufgelöst" }
+    },
+    "legal": {
+      "executed": "Ausgeführt",
+      "content": "Dokumentinhalt",
+      "save": "Änderungen speichern",
+      "saved": "Dokument gespeichert.",
+      "signed": "Unterzeichnet",
+      "awaitingSignature": "Unterschrift ausstehend",
+      "sign": "Dokument unterzeichnen",
+      "download": "Herunterladen",
+      "openLegal": "Rechtliches öffnen",
+      "openDocument": "{title} öffnen",
+      "backToCrew": "Zurück zu den Dokumenten von {name}",
+      "crew": "Crew",
+      "validation": "Wähle eine Crew und gib Dokumenttitel und Inhalt ein.",
+      "needsCrew": "Erstelle eine Crew oder tritt einer bei, bevor du ein Dokument erstellst."
+    }
+  },
+  "features": {
+    "title": "Alles, was deine Crew braucht.",
+    "description": "Sechs strukturierte Ebenen, wertebasierter Abgleich und rechtlicher Schutz – auf einer Plattform.",
+    "tabs": { "layers": "Die 6 Ebenen", "compass": "Der Kompass", "for": "Für wen" },
+    "compassIntro": "Werte und Vision stehen an erster Stelle. Der Kompass zeigt Menschen auf derselben Reise.",
+    "forQuote": "Für eine gute Erziehung brauchst du keinen romantischen Partner, sondern Erwachsene mit gemeinsamen Werten, die sich langfristig engagieren."
+  },
   "brand": {
     "name": "Kinship"
   },
@@ -41,10 +173,12 @@
   },
   "header": {
     "nav": {
+      "mission": "Mission",
       "howItWorks": "So funktioniert es",
       "features": "Funktionen",
       "about": "Über uns"
     },
+    "download": { "appStore": "App Store", "playStore": "Play Store" },
     "cta": "Jetzt starten",
     "mobileToggle": "Mobiles Menü umschalten",
     "ariaLabel": "Globale Navigation"
@@ -94,25 +228,6 @@
         "legalGuidance": "Integrierte rechtliche Beratung und Unterstützung",
         "accountabilityTools": "Rechenschaftstools und -verfolgung",
         "exitStrategies": "Austrittsstrategien von Anfang an eingebaut"
-      }
-    }
-  },
-  "compass": {
-    "title": "Der Kompass: Deine Crew entdecken",
-    "description": "Kinship verbindet die Leichtigkeit moderner Matching-Apps mit der Strenge, die intentionale Familien brauchen. Der Kompass stellt Werte und Vision an erste Stelle und zeigt dann Menschen, die dieselbe Reise suchen.",
-    "imageAlt": "Die Kompass-Oberfläche für Crew-Matching",
-    "features": {
-      "values": {
-        "title": "Werte zuerst",
-        "description": "Durchsuche Crew-Profile, die mit Erziehungsphilosophie beginnen, nicht mit Fotos. Kompatibilität zeigt sich vor Anziehung."
-      },
-      "dimensions": {
-        "title": "Sechs Dimensionen der Ausrichtung",
-        "description": "Sieh, wo ihr übereinstimmt und wo frühe Gespräche wichtig sind. Keine einzelne Punktzahl, die Inkompatibilitäten verdeckt."
-      },
-      "structure": {
-        "title": "Struktur vor Chemie",
-        "description": "Geführte Gespräche zu schwierigen Themen abschließen, bevor der Chat freigeschaltet wird. Meinungsverschiedenheiten früh sichtbar machen."
       }
     }
   },
@@ -187,6 +302,7 @@
     }
   },
   "familyAccountability": {
+    "badge": "Familienverantwortung",
     "title": "Familienverantwortung vor staatlicher Intervention",
     "description": "Wer sich bei der Geburt verpflichtet, bleibt verantwortlich für Anleitung, Korrektur und Eingreifen, wenn Herausforderungen entstehen. Kinship bietet die Struktur, als Crew zu reagieren, bevor Gerichte mit Strafen eingreifen.",
     "imageAlt": "Visualisierung des Familienverantwortungskreises",
@@ -230,6 +346,7 @@
     }
   },
   "governance": {
+    "badge": "Rechtlicher Schutz",
     "title": "Rechtlicher Schutz in jedem Schritt",
     "description": "Kinship erstellt von Beginn an rechtssichere Dokumentation. Vereinbarungen werden aktiv, sobald eine Schwangerschaft beginnt, und sichern Verantwortung vor der Geburt, statt nach einer Trennung hektisch Schutz zu suchen.",
     "imageAlt": "Professionelles, vielfältiges Team für Governance und rechtliche Unterstützung",
@@ -270,6 +387,8 @@
     }
   },
   "cta": {
+    "badge": "Beginne deine Reise",
+    "note": "Werde Teil der Gemeinschaft intentionaler Familien.",
     "imageAlt": "Mehrgenerationen-Crew mit Kindern auf dem Weg in eine helle Zukunft",
     "title": "Bereit, deine Crew zu bilden?",
     "description": "Beginne mit Werteabgleich. Baue rechtlichen Schutz von Tag eins an. Halte Unterstützung durch jeden Übergang aufrecht.",
@@ -293,6 +412,7 @@
       "contact": "Kontakt"
     },
     "legal": {
+      "cookies": "Cookies",
       "title": "Rechtliches",
       "privacy": "Datenschutz",
       "terms": "Nutzungsbedingungen"
@@ -451,6 +571,12 @@
       "connectionHint": "Das Senden einer Verbindungsanfrage benachrichtigt {name} und ermöglicht euch, gemeinsam eine Eltern-Crew aufzubauen.",
       "noteOptional": "Persönliche Notiz hinzufügen (optional)"
     },
+    "toasts": {
+      "messageSent": "Nachricht gesendet",
+      "messageSentDesc": "Deine Nachricht an {name} wurde gesendet.",
+      "requestSent": "Anfrage gesendet",
+      "requestSentDesc": "Verbindungsanfrage an {name} gesendet."
+    },
     "noMatches": {
       "title": "Keine Übereinstimmungen gefunden",
       "description": "Schau später nochmal nach neuen potenziellen Crew-Mitgliedern."
@@ -482,6 +608,7 @@
     },
     "buttons": {
       "preview": "Vorschau",
+      "cancel": "Abbrechen",
       "useTemplate": "Vorlage verwenden",
       "close": "Schließen",
       "edit": "Bearbeiten",
@@ -503,6 +630,7 @@
     }
   },
   "loginPage": {
+    "or": "oder",
     "welcomeTitle": "Willkommen bei Kinship",
     "welcomeSubtitle": "Melde dich an, um auf deine Crews zuzugreifen",
     "email": "E-Mail",
@@ -549,8 +677,20 @@
    },
    "landing": {
      "hero": {
+       "browseCompass": "Kompass entdecken",
        "openApp": "App öffnen",
        "tryDemo": "Demo ausprobieren"
+     },
+     "compass": {
+       "badge": "Kompatibilität",
+       "title": "Der Kompass: Entdecke deine Crew",
+       "description": "Kinship verbindet einfache Entdeckung mit der Struktur intentionaler Familien. Der Kompass stellt Werte und Vision an erste Stelle.",
+       "imageAlt": "Kompass-Oberfläche zum Crew-Abgleich",
+       "features": {
+         "values": { "title": "Werte zuerst", "description": "Entdecke Profile mit Erziehungsphilosophie statt nur Fotos. Kompatibilität steht vor Anziehung." },
+         "dimensions": { "title": "Sechs Dimensionen der Ausrichtung", "description": "Sieh Gemeinsamkeiten und wichtige Gesprächsthemen, ohne Unterschiede hinter einer Zahl zu verbergen." },
+         "structure": { "title": "Struktur vor Chemie", "description": "Besprecht schwierige Themen in geführten Gesprächen und erkennt Unterschiede frühzeitig." }
+       }
      }
    },
   "statCard": {
@@ -613,6 +753,7 @@
       "noIncidents": "Keine Vorfälle protokolliert",
       "healthy": "Diese Crew pflegt gesunde Verantwortlichkeit",
       "actionsTaken": "Ergriffene Maßnahmen",
+      "reportedBy": "Gemeldet von",
       "severityLevels": {
         "minor": "Gering (Hauptbezugsperson)",
         "pattern": "Muster (Gesamte Crew)",
@@ -639,6 +780,7 @@
       "valueTitle": "Wert-Titel",
       "valuePlaceholder": "z.B., Offene Kommunikation",
       "category": "Kategorie",
+      "noContent": "Kein Inhalt verfügbar",
       "close": "Schließen",
       "edit": "Bearbeiten"
     }

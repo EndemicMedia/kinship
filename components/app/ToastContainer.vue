@@ -1,15 +1,30 @@
 <script setup lang="ts">
 const uiStore = useUIStore()
+const { t } = useI18n()
+const timers = new Map<number, ReturnType<typeof setTimeout>>()
 
-// Auto-dismiss toasts after duration
-watch(() => uiStore.toasts.length, () => {
+watch(() => uiStore.toasts.map(toast => toast.id), () => {
   uiStore.toasts.forEach(toast => {
-    if (!toast.dismissed) {
-      setTimeout(() => {
+    if (!toast.dismissed && !timers.has(toast.id)) {
+      timers.set(toast.id, setTimeout(() => {
         uiStore.dismissToast(toast.id)
-      }, toast.duration || 5000)
+        timers.delete(toast.id)
+      }, toast.duration || 5000))
     }
-  })
+  }, { immediate: true })
+})
+
+watch(() => uiStore.toasts.filter(toast => toast.dismissed).map(toast => toast.id), (dismissedIds) => {
+  for (const id of dismissedIds) {
+    const timer = timers.get(id)
+    if (timer) clearTimeout(timer)
+    timers.delete(id)
+  }
+})
+
+onUnmounted(() => {
+  for (const timer of timers.values()) clearTimeout(timer)
+  timers.clear()
 })
 
 const toastIconMap = {
@@ -40,7 +55,7 @@ function dismissToast(id: number) {
 
 <template>
   <Teleport to="body">
-    <div class="fixed top-4 right-4 z-[100] flex flex-col gap-2 w-full max-w-sm pointer-events-none">
+    <div class="pointer-events-none fixed inset-x-4 bottom-24 z-[45] flex max-w-sm flex-col gap-2 sm:bottom-4 sm:left-auto sm:right-4">
       <TransitionGroup 
         enter-active-class="transition-all duration-300 ease-out"
         enter-from-class="translate-x-full opacity-0"
@@ -72,8 +87,9 @@ function dismissToast(id: number) {
           <UButton
             icon="i-heroicons-x-mark"
             variant="ghost"
-            color="neutral"
+            color="gray"
             size="xs"
+            :aria-label="t('showcase.toasts.dismiss')"
             class="flex-shrink-0 -mr-1 -mt-1"
             @click="dismissToast(toast.id)"
           />

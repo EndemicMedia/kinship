@@ -8,51 +8,34 @@ interface ImageOptions {
   nologo?: boolean
 }
 
-const GEN_BASE_URL = 'https://gen.pollinations.ai/image/'
 const PUBLIC_BASE_URL = 'https://image.pollinations.ai/prompt/'
-const POLLINATIONS_API_KEY = import.meta.env.VITE_POLLINATIONS_API_KEY || ''
-const DEFAULT_MODEL = 'gptimage-large'
+const DEFAULT_MODEL = 'flux'
 
-// Module-level singleton: probe gen endpoint once per session
-let endpointProbe: Promise<boolean> | null = null
-
-async function probeGenEndpoint(): Promise<boolean> {
-  if (!endpointProbe) {
-    endpointProbe = fetch(
-      `${GEN_BASE_URL}${encodeURIComponent('test')}?key=${POLLINATIONS_API_KEY}&model=${DEFAULT_MODEL}&width=32&height=32`,
-      { method: 'HEAD' }
-    )
-      .then(res => {
-        console.log(`[pollinations] gen probe → ${res.status} — using ${res.ok ? 'gen (paid)' : 'public (free)'}`)
-        return res.ok
-      })
-      .catch(() => {
-        console.log('[pollinations] gen probe failed — using public (free)')
-        return false
-      })
-  }
-  return endpointProbe
-}
-
-export function buildPollinationsUrl(prompt: string, options: ImageOptions = {}, useGen = false): string {
+export function buildPollinationsUrl(prompt: string, options: ImageOptions = {}): string {
   const styledPrompt = applyStyle(prompt, 'base')
   const params = new URLSearchParams({
     model: options.model || DEFAULT_MODEL,
-    nologo: 'true',
+    nologo: String(options.nologo ?? true),
     ...(options.width ? { width: String(options.width) } : {}),
     ...(options.height ? { height: String(options.height) } : {}),
-    ...(options.seed !== undefined ? { seed: String(options.seed) } : {}),
-    ...(useGen ? { key: POLLINATIONS_API_KEY } : {}),
+    seed: String(options.seed ?? 1),
   })
-  const base = useGen ? GEN_BASE_URL : PUBLIC_BASE_URL
-  return `${base}${encodeURIComponent(styledPrompt)}?${params}`
+  return `${PUBLIC_BASE_URL}${encodeURIComponent(styledPrompt)}?${params}`
+}
+
+export function buildImageFallback(prompt: string, options: ImageOptions = {}): string {
+  const hash = [...prompt].reduce((value, character) => (value * 31 + character.charCodeAt(0)) >>> 0, options.seed ?? 1)
+  const width = Math.min(2048, Math.max(1, options.width || 1024))
+  const height = Math.min(2048, Math.max(1, options.height || 768))
+  const hue = 165 + hash % 30
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 800 600"><rect width="800" height="600" fill="#f1e9dc"/><circle cx="${200 + hash % 400}" cy="230" r="170" fill="hsl(${hue},35%,72%)"/><path d="M0 470Q220 280 420 450T800 400V600H0Z" fill="#1e3a5f"/><path d="M0 540Q280 390 520 520T800 480V600H0Z" fill="#0f766e"/></svg>`
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`
 }
 
 export function usePollinationsImage() {
   const resolveUrl = async (prompt: string, options: ImageOptions = {}): Promise<string> => {
-    const useGen = await probeGenEndpoint()
-    return buildPollinationsUrl(prompt, options, useGen)
+    return buildImageFallback(prompt, options)
   }
 
-  return { resolveUrl, buildPollinationsUrl }
+  return { resolveUrl, buildPollinationsUrl, buildImageFallback }
 }

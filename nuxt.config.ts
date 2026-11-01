@@ -4,6 +4,16 @@ const unheadCompatPath = fileURLToPath(new URL('./utils/unhead-compat.ts', impor
 
 export default defineNuxtConfig({
   modules: ['@nuxt/ui', '@nuxtjs/i18n', '@pinia/nuxt'],
+  devtools: { enabled: process.env.E2E_TEST !== '1' },
+  // Mock account state lives in the browser; app routes must not render a different SSR session.
+  routeRules: {
+    '/app': { ssr: false },
+    '/app/**': { ssr: false },
+    '/de/app': { ssr: false },
+    '/de/app/**': { ssr: false },
+    '/pt-BR/app': { ssr: false },
+    '/pt-BR/app/**': { ssr: false }
+  },
   vite: {
     resolve: {
       alias: [{ find: /^unhead$/, replacement: unheadCompatPath }]
@@ -17,17 +27,19 @@ export default defineNuxtConfig({
       }
     }
   },
-  ui: {
-    icons: ['heroicons']
+  icon: {
+    serverBundle: {
+      collections: ['heroicons']
+    }
   },
   i18n: {
     lazy: true,
     langDir: 'locales',
     defaultLocale: 'en',
     locales: [
-      { code: 'en', iso: 'en-US', file: 'en.json', name: 'English' },
-      { code: 'de', iso: 'de-DE', file: 'de.json', name: 'Deutsch' },
-      { code: 'pt-BR', iso: 'pt-BR', file: 'pt-BR.json', name: 'Português (Brasil)' }
+      { code: 'en', language: 'en-US', file: 'en.json', name: 'English' },
+      { code: 'de', language: 'de-DE', file: 'de.json', name: 'Deutsch' },
+      { code: 'pt-BR', language: 'pt-BR', file: 'pt-BR.json', name: 'Português (Brasil)' }
     ],
     detectBrowserLanguage: {
       useCookie: true,
@@ -37,7 +49,9 @@ export default defineNuxtConfig({
   },
   nitro: {
     prerender: {
-      failOnError: false,
+      failOnError: true,
+      crawlLinks: false,
+      routes: ['/', '/de', '/pt-BR'],
       ignore: [
         '/app',
         '/app/**',

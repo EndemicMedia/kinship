@@ -2,11 +2,12 @@
 import { computed } from 'vue'
 
 const { t } = useI18n()
+const interactiveReady = useState('interactive-ready', () => false)
 
 const tabs = computed(() => [
-  { label: t('features.tabs.layers'), slot: 'layers' },
-  { label: t('features.tabs.compass'), slot: 'compass' },
-  { label: t('features.tabs.for'), slot: 'for' }
+  { label: t('features.tabs.layers'), slot: 'layers', disabled: !interactiveReady.value },
+  { label: t('features.tabs.compass'), slot: 'compass', disabled: !interactiveReady.value },
+  { label: t('features.tabs.for'), slot: 'for', disabled: !interactiveReady.value }
 ])
 
 const layers = computed(() => [
@@ -20,7 +21,7 @@ const layers = computed(() => [
 
 const compassFeatures = computed(() => [
   {
-    icon: 'i-heroicons-compass',
+    icon: 'i-heroicons-map',
     title: t('landing.compass.features.values.title'),
     description: t('landing.compass.features.values.description')
   },

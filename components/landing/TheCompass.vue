@@ -7,7 +7,7 @@ const { t } = useI18n()
 
 const features = computed(() => [
   {
-    icon: 'i-heroicons-compass',
+    icon: 'i-heroicons-map',
     title: t('landing.compass.features.values.title'),
     description: t('landing.compass.features.values.description')
   },
@@ -25,13 +25,13 @@ const features = computed(() => [
 </script>
 
 <template>
-  <section id="features" class="relative py-20 lg:py-28 bg-slate-50 dark:bg-slate-900/50">
+  <section id="compass" class="relative py-20 lg:py-28 bg-slate-50 dark:bg-slate-900/50">
     <UContainer>
       <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <!-- Content -->
         <div class="space-y-6">
           <div class="inline-flex items-center gap-2 rounded-full bg-teal-100 px-3 py-1 text-sm font-medium text-teal-700 dark:bg-teal-900/30 dark:text-teal-300">
-            <UIcon name="i-heroicons-compass" class="h-4 w-4" />
+            <UIcon name="i-heroicons-map" class="h-4 w-4" />
             {{ t('landing.compass.badge') }}
           </div>
           
@@ -64,6 +64,7 @@ const features = computed(() => [
         <div class="relative">
           <AiImageContainer
             :prompt="sectionPrompts.compass.prompt"
+            staticSrc="/images/compass.jpg"
             aspectRatio="square"
             :alt="t('landing.compass.imageAlt')"
             shadow="xl"

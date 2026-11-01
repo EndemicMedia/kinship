@@ -21,7 +21,7 @@ const { t } = useI18n()
           <div class="order-2 lg:order-1">
             <div class="relative">
               <AiImageContainer
-                :prompt="sectionPrompts.problem.prompt" staticSrc="/kinship/images/problem.jpg"
+                :prompt="sectionPrompts.problem.prompt" staticSrc="/images/problem.jpg"
                 aspectRatio="square"
                 :alt="t('problemSolution.problem.imageAlt')"
                 shadow="xl"
@@ -95,7 +95,7 @@ const { t } = useI18n()
           </div>
           <div class="relative">
             <AiImageContainer
-              :prompt="sectionPrompts.solution.prompt" staticSrc="/kinship/images/solution.jpg"
+              :prompt="sectionPrompts.solution.prompt" staticSrc="/images/solution.jpg"
               aspectRatio="square"
               :alt="t('problemSolution.solution.imageAlt')"
               shadow="xl"

@@ -8,6 +8,7 @@ export type ProviderRole =
   | 'co-parent'
   | 'primary-parent'
   | 'support-provider'
+  | 'surrogate'
 
 export type UserStatus = 'available' | 'in-crew' | 'matched' | 'offline'
 export type CrewStatus = 'forming' | 'active' | 'paused' | 'dissolved'
@@ -54,8 +55,17 @@ export interface Crew {
   chatMessages: ChatMessage[]
   checkIns: CheckIn[]
   accountabilityLogs: AccountabilityLog[]
-  nextCheckIn: Date
+  values: CrewValue[]
+  nextCheckIn: Date | null
   createdAt: Date
+}
+
+export interface CrewValue {
+  id: string
+  title: string
+  description: string
+  category: string
+  matchPercentage: number
 }
 
 export interface CrewMember {

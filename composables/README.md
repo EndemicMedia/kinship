@@ -1,135 +1,40 @@
-# Kinship AI Image Generation System
+# Kinship image assets
 
-This directory contains the AI image generation system powered by Pollinations.ai for the Kinship platform.
+Landing images are committed JPEGs in `public/images/`. Rendering, prerendering, and routine CI do not contact an image provider. Neither provider credentials nor image caches belong in browser code.
 
-## Architecture
-
-### Components
-
-- **`usePollinationsImage.ts`** - Core composable for fetching and caching AI-generated images
-- **`prompts.ts`** - Pre-defined style prompts and configurations for all sections
-- **`AiImageContainer.vue`** - Reusable image component with loading states and error handling
-
-### Features
-
-✅ **Smart Browser Caching** - Images are cached in localStorage for 24 hours to reduce API calls  
-✅ **Publishable Key** - Uses client-safe public key with IP-based rate limiting (1 pollen/hour)  
-✅ **Automatic Cleanup** - LRU cache eviction when exceeding 50 images  
-✅ **Error Handling** - Graceful fallbacks with loading and error states  
-✅ **Consistent Styling** - Pre-defined prompts for brand-aligned visuals  
-
-## Usage
-
-### Basic Image Component
-
-```vue
-<template>
-  <AiImageContainer
-    prompt="Modern minimalist illustration of family planning"
-    aspectRatio="landscape"
-    :rounded="true"
-    shadow="lg"
-  />
-</template>
-```
-
-### Using Pre-defined Prompts
-
-```vue
-<script setup>
-import { sectionPrompts } from '../composables/prompts'
-</script>
-
-<template>
-  <AiImageContainer
-    :prompt="sectionPrompts.hero.prompt"
-    :aspectRatio="sectionPrompts.hero.aspectRatio"
-    :width="sectionPrompts.hero.width"
-    :height="sectionPrompts.hero.height"
-  />
-</template>
-```
-
-### Custom Styling
+## Static images
 
 ```vue
 <AiImageContainer
-  prompt="Your custom prompt here"
-  width="800"
-  height="600"
-  model="flux"
-  :nologo="true"
-  objectFit="contain"
-  class="my-custom-class"
+  prompt="A diverse crew planning together"
+  staticSrc="/images/how-align.jpg"
+  :width="400"
+  :height="500"
+  alt="Crew members reviewing their shared plan"
+  loading="lazy"
+  objectFit="cover"
+  shadow="md"
 />
 ```
 
-## Available Props
+Use paths relative to the public directory, without hardcoding the deployment prefix. The component adds Nuxt's configured `app.baseURL`, including on locale routes.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `prompt` | string | required | The text prompt for image generation |
-| `width` | number | 1024 | Image width in pixels |
-| `height` | number | 1024 | Image height in pixels |
-| `model` | string | 'flux' | AI model (flux, turbo, etc.) |
-| `seed` | number | random | Seed for reproducible results |
-| `nologo` | boolean | undefined | Remove watermark |
-| `aspectRatio` | string | 'auto' | Preset: square, portrait, landscape, wide |
-| `alt` | string | 'AI generated image' | Accessibility text |
-| `loading` | string | 'lazy' | Loading strategy |
-| `objectFit` | string | 'cover' | CSS object-fit |
-| `rounded` | boolean | true | Rounded corners |
-| `shadow` | string | 'md' | Shadow size: none, sm, md, lg, xl |
+`prompt` is required; `staticSrc` is preferred. `aspectRatio` supports `auto`, `square`, `portrait`, `landscape`, and `wide`; explicit width/height apply to `auto`. Other props are `alt`, `loading` (`lazy` or `eager`), `objectFit`, `rounded`, `shadow`, `class`, `model`, and `seed`. Model is retained for compatibility but does not trigger runtime generation.
 
-## Environment Variables
+If no static path is supplied or a local asset fails, a deterministic inline SVG is rendered. There are no retries, remote fallbacks, fetch probes, timers, localStorage caches, or blob URLs. The same prompt/seed yields the same illustration on server and client. `resolveUrl()` in `usePollinationsImage()` resolves this local fallback immediately. `buildPollinationsUrl()` is an explicit URL-building utility only; it never fetches or includes credentials.
 
-Copy `.env.example` to `.env` and configure:
+## Validate and generate assets
 
-```env
-POLLINATIONS_API_KEY=pk_9sbL41ofRXSoaOC2
-REFERRER_ID=kinship.app
+```sh
+node scripts/validate-images.mjs
+# Only when intentionally generating missing or invalid assets:
+POLLINATIONS_API_KEY=your-private-key node scripts/generate-images.mjs
 ```
 
-## Cache Management
+Keep the generation credential in the process environment, not in source or any `VITE_` variable. Do not invoke generation in routine CI.
 
-The composable automatically:
-- Stores images as blob URLs in localStorage
-- Persists cache across sessions
-- Evicts oldest entries when limit reached (50 images)
-- Revokes blob URLs to prevent memory leaks
+Validation checks all twelve required JPEGs for size limits, segment boundaries, dimensions, quantization/Huffman tables, scan data, and a complete end marker. This is structural validation, not a full pixel decoder or visual quality review.
 
-To manually clear cache:
-```typescript
-const { clearCache } = usePollinationsImage()
-clearCache()
-```
+Generation skips only valid local files, bounds each provider request (including its response body) to 30 seconds and the run to 180 seconds, and permits at most two model attempts per asset. Downloads must be JPEGs no larger than 15 MiB. Validated bytes are written to a same-directory staging file, checked again, then atomically renamed. Failures leave existing files unchanged, clean staging files, and return nonzero if any required asset remains invalid or missing.
 
-## Rate Limits
-
-- **Publishable Key**: 1 pollen/hour per IP+key combination
-- Caching prevents repeated API calls for same prompts
-- Consider implementing request queuing for multiple users
-
-## Available Models
-
-- `flux` (default) - High quality, balanced speed
-- `turbo` - Faster generation
-- `gptimage` - GPT-based generation
-- `kontext` - Context-aware generation
-- `seedream` - Creative/dreamlike style
-- `nanobanana` - Specialized model
-
-## Troubleshooting
-
-**Images not loading:**
-- Check browser console for errors
-- Verify API key is set in `.env`
-- Check rate limit status (1 pollen/hour per IP)
-
-**Cache issues:**
-- Clear browser localStorage: `localStorage.removeItem('pollinations-image-cache')`
-- Or use `clearCache()` from composable
-
-**Styling inconsistencies:**
-- All prompts should include style prefix: `stylePrefixes.base`
-- Use `applyStyle()` helper to ensure consistency
+For creative direction, see [the image style reference](../docs/IMAGE_STYLE_REFERENCE.md).

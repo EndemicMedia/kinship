@@ -7,7 +7,11 @@
     "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "typecheck": "nuxt typecheck",
+    "test:unit": "node --experimental-strip-types --test tests/unit/*.test.ts",
+    "test:i18n": "node --experimental-strip-types scripts/find-missing-translations.ts",
     "test:e2e": "playwright test",
+    "test:e2e:static": "E2E_STATIC=1 playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:debug": "playwright test --debug"
   },
@@ -21,6 +25,9 @@
   },
   "devDependencies": {
     "@nuxt/test-utils": "^3.23.0",
-    "@playwright/test": "^1.58.1"
+    "@playwright/test": "^1.58.1",
+    "@types/node": "^22.19.0",
+    "typescript": "^5.9.3",
+    "vue-tsc": "^3.1.1"
   }
 }

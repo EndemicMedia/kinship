@@ -1,7 +1,8 @@
 // Mock user profiles for Kinship app
 // Using provider-based terminology
+import type { User } from '~/types/app'
 
-export const mockUsers = [
+export const mockUsers: User[] = [
   {
     id: 'user-1',
     email: 'alex@kinship.app',

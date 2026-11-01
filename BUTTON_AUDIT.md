@@ -1,74 +1,45 @@
-# Button Audit & Fixes
+# Showcase interaction contracts
 
-## Summary
-All buttons on the website now have proper functionality. Buttons that aren't yet functional have been disabled with a "Coming soon" tooltip.
+Kinship is a frontend-only feature showcase. An operation should update
+visible local state rather than merely close a form. No action sends real
+messages, executes legal agreements, or changes an external account.
 
-## Fixed Buttons
+## Landing
 
-### Landing Page
+- Section links scroll to existing sections.
+- Company, pricing, social, and policy controls open the relevant information.
+- App entry controls navigate to login under the configured deployment base.
+- The logo returns to the active locale's home page.
+- The mobile menu supports keyboard opening, Escape dismissal, and navigation.
+- The language selector updates content and locale metadata.
 
-#### Header (`components/layout/Header.vue`)
-- ✅ **CTA Button** (Desktop & Mobile) - Now links to `/app/login`
-- ✅ **App Store/Play Store Buttons** - Now link to `/app/login` instead of hash links
+## Account and discovery
 
-#### Hero (`components/landing/Hero.vue`)
-- ✅ **Open App Button** - Links to `/app/login`
-- ✅ **Try Demo Button** - Links to `/app/login`
-- ✅ **How it works Button** - Now links to `#how-it-works` section
+- Login selects a seeded persona; logout clears the active session.
+- Profile edits belong to the current persona and survive navigation.
+- Persona switching refreshes the editor rather than retaining another user's draft.
+- Compass filters change results; votes update counts and progress; reset restores results.
+- Messages and connection requests have visible local outcomes.
+- Saved settings remain selected when revisiting the page.
+- Account actions expose simulated, cancellable workflows.
+- Search, notifications, theme, and navigation remain reachable on mobile.
+- App links, search commands, account menus, and logout retain the active language.
+- Sidebar collapse, expansion, and logout remain keyboard-accessible in either state.
 
-### App Pages
+## Crews and documents
 
-#### Login (`pages/app/login.vue`)
-- ✅ **Sign In Button** - Submits login form
-- ✅ **Continue as Demo User** - Triggers demo login
-
-#### Dashboard (`pages/app/index.vue`)
-- ✅ **Quick Action Buttons** (Browse Compass, View Crews, Messages, Documents) - All navigate correctly
-- ✅ **View All Button** - Links to crews page
-- ✅ **Browse The Compass Button** - Links to compass page
-- ✅ **Crew Cards** - Fixed routing to use correct URL format with query params
-
-#### Crews List (`pages/app/crews/index.vue`)
-- ✅ **Find Crews Button** - Links to compass page
-- ✅ **Browse The Compass Button** (empty state) - Links to compass page
-- ✅ **Crew Cards** - Navigate to detail page correctly
-
-#### Crew Detail (`pages/app/crews/detail.vue`)
-- ✅ **Back Button** - Links back to crews list
-- ✅ **Chat Buttons**:
-  - Paperclip (attachment) - Disabled (coming soon)
-  - Send button - Functional when message entered
-- ✅ **Documents Tab**:
-  - Create Document - Disabled (coming soon)
-  - View Document (eye icon) - Disabled (coming soon)
-- ✅ **Accountability Tab**:
-  - Log Incident - Opens incident form
-  - Submit/Cancel buttons - Functional
-
-#### The Compass (`pages/app/compass.vue`)
-- ✅ **Filters Button** - Disabled (coming soon)
-- ✅ **Action Buttons**:
-  - Pass (X) - Functional
-  - Maybe (?) - Functional
-  - Like (Heart) - Functional
-  - Previous/Skip - Functional with proper disabled states
-  - Start Over - Functional
-
-#### Legal (`pages/app/legal.vue`)
-- ✅ **New Document Button** - Disabled (coming soon)
-- ✅ **Create Document Button** (empty state) - Disabled (coming soon)
-- ✅ **View Document Button** (eye icon) - Disabled (coming soon)
-- ✅ **Use Template Button** - Disabled (coming soon)
-
-#### Profile (`pages/app/profile.vue`)
-- ✅ **Edit Profile Button** - Disabled with tooltip (coming soon)
-- ✅ **Settings Button** - Disabled with tooltip (coming soon)
-- ✅ **Log Out Button** - Functional, logs user out
+- Crew creation adds a navigable crew with the creator as a member.
+- Crew discovery supports a visible join/request outcome.
+- Chat appends text and attachment previews; each submission appears once.
+- Incidents, response status, values, and check-ins update the selected crew.
+- Document creation preserves the crew and selected template.
+- Draft editing, reopening, signing, and downloading operate on local documents.
+- Activity links open a valid activity view or their referenced destination.
 
 ## Testing
-All buttons verified through E2E tests:
-```bash
-npm run test:e2e
-```
 
-**Result: 26/26 tests passing**
+Behavioral checks live in `tests/e2e/`. Run `npm run test:e2e` for the
+development server, and `npm run generate && npm run test:e2e:static` for
+the exported Pages-like site. Tests must assert outcomes, not just button
+visibility or success notifications. Narrow mobile, tablet, desktop, keyboard,
+locale, and WebKit checks cover the relevant interaction surfaces.

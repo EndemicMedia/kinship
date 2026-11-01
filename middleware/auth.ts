@@ -1,21 +1,23 @@
 import { useAuthStore } from '~/stores/auth'
 
-export default defineNuxtRouteMiddleware(async (to, from) => {
+export default defineNuxtRouteMiddleware(async (to) => {
   const authStore = useAuthStore()
-  
-  // On client, always ensure auth is loaded from storage
-  // This is safe to call multiple times as it only sets state if localStorage has data
-  if (process.client) {
+  const localePath = useLocalePath()
+  const isShowcaseRoute = /^\/(?:(?:de|pt-BR)\/)?app(?:\/|$)/.test(to.path)
+  const loginPath = localePath('/app/login')
+
+  if (!isShowcaseRoute) return
+
+  // The mock session exists only in this browser; never gate the server render on it.
+  if (process.client && !authStore.hasRestored) {
     await authStore.loadFromStorage()
   }
-  
-  // If not authenticated and trying to access app routes
-  if (!authStore.isAuthenticated && to.path.startsWith('/app') && to.path !== '/app/login') {
-    return navigateTo('/app/login')
+
+  if (process.client && !authStore.isLoggedIn && to.path !== loginPath) {
+    return navigateTo(loginPath)
   }
-  
-  // If authenticated and on login page, redirect to dashboard
-  if (authStore.isAuthenticated && to.path === '/app/login') {
-    return navigateTo('/app')
+
+  if (process.client && authStore.isLoggedIn && to.path === loginPath) {
+    return navigateTo(localePath('/app'))
   }
 })

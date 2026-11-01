@@ -16,6 +16,7 @@ interface Props {
 }
 
 defineProps<Props>()
+const localePath = useLocalePath()
 </script>
 
 <template>
@@ -44,7 +45,7 @@ defineProps<Props>()
     <div class="flex flex-col sm:flex-row gap-3">
       <UButton
         v-if="action"
-        :to="action.to"
+        :to="localePath(action.to)"
         color="primary"
         :icon="action.icon || 'i-heroicons-plus'"
         size="lg"
@@ -54,9 +55,9 @@ defineProps<Props>()
 
       <UButton
         v-if="secondaryAction"
-        :to="secondaryAction.to"
+        :to="localePath(secondaryAction.to)"
         variant="outline"
-        color="neutral"
+        color="gray"
         :icon="secondaryAction.icon"
         size="lg"
       >

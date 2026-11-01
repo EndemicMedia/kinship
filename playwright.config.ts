@@ -1,16 +1,19 @@
 import { defineConfig, devices } from '@playwright/test'
 
+const staticMode = process.env.E2E_STATIC === '1'
+
 export default defineConfig({
   testDir: './tests/e2e',
+  outputDir: './test-results/browser',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: 'list',
+  reporter: [['list'], ['html', { open: 'never' }]],
   use: {
-    baseURL: 'http://localhost:3000/kinship',
-    trace: 'on-first-retry',
-    screenshot: 'off',
+    baseURL: 'http://127.0.0.1:3000/kinship/',
+    trace: 'retain-on-failure',
+    screenshot: 'only-on-failure',
     video: 'off',
     browserName: 'chromium',
   },
@@ -18,28 +21,32 @@ export default defineConfig({
   projects: [
     {
       name: 'Mobile Portrait',
-      use: {
-        browserName: 'chromium',
-        viewport: { width: 375, height: 667 },
-        userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1',
-        isMobile: true,
-      },
+      use: { ...devices['iPhone SE'], defaultBrowserType: 'chromium' },
     },
     {
       name: 'Tablet Landscape',
       use: {
         browserName: 'chromium',
         viewport: { width: 1024, height: 768 },
-        userAgent: 'Mozilla/5.0 (iPad; CPU OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1',
         isMobile: false,
       },
+    },
+    {
+      name: 'Desktop',
+      use: { viewport: { width: 1440, height: 900 } },
+    },
+    {
+      name: 'WebKit',
+      testMatch: /(?:app|landing-features)\.spec\.ts/,
+      use: { ...devices['Desktop Safari'], browserName: 'webkit' },
     },
   ],
 
   webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:3000/kinship',
-    reuseExistingServer: !process.env.CI,
+    env: { E2E_TEST: '1' },
+    command: staticMode ? 'node scripts/serve-static.mjs' : 'npm run dev -- --host 127.0.0.1',
+    url: 'http://127.0.0.1:3000/kinship/',
+    reuseExistingServer: false,
     timeout: 120000,
   },
 })

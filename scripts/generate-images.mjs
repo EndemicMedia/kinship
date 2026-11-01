@@ -1,16 +1,16 @@
 /**
- * Pre-generates all landing page images from Pollinations at build time.
+ * Explicitly refreshes missing or invalid landing images from Pollinations.
  * Run with: node scripts/generate-images.mjs
  * Saves images to public/images/ so they are served as static assets.
  *
  * Set POLLINATIONS_API_KEY env var to use the paid gen endpoint.
- * Falls back to loremflickr placeholders if all APIs are unreachable.
+ * Routine builds use validated committed assets and never invoke providers.
  */
 
-import { createWriteStream, existsSync, mkdirSync } from 'fs'
-import { pipeline } from 'stream/promises'
+import { mkdir, readFile, rename, unlink, writeFile } from 'node:fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { MAX_IMAGE_BYTES, REQUIRED_IMAGE_NAMES, validateImage, validateRequiredImages } from './validate-images.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const OUTPUT_DIR = path.join(__dirname, '..', 'public', 'images')
@@ -20,13 +20,9 @@ const API_KEY = process.env.POLLINATIONS_API_KEY || ''
 
 // Model fallback order — evaluated by quality, highest first.
 // flux and kontext return 403 with sk_ keys (require different auth).
-const MODELS = [
-  'gptimage-large',  // GPT Image 1.5 — best quality, diverse scenes, 0.000032 pollens
-  'gptimage',        // GPT Image 1 Mini — very good, cheapest at 0.000006 pollens
-  'nova-canvas',     // Nova Canvas — solid photorealistic, 0.04 pollens
-  'klein',           // FLUX.2 Klein 4B — decent, 0.01 pollens
-  'zimage',          // Z-Image Turbo — lower res fallback, 0.002 pollens
-]
+const MODELS = ['gptimage-large', 'gptimage']
+const REQUEST_TIMEOUT_MS = 30_000
+const RUN_TIMEOUT_MS = 180_000
 
 // Base style injected into every prompt
 const BASE_STYLE = 'Professional lifestyle photography, diverse multi-generational crews, platonic collaborative energy, warm natural lighting, documentary-style candid moments, ages ranging from 20s to 70s, mixed genders and ethnicities, genuine connections not romantic, warm beige and navy blue color palette, editorial photography quality'
@@ -87,91 +83,91 @@ const images = {
   },
 }
 
-async function tryModel(prompt, width, height, model) {
+async function tryModel(prompt, width, height, model, deadline) {
   const styled = applyStyle(prompt)
-  const params = new URLSearchParams({ key: API_KEY, model, width: String(width), height: String(height), nologo: 'true' })
+  const params = new URLSearchParams({ model, width: String(width), height: String(height), nologo: 'true', seed: '1' })
   const url = `${GEN_BASE}${encodeURIComponent(styled)}?${params}`
   try {
-    const res = await fetch(url)
-    if (res.ok) {
-      const buf = await res.clone().arrayBuffer()
-      console.log(`    ✅ ${model} (${(buf.byteLength / 1024).toFixed(0)} KB)`)
-      return res
+    const remaining = deadline - Date.now()
+    if (remaining <= 0) throw new Error('Generation run deadline exceeded')
+    const res = await fetch(url, {
+      headers: { Authorization: `Bearer ${API_KEY}` },
+      signal: AbortSignal.timeout(Math.min(REQUEST_TIMEOUT_MS, remaining)),
+      redirect: 'error'
+    })
+    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+    if (!/^image\/jpeg(?:;|$)/i.test(res.headers.get('content-type') || '')) throw new Error('Response is not a JPEG')
+    if (Number(res.headers.get('content-length')) > MAX_IMAGE_BYTES) throw new Error('Response exceeds image size limit')
+    const chunks = []
+    let size = 0
+    for await (const chunk of res.body) {
+      size += chunk.length
+      if (size > MAX_IMAGE_BYTES) throw new Error('Response exceeds image size limit')
+      chunks.push(chunk)
     }
-    console.log(`    ⚠️  ${model} → HTTP ${res.status}`)
-    return null
+    const buffer = Buffer.concat(chunks)
+    validateImage(buffer)
+    console.log(`    ${model}: validated ${(size / 1024).toFixed(0)} KiB`)
+    return buffer
   } catch (e) {
-    console.log(`    ⚠️  ${model} → ${e.message}`)
-    return null
-  }
-}
-
-async function fetchLoremFlickr(name, width, height) {
-  const keywords = {
-    hero: 'family,children,diverse,parenting',
-    problem: 'family,conflict,stress',
-    solution: 'family,cooperation,planning',
-    compass: 'people,meeting,diverse',
-    testimonial1: 'woman,portrait,smile',
-    testimonial2: 'friends,group,diverse',
-    testimonial3: 'grandmother,children,family',
-    cta: 'family,outdoors,walking,children',
-    'how-discover': 'people,meeting,coffee',
-    'how-align': 'planning,teamwork,table',
-    'how-formalize': 'signing,contract,professional',
-    'how-sustain': 'family,dinner,gathering',
-  }
-  const kw = keywords[name] || 'family'
-  const idx = Object.keys(keywords).indexOf(name) + 1
-  try {
-    const res = await fetch(`https://loremflickr.com/${width}/${height}/${kw}?lock=${idx}`)
-    return res.ok ? res : null
-  } catch {
+    console.log(`    ${model}: ${e.name === 'TimeoutError' || e.name === 'AbortError' ? 'request timed out' : 'request or image validation failed'}`)
     return null
   }
 }
 
 async function main() {
-  mkdirSync(OUTPUT_DIR, { recursive: true })
-
-  if (!API_KEY) {
-    console.log('⚠️  No POLLINATIONS_API_KEY set — will use loremflickr placeholders\n')
-  } else {
-    console.log(`✅ API key found — trying gen.pollinations.ai with model order: ${MODELS.join(' → ')}\n`)
-  }
-
-  for (const [name, { prompt, width, height }] of Object.entries(images)) {
+  await mkdir(OUTPUT_DIR, { recursive: true })
+  const deadline = Date.now() + RUN_TIMEOUT_MS
+  for (const name of REQUIRED_IMAGE_NAMES) {
+    const { prompt, width, height } = images[name]
     const outPath = path.join(OUTPUT_DIR, `${name}.jpg`)
-    if (existsSync(outPath)) {
-      console.log(`⏭  ${name} — already exists, skipping`)
+    try {
+      validateImage(await readFile(outPath))
+      console.log(`${name}: existing image validated`)
+      continue
+    } catch (error) {
+      if (error.code !== 'ENOENT') console.warn(`${name}: existing image is invalid; regeneration required`)
+    }
+    if (!API_KEY || Date.now() >= deadline) {
+      console.error(`${name}: a valid local image is required; ${API_KEY ? 'run deadline exceeded' : 'set POLLINATIONS_API_KEY to generate it'}`)
       continue
     }
 
     console.log(`⏳ ${name} (${width}×${height})...`)
-    let res = null
-
-    if (API_KEY) {
-      for (const model of MODELS) {
-        res = await tryModel(prompt, width, height, model)
-        if (res) break
-      }
+    let buffer = null
+    for (const model of MODELS) {
+      if (Date.now() >= deadline) break
+      buffer = await tryModel(prompt, width, height, model, deadline)
+      if (buffer) break
     }
 
-    if (!res) {
-      console.log(`    ↩️  using loremflickr placeholder`)
-      res = await fetchLoremFlickr(name, width, height)
-    }
-
-    if (!res) {
+    if (!buffer) {
       console.log(`    ❌ all sources failed for ${name}`)
       continue
     }
 
-    await pipeline(res.body, createWriteStream(outPath))
+    const stagingPath = `${outPath}.${process.pid}.partial`
+    try {
+      await writeFile(stagingPath, buffer, { flag: 'wx' })
+      validateImage(await readFile(stagingPath))
+      await rename(stagingPath, outPath)
+    } finally {
+      try {
+        await unlink(stagingPath)
+      } catch (error) {
+        if (error.code !== 'ENOENT') throw error
+      }
+    }
     console.log(`    💾 saved → public/images/${name}.jpg`)
   }
 
-  console.log('\n✨ Done')
+  await validateRequiredImages(OUTPUT_DIR)
+  console.log('\nAll required landing images are valid.')
 }
 
-main().catch(console.error)
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch(error => {
+    console.error(error.message)
+    process.exitCode = 1
+  })
+}

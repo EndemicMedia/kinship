@@ -1,6 +1,8 @@
 // Mock accountability incidents for Kinship app
 
-export const mockIncidents = {
+import type { AccountabilityLog } from '~/types/app'
+
+export const mockIncidents: Record<string, AccountabilityLog[]> = {
   'crew-1': [
     {
       id: 'inc-1',

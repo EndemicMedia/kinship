@@ -11,21 +11,21 @@ const testimonials = computed(() => [
     name: t('testimonials.items.first.name'),
     role: t('testimonials.items.first.role'),
     image: sectionPrompts.testimonial1,
-    staticSrc: '/kinship/images/testimonial1.jpg'
+    staticSrc: '/images/testimonial1.jpg'
   },
   {
     quote: t('testimonials.items.second.quote'),
     name: t('testimonials.items.second.name'),
     role: t('testimonials.items.second.role'),
     image: sectionPrompts.testimonial2,
-    staticSrc: '/kinship/images/testimonial2.jpg'
+    staticSrc: '/images/testimonial2.jpg'
   },
   {
     quote: t('testimonials.items.third.quote'),
     name: t('testimonials.items.third.name'),
     role: t('testimonials.items.third.role'),
     image: sectionPrompts.testimonial3,
-    staticSrc: '/kinship/images/testimonial3.jpg'
+    staticSrc: '/images/testimonial3.jpg'
   }
 ])
 </script>
@@ -53,7 +53,7 @@ const testimonials = computed(() => [
           >
             <!-- Quote Icon -->
             <div class="mb-4 text-teal-500/20">
-              <UIcon name="i-heroicons-quotation-mark" class="h-10 w-10" />
+              <UIcon name="i-heroicons-chat-bubble-left-right" class="h-10 w-10" />
             </div>
             
             <p class="mb-6 line-clamp-4 text-slate-600 dark:text-slate-300 leading-relaxed">

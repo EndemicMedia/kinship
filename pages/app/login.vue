@@ -1,23 +1,25 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: false
+  layout: false,
+  middleware: ['auth']
 })
 
 const { t } = useI18n()
+const localePath = useLocalePath()
 
 const url = 'https://endemicmedia.github.io/kinship/app/login'
 
-useSeoMeta(() => ({
-  title: t('seo.app.login.title'),
-  description: t('seo.app.login.description'),
-  ogTitle: t('seo.app.login.title'),
-  ogDescription: t('seo.app.login.description'),
+useSeoMeta({
+  title: () => t('seo.app.login.title'),
+  description: () => t('seo.app.login.description'),
+  ogTitle: () => t('seo.app.login.title'),
+  ogDescription: () => t('seo.app.login.description'),
   ogType: 'website',
   ogUrl: url,
-  twitterTitle: t('seo.app.login.title'),
-  twitterDescription: t('seo.app.login.description'),
-  twitterCard: 'summary',
-}))
+  twitterTitle: () => t('seo.app.login.title'),
+  twitterDescription: () => t('seo.app.login.description'),
+  twitterCard: 'summary_large_image'
+})
 
 useHead(() => ({
   link: [
@@ -36,25 +38,35 @@ const error = ref('')
 const loading = ref(false)
 
 async function handleLogin() {
+  if (loading.value || authStore.loading) return
   loading.value = true
   error.value = ''
-  
-  const success = await authStore.login(state.email, state.password)
-  
-  if (success) {
-    router.push('/app')
-  } else {
-    error.value = t('loginPage.error')
+
+  try {
+    const success = await authStore.login(state.email, state.password)
+    if (success) {
+      await router.push(localePath('/app'))
+    } else {
+      error.value = t('loginPage.error')
+    }
+  } catch {
+    error.value = t('showcase.auth.storageError')
+  } finally {
+    loading.value = false
   }
-  
-  loading.value = false
 }
 
 async function demoLogin() {
+  if (loading.value || authStore.loading) return
   loading.value = true
-  await authStore.demoLogin()
-  router.push('/app')
-  loading.value = false
+  try {
+    await authStore.demoLogin()
+    if (authStore.isLoggedIn) await router.push(localePath('/app'))
+  } catch {
+    error.value = t('showcase.auth.storageError')
+  } finally {
+    loading.value = false
+  }
 }
 </script>
 
@@ -96,6 +108,16 @@ async function demoLogin() {
           color="red"
           variant="soft"
           icon="i-heroicons-exclamation-triangle"
+        />
+
+        <UAlert
+          v-if="authStore.storageError"
+          :title="t('showcase.auth.storageErrorTitle')"
+          :description="t(`showcase.auth.storageErrors.${authStore.storageError}`)"
+          color="amber"
+          variant="soft"
+          icon="i-heroicons-exclamation-triangle"
+          role="alert"
         />
 
         <UButton

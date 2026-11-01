@@ -1,4 +1,131 @@
 {
+  "showcase": {
+    "sidebar": { "collapse": "Recolher barra lateral", "expand": "Expandir barra lateral" },
+    "auth": {
+      "storageError": "Não foi possível acessar o armazenamento do navegador. Tente novamente.",
+      "storageErrorTitle": "Problema no armazenamento",
+      "storageErrors": {
+        "clear": "Não foi possível remover a sessão local deste navegador.",
+        "write": "As alterações estão ativas nesta visita, mas não puderam ser salvas no navegador.",
+        "read": "Não foi possível ler a sessão salva. Você pode iniciar uma nova sessão.",
+        "profileRead": "Não foi possível ler as alterações de perfil salvas."
+      },
+      "dismiss": "Fechar"
+    },
+    "header": { "search": "Pesquisar Kinship", "notifications": "Notificações, {count} não lidas", "toggleTheme": "Alternar tema de cores", "logout": "Sair", "account": "Conta de {name}" },
+    "notifications": { "empty": "Nenhuma notificação" },
+    "toasts": { "dismiss": "Fechar notificação" },
+    "profile": { "personaHint": "As alterações de perfil são salvas separadamente para cada persona." },
+    "activity": { "subtitle": "Selecione uma atividade para abrir a equipe ou documento relacionado." },
+    "settings": {
+      "storageFailed": "Não foi possível salvar as configurações",
+      "storageFailedDescription": "Suas preferências permanecem ativas nesta visita, mas não puderam ser salvas no navegador.",
+      "storageErrorTitle": "Problema ao salvar preferências",
+      "storageErrors": { "read": "Não foi possível ler as preferências salvas.", "write": "As preferências estão ativas nesta visita, mas não puderam ser salvas no navegador." },
+      "personaHint": "Estas preferências se aplicam a {name} e são salvas neste navegador.",
+      "passwordCompleteTitle": "Fluxo de senha concluído", "passwordCompleteDescription": "Nenhuma senha foi alterada e nenhum serviço foi contatado.",
+      "privacyCompleteTitle": "Preferências de privacidade salvas", "privacyCompleteDescription": "Estas preferências foram salvas localmente para esta persona.",
+      "deleteCompleteTitle": "Fluxo de exclusão concluído", "deleteCompleteDescription": "Nenhuma conta ou dado foi excluído.",
+      "workflowCompleteTitle": "Fluxo concluído", "workflowCompleteDescription": "Este site não contata um serviço nem altera uma conta real.",
+      "passwordHint": "Digite uma senha atual e uma nova senha com pelo menos oito caracteres para ver a confirmação.",
+      "currentPassword": "Senha atual", "newPassword": "Nova senha", "passwordMinimum": "Use pelo menos oito caracteres.",
+      "privacyHint": "Estes controles se aplicam à persona selecionada.",
+      "discoverable": "Mostrar meu perfil na bússola", "shareMatchBreakdown": "Compartilhar detalhes da compatibilidade",
+      "deleteWarning": "Revise a solicitação de exclusão antes de continuar.", "simulatedOnly": "Nenhuma conta real ou dado será alterado.",
+      "deleteConfirmationLabel": "Digite DELETE para confirmar a solicitação",
+      "done": "Concluído", "cancel": "Cancelar", "submitPassword": "Continuar", "savePrivacy": "Salvar preferências de privacidade", "confirmDelete": "Confirmar solicitação"
+    },
+    "compass": {
+      "children": "{count} crianças",
+      "conversation": "Conversa",
+      "like": "Curtir {name}", "maybeAction": "Talvez {name}", "pass": "Passar {name}",
+      "liked": "curtido", "maybe": "talvez", "passed": "ignorado",
+      "decisionActivity": "Perfil marcado como {decision}", "decisionActivityDescription": "Sua escolha para {name} foi salva nesta sessão.",
+      "decisionSaved": "{decision} salvo", "decisionSavedDescription": "Sua escolha para {name} foi salva nesta sessão do navegador.",
+      "messageActivity": "Mensagem salva", "connectActivity": "Solicitação de conexão salva",
+      "actionActivityDescription": "Uma ação foi registrada para {name}.",
+      "resetComplete": "Escolhas da bússola redefinidas", "resetDescription": "As escolhas Curtir, Talvez e Passar foram limpas para esta persona.",
+      "resetFilters": "Redefinir filtros", "messageSent": "Mensagem salva", "requestSent": "Solicitação pendente",
+      "notProvided": "Não informado", "availability": "Disponibilidade",
+      "breakdownHint": "Cada porcentagem mostra o alinhamento na categoria; dados indisponíveis não são contados.",
+      "notAvailable": "Não disponível", "requestAlreadySent": "Uma solicitação de conexão para {name} já foi salva.",
+      "messageSavedTitle": "Mensagem salva", "messageSavedDescription": "Sua mensagem para {name} está visível nesta sessão.",
+      "requestSavedTitle": "Solicitação de conexão salva", "requestSavedDescription": "Sua solicitação para {name} está visível nesta sessão."
+    },
+    "close": "Fechar",
+    "info": {
+      "about": { "title": "Sobre Kinship", "body": "Kinship explora equipes parentais intencionais com valores compartilhados, responsabilidades claras e apoio contínuo. Explore compatibilidade, conversas, responsabilidade e documentos. Acordos parentais exigem conversas cuidadosas e orientação profissional qualificada." },
+      "pricing": { "title": "Preços e disponibilidade", "body": "Você pode explorar todos os recursos aqui sem pagamento. Nenhum serviço de assinatura, compra ou cobrança está conectado. Um futuro serviço explicaria recursos, custos, regras de cancelamento e disponibilidade antes de solicitar pagamento." },
+      "blog": { "title": "Recursos de planejamento", "body": "Comecem discutindo objetivos parentais, horários de cuidado, responsabilidades financeiras, decisões e limites. Revisem os acordos conforme as circunstâncias mudam. As seções Recursos e Como funciona apresentam essa abordagem de parentalidade intencional." },
+      "contact": { "title": "Contato e feedback", "body": "Explore os fluxos de equipes, compatibilidade e documentos para avaliar o conceito. Este site não está conectado a uma caixa de suporte e não envia solicitações de contato. Não insira detalhes familiares privados, pedidos urgentes ou documentos sensíveis." },
+      "privacy": { "title": "Privacidade", "body": "Alterações e preferências são armazenadas no navegador em vez de enviadas a um serviço de contas Kinship. Limpe os dados do site para redefinir as informações. Não forneça informações pessoais, médicas, financeiras ou relacionadas a crianças que sejam sensíveis." },
+      "terms": { "title": "Termos", "body": "Este site permite explorar ideias de produto, não estabelecer acordos jurídicos, financeiros, médicos ou parentais. Acordos e assinaturas de exemplo não criam compromissos executáveis. Consulte profissionais qualificados na sua jurisdição antes de confiar em qualquer acordo real." },
+      "cookies": { "title": "Cookies e armazenamento", "body": "O seletor de idioma salva um cookie para lembrar sua preferência. Interações também podem salvar estado no navegador. Não há rastreamento de publicidade ou pagamento. Remova preferências salvas nas configurações de dados do site do navegador." },
+      "community": { "title": "Novidades da comunidade", "body": "O conceito de comunidade Kinship se concentra em colaboração respeitosa, estruturas parentais inclusivas e apoio prático às equipes. Explore o site e o aplicativo para saber mais. Estes controles não conectam a um canal social externo oficial." },
+      "mobile": { "title": "Acesso móvel", "body": "Kinship está disponível no navegador em celulares, tablets e computadores. Nenhuma versão da App Store ou Play Store está conectada, e estes controles não iniciam instalação. Use Começar ou uma ação principal para explorar o aplicativo no navegador." }
+    },
+    "crews": {
+      "level": "Nível {level}",
+      "incidentStatus": { "open": "Aberto", "addressed": "Tratado", "resolved": "Resolvido" },
+      "categories": { "parenting": "Criação", "communication": "Comunicação", "financial": "Finanças", "lifestyle": "Estilo de vida" },
+      "create": "Criar equipe",
+      "name": "Nome da equipe",
+      "description": "Descrição da equipe",
+      "nameError": "Digite um nome de equipe entre 3 e 80 caracteres.",
+      "descriptionError": "Digite uma descrição entre 1 e 1.000 caracteres.",
+      "creatorMembership": "Você será adicionado como membro ativo com sua função atual.",
+      "discover": "Descobrir equipes",
+      "membershipUpdated": "Participação atualizada. Sua equipe aparece abaixo.",
+      "noAvailable": "Você já entrou ou solicitou participação em todas as equipes disponíveis.",
+      "request": "Solicitar participação",
+      "join": "Entrar na equipe",
+      "requested": "Solicitação pendente",
+      "send": "Enviar mensagem",
+      "removeAttachments": "Remover anexos",
+      "response": "Notas da resposta (opcional)",
+      "address": "Marcar como tratado",
+      "resolve": "Resolver incidente",
+      "reopen": "Reabrir incidente",
+      "incidentActions": {
+        "open": "Incidente reaberto para discussão.",
+        "addressed": "Resposta da equipe registrada; incidente tratado.",
+        "resolved": "Resposta da equipe registrada; incidente resolvido."
+      },
+      "checkIn": "Check-in da equipe",
+      "nextCheckIn": "Próximo check-in",
+      "checkInDate": "Data e hora do check-in",
+      "schedule": "Agendar check-in",
+      "rating": "Qualidade da relação (1–5)",
+      "checkInNotes": "Notas do check-in",
+      "completeCheckIn": "Enviar check-in",
+      "checkInScheduled": "Check-in agendado.",
+      "checkInSaved": "Resposta do check-in salva.",
+      "status": { "active": "Ativa", "forming": "Em formação", "paused": "Pausada", "dissolved": "Dissolvida" }
+    },
+    "legal": {
+      "executed": "Executado",
+      "content": "Conteúdo do documento",
+      "save": "Salvar alterações",
+      "saved": "Documento salvo.",
+      "signed": "Assinado",
+      "awaitingSignature": "Aguardando assinatura",
+      "sign": "Assinar documento",
+      "download": "Baixar",
+      "openLegal": "Abrir documentos legais",
+      "openDocument": "Abrir {title}",
+      "backToCrew": "Voltar aos documentos de {name}",
+      "crew": "Equipe",
+      "validation": "Escolha uma equipe e preencha o título e o conteúdo do documento.",
+      "needsCrew": "Entre em uma equipe ou crie uma antes de criar um documento."
+    }
+  },
+  "features": {
+    "title": "Tudo o que sua equipe precisa.",
+    "description": "Seis camadas estruturadas, compatibilidade de valores e proteção jurídica em uma plataforma.",
+    "tabs": { "layers": "As 6 camadas", "compass": "A bússola", "for": "Para quem" },
+    "compassIntro": "Valores e visão vêm primeiro. A bússola apresenta pessoas buscando a mesma jornada.",
+    "forQuote": "Você não precisa de um parceiro romântico para criar bem uma criança. Precisa de adultos alinhados e comprometidos com o mesmo projeto de longo prazo."
+  },
   "brand": {
     "name": "Kinship"
   },
@@ -41,10 +168,12 @@
   },
   "header": {
     "nav": {
+      "mission": "Missão",
       "howItWorks": "Como funciona",
       "features": "Recursos",
       "about": "Sobre"
     },
+    "download": { "appStore": "App Store", "playStore": "Play Store" },
     "cta": "Começar",
     "mobileToggle": "Alternar menu móvel",
     "ariaLabel": "Navegação global"
@@ -94,25 +223,6 @@
         "legalGuidance": "Orientação e suporte jurídico integrados",
         "accountabilityTools": "Ferramentas de responsabilização e rastreamento",
         "exitStrategies": "Estratégias de saída planejadas desde o início"
-      }
-    }
-  },
-  "compass": {
-    "title": "O Compass: descubra sua equipe",
-    "description": "A Kinship combina a facilidade dos apps modernos de matching com o rigor que famílias intencionais precisam. O Compass coloca valores e visão em primeiro lugar e, então, mostra pessoas buscando a mesma jornada.",
-    "imageAlt": "Interface do Compass para matching de equipes",
-    "features": {
-      "values": {
-        "title": "Valores em primeiro lugar",
-        "description": "Explore perfis de equipe que começam pela filosofia de criação, não por fotos. A compatibilidade aparece antes da atração."
-      },
-      "dimensions": {
-        "title": "Seis dimensões de alinhamento",
-        "description": "Veja onde vocês combinam e onde conversas iniciais importam. Nenhuma pontuação única escondendo incompatibilidades."
-      },
-      "structure": {
-        "title": "Estrutura antes da química",
-        "description": "Conclua conversas guiadas sobre temas difíceis antes de liberar o chat. Traga discordâncias à tona cedo."
       }
     }
   },
@@ -187,6 +297,7 @@
     }
   },
   "familyAccountability": {
+    "badge": "Responsabilidade familiar",
     "title": "Responsabilidade familiar antes da intervenção do Estado",
     "description": "Quem se compromete no nascimento permanece responsável por orientar, corrigir e intervir quando surgirem desafios. A Kinship oferece a estrutura para responder como equipe antes que os tribunais intervenham com punição.",
     "imageAlt": "Visualização do círculo de responsabilidade familiar",
@@ -230,6 +341,7 @@
     }
   },
   "governance": {
+    "badge": "Proteção jurídica",
     "title": "Proteção jurídica integrada a cada etapa",
     "description": "A Kinship gera documentação juridicamente sólida desde o início. Os acordos são ativados quando a gravidez começa, estabelecendo responsabilidade antes do nascimento em vez de correr atrás de proteção após a separação.",
     "imageAlt": "Equipe profissional diversa de governança e suporte jurídico",
@@ -270,6 +382,8 @@
     }
   },
   "cta": {
+    "badge": "Comece sua jornada",
+    "note": "Junte-se à comunidade de famílias intencionais.",
     "imageAlt": "Equipe multigeracional com crianças caminhando rumo a um futuro promissor",
     "title": "Pronto para formar sua equipe?",
     "description": "Comece com alinhamento de valores. Construa proteção jurídica desde o primeiro dia. Mantenha apoio em cada transição.",
@@ -293,6 +407,7 @@
       "contact": "Contato"
     },
     "legal": {
+      "cookies": "Cookies",
       "title": "Legal",
       "privacy": "Privacidade",
       "terms": "Termos"
@@ -451,6 +566,12 @@
       "connectionHint": "Enviar uma solicitação de conexão notificará {name} e permitirá que você comece a construir uma equipe parental juntos.",
       "noteOptional": "Adicionar uma nota pessoal (opcional)"
     },
+    "toasts": {
+      "messageSent": "Mensagem enviada",
+      "messageSentDesc": "Sua mensagem para {name} foi enviada.",
+      "requestSent": "Solicitação enviada",
+      "requestSentDesc": "Solicitação de conexão enviada para {name}."
+    },
     "noMatches": {
       "title": "Nenhuma correspondência encontrada",
       "description": "Volte mais tarde para novos membros potenciais de equipe."
@@ -482,6 +603,7 @@
     },
     "buttons": {
       "preview": "Visualizar",
+      "cancel": "Cancelar",
       "useTemplate": "Usar Modelo",
       "close": "Fechar",
       "edit": "Editar",
@@ -503,6 +625,7 @@
     }
   },
   "loginPage": {
+    "or": "ou",
     "welcomeTitle": "Bem-vindo ao Kinship",
     "welcomeSubtitle": "Entre para acessar suas equipes",
     "email": "E-mail",
@@ -549,8 +672,20 @@
    },
    "landing": {
      "hero": {
+       "browseCompass": "Explorar bússola",
        "openApp": "Abrir App",
        "tryDemo": "Experimentar Demo"
+     },
+     "compass": {
+       "badge": "Compatibilidade",
+       "title": "A bússola: descubra sua equipe",
+       "description": "Kinship combina descoberta simples com a estrutura necessária às famílias intencionais. A bússola prioriza valores e visão.",
+       "imageAlt": "Interface da bússola para encontrar equipes",
+       "features": {
+         "values": { "title": "Valores em primeiro lugar", "description": "Explore perfis que destacam a filosofia de criação, não apenas fotos. A compatibilidade aparece antes da atração." },
+         "dimensions": { "title": "Seis dimensões de alinhamento", "description": "Veja os pontos em comum e os assuntos importantes, sem esconder diferenças atrás de uma única pontuação." },
+         "structure": { "title": "Estrutura antes da química", "description": "Conversem sobre assuntos difíceis com orientação e descubram divergências cedo." }
+       }
      }
    },
   "statCard": {
@@ -613,6 +748,7 @@
       "noIncidents": "Nenhum incidente registrado",
       "healthy": "Esta equipe está mantendo responsabilidade saudável",
       "actionsTaken": "Ações Tomadas",
+      "reportedBy": "Relatado por",
       "severityLevels": {
         "minor": "Leve (Pai/Mãe Principal)",
         "pattern": "Padrão (Equipe Completa)",
@@ -639,6 +775,7 @@
       "valueTitle": "Título do Valor",
       "valuePlaceholder": "ex., Comunicação Aberta",
       "category": "Categoria",
+      "noContent": "Nenhum conteúdo disponível",
       "close": "Fechar",
       "edit": "Editar"
     }

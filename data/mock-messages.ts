@@ -1,6 +1,8 @@
 // Mock chat messages for Kinship app
 
-export const mockMessages = {
+import type { ChatMessage } from '~/types/app'
+
+export const mockMessages: Record<string, ChatMessage[]> = {
   'crew-1': [
     {
       id: 'msg-1',

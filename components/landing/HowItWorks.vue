@@ -11,28 +11,28 @@ const steps = computed(() => [
     label: t('howItWorks.steps.discover.label'),
     content: t('howItWorks.steps.discover.content'),
     image: sectionPrompts.discover,
-    staticSrc: '/kinship/images/how-discover.jpg'
+    staticSrc: '/images/how-discover.jpg'
   },
   {
-    icon: 'i-heroicons-bullseye',
+    icon: 'i-heroicons-adjustments-horizontal',
     label: t('howItWorks.steps.align.label'),
     content: t('howItWorks.steps.align.content'),
     image: sectionPrompts.plan,
-    staticSrc: '/kinship/images/how-align.jpg'
+    staticSrc: '/images/how-align.jpg'
   },
   {
     icon: 'i-heroicons-document-check',
     label: t('howItWorks.steps.formalize.label'),
     content: t('howItWorks.steps.formalize.content'),
     image: sectionPrompts.secure,
-    staticSrc: '/kinship/images/how-formalize.jpg'
+    staticSrc: '/images/how-formalize.jpg'
   },
   {
     icon: 'i-heroicons-arrow-path',
     label: t('howItWorks.steps.sustain.label'),
     content: t('howItWorks.steps.sustain.content'),
     image: sectionPrompts.sustain,
-    staticSrc: '/kinship/images/how-sustain.jpg'
+    staticSrc: '/images/how-sustain.jpg'
   }
 ])
 </script>

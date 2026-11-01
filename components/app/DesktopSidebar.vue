@@ -1,16 +1,20 @@
 <script setup lang="ts">
+import { withBase } from 'ufo'
 const route = useRoute()
 const { t } = useI18n()
 const authStore = useAuthStore()
 const uiStore = useUIStore()
+const router = useRouter()
+const localePath = useLocalePath()
+const baseURL = useRuntimeConfig().app.baseURL
 
-const navItems = [
+const navItems = computed(() => [
   { icon: 'i-heroicons-home', label: t('commandPalette.dashboard'), to: '/app', shortcut: 'D' },
   { icon: 'i-heroicons-magnifying-glass', label: t('commandPalette.theCompass'), to: '/app/compass', shortcut: 'C' },
   { icon: 'i-heroicons-users', label: t('commandPalette.myCrews'), to: '/app/crews', shortcut: 'M' },
   { icon: 'i-heroicons-folder', label: t('commandPalette.legal'), to: '/app/legal', shortcut: 'L' },
   { icon: 'i-heroicons-user', label: t('commandPalette.profile'), to: '/app/profile', shortcut: 'P' }
-]
+])
 
 const isCollapsed = computed({
   get: () => uiStore.sidebarCollapsed,
@@ -21,6 +25,11 @@ const isCollapsed = computed({
 
 function toggleCollapse() {
   uiStore.toggleSidebarCollapse()
+}
+
+async function logout() {
+  authStore.logout()
+  await router.push(localePath('/app/login'))
 }
 </script>
 
@@ -34,8 +43,8 @@ function toggleCollapse() {
       class="border-b border-slate-200 dark:border-slate-800 flex items-center"
       :class="isCollapsed ? 'justify-center h-16 px-2' : 'justify-between px-6 py-5'"
     >
-      <NuxtLink to="/app" class="flex items-center gap-3 overflow-hidden">
-        <img src="/logo.png" alt="Kinship" class="h-8 w-8 flex-shrink-0" />
+      <NuxtLink :to="localePath('/app')" class="flex items-center gap-3 overflow-hidden">
+        <img :src="withBase('/logo.png', baseURL)" alt="Kinship" class="h-8 w-8 flex-shrink-0" />
         <span 
           v-if="!isCollapsed" 
           class="text-xl font-semibold text-slate-900 dark:text-white whitespace-nowrap transition-opacity duration-300"
@@ -46,11 +55,12 @@ function toggleCollapse() {
       
       <UButton
         v-if="!isCollapsed"
+        :aria-label="t('showcase.sidebar.collapse')"
+        :aria-expanded="!isCollapsed"
         icon="i-heroicons-chevron-left"
         variant="ghost"
-        color="neutral"
+        color="gray"
         size="xs"
-        class="hidden lg:flex"
         @click="toggleCollapse"
       />
     </div>
@@ -60,11 +70,12 @@ function toggleCollapse() {
       <NuxtLink
         v-for="item in navItems"
         :key="item.to"
-        :to="item.to"
+        :to="localePath(item.to)"
+        :aria-label="item.label"
         class="flex items-center mx-2 rounded-lg text-sm font-medium transition-all duration-200 group relative"
         :class="[
           isCollapsed ? 'justify-center p-3' : 'gap-3 px-4 py-3',
-          route.path === item.to 
+          route.path === localePath(item.to)
             ? 'bg-primary-50 text-primary-600 dark:bg-primary-900/20 dark:text-primary-400' 
             : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
         ]"
@@ -89,9 +100,11 @@ function toggleCollapse() {
       class="p-2 border-t border-slate-200 dark:border-slate-800"
     >
       <UButton
+        :aria-label="t('showcase.sidebar.expand')"
+        :aria-expanded="!isCollapsed"
         icon="i-heroicons-chevron-right"
         variant="ghost"
-        color="neutral"
+        color="gray"
         block
         @click="toggleCollapse"
       />
@@ -104,7 +117,7 @@ function toggleCollapse() {
     >
       <div 
         class="flex items-center gap-3"
-        :class="isCollapsed ? 'justify-center' : ''"
+        :class="isCollapsed ? 'flex-col justify-center' : ''"
       >
         <UAvatar
           :src="authStore.currentUser?.avatar"
@@ -121,12 +134,12 @@ function toggleCollapse() {
           </p>
         </div>
         <UButton
-          v-if="!isCollapsed"
+          :aria-label="t('showcase.header.logout')"
           icon="i-heroicons-arrow-right-on-rectangle"
-          color="neutral"
+          color="gray"
           variant="ghost"
           size="sm"
-          @click="authStore.logout()"
+          @click="logout"
         />
       </div>
     </div>

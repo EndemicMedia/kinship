@@ -5,20 +5,21 @@ definePageMeta({
 })
 
 const { t } = useI18n()
+const localePath = useLocalePath()
 
 const url = 'https://endemicmedia.github.io/kinship/app'
 
-useSeoMeta(() => ({
-  title: t('seo.app.title'),
-  description: t('seo.app.description'),
-  ogTitle: t('seo.app.title'),
-  ogDescription: t('seo.app.description'),
+useSeoMeta({
+  title: () => t('seo.app.title'),
+  description: () => t('seo.app.description'),
+  ogTitle: () => t('seo.app.title'),
+  ogDescription: () => t('seo.app.description'),
   ogType: 'website',
   ogUrl: url,
-  twitterTitle: t('seo.app.title'),
-  twitterDescription: t('seo.app.description'),
-  twitterCard: 'summary',
-}))
+  twitterTitle: () => t('seo.app.title'),
+  twitterDescription: () => t('seo.app.description'),
+  twitterCard: 'summary_large_image'
+})
 
 useHead(() => ({
   link: [
@@ -62,7 +63,7 @@ const stats = computed(() => [
   },
   {
     label: t('dashboard.stats.documents'),
-    value: 8,
+    value: userCrews.value.reduce((total, crew) => total + crew.documents.length, 0),
     icon: 'i-heroicons-document-text',
     trend: -5,
     iconColor: 'text-purple-600 dark:text-purple-400',
@@ -79,7 +80,7 @@ const stats = computed(() => [
 ])
 
 // Quick actions with enhanced design
-const quickActions = [
+const quickActions = computed(() => [
   { 
     icon: 'i-heroicons-magnifying-glass', 
     label: t('landing.hero.browseCompass'), 
@@ -90,14 +91,16 @@ const quickActions = [
   { 
     icon: 'i-heroicons-users', 
     label: t('dashboard.quickActionsList.viewCrews'), 
-    to: '/app/crews', 
+    to: '/app/crews',
     color: 'neutral',
     description: t('dashboard.quickActionsList.manageCrews')
   },
   { 
     icon: 'i-heroicons-chat-bubble-left', 
     label: t('dashboard.quickActionsList.messages'), 
-    to: '/app/crews', 
+    to: userCrews.value[0]
+      ? `/app/crews/detail?id=${encodeURIComponent(userCrews.value[0].id)}&tab=chat`
+      : '/app/crews',
     color: 'neutral',
     description: t('dashboard.quickActionsList.checkMessages')
   },
@@ -108,7 +111,7 @@ const quickActions = [
     color: 'neutral',
     description: t('dashboard.quickActionsList.viewLegalDocs')
   }
-]
+])
 
 // Simulate loading
 onMounted(() => {
@@ -146,7 +149,7 @@ const showEmptyState = computed(() => !isLoading.value && userCrews.value.length
         </div>
         <div class="flex items-center gap-3">
           <UButton
-            to="/app/crews"
+            :to="localePath('/app/crews/create')"
             color="primary"
             icon="i-heroicons-plus"
           >
@@ -175,8 +178,8 @@ const showEmptyState = computed(() => !isLoading.value && userCrews.value.length
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <NuxtLink
             v-for="action in quickActions"
-            :key="action.to"
-            :to="action.to"
+            :key="action.label"
+            :to="localePath(action.to)"
             class="group relative overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 transition-all duration-300 hover:shadow-lg hover:border-primary-300 dark:hover:border-primary-700"
           >
             <!-- Hover background effect -->
@@ -207,7 +210,7 @@ const showEmptyState = computed(() => !isLoading.value && userCrews.value.length
           <div class="flex items-center justify-between">
             <h2 class="text-lg font-semibold text-slate-900 dark:text-white">{{ t('dashboard.yourCrews') }}</h2>
             <UButton 
-              to="/app/crews" 
+              :to="localePath('/app/crews')"
               variant="link" 
               color="primary"
               trailing-icon="i-heroicons-arrow-right"
@@ -227,20 +230,21 @@ const showEmptyState = computed(() => !isLoading.value && userCrews.value.length
 
           <!-- Crew Cards -->
           <div v-else class="space-y-4">
-            <UCard
+            <NuxtLink
               v-for="crew in userCrews.slice(0, 3)"
               :key="crew.id"
-              class="group cursor-pointer hover:shadow-lg transition-all duration-300 border-slate-200 dark:border-slate-800 hover:border-primary-300 dark:hover:border-primary-700"
-              @click="$router.push(`/app/crews/detail?id=${crew.id}`)"
+              :to="localePath(`/app/crews/detail?id=${encodeURIComponent(crew.id)}`)"
+              class="group block rounded-xl transition-shadow hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary-500"
             >
-              <div class="flex items-start justify-between">
+              <UCard class="border-slate-200 transition-colors group-hover:border-primary-300 dark:border-slate-800 dark:group-hover:border-primary-700">
+                <div class="flex items-start justify-between">
                 <div class="flex-1">
                   <div class="flex items-center gap-3 mb-2">
                     <h3 class="font-semibold text-lg text-slate-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                       {{ crew.name }}
                     </h3>
                     <UBadge 
-                      :color="crew.status === 'active' ? 'success' : 'warning'" 
+                      :color="crew.status === 'active' ? 'green' : 'amber'"
                       variant="soft"
                       size="sm"
                     >
@@ -268,13 +272,8 @@ const showEmptyState = computed(() => !isLoading.value && userCrews.value.length
                   </div>
                 </div>
 
-                <UButton
-                  icon="i-heroicons-chevron-right"
-                  variant="ghost"
-                  color="neutral"
-                  class="opacity-0 group-hover:opacity-100 transition-opacity"
-                />
-              </div>
+                <UIcon name="i-heroicons-chevron-right" class="h-5 w-5 shrink-0 text-slate-400 transition-transform group-hover:translate-x-1" />
+                </div>
 
               <!-- Progress Bar -->
               <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
@@ -288,7 +287,8 @@ const showEmptyState = computed(() => !isLoading.value && userCrews.value.length
                   size="sm"
                 />
               </div>
-            </UCard>
+              </UCard>
+            </NuxtLink>
           </div>
         </div>
 

@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { formatDistanceToNow } from 'date-fns'
+import type { Activity } from '~/stores/ui'
 const { t } = useI18n()
+const localePath = useLocalePath()
 const uiStore = useUIStore()
 
-const activityTypeConfig = {
+const activityTypeConfig: Record<Activity['type'], { icon: string; color: string; label: string }> = {
   crew: {
     icon: 'i-heroicons-user-group',
     color: 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400',
@@ -34,6 +36,13 @@ const activityTypeConfig = {
 function formatTime(date: Date): string {
   return formatDistanceToNow(new Date(date), { addSuffix: true })
 }
+
+function activityUrl(activity: Activity): string {
+  if (activity.crewId) return `/app/crews/detail?id=${encodeURIComponent(activity.crewId)}`
+  if (activity.type === 'document') return '/app/legal'
+  if (activity.type === 'crew' || activity.type === 'member' || activity.type === 'message') return '/app/crews'
+  return '/app/activity'
+}
 </script>
 
 <template>
@@ -42,7 +51,7 @@ function formatTime(date: Date): string {
       <div class="flex items-center justify-between">
         <h3 class="font-semibold text-lg">{{ t('activity.recentActivity') }}</h3>
         <UButton 
-          to="/app/activity" 
+          :to="localePath('/app/activity')"
           variant="link" 
           color="primary"
           size="sm"
@@ -54,18 +63,18 @@ function formatTime(date: Date): string {
     </template>
 
     <div class="space-y-4">
-      <div 
+      <NuxtLink
         v-for="activity in uiStore.recentActivities" 
         :key="activity.id"
-        class="flex gap-3 group cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 -mx-4 px-4 py-3 rounded-lg transition-colors"
+        :to="localePath(activityUrl(activity))"
+        class="group -mx-4 flex gap-3 rounded-lg px-4 py-3 transition-colors hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary-500 dark:hover:bg-slate-800/50"
+        :aria-label="`${activity.title}: ${activity.description}`"
       >
-        <!-- Icon -->
         <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
           :class="activityTypeConfig[activity.type].color">
           <UIcon :name="activityTypeConfig[activity.type].icon" class="w-5 h-5" />
         </div>
 
-        <!-- Content -->
         <div class="flex-1 min-w-0">
           <div class="flex items-start justify-between gap-2">
             <div>
@@ -81,7 +90,7 @@ function formatTime(date: Date): string {
             </span>
           </div>
         </div>
-      </div>
+      </NuxtLink>
 
       <!-- Empty State -->
       <div v-if="uiStore.recentActivities.length === 0" class="text-center py-8">

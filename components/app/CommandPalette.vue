@@ -1,147 +1,108 @@
 <script setup lang="ts">
+interface CommandItem {
+  id: string
+  label: string
+  description: string
+  icon: string
+  shortcut?: string[]
+  click: () => unknown
+}
+
+interface CommandGroup {
+  key: string
+  label: string
+  commands: CommandItem[]
+}
+
+const props = defineProps<{ open?: boolean }>()
+const emit = defineEmits<{ 'update:open': [value: boolean] }>()
 const { t } = useI18n()
-const uiStore = useUIStore()
-const authStore = useAuthStore()
+const localePath = useLocalePath()
 const crewsStore = useCrewsStore()
-
 const isOpen = ref(false)
-const searchQuery = ref('')
+const selectedCommand = ref<CommandItem>()
+const paletteOpen = computed({
+  get: () => props.open ?? isOpen.value,
+  set: (value: boolean) => {
+    isOpen.value = value
+    emit('update:open', value)
+  }
+})
 
-// Command palette groups
-const commandGroups = computed(() => [
+const commandGroups = computed<CommandGroup[]>(() => [
   {
-    id: 'actions',
+    key: 'actions',
     label: t('commandPalette.quickActions'),
-    items: [
-      { 
-        id: 'new-crew', 
-        label: t('commandPalette.createNewCrew'), 
-        icon: 'i-heroicons-plus-circle',
-        shortcut: ['N'],
-        click: () => navigateTo('/app/crews')
-      },
-      { 
-        id: 'browse-compass', 
-        label: t('commandPalette.browseCompass'), 
-        icon: 'i-heroicons-magnifying-glass',
-        shortcut: ['B'],
-        click: () => navigateTo('/app/compass')
-      },
-      { 
-        id: 'view-profile', 
-        label: t('commandPalette.viewProfile'), 
-        icon: 'i-heroicons-user',
-        shortcut: ['P'],
-        click: () => navigateTo('/app/profile')
-      },
-      { 
-        id: 'legal-docs', 
-        label: t('commandPalette.legalDocuments'), 
-        icon: 'i-heroicons-folder',
-        shortcut: ['L'],
-        click: () => navigateTo('/app/legal')
-      }
+    commands: [
+      { id: 'new-crew', label: t('commandPalette.createNewCrew'), description: t('commandPalette.createNewCrew'), icon: 'i-heroicons-plus-circle', shortcut: ['N'], click: () => navigateTo(localePath('/app/crews/create')) },
+      { id: 'browse-compass', label: t('commandPalette.browseCompass'), description: t('commandPalette.browseCompass'), icon: 'i-heroicons-magnifying-glass', shortcut: ['B'], click: () => navigateTo(localePath('/app/compass')) },
+      { id: 'view-profile', label: t('commandPalette.viewProfile'), description: t('commandPalette.viewProfile'), icon: 'i-heroicons-user', shortcut: ['P'], click: () => navigateTo(localePath('/app/profile')) },
+      { id: 'legal-docs', label: t('commandPalette.legalDocuments'), description: t('commandPalette.legalDocuments'), icon: 'i-heroicons-folder', shortcut: ['L'], click: () => navigateTo(localePath('/app/legal')) }
     ]
   },
   {
-    id: 'crews',
+    key: 'crews',
     label: t('commandPalette.myCrews'),
-    items: crewsStore.crews.slice(0, 5).map(crew => ({
+    commands: crewsStore.crews.slice(0, 5).map(crew => ({
       id: `crew-${crew.id}`,
       label: crew.name,
-      icon: 'i-heroicons-user-group',
       description: `${crew.members.length} ${t('commandPalette.members')}`,
-      click: () => navigateTo(`/app/crews/detail?id=${crew.id}`)
+      icon: 'i-heroicons-user-group',
+      click: () => navigateTo(localePath(`/app/crews/detail?id=${encodeURIComponent(crew.id)}`))
     }))
   },
   {
-    id: 'pages',
+    key: 'pages',
     label: t('commandPalette.pages'),
-    items: [
-      { id: 'dashboard', label: t('commandPalette.dashboard'), icon: 'i-heroicons-home', shortcut: ['D'], click: () => navigateTo('/app') },
-      { id: 'crews', label: t('commandPalette.myCrews'), icon: 'i-heroicons-users', shortcut: ['C'], click: () => navigateTo('/app/crews') },
-      { id: 'compass', label: t('commandPalette.theCompass'), icon: 'i-heroicons-magnifying-glass', shortcut: ['T'], click: () => navigateTo('/app/compass') },
-      { id: 'profile', label: t('commandPalette.profile'), icon: 'i-heroicons-user-circle', shortcut: ['P'], click: () => navigateTo('/app/profile') },
-      { id: 'legal', label: t('commandPalette.legal'), icon: 'i-heroicons-document-text', shortcut: ['L'], click: () => navigateTo('/app/legal') }
+    commands: [
+      { id: 'dashboard', label: t('commandPalette.dashboard'), description: t('commandPalette.dashboard'), icon: 'i-heroicons-home', shortcut: ['D'], click: () => navigateTo(localePath('/app')) },
+      { id: 'crews-page', label: t('commandPalette.myCrews'), description: t('commandPalette.myCrews'), icon: 'i-heroicons-users', shortcut: ['C'], click: () => navigateTo(localePath('/app/crews')) },
+      { id: 'compass', label: t('commandPalette.theCompass'), description: t('commandPalette.theCompass'), icon: 'i-heroicons-magnifying-glass', shortcut: ['T'], click: () => navigateTo(localePath('/app/compass')) },
+      { id: 'profile', label: t('commandPalette.profile'), description: t('commandPalette.profile'), icon: 'i-heroicons-user-circle', shortcut: ['P'], click: () => navigateTo(localePath('/app/profile')) },
+      { id: 'legal', label: t('commandPalette.legal'), description: t('commandPalette.legal'), icon: 'i-heroicons-document-text', shortcut: ['L'], click: () => navigateTo(localePath('/app/legal')) }
     ]
   }
 ])
 
-// Filter commands based on search query
-const filteredGroups = computed(() => {
-  if (!searchQuery.value) return commandGroups.value
-  
-  const query = searchQuery.value.toLowerCase()
-  return commandGroups.value.map(group => ({
-    ...group,
-    items: group.items.filter(item => 
-      item.label.toLowerCase().includes(query) ||
-      (item.description && item.description.toLowerCase().includes(query))
-    )
-  })).filter(group => group.items.length > 0)
-})
-
-// Keyboard shortcut to open command palette
 onMounted(() => {
-  const handleKeyDown = (e: KeyboardEvent) => {
-    // Check for ⌘K or Ctrl+K
-    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-      e.preventDefault()
-      isOpen.value = true
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+      event.preventDefault()
+      paletteOpen.value = true
     }
-    // Check for Escape to close
-    if (e.key === 'Escape') {
-      isOpen.value = false
-    }
+    if (event.key === 'Escape') paletteOpen.value = false
   }
-  
   window.addEventListener('keydown', handleKeyDown)
-  
-  onUnmounted(() => {
-    window.removeEventListener('keydown', handleKeyDown)
-  })
+  onUnmounted(() => window.removeEventListener('keydown', handleKeyDown))
 })
 
-function onSelect(option: any) {
-  if (option.click) {
-    option.click()
-  }
-  isOpen.value = false
-  searchQuery.value = ''
+function onSelect(option: CommandItem) {
+  option.click()
+  paletteOpen.value = false
+  selectedCommand.value = undefined
 }
 </script>
 
 <template>
-  <div>
-    <!-- Trigger Button -->
+  <div class="contents">
     <UButton
-       icon="i-heroicons-magnifying-glass"
-       variant="outline"
-       color="neutral"
-       class="w-full justify-between text-slate-500 hidden md:flex"
-       @click="isOpen = true"
-     >
-       <span class="flex-1 text-left">{{ t('commandPalette.searchButton') }}</span>
-       <UKbd>⌘K</UKbd>
-     </UButton>
-     
-     <!-- Mobile Trigger -->
-     <UButton
-       icon="i-heroicons-magnifying-glass"
-       variant="ghost"
-       color="neutral"
-       class="md:hidden"
-       @click="isOpen = true"
-     />
-
-     <!-- Command Palette Modal -->
-     <UModal v-model="isOpen" :ui="{ width: 'sm:max-w-2xl' }">
-       <UCommandPalette
-         v-model="searchQuery"
-         :groups="filteredGroups"
-         :placeholder="t('commandPalette.searchPlaceholder')"
-         @update:model-value="onSelect"
-       />
-     </UModal>
+      icon="i-heroicons-magnifying-glass"
+      variant="outline"
+      color="gray"
+      class="hidden w-full justify-between text-slate-500 md:flex"
+      :aria-label="t('commandPalette.searchButton')"
+      @click="paletteOpen = true"
+    >
+      <span class="flex-1 text-left">{{ t('commandPalette.searchButton') }}</span>
+      <UKbd>⌘K</UKbd>
+    </UButton>
+    <UModal v-model="paletteOpen" :ui="{ width: 'sm:max-w-2xl' }">
+      <UCommandPalette
+        v-model="selectedCommand"
+        :groups="commandGroups"
+        :placeholder="t('commandPalette.searchPlaceholder')"
+        @update:model-value="onSelect"
+      />
+    </UModal>
   </div>
 </template>

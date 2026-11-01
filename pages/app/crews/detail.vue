@@ -1,31 +1,14 @@
 <script setup lang="ts">
 import { mockUsers } from '~/data/mock-users'
-import { getMessagesForCrew } from '~/data/mock-messages'
-import { getIncidentsForCrew, severityLabels } from '~/data/mock-incidents'
+import type { Attachment, Document, IncidentStatus } from '~/types/app'
 
 definePageMeta({
   layout: 'app',
   middleware: ['auth']
 })
 
-const { t } = useI18n()
-
-useSeoMeta(() => {
-  const crewName = crewsStore.getCrewById(crewId.value as string)?.name || 'Crew'
-  const title = t('seo.app.crewDetail.title', { name: crewName })
-  const description = t('seo.app.crewDetail.description', { name: crewName })
-  
-  return {
-    title,
-    description,
-    ogTitle: title,
-    ogDescription: description,
-    ogType: 'website',
-    twitterTitle: title,
-    twitterDescription: description,
-    twitterCard: 'summary',
-  }
-})
+const { t, locale } = useI18n()
+const localePath = useLocalePath()
 
 const route = useRoute()
 const crewsStore = useCrewsStore()
@@ -33,50 +16,65 @@ const authStore = useAuthStore()
 
 const crewId = computed(() => {
   const id = route.query.id
-  return Array.isArray(id) ? id[0] : id
+  return (Array.isArray(id) ? id[0] : id) || ''
 })
 
 const crew = computed(() => {
   if (!crewId.value) return null
-  const found = crewsStore.getCrewById(crewId.value as string)
+  const found = crewsStore.getCrewById(crewId.value)
   return found || null
 })
-const router = useRouter()
 const toast = useToast()
 
 const crewName = computed(() => crew.value?.name || 'Crew Details')
 const crewMembers = computed(() => crew.value?.members || [])
 const crewDocuments = computed(() => crew.value?.documents || [])
 
+useSeoMeta({
+  title: () => t('seo.app.crewDetail.title', { name: crewName.value }),
+  description: () => t('seo.app.crewDetail.description', { name: crewName.value }),
+  ogTitle: () => t('seo.app.crewDetail.title', { name: crewName.value }),
+  ogDescription: () => t('seo.app.crewDetail.description', { name: crewName.value }),
+  ogType: 'website',
+  twitterTitle: () => t('seo.app.crewDetail.title', { name: crewName.value }),
+  twitterDescription: () => t('seo.app.crewDetail.description', { name: crewName.value }),
+  twitterCard: 'summary'
+})
+
 const activeTab = ref(0)
-const tabs = [
+const tabs = computed(() => [
   { slot: 'overview', label: t('crewDetail.tabs.overview'), icon: 'i-heroicons-home' },
   { slot: 'chat', label: t('crewDetail.tabs.chat'), icon: 'i-heroicons-chat-bubble-left-right' },
   { slot: 'documents', label: t('crewDetail.tabs.documents'), icon: 'i-heroicons-document-text' },
   { slot: 'values', label: t('crewDetail.tabs.values'), icon: 'i-heroicons-heart' },
   { slot: 'accountability', label: t('crewDetail.tabs.accountability'), icon: 'i-heroicons-scale' }
-]
+])
 
 const getMemberInfo = (userId: string) => {
+  if (authStore.currentUser?.id === userId) return authStore.currentUser
   return mockUsers.find(u => u.id === userId)
 }
 
 // Chat functionality
-const messages = computed(() => getMessagesForCrew(crewId.value))
+const messages = computed(() => crew.value?.chatMessages || [])
 const newMessage = ref('')
+const pendingAttachments = ref<Attachment[]>([])
 
 const formatTime = (date: Date) => {
-  return new Date(date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  return new Date(date).toLocaleTimeString(locale.value, { hour: '2-digit', minute: '2-digit' })
 }
 
 const sendMessage = () => {
-  if (!newMessage.value.trim()) return
-  // logic to send message would go here
+  if (!authStore.currentUser) return
+  if (!crewsStore.sendMessage(crewId.value, authStore.currentUser.id, newMessage.value, pendingAttachments.value)) return
   newMessage.value = ''
+  pendingAttachments.value = []
+  if (fileInput.value) fileInput.value.value = ''
 }
 
 // Accountability functionality
-const incidents = computed(() => getIncidentsForCrew(crewId.value))
+const incidents = computed(() => crew.value?.accountabilityLogs || [])
+const incidentResponses = ref<Record<string, string>>({})
 const showIncidentForm = ref(false)
 const newIncident = ref({
   severity: 2,
@@ -84,15 +82,15 @@ const newIncident = ref({
 })
 
 const submitIncident = () => {
-  if (!newIncident.value.description.trim()) return
-  // logic to submit incident would go here
+  if (!authStore.currentUser) return
+  if (!crewsStore.addIncident(crewId.value, authStore.currentUser.id, Number(newIncident.value.severity), newIncident.value.description)) return
   newIncident.value.description = ''
   newIncident.value.severity = 2
   showIncidentForm.value = false
 }
 
 const formatDate = (date: Date) => {
-  return new Date(date).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })
+  return new Date(date).toLocaleDateString(locale.value, { month: 'short', day: 'numeric', year: 'numeric' })
 }
 
 // File upload
@@ -102,25 +100,21 @@ const triggerFileUpload = () => {
 }
 
 const handleFileSelect = (event: Event) => {
-  const target = event.target as HTMLInputElement
-  const file = target.files?.[0]
-  if (file) {
-    toast.add({
-      title: t('crewDetail.toasts.fileAttached'),
-      description: t('crewDetail.toasts.fileAttachedDesc', { name: file.name }),
-      color: 'success',
-      icon: 'i-heroicons-paper-clip'
-    })
-  }
+  if (!(event.target instanceof HTMLInputElement)) return
+  pendingAttachments.value = Array.from(event.target.files || []).map(file => ({
+    id: crypto.randomUUID(), name: file.name, type: file.type, size: file.size, url: ''
+  }))
 }
 
 // Document viewing
 const showDocViewModal = ref(false)
-const selectedDoc = ref<any>(null)
-const viewDocument = (doc: any) => {
-  selectedDoc.value = doc
+const selectedDocId = ref('')
+const selectedDoc = computed(() => crew.value?.documents.find(doc => doc.id === selectedDocId.value))
+const viewDocument = (doc: Document) => {
+  selectedDocId.value = doc.id
   showDocViewModal.value = true
 }
+const legalLink = computed(() => localePath({ path: '/app/legal', query: { crewId: crewId.value } }))
 
 // Values modal
 const showAddValuesModal = ref(false)
@@ -128,24 +122,52 @@ const newValueTitle = ref('')
 const newValueCategory = ref('parenting')
 
 const addValue = () => {
-  if (!newValueTitle.value.trim()) return
+  if (!crewsStore.addValue(crewId.value, newValueTitle.value, newValueCategory.value)) return
   
   toast.add({
     title: t('crewDetail.toasts.valueAdded'),
     description: t('crewDetail.toasts.valueAddedDesc', { name: newValueTitle.value }),
-    color: 'success',
+    color: 'teal',
     icon: 'i-heroicons-heart'
   })
   
   showAddValuesModal.value = false
   newValueTitle.value = ''
 }
+
+function respondToIncident(id: string, status: IncidentStatus) {
+  if (crewsStore.respondToIncident(crewId.value, id, status, incidentResponses.value[id] || t(`showcase.crews.incidentActions.${status}`))) {
+    incidentResponses.value[id] = ''
+  }
+}
+
+const checkInDate = ref('')
+const checkInRating = ref(3)
+const checkInNotes = ref('')
+const checkInFeedback = ref('')
+function scheduleCheckIn() {
+  if (crewsStore.scheduleCheckIn(crewId.value, new Date(checkInDate.value))) checkInFeedback.value = t('showcase.crews.checkInScheduled')
+}
+function completeCheckIn() {
+  if (authStore.currentUser && crewsStore.completeCheckIn(crewId.value, authStore.currentUser.id, Number(checkInRating.value), checkInNotes.value)) {
+    checkInNotes.value = ''
+    checkInFeedback.value = t('showcase.crews.checkInSaved')
+  }
+}
+watch(crewId, () => {
+  pendingAttachments.value = []
+  newMessage.value = ''
+})
+watch(() => route.query.tab, tab => {
+  const index = tabs.value.findIndex(item => item.slot === tab)
+  activeTab.value = index >= 0 ? index : 0
+}, { immediate: true })
 </script>
 
 <template>
   <div class="space-y-6">
     <div class="flex items-center gap-4">
-      <UButton to="/app/crews" variant="ghost" icon="i-heroicons-arrow-left">
+      <UButton :to="localePath('/app/crews')" variant="ghost" icon="i-heroicons-arrow-left">
         {{ t('crewDetail.back') }}
       </UButton>
       <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
@@ -165,7 +187,7 @@ const addValue = () => {
       <h2 class="text-xl font-bold mb-2">{{ t('crewDetail.notFound.title') }}</h2>
       <p class="text-slate-600 mb-2">{{ t('crewDetail.notFound.crewId', { id: crewId }) }}</p>
       <p class="text-slate-600 mb-6">{{ t('crewDetail.notFound.description') }}</p>
-      <UButton to="/app/crews" color="primary">{{ t('crewDetail.notFound.backToCrews') }}</UButton>
+      <UButton :to="localePath('/app/crews')" color="primary">{{ t('crewDetail.notFound.backToCrews') }}</UButton>
     </UCard>
 
     <UTabs v-else v-model="activeTab" :items="tabs" :key="crew.id">
@@ -199,12 +221,30 @@ const addValue = () => {
                         <p class="text-sm text-slate-500">{{ member.role.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) }}</p>
                       </div>
                     </div>
-                    <UBadge :color="member.status === 'active' ? 'success' : 'warning'" variant="soft">
+                    <UBadge :color="member.status === 'active' ? 'emerald' : 'amber'" variant="soft">
                       {{ member.status }}
                     </UBadge>
                   </div>
                 </div>
               </div>
+                    <div class="space-y-3 border-t pt-4">
+                      <h3 class="text-lg font-semibold">{{ t('showcase.crews.checkIn') }}</h3>
+                      <p v-if="crew.nextCheckIn">{{ t('showcase.crews.nextCheckIn') }}: {{ formatDate(crew.nextCheckIn) }}</p>
+                      <div class="flex flex-wrap gap-2">
+                        <UInput v-model="checkInDate" type="datetime-local" :aria-label="t('showcase.crews.checkInDate')" />
+                        <UButton :disabled="!checkInDate || !Number.isFinite(new Date(checkInDate).getTime()) || new Date(checkInDate).getTime() <= Date.now()" @click="scheduleCheckIn">{{ t('showcase.crews.schedule') }}</UButton>
+                      </div>
+                      <UFormGroup :label="t('showcase.crews.rating')">
+                        <USelect v-model="checkInRating" :options="[1, 2, 3, 4, 5]" :aria-label="t('showcase.crews.rating')" />
+                      </UFormGroup>
+                      <UTextarea v-model="checkInNotes" :placeholder="t('showcase.crews.checkInNotes')" :aria-label="t('showcase.crews.checkInNotes')" />
+                      <UButton :disabled="!checkInNotes.trim()" @click="completeCheckIn">{{ t('showcase.crews.completeCheckIn') }}</UButton>
+                      <p v-if="checkInFeedback" role="status" class="text-teal-600">{{ checkInFeedback }}</p>
+                      <div v-for="checkIn in crew.checkIns" :key="checkIn.id" class="rounded-lg bg-slate-50 dark:bg-slate-800 p-3">
+                        <p class="text-sm text-slate-500">{{ formatDate(checkIn.date) }} · {{ checkIn.responses[0]?.rating }}/5</p>
+                        <p>{{ checkIn.summary }}</p>
+                      </div>
+                    </div>
             </div>
           </UCard>
         </template>
@@ -246,23 +286,28 @@ const addValue = () => {
                   </div>
                 </div>
               </div>
-              <div class="border-t pt-4 flex gap-2">
-                <UButton icon="i-heroicons-paper-clip" variant="ghost" color="gray" @click="triggerFileUpload" :title="t('crewDetail.chat.attachFile')" />
-                <input ref="fileInput" type="file" class="hidden" @change="handleFileSelect" />
-                <UInput v-model="newMessage" :placeholder="t('crewDetail.chat.typeMessage')" class="flex-1" @keyup.enter="sendMessage" />
-                <UButton icon="i-heroicons-paper-airplane" color="primary" :disabled="!newMessage.trim()" @click="sendMessage" />
+              <div v-if="pendingAttachments.length" class="flex flex-wrap gap-2 py-2">
+                <UBadge v-for="attachment in pendingAttachments" :key="attachment.id" variant="soft">{{ attachment.name }} ({{ Math.ceil(attachment.size / 1024) }} KB)</UBadge>
+                <UButton variant="ghost" size="xs" @click="pendingAttachments = []; fileInput && (fileInput.value = '')">{{ t('showcase.crews.removeAttachments') }}</UButton>
               </div>
+              <form class="border-t pt-4 flex gap-2" @submit.prevent="sendMessage">
+                <UButton icon="i-heroicons-paper-clip" variant="ghost" color="gray" @click="triggerFileUpload" :title="t('crewDetail.chat.attachFile')" />
+                <input ref="fileInput" type="file" multiple class="hidden" @change="handleFileSelect" />
+                <UInput v-model="newMessage" :placeholder="t('crewDetail.chat.typeMessage')" :aria-label="t('crewDetail.chat.typeMessage')" class="flex-1" />
+                <UButton type="submit" icon="i-heroicons-paper-airplane" color="primary" :aria-label="t('showcase.crews.send')" :disabled="!newMessage.trim() && !pendingAttachments.length" />
+              </form>
             </div>
           </UCard>
         </template>
 
         <template #documents>
           <UCard class="mt-4">
+            <template #header><UButton :to="legalLink" icon="i-heroicons-plus">{{ t('crewDetail.documents.createDocument') }}</UButton></template>
             <div v-if="crewDocuments.length === 0" class="text-center py-12">
               <UIcon name="i-heroicons-document-text" class="w-16 h-16 mx-auto text-slate-300 mb-4" />
               <h3 class="text-lg font-medium mb-2">{{ t('crewDetail.documents.noDocuments') }}</h3>
               <p class="text-slate-600 mb-4">{{ t('crewDetail.documents.createFirst') }}</p>
-              <UButton color="primary" icon="i-heroicons-plus" @click="router.push('/app/legal')">{{ t('crewDetail.documents.createDocument') }}</UButton>
+              <UButton color="primary" icon="i-heroicons-plus" :to="legalLink">{{ t('showcase.legal.openLegal') }}</UButton>
             </div>
             
             <div v-else class="space-y-3">
@@ -276,10 +321,10 @@ const addValue = () => {
                   </div>
                 </div>
                 <div class="flex items-center gap-3">
-                  <UBadge :color="doc.status === 'signed' ? 'success' : doc.status === 'pending' ? 'warning' : 'gray'" variant="soft">
-                    {{ doc.status.charAt(0).toUpperCase() + doc.status.slice(1) }}
+                  <UBadge :color="doc.status === 'signed' ? 'emerald' : doc.status === 'pending' ? 'amber' : 'gray'" variant="soft">
+                    {{ doc.status === 'executed' ? t('showcase.legal.executed') : t(`legal.status.${doc.status}`) }}
                   </UBadge>
-                  <UButton variant="ghost" icon="i-heroicons-eye" @click="viewDocument(doc)" />
+                  <UButton variant="ghost" icon="i-heroicons-eye" :aria-label="t('showcase.legal.openDocument', { title: doc.title })" @click="viewDocument(doc)" />
                 </div>
               </div>
             </div>
@@ -298,7 +343,7 @@ const addValue = () => {
             <div v-else class="space-y-6">
               <div class="flex items-center justify-between">
                 <h3 class="font-semibold text-lg">{{ t('crewDetail.values.crewValues') }}</h3>
-                <UBadge color="primary" variant="subtle" size="lg">{{ t('crewDetail.values.matchPercent', { percent: 90 }) }}</UBadge>
+                <UButton icon="i-heroicons-plus" @click="showAddValuesModal = true">{{ t('crewDetail.values.addValues') }}</UButton>
               </div>
               
               <div class="grid gap-4 md:grid-cols-2">
@@ -356,7 +401,7 @@ const addValue = () => {
                   <UTextarea v-model="newIncident.description" :placeholder="t('crewDetail.accountability.describeIncident')" />
                 </UFormGroup>
                 <div class="flex gap-2">
-                  <UButton color="primary" @click="submitIncident">{{ t('crewDetail.accountability.submit') }}</UButton>
+                  <UButton color="primary" :disabled="!newIncident.description.trim()" @click="submitIncident">{{ t('crewDetail.accountability.submit') }}</UButton>
                   <UButton variant="ghost" @click="showIncidentForm = false">{{ t('crewDetail.accountability.cancel') }}</UButton>
                 </div>
               </div>
@@ -377,12 +422,12 @@ const addValue = () => {
                 <div class="flex items-start justify-between mb-2">
                   <div class="flex items-center gap-2">
                     <UBadge :color="incident.severity <= 2 ? 'emerald' : incident.severity === 3 ? 'amber' : 'rose'" variant="soft">
-                      Level {{ incident.severity }}
+                      {{ t('showcase.crews.level', { level: incident.severity }) }}
                     </UBadge>
                     <span class="text-sm text-slate-500">{{ formatDate(incident.date) }}</span>
                   </div>
                   <UBadge :color="incident.status === 'resolved' ? 'emerald' : incident.status === 'addressed' ? 'teal' : 'amber'" variant="soft">
-                    {{ incident.status.charAt(0).toUpperCase() + incident.status.slice(1) }}
+                    {{ t(`showcase.crews.incidentStatus.${incident.status}`) }}
                   </UBadge>
                 </div>
                 
@@ -402,6 +447,14 @@ const addValue = () => {
                     </li>
                   </ul>
                 </div>
+                <div class="mt-3 space-y-2">
+                  <UInput v-model="incidentResponses[incident.id]" :placeholder="t('showcase.crews.response')" :aria-label="t('showcase.crews.response')" />
+                  <div class="flex flex-wrap gap-2">
+                    <UButton v-if="incident.status === 'open'" size="sm" variant="soft" @click="respondToIncident(incident.id, 'addressed')">{{ t('showcase.crews.address') }}</UButton>
+                    <UButton v-if="incident.status !== 'resolved'" size="sm" @click="respondToIncident(incident.id, 'resolved')">{{ t('showcase.crews.resolve') }}</UButton>
+                    <UButton v-else size="sm" variant="soft" @click="respondToIncident(incident.id, 'open')">{{ t('showcase.crews.reopen') }}</UButton>
+                  </div>
+                </div>
               </div>
             </div>
           </UCard>
@@ -410,35 +463,7 @@ const addValue = () => {
 
     <!-- Document View Modal -->
     <UModal v-model="showDocViewModal" :ui="{ width: 'w-full sm:max-w-4xl' }">
-      <UCard v-if="selectedDoc">
-        <template #header>
-          <div>
-            <h2 class="text-xl font-bold">{{ selectedDoc.title }}</h2>
-            <p class="text-sm text-slate-500 mt-1">{{ selectedDoc.type }}</p>
-          </div>
-        </template>
-
-        <div class="prose prose-slate dark:prose-invert max-w-none" v-html="selectedDoc.content || $t('crewDetail.modals.noContent')"></div>
-
-        <template #footer>
-          <div class="flex justify-between items-center">
-            <UBadge :color="selectedDoc.status === 'signed' ? 'success' : selectedDoc.status === 'pending' ? 'warning' : 'gray'" variant="soft">
-              {{ selectedDoc.status.charAt(0).toUpperCase() + selectedDoc.status.slice(1) }}
-            </UBadge>
-            <div class="flex gap-3">
-              <UButton variant="ghost" @click="showDocViewModal = false">{{ t('crewDetail.modals.close') }}</UButton>
-              <UButton 
-                v-if="selectedDoc.status !== 'signed'" 
-                color="primary" 
-                icon="i-heroicons-pencil-square"
-                @click="toast.add({ title: t('crewDetail.toasts.editMode'), description: t('crewDetail.toasts.editModeDesc'), icon: 'i-heroicons-pencil-square' })"
-              >
-                {{ t('crewDetail.modals.edit') }}
-              </UButton>
-            </div>
-          </div>
-        </template>
-      </UCard>
+      <CrewDocumentViewer v-if="selectedDoc && showDocViewModal" :document="selectedDoc" @close="showDocViewModal = false" />
     </UModal>
 
     <!-- Add Values Modal -->
@@ -456,10 +481,10 @@ const addValue = () => {
             <div>
             <label class="block text-sm font-medium mb-2">{{ t('crewDetail.modals.category') }}</label>
             <select v-model="newValueCategory" class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800">
-              <option value="parenting">Parenting</option>
-              <option value="communication">Communication</option>
-              <option value="financial">Financial</option>
-              <option value="lifestyle">Lifestyle</option>
+              <option value="parenting">{{ t('showcase.crews.categories.parenting') }}</option>
+              <option value="communication">{{ t('showcase.crews.categories.communication') }}</option>
+              <option value="financial">{{ t('showcase.crews.categories.financial') }}</option>
+              <option value="lifestyle">{{ t('showcase.crews.categories.lifestyle') }}</option>
             </select>
           </div>
         </div>

@@ -1,72 +1,48 @@
-# Kinship Image Style Reference
+# Kinship image style reference
 
-## Quick Style Description Summary
+## Active direction
 
-### V2 Photorealistic Style (ACTIVE)
+Professional lifestyle photography of diverse, multigenerational crews: ages from the twenties through the seventies, mixed genders and ethnicities, platonic collaboration, warm natural lighting, candid documentary moments, warm beige backgrounds, and navy accents. Children belong at the center of caregiving scenes. Do not imply romance is required or equate a single household model with family.
 
-**Base Style Keywords:**
-> Professional lifestyle photography, warm natural lighting, authentic candid moments, European real families, genuine emotions and connections, soft focus backgrounds, natural skin tones, warm beige and cream color palette with navy blue accents, cinematic depth of field, natural indoor settings, cozy home environments, professional portrait quality, authentic human interaction, editorial photography style, warm color grading, intimate family moments
+Prompts in `scripts/generate-images.mjs` define the required static asset set. `composables/prompts.ts` supplies reusable runtime descriptions. Generated imagery and landing testimonial stories are illustrative, not photographs of verified customers or evidence of product ratings.
 
-### Logo Style
-> Clean nautical ship logo design, sailing vessel with waves, navy blue and white color scheme, maritime theme symbolizing journey and navigation, professional minimalist vector logo, simple geometric shapes, classic maritime emblem style, centered composition
+## Section direction and requested dimensions
 
-### Example Section Prompts (v2)
+| Asset | Direction | Requested size |
+| --- | --- | --- |
+| hero | Four adults and two children collaborating around a table | 1024 × 600 |
+| problem | Tangled chains illustrating conflated obligations | 768 × 768 |
+| solution | Three distinct, harmonious paths | 768 × 768 |
+| compass | Person reviewing compatibility dimensions on a tablet | 1024 × 600 |
+| testimonial1 | Candid portrait of one adult | 200 × 200 |
+| testimonial2 | Friendly, diverse three-person crew portrait | 200 × 200 |
+| testimonial3 | Grandparent and children outdoors | 200 × 200 |
+| cta | Multigenerational group walking toward the sunset | 1024 × 400 |
+| how-discover | Friendly first conversation in a coffee shop | 400 × 500 |
+| how-align | Collaborative planning documents and notes | 400 × 500 |
+| how-formalize | Crew reviewing documents with an advisor | 400 × 500 |
+| how-sustain | Adults and children sharing an outdoor meal | 400 × 500 |
 
-#### Hero Section
-**Prompt:** Family sitting together on comfortable couch, warm natural home lighting, genuine smiles and laughter, casual modern living room, parents and children interacting naturally, professional lifestyle photography, warm beige walls, cozy intimate atmosphere, authentic family bonding moment, natural candid poses, European home setting
+Requested dimensions guide generation, not validation of legacy assets. Providers may return different dimensions; the component reserves the intended display geometry and crops with `objectFit="cover"`. Review generated imagery for inclusion, dignity, believable anatomy, and unwanted text before publishing.
 
-**Aspect Ratio:** Landscape (1024x768)
+## Palette and composition
 
-#### Testimonial Portrait
-**Prompt:** Genuine portrait of couple smiling warmly at camera, natural home setting, soft window lighting, warm beige background, professional lifestyle portrait photography, authentic happy expressions, editorial quality, European home
+- Navy: brand anchors, furnishings, and background accents.
+- Beige/cream: welcoming neutral interiors.
+- Teal: calm, cooperative planning illustrations.
+- Natural skin tones: authentic, unretouched photographic direction.
+- Golden light: soft windows and outdoor golden-hour scenes.
+- Use natural framing, shallow-to-medium depth of field, and genuine collaborative expressions.
+- Problem/solution assets may use abstract editorial illustration rather than photography.
 
-**Aspect Ratio:** Square (600x600)
+## Nautical identity
 
-#### How It Works: Planning Step
-**Prompt:** Co-parents planning together at table with laptop and notebooks, collaborative working session, warm focused expressions, modern home office, natural daylight, editorial photography style capturing planning journey
+The ship-and-waves logo represents navigation and shared journeys. Keep its navy-and-white, minimal geometric design separate from lifestyle scenes. Reference the committed logo and favicons rather than generating replacement logos during builds.
 
-**Aspect Ratio:** Portrait (600x800)
+## Earlier illustration direction
 
-#### Support Network
-**Prompt:** Support group of parents sitting in circle, warm welcoming atmosphere, community center or home setting, natural lighting, genuine connections and empathy, documentary style capturing authentic support network, European context
+The earlier style uses minimalist digital illustration, soft pastel teal and indigo, airy negative space, subtle paper grain, and inclusive human-centered composition. `composables/prompts.ts` retains style selection for reference. Switching that selection does not regenerate committed landing photographs.
 
-**Aspect Ratio:** Square (768x768)
+## Publishing
 
-## Color Palette
-
-| Color | Usage |
-|-------|-------|
-| **Navy Blue** | Primary brand color, logo, accents |
-| **Warm Beige/Cream** | Backgrounds, walls, neutral base |
-| **Natural Skin Tones** | Authentic, unretouched photography |
-| **Golden/Amber** | Natural lighting accents, warmth |
-| **Soft White** | Highlights, brightness |
-
-## Photography Direction
-
-- **Lighting:** Natural window light, golden hour, soft diffused
-- **Depth of Field:** Shallow to medium (cinematic bokeh)
-- **Composition:** Rule of thirds, natural framing
-- **Subjects:** European families, modern home settings
-- **Mood:** Warm, hopeful, authentic, intimate
-- **Style:** Editorial lifestyle photography, documentary moments
-
-## Maritime/Nautical Theme (Logo & Brand)
-
-- **Symbol:** Ship sailing on waves
-- **Meaning:** Journey, navigation, guidance through parenting waters
-- **Style:** Classic maritime emblems, minimal geometric shapes
-- **Colors:** Navy blue primary, white accents
-- **Application:** Logo, favicon, brand identity elements
-
-## V1 Illustration Style (Preserved for Reference)
-
-**Base Style Keywords:**
-> Modern minimalist digital illustration, soft pastel color palette with teal and indigo accents, warm and inviting atmosphere, clean composition, professional quality, tall aspect ratio poster aesthetic, soft gradients and airy negative space, precise clean lines, inclusive human-centered design, cohesive pastel palette, flat vector artistry, subtle paper grain texture, gentle diffused lighting, elegant typography accents
-
-## Switching Between Styles
-
-Edit `composables/prompts.ts` line 28:
-```typescript
-const ACTIVE_STYLE_VERSION = 'v2' as const  // Change to 'v1' for illustrations
-```
+Use committed assets under `public/images/` with base-relative paths. Offline deterministic SVG fallbacks are intentionally abstract, not substitute customer portraits. See [image asset usage](../composables/README.md) for validation, bounded generation, credentials, and atomic publication.

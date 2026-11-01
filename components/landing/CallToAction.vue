@@ -3,6 +3,7 @@ import AiImageContainer from '../image/AiImageContainer.vue'
 import { sectionPrompts } from '../../composables/prompts'
 
 const { t } = useI18n()
+const localePath = useLocalePath()
 </script>
 
 <template>
@@ -13,7 +14,7 @@ const { t } = useI18n()
         <!-- Image -->
         <div class="relative order-2 lg:order-1">
           <AiImageContainer
-            :prompt="sectionPrompts.cta.prompt" staticSrc="/kinship/images/cta.jpg"
+            :prompt="sectionPrompts.cta.prompt" staticSrc="/images/cta.jpg"
             aspectRatio="square"
             :alt="t('cta.imageAlt')"
             shadow="xl"
@@ -39,11 +40,11 @@ const { t } = useI18n()
           </p>
           
           <div class="flex flex-wrap gap-3 pt-2">
-            <UButton color="primary" size="lg" to="/app/login" :aria-label="t('cta.primaryAria')">
+            <UButton color="primary" size="lg" :to="localePath('/app/login')" :aria-label="t('cta.primaryAria')">
               <UIcon name="i-heroicons-rocket-launch" class="mr-2 h-5 w-5" />
               {{ t('cta.primary') }}
             </UButton>
-            <UButton color="gray" variant="outline" size="lg" to="/app/login" :aria-label="t('cta.secondaryAria')">
+            <UButton color="gray" variant="outline" size="lg" :to="localePath('/app/login')" :aria-label="t('cta.secondaryAria')">
               <UIcon name="i-heroicons-play" class="mr-2 h-5 w-5" />
               {{ t('cta.secondary') }}
             </UButton>

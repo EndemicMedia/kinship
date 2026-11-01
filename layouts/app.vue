@@ -4,6 +4,7 @@ import { useAuthStore } from '~/stores/auth'
 const authStore = useAuthStore()
 const route = useRoute()
 const uiStore = useUIStore()
+const { t } = useI18n()
 
 const isMobile = ref(false)
 
@@ -31,7 +32,7 @@ const sidebarWidth = computed(() => {
 <template>
   <div class="min-h-screen bg-slate-50 dark:bg-slate-950">
     <!-- Toast Notifications -->
-    <ToastContainer />
+    <AppToastContainer />
 
     <!-- Mobile Bottom Navigation -->
     <AppMobileNav v-if="isMobile" />
@@ -48,15 +49,44 @@ const sidebarWidth = computed(() => {
         :style="{ marginLeft: sidebarWidth }"
       >
         <AppHeader />
-        <div class="p-6">
+        <div class="space-y-4 p-6">
+          <UAlert
+            v-if="authStore.storageError"
+            color="amber"
+            variant="soft"
+            icon="i-heroicons-exclamation-triangle"
+            :title="t('showcase.auth.storageErrorTitle')"
+            :description="t(`showcase.auth.storageErrors.${authStore.storageError}`)"
+            role="alert"
+          >
+            <template #actions>
+              <UButton size="xs" color="gray" variant="ghost" @click="authStore.clearStorageError()">{{ t('showcase.auth.dismiss') }}</UButton>
+            </template>
+          </UAlert>
           <slot />
         </div>
       </main>
     </div>
     
     <!-- Main content area for mobile -->
-    <main v-if="isMobile" class="pb-24 pt-4 px-4">
-      <slot />
+    <main v-if="isMobile" class="relative z-0 px-4 pb-24 pt-4">
+      <AppHeader class="mb-4" />
+      <div class="space-y-4">
+        <UAlert
+          v-if="authStore.storageError"
+          color="amber"
+          variant="soft"
+          icon="i-heroicons-exclamation-triangle"
+          :title="t('showcase.auth.storageErrorTitle')"
+          :description="t(`showcase.auth.storageErrors.${authStore.storageError}`)"
+          role="alert"
+        >
+          <template #actions>
+            <UButton size="xs" color="gray" variant="ghost" @click="authStore.clearStorageError()">{{ t('showcase.auth.dismiss') }}</UButton>
+          </template>
+        </UAlert>
+        <slot />
+      </div>
     </main>
   </div>
 </template>

@@ -1,7 +1,9 @@
 // Mock crew data for Kinship app
 // Using provider-based terminology
 
-export const mockCrews = [
+import type { Crew } from '~/types/app'
+
+export const mockCrews: Crew[] = [
   {
     id: 'crew-1',
     name: 'The Village Collective',
@@ -75,6 +77,7 @@ export const mockCrews = [
   },
   {
     id: 'crew-2',
+    values: [],
     name: 'Brooklyn Formation',
     description: 'Couple seeking genetic provider partnership',
     status: 'forming',
@@ -118,6 +121,7 @@ export const mockCrews = [
   },
   {
     id: 'crew-3',
+    values: [],
     name: 'Miami Crew',
     description: 'Building our family with cultural heritage focus',
     status: 'forming',
